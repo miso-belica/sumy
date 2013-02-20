@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from case import unittest, build_document, build_sentence
-from sumy.algorithms._luhn import LuhnMethod
+from sumy.algorithms import LuhnMethod
 from sumy._py3k import to_unicode
 
 
