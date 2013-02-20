@@ -155,3 +155,80 @@ class TestEdmundson(unittest.TestCase):
         self.assertEqual(to_unicode(sentences[3]),
             "n1 n2 n3 n4 s1 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3")
         self.assertEqual(to_unicode(sentences[4]), ("b1 n "*10).strip())
+
+    def test_key_empty(self):
+        document = build_document()
+
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("b1", "b2", "b3",)
+
+        returned = summarize.key_method(10)
+        self.assertEqual(len(returned), 0)
+
+    def test_key_without_bonus_words(self):
+        document = build_document()
+        summarize = EdmundsonMethod(document)
+
+        self.assertRaises(ValueError, summarize.key_method, 10)
+
+    def test_key_no_bunus_words_in_document(self):
+        document = build_document(
+            ("w1 w2 w3 w4", "I like music",),
+            ("This is test sentence with some extra words",)
+        )
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
+
+        sentences = summarize.key_method(10)
+        self.assertEqual(len(sentences), 3)
+        self.assertEqual(to_unicode(sentences[0]), "w1 w2 w3 w4")
+        self.assertEqual(to_unicode(sentences[1]), "I like music")
+        self.assertEqual(to_unicode(sentences[2]),
+            "This is test sentence with some extra words")
+
+    def test_key_1(self):
+        document = build_document(
+            ("w1 w2 w3 w4", "I like music",),
+            ("This is test sentence with some extra words and bonus",)
+        )
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
+
+        sentences = summarize.key_method(1)
+        self.assertEqual(len(sentences), 1)
+        self.assertEqual(to_unicode(sentences[0]),
+            "This is test sentence with some extra words and bonus")
+
+    def test_key_2(self):
+        document = build_document(
+            ("Om nom nom nom nom", "Sure I sumarrize it, with bonus",),
+            ("This is bonus test sentence with some extra words and bonus",)
+        )
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("nom", "bonus",)
+
+        sentences = summarize.key_method(2)
+        self.assertEqual(len(sentences), 2)
+        self.assertEqual(to_unicode(sentences[0]), "Om nom nom nom nom")
+        self.assertEqual(to_unicode(sentences[1]),
+            "This is bonus test sentence with some extra words and bonus")
+
+    def test_key_3(self):
+        document = build_document(
+            ("w1", "w1 w1", "w1 w1 w1", "w1 w1 w1 w1", "w1 W1 W1 W1 w1",),
+            ("x X x X",)
+        )
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("w1", "X",)
+
+        sentences = summarize.key_method(3)
+        self.assertEqual(len(sentences), 3)
+        self.assertEqual(to_unicode(sentences[0]), "w1 w1 w1")
+        self.assertEqual(to_unicode(sentences[1]), "w1 w1 w1 w1")
+        self.assertEqual(to_unicode(sentences[2]), "w1 W1 W1 W1 w1")
+
+        sentences = summarize.key_method(3, weight=0)
+        self.assertEqual(len(sentences), 3)
+        self.assertEqual(to_unicode(sentences[0]), "w1 w1 w1 w1")
+        self.assertEqual(to_unicode(sentences[1]), "w1 W1 W1 W1 w1")
+        self.assertEqual(to_unicode(sentences[2]), "x X x X")

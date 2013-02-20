@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+from collections import Counter
 from ._utils import null_stemmer
 from ._method import AbstractSummarizationMethod
 
@@ -64,6 +65,31 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         stigma_words_count = sum(w in self._stigma_words for w in words)
 
         return bonus_words_count*bunus_word_value - stigma_words_count*stigma_word_value
+
+    def key_method(self, sentences_count, weight=0.5):
+        self.__check_bonus_words()
+
+        words = map(self.stem_word, self._document.words)
+        words = filter(self._is_bonus_word, words)
+        word_counts = Counter(self.stem_word(w) for w in words)
+        word_frequencies = word_counts.values()
+        max_word_frequency = 1 if not word_frequencies else max(word_frequencies)
+        significant_words = tuple(w for w, c in word_counts.items()
+            if c/max_word_frequency > weight)
+
+        sentences = []
+        for sentence in self._document.sentences:
+            rating = self._rate_sentence_by_key_method(sentence, significant_words)
+            sentences.append((sentence, rating,))
+
+        return self._get_best_sentences(sentences, sentences_count)
+
+    def _is_bonus_word(self, word):
+        return word in self._bonus_words
+
+    def _rate_sentence_by_key_method(self, sentence, significant_words):
+        words = map(self.stem_word, sentence.words)
+        return sum(w in significant_words for w in words)
 
     def __check_bonus_words(self):
         if not self._bonus_words:
