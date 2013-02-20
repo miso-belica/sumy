@@ -24,7 +24,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
     @bonus_words.setter
     def bonus_words(self, collection):
-        self._bonus_words = frozenset(collection)
+        self._bonus_words = frozenset(map(self.stem_word, collection))
 
     @property
     def stigma_words(self):
@@ -32,7 +32,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
     @stigma_words.setter
     def stigma_words(self, collection):
-        self._stigma_words = frozenset(collection)
+        self._stigma_words = frozenset(map(self.stem_word, collection))
 
     @property
     def null_words(self):
@@ -40,7 +40,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
     @null_words.setter
     def null_words(self, collection):
-        self._null_words = frozenset(collection)
+        self._null_words = frozenset(map(self.stem_word, collection))
 
     def __call__(self, sentences_count):
         return self._get_best_sentences((), sentences_count)
@@ -62,7 +62,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
     def _rate_sentence_by_cue_method(self, sentence, bunus_word_value,
             stigma_word_value):
-        words = sentence.words
+        words = tuple(map(self.stem_word, sentence.words))
         bonus_words_count = sum(w in self._bonus_words for w in words)
         stigma_words_count = sum(w in self._stigma_words for w in words)
 

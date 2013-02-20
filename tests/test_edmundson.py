@@ -79,6 +79,21 @@ class TestEdmundson(unittest.TestCase):
         returned = summarize.cue_method(10)
         self.assertEqual(len(returned), 0)
 
+    def test_cue_letters_case(self):
+        document = build_document(
+            ("X X X", "x x x x",),
+            ("w w w", "W W W W",)
+        )
+
+        summarize = EdmundsonMethod(document)
+        summarize.bonus_words = ("X", "w",)
+        summarize.stigma_words = ("stigma",)
+
+        sentences = summarize.cue_method(2)
+        self.assertEqual(len(sentences), 2)
+        self.assertEqual(to_unicode(sentences[0]), "x x x x")
+        self.assertEqual(to_unicode(sentences[1]), "W W W W")
+
     def test_cue_1(self):
         document = build_document(
             ("b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2",)
