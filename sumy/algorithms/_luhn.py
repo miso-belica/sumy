@@ -30,7 +30,7 @@ class LuhnMethod(AbstractSummarizationMethod):
         words = filter(self._is_stopword, words)
         words = tuple(self.stem_word(w) for w in words)
 
-        # sort word by number of occurrences
+        # sort words by number of occurrences
         words = sorted((c, w) for w, c in Counter(words).items())
 
         # take only best `significant_percentage` % words
