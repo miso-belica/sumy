@@ -5,11 +5,9 @@ from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
 from collections import Counter, namedtuple
+from ._utils import null_stemmer
 from ..document import Document
 from .._py3k import to_unicode
-
-
-_NULL_STEMMER = lambda o: o
 
 
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
@@ -19,7 +17,7 @@ class LuhnMethod(object):
     max_gap_size = 4
     significant_percentage = 1
 
-    def __init__(self, document, stopwords=(), stemmer=_NULL_STEMMER):
+    def __init__(self, document, stopwords=(), stemmer=null_stemmer):
         self._document = document
         self._stopwords = frozenset(stopwords)
         self._stemmer = stemmer
