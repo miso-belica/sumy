@@ -46,11 +46,8 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         return self._get_best_sentences((), sentences_count)
 
     def cue_method(self, sentences_count, bunus_word_value=1, stigma_word_value=1):
-        if not self._bonus_words:
-            raise ValueError("Set of bonus words is empty. Please set attribute 'bonus_words' with collection of words.")
-
-        if not self._stigma_words:
-            raise ValueError("Set of stigma words is empty. Please set attribute 'stigma_words' with collection of words.")
+        self.__check_bonus_words()
+        self.__check_stigma_words()
 
         sentences = []
         for sentence in self._document.sentences:
@@ -67,3 +64,15 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         stigma_words_count = sum(w in self._stigma_words for w in words)
 
         return bonus_words_count*bunus_word_value - stigma_words_count*stigma_word_value
+
+    def __check_bonus_words(self):
+        if not self._bonus_words:
+            raise ValueError("Set of bonus words is empty. Please set attribute 'bonus_words' with collection of words.")
+
+    def __check_stigma_words(self):
+        if not self._stigma_words:
+            raise ValueError("Set of stigma words is empty. Please set attribute 'stigma_words' with collection of words.")
+
+    def __check_null_words(self):
+        if not self._null_words:
+            raise ValueError("Set of null words is empty. Please set attribute 'null_words' with collection of words.")
