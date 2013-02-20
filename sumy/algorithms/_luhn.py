@@ -3,45 +3,32 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from itertools import chain
-from collections import Counter, namedtuple
+from collections import Counter
 from ._utils import null_stemmer
-from ..document import Document
-from .._py3k import to_unicode
+from ._method import AbstractSummarizationMethod
 
 
-SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
-
-
-class LuhnMethod(object):
+class LuhnMethod(AbstractSummarizationMethod):
     max_gap_size = 4
     significant_percentage = 1
 
     def __init__(self, document, stopwords=(), stemmer=null_stemmer):
-        self._document = document
+        super(LuhnMethod, self).__init__(document, stemmer)
         self._stopwords = frozenset(stopwords)
-        self._stemmer = stemmer
 
     def __call__(self, sentences_count):
         words = self._get_significant_words(self._document.words)
 
         sentences = []
-        for order, sentence in enumerate(self._document.sentences):
+        for sentence in self._document.sentences:
             rating = self.rate_sentence(sentence, words)
-            sentences.append(SentenceInfo(sentence, order, rating))
+            sentences.append((sentence, rating,))
 
-        # sort sentences by rating in descending order
-        sorted_sentences = sorted(sentences, key=lambda s: -s.rating)
-        # get first best rated `sentences_count` sentences
-        sorted_sentences = sorted_sentences[:sentences_count]
-        # sort sentences by their order in document
-        ordered_sentences = sorted(sorted_sentences, key=lambda s: s.order)
-
-        return tuple(i.sentence for i in ordered_sentences)
+        return self._get_best_sentences(sentences, sentences_count)
 
     def _get_significant_words(self, words):
         words = filter(self._is_stopword, words)
-        words = tuple(self._stem_word(w) for w in words)
+        words = tuple(self.stem_word(w) for w in words)
 
         # sort word by number of occurrences
         words = sorted((c, w) for w, c in Counter(words).items())
@@ -53,9 +40,6 @@ class LuhnMethod(object):
     def _is_stopword(self, word):
         return not word.is_stopword(self._stopwords)
 
-    def _stem_word(self, word):
-        return self._stemmer(to_unicode(word).lower())
-
     def rate_sentence(self, sentence, significant_stems):
         ratings = self._get_chunk_ratings(sentence, significant_stems)
         return max(ratings) if ratings else 0
@@ -66,7 +50,7 @@ class LuhnMethod(object):
 
         in_chunk = False
         for order, word in enumerate(sentence.words):
-            stem = self._stem_word(word)
+            stem = self.stem_word(word)
             # new chunk
             if stem in significant_stems and not in_chunk:
                 in_chunk = True
