@@ -4,8 +4,15 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import Counter
+from operator import attrgetter
+from itertools import chain
 from ._utils import null_stemmer
 from ._method import AbstractSummarizationMethod
+
+try:
+    from itertools import ifilterfalse as ffilter
+except ImportError:
+    from itertools import filterfalse as ffilter
 
 
 _EMPTY_SET = frozenset()
@@ -88,6 +95,42 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         return word in self._bonus_words
 
     def _rate_sentence_by_key_method(self, sentence, significant_words):
+        words = map(self.stem_word, sentence.words)
+        return sum(w in significant_words for w in words)
+
+    def title_method(self, sentences_count):
+        self.__check_null_words()
+
+        headings, sentences = self._split_sentences(self._document.sentences)
+
+        significant_words = chain(*map(attrgetter("words"), headings))
+        significant_words = map(self.stem_word, significant_words)
+        significant_words = ffilter(self._is_null_word, significant_words)
+        significant_words = frozenset(significant_words)
+
+        rated_sentences = []
+        for sentence in sentences:
+            rating = self._rate_sentence_by_title_method(sentence, significant_words)
+            rated_sentences.append((sentence, rating,))
+
+        return self._get_best_sentences(rated_sentences, sentences_count)
+
+    def _split_sentences(self, sentences):
+        headings = []
+        common_sentences = []
+
+        for sentence in sentences:
+            if sentence.is_heading:
+                headings.append(sentence)
+            else:
+                common_sentences.append(sentence)
+
+        return tuple(headings), tuple(common_sentences)
+
+    def _is_null_word(self, word):
+        return word in self._null_words
+
+    def _rate_sentence_by_title_method(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
 

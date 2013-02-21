@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest, build_document, build_sentence
+from case import unittest, build_document, build_document_from_string
 from sumy.algorithms import EdmundsonMethod
 from sumy._py3k import to_unicode
 
@@ -232,3 +232,96 @@ class TestEdmundson(unittest.TestCase):
         self.assertEqual(to_unicode(sentences[0]), "w1 w1 w1 w1")
         self.assertEqual(to_unicode(sentences[1]), "w1 W1 W1 W1 w1")
         self.assertEqual(to_unicode(sentences[2]), "x X x X")
+
+    def test_title_method_with_empty_document(self):
+        document = build_document()
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("b1", "b2", "b3",)
+
+        sentences = summarize.title_method(10)
+        self.assertEqual(len(sentences), 0)
+
+    def test_title_method_without_null_words(self):
+        document = build_document()
+        summarize = EdmundsonMethod(document)
+
+        self.assertRaises(ValueError, summarize.title_method, 10)
+
+    def test_title_method_without_title(self):
+        document = build_document(
+            ("This is sentence", "This is another one",),
+            ("And some next sentence but no heading",)
+        )
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("this", "is", "some", "and",)
+
+        sentences = summarize.title_method(10)
+        self.assertEqual(len(sentences), 3)
+        self.assertEqual(to_unicode(sentences[0]), "This is sentence")
+        self.assertEqual(to_unicode(sentences[1]), "This is another one")
+        self.assertEqual(to_unicode(sentences[2]), "And some next sentence but no heading")
+
+    def test_title_method_1(self):
+        document = build_document_from_string("""
+            # This is cool heading
+            Because I am sentence I like words
+            And because I am string I like characters
+
+            # blank and heading
+            This is next paragraph because of blank line above
+            Here is the winner because contains words like cool and heading
+        """)
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("this", "is", "I", "am", "and",)
+
+        sentences = summarize.title_method(1)
+        self.assertEqual(len(sentences), 1)
+        self.assertEqual(to_unicode(sentences[0]),
+            "Here is the winner because contains words like cool and heading")
+
+    def test_title_method_2(self):
+        document = build_document_from_string("""
+            # This is cool heading
+            Because I am sentence I like words
+            And because I am string I like characters
+
+            # blank and heading
+            This is next paragraph because of blank line above
+            Here is the winner because contains words like cool and heading
+        """)
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("this", "is", "I", "am", "and",)
+
+        sentences = summarize.title_method(2)
+        self.assertEqual(len(sentences), 2)
+        self.assertEqual(to_unicode(sentences[0]),
+            "This is next paragraph because of blank line above")
+        self.assertEqual(to_unicode(sentences[1]),
+            "Here is the winner because contains words like cool and heading")
+
+    def test_title_method_3(self):
+        document = build_document_from_string("""
+            # This is cool heading
+            Because I am sentence I like words
+            And because I am string I like characters
+
+            # blank and heading
+            This is next paragraph because of blank line above
+            Here is the winner because contains words like cool and heading
+        """)
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("this", "is", "I", "am", "and",)
+
+        sentences = summarize.title_method(3)
+        self.assertEqual(len(sentences), 3)
+        self.assertEqual(to_unicode(sentences[0]),
+            "Because I am sentence I like words")
+        self.assertEqual(to_unicode(sentences[1]),
+            "This is next paragraph because of blank line above")
+        self.assertEqual(to_unicode(sentences[2]),
+            "Here is the winner because contains words like cool and heading")

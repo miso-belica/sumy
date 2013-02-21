@@ -26,8 +26,26 @@ def build_document(*sets_of_sentences):
     return Document(paragraphs)
 
 
-def build_sentence(sentence_as_string):
-    return Sentence(map(Word, sentence_as_string.split()))
+def build_document_from_string(string):
+    sentences = []
+    paragraphs = []
+
+    for line in string.strip().splitlines():
+        line = line.lstrip()
+        if line.startswith("# "):
+            sentences.append(build_sentence(line[2:], is_heading=True))
+        elif not line:
+            paragraphs.append(Paragraph(sentences))
+            sentences = []
+        else:
+            sentences.append(build_sentence(line))
+
+    paragraphs.append(Paragraph(sentences))
+    return Document(paragraphs)
+
+
+def build_sentence(sentence_as_string, is_heading=False):
+    return Sentence(map(Word, sentence_as_string.split()), is_heading)
 
 
 def to_words(*words):
