@@ -325,3 +325,69 @@ class TestEdmundson(unittest.TestCase):
             "This is next paragraph because of blank line above")
         self.assertEqual(to_unicode(sentences[2]),
             "Here is the winner because contains words like cool and heading")
+
+    def test_location_method_with_empty_document(self):
+        document = build_document()
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("n1", "n2", "n3",)
+
+        sentences = summarize.location_method(10)
+        self.assertEqual(len(sentences), 0)
+
+    def test_location_method_without_null_words(self):
+        document = build_document()
+        summarize = EdmundsonMethod(document)
+
+        self.assertRaises(ValueError, summarize.location_method, 10)
+
+    def test_location_method_1(self):
+        document = build_document_from_string("""
+            # n1 n2 n3 h1 h2
+            h1 = 1 + 1 + 1 = 3
+            h1 h2 = 2 + 1 + 1 = 4
+
+            first = 1
+            h1 h2 h1 = 3
+            last = 1
+
+            # h3 h4
+            h2 h3 h4 = 3 + 1 + 1 = 5
+            h1 h2 = 2 + 1 + 1 = 4
+        """)
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
+
+        sentences = summarize.location_method(4)
+        self.assertEqual(len(sentences), 4)
+        self.assertEqual(to_unicode(sentences[0]), "h1 = 1 + 1 + 1 = 3")
+        self.assertEqual(to_unicode(sentences[1]), "h1 h2 = 2 + 1 + 1 = 4")
+        self.assertEqual(to_unicode(sentences[2]), "h2 h3 h4 = 3 + 1 + 1 = 5")
+        self.assertEqual(to_unicode(sentences[3]), "h1 h2 = 2 + 1 + 1 = 4")
+
+    def test_location_method_2(self):
+        document = build_document_from_string("""
+            # n1 n2 n3 h1 h2
+            h1 = 1 + 1 + 0 = 2
+            middle = 0
+            h1 h2 = 2 + 1 + 0 = 3
+
+            first = 1
+            h1 h2 h1 = 3
+            last = 1
+
+            # h3 h4
+            h2 h3 h4 = 3 + 1 + 0 = 4
+            h1 h2 = 2 + 1 + 0 = 3
+        """)
+
+        summarize = EdmundsonMethod(document)
+        summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
+
+        sentences = summarize.location_method(4, w_p1=0, w_p2=0)
+        self.assertEqual(len(sentences), 4)
+        self.assertEqual(to_unicode(sentences[0]), "h1 h2 = 2 + 1 + 0 = 3")
+        self.assertEqual(to_unicode(sentences[1]), "h1 h2 h1 = 3")
+        self.assertEqual(to_unicode(sentences[2]), "h2 h3 h4 = 3 + 1 + 0 = 4")
+        self.assertEqual(to_unicode(sentences[3]), "h1 h2 = 2 + 1 + 0 = 3")

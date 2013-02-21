@@ -134,6 +134,42 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
 
+    def location_method(self, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
+        self.__check_null_words()
+
+        headings = filter(attrgetter("is_heading"), self._document.sentences)
+        significant_words = chain(*map(attrgetter("words"), headings))
+        significant_words = map(self.stem_word, significant_words)
+        significant_words = ffilter(self._is_null_word, significant_words)
+        significant_words = frozenset(significant_words)
+
+        rated_sentences = []
+        paragraphs = self._document.paragraphs
+        for paragraph_order, paragraph in enumerate(paragraphs):
+            sentences = tuple(ffilter(attrgetter("is_heading"), paragraph.sentences))
+            for sentence_order, sentence in enumerate(sentences):
+                rating = self._rate_sentence_by_location_method(sentence,
+                    significant_words)
+                rating *= w_h
+
+                if paragraph_order == 0:
+                    rating += w_p1
+                elif paragraph_order == len(paragraphs) - 1:
+                    rating += w_p2
+
+                if sentence_order == 0:
+                    rating += w_s1
+                elif sentence_order == len(sentences) - 1:
+                    rating += w_s2
+
+                rated_sentences.append((sentence, rating,))
+
+        return self._get_best_sentences(rated_sentences, sentences_count)
+
+    def _rate_sentence_by_location_method(self, sentence, significant_words):
+        words = map(self.stem_word, sentence.words)
+        return sum(w in significant_words for w in words)
+
     def __check_bonus_words(self):
         if not self._bonus_words:
             raise ValueError("Set of bonus words is empty. Please set attribute 'bonus_words' with collection of words.")
