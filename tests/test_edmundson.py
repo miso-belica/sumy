@@ -46,8 +46,8 @@ class TestEdmundson(unittest.TestCase):
         document = build_document()
         summarize = EdmundsonMethod(document)
 
-        returned = summarize(10)
-        self.assertEqual(len(returned), 0)
+        sentences = summarize(10)
+        self.assertEqual(len(sentences), 0)
 
     def test_cue_with_no_words(self):
         document = build_document()
@@ -76,8 +76,8 @@ class TestEdmundson(unittest.TestCase):
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
-        returned = summarize.cue_method(10)
-        self.assertEqual(len(returned), 0)
+        sentences = summarize.cue_method(10)
+        self.assertEqual(len(sentences), 0)
 
     def test_cue_letters_case(self):
         document = build_document(
@@ -103,8 +103,8 @@ class TestEdmundson(unittest.TestCase):
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
-        returned = summarize.cue_method(10)
-        self.assertEqual(len(returned), 1)
+        sentences = summarize.cue_method(10)
+        self.assertEqual(len(sentences), 1)
 
     def test_cue_2(self):
         document = build_document(
@@ -162,8 +162,8 @@ class TestEdmundson(unittest.TestCase):
         summarize = EdmundsonMethod(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
 
-        returned = summarize.key_method(10)
-        self.assertEqual(len(returned), 0)
+        sentences = summarize.key_method(10)
+        self.assertEqual(len(sentences), 0)
 
     def test_key_without_bonus_words(self):
         document = build_document()
@@ -171,7 +171,7 @@ class TestEdmundson(unittest.TestCase):
 
         self.assertRaises(ValueError, summarize.key_method, 10)
 
-    def test_key_no_bunus_words_in_document(self):
+    def test_key_no_bonus_words_in_document(self):
         document = build_document(
             ("w1 w2 w3 w4", "I like music",),
             ("This is test sentence with some extra words",)
