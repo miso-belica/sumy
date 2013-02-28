@@ -18,16 +18,16 @@ class TestLuhn(unittest.TestCase):
 
     def test_single_sentence(self):
         document = build_document(("Já jsem jedna věta",))
-        stopwords = ("já", "jsem",)
-        luhn = LuhnMethod(document, stopwords)
+        luhn = LuhnMethod(document)
+        luhn.stop_words = ("já", "jsem",)
 
         returned = luhn(10)
         self.assertEqual(len(returned), 1)
 
     def test_two_sentences(self):
         document = build_document(("Já jsem 1. věta", "A já ta 2. vítězná výhra"))
-        stopwords = ("já", "jsem", "a", "ta",)
-        luhn = LuhnMethod(document, stopwords)
+        luhn = LuhnMethod(document)
+        luhn.stop_words = ("já", "jsem", "a", "ta",)
 
         returned = luhn(10)
         self.assertEqual(len(returned), 2)
@@ -36,8 +36,8 @@ class TestLuhn(unittest.TestCase):
 
     def test_two_sentences_but_one_winner(self):
         document = build_document(("Já jsem 1. ta věta", "A já ta 2. vítězná výhra"))
-        stopwords = ("já", "jsem", "a", "ta",)
-        luhn = LuhnMethod(document, stopwords)
+        luhn = LuhnMethod(document)
+        luhn.stop_words = ("já", "jsem", "a", "ta",)
 
         returned = luhn(1)
         self.assertEqual(len(returned), 1)
@@ -49,8 +49,8 @@ class TestLuhn(unittest.TestCase):
             "2 s 2 s 2 s s s s s s s s s 2",
             "3 s s 3 s s 3",
         ))
-        stopwords = ("s",)
-        luhn = LuhnMethod(document, stopwords)
+        luhn = LuhnMethod(document)
+        luhn.stop_words = ("s",)
 
         returned = luhn(1)
         self.assertEqual(len(returned), 1)

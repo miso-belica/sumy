@@ -5,16 +5,25 @@ from __future__ import division, print_function, unicode_literals
 
 from collections import Counter
 from ._utils import null_stemmer
+from .._py3k import to_unicode
 from ._method import AbstractSummarizationMethod
 
 
 class LuhnMethod(AbstractSummarizationMethod):
     max_gap_size = 4
     significant_percentage = 1
+    _stop_words = frozenset()
 
-    def __init__(self, document, stopwords=(), stemmer=null_stemmer):
+    def __init__(self, document, stemmer=null_stemmer):
         super(LuhnMethod, self).__init__(document, stemmer)
-        self._stopwords = frozenset(stopwords)
+
+    @property
+    def stop_words(self):
+        return self._stop_words
+
+    @stop_words.setter
+    def stop_words(self, words):
+        self._stop_words = frozenset(to_unicode(w).lower() for w in words)
 
     def __call__(self, sentences_count):
         words = self._get_significant_words(self._document.words)
@@ -38,7 +47,7 @@ class LuhnMethod(AbstractSummarizationMethod):
         return tuple(w for _, w in words)[:best_words_count]
 
     def _is_stopword(self, word):
-        return not word.is_stopword(self._stopwords)
+        return not word.is_stopword(self._stop_words)
 
     def rate_sentence(self, sentence, significant_stems):
         ratings = self._get_chunk_ratings(sentence, significant_stems)
