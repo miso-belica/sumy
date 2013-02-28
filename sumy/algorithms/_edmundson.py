@@ -47,19 +47,15 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         self._null_words = frozenset(map(self.stem_word, collection))
 
     def __call__(self, sentences_count):
-        return self._get_best_sentences((), sentences_count)
+        return self._get_best_sentences((), sentences_count, lambda s: 0)
 
     def cue_method(self, sentences_count, bunus_word_value=1, stigma_word_value=1):
         self.__check_bonus_words()
         self.__check_stigma_words()
 
-        sentences = []
-        for sentence in self._document.sentences:
-            rating = self._rate_sentence_by_cue_method(sentence,
-                bunus_word_value, stigma_word_value)
-            sentences.append((sentence, rating,))
-
-        return self._get_best_sentences(sentences, sentences_count)
+        return self._get_best_sentences(self._document.sentences,
+            sentences_count, self._rate_sentence_by_cue_method,
+            bunus_word_value, stigma_word_value)
 
     def _rate_sentence_by_cue_method(self, sentence, bunus_word_value,
             stigma_word_value):
@@ -80,12 +76,9 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         significant_words = tuple(w for w, c in word_counts.items()
             if c/max_word_frequency > weight)
 
-        sentences = []
-        for sentence in self._document.sentences:
-            rating = self._rate_sentence_by_key_method(sentence, significant_words)
-            sentences.append((sentence, rating,))
-
-        return self._get_best_sentences(sentences, sentences_count)
+        return self._get_best_sentences(self._document.sentences,
+            sentences_count, self._rate_sentence_by_key_method,
+            significant_words)
 
     def _is_bonus_word(self, word):
         return word in self._bonus_words
@@ -104,12 +97,8 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         significant_words = ffilter(self._is_null_word, significant_words)
         significant_words = frozenset(significant_words)
 
-        rated_sentences = []
-        for sentence in sentences:
-            rating = self._rate_sentence_by_title_method(sentence, significant_words)
-            rated_sentences.append((sentence, rating,))
-
-        return self._get_best_sentences(rated_sentences, sentences_count)
+        return self._get_best_sentences(sentences, sentences_count,
+            self._rate_sentence_by_title_method, significant_words)
 
     def _split_sentences(self, sentences):
         headings = []
@@ -139,7 +128,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         significant_words = ffilter(self._is_null_word, significant_words)
         significant_words = frozenset(significant_words)
 
-        rated_sentences = []
+        rated_sentences = {}
         paragraphs = self._document.paragraphs
         for paragraph_order, paragraph in enumerate(paragraphs):
             sentences = tuple(ffilter(attrgetter("is_heading"), paragraph.sentences))
@@ -158,9 +147,11 @@ class EdmundsonMethod(AbstractSummarizationMethod):
                 elif sentence_order == len(sentences) - 1:
                     rating += w_s2
 
-                rated_sentences.append((sentence, rating,))
+                rated_sentences[sentence] = rating
 
-        return self._get_best_sentences(rated_sentences, sentences_count)
+        sentences = ffilter(attrgetter("is_heading"), self._document.sentences)
+        return self._get_best_sentences(sentences, sentences_count,
+            lambda s: rated_sentences[s])
 
     def _rate_sentence_by_location_method(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)

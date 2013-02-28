@@ -22,13 +22,8 @@ class LuhnMethod(AbstractSummarizationMethod):
 
     def __call__(self, sentences_count):
         words = self._get_significant_words(self._document.words)
-
-        sentences = []
-        for sentence in self._document.sentences:
-            rating = self.rate_sentence(sentence, words)
-            sentences.append((sentence, rating,))
-
-        return self._get_best_sentences(sentences, sentences_count)
+        return self._get_best_sentences(self._document.sentences,
+            sentences_count, self.rate_sentence, words)
 
     def _get_significant_words(self, words):
         words = filter(self._is_stopword, words)

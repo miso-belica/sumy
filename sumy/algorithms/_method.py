@@ -30,8 +30,9 @@ class AbstractSummarizationMethod(object):
     def normalize_word(self, word):
         return to_unicode(word).lower()
 
-    def _get_best_sentences(self, rated_sentences, count):
-        infos = (SentenceInfo(s, o, r) for o, (s, r,) in enumerate(rated_sentences))
+    def _get_best_sentences(self, sentences, count, rate, *args, **kwargs):
+        infos = (SentenceInfo(s, o, rate(s, *args, **kwargs))
+            for o, s in enumerate(sentences))
 
         # sort sentences by rating in descending order
         infos = sorted(infos, key=attrgetter("rating"), reverse=True)
