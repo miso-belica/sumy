@@ -25,7 +25,10 @@ class AbstractSummarizationMethod(object):
         raise NotImplementedError("This method should be overriden in subclass")
 
     def stem_word(self, word):
-        return self._stemmer(to_unicode(word).lower())
+        return self._stemmer(self.normalize_word(word))
+
+    def normalize_word(self, word):
+        return to_unicode(word).lower()
 
     def _get_best_sentences(self, rated_sentences, count):
         infos = (SentenceInfo(s, o, r) for o, (s, r,) in enumerate(rated_sentences))

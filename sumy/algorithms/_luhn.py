@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import Counter
-from .._py3k import to_unicode
 from ._method import AbstractSummarizationMethod
 
 
@@ -19,7 +18,7 @@ class LuhnMethod(AbstractSummarizationMethod):
 
     @stop_words.setter
     def stop_words(self, words):
-        self._stop_words = frozenset(to_unicode(w).lower() for w in words)
+        self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, sentences_count):
         words = self._get_significant_words(self._document.words)
