@@ -6,7 +6,6 @@ from __future__ import division, print_function, unicode_literals
 from collections import Counter
 from operator import attrgetter
 from itertools import chain
-from ._utils import null_stemmer
 from ._method import AbstractSummarizationMethod
 
 try:
@@ -22,9 +21,6 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     _bonus_words = _EMPTY_SET
     _stigma_words = _EMPTY_SET
     _null_words = _EMPTY_SET
-
-    def __init__(self, document, stemmer=null_stemmer):
-        super(EdmundsonMethod, self).__init__(document, stemmer)
 
     @property
     def bonus_words(self):

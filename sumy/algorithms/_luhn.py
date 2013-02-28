@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import Counter
-from ._utils import null_stemmer
 from .._py3k import to_unicode
 from ._method import AbstractSummarizationMethod
 
@@ -13,9 +12,6 @@ class LuhnMethod(AbstractSummarizationMethod):
     max_gap_size = 4
     significant_percentage = 1
     _stop_words = frozenset()
-
-    def __init__(self, document, stemmer=null_stemmer):
-        super(LuhnMethod, self).__init__(document, stemmer)
 
     @property
     def stop_words(self):

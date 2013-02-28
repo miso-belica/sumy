@@ -12,8 +12,12 @@ from .._py3k import to_unicode
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
 
 
+def null_stemmer(object):
+    return to_unicode(object).lower()
+
+
 class AbstractSummarizationMethod(object):
-    def __init__(self, document, stemmer):
+    def __init__(self, document, stemmer=null_stemmer):
         self._document = document
         self._stemmer = stemmer
 
