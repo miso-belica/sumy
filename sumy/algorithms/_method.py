@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 
 from collections import namedtuple
 from operator import attrgetter
-from .._py3k import to_unicode
+from .._py3k import to_unicode, callable
 
 
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
@@ -18,6 +18,9 @@ def null_stemmer(object):
 
 class AbstractSummarizationMethod(object):
     def __init__(self, document, stemmer=null_stemmer):
+        if not callable(stemmer):
+            raise ValueError("Stemmer has to be callable object")
+
         self._document = document
         self._stemmer = stemmer
 
