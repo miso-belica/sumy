@@ -36,7 +36,10 @@ setup(
         "singular value decomposition",
         "SVD"
     ],
-    install_requires=[],
+    install_requires=[
+        # "numpy",  # required only for LSA summarization method
+        # "scipy",  # required only for LSA summarization method
+    ],
     packages=[
         "sumy",
         "sumy.document",
