@@ -74,8 +74,9 @@ class LuhnMethod(AbstractSummarizationMethod):
             return significant_words**2 / words_count
 
     def __remove_trailing_zeros(self, collection):
-        collection = list(collection)
-        while collection[-1] == 0:
-            collection.pop()
+        """Removes trailing zeroes from indexable collection of numbers"""
+        index = len(collection) - 1
+        while index >= 0 and collection[index] == 0:
+            index -= 1
 
-        return collection
+        return collection[:index + 1]
