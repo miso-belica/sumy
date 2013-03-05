@@ -12,7 +12,7 @@ class Sentence(Object):
     __slots__ = ("_words", "_is_heading",)
 
     def __init__(self, words, is_heading=False):
-        self._words = tuple(words)
+        self._words = tuple(map(to_unicode, words))
         self._is_heading = bool(is_heading)
 
     @property
@@ -24,5 +24,4 @@ class Sentence(Object):
         return self._is_heading
 
     def _to_string(self):
-        words = map(to_unicode, self._words)
-        return " ".join(words)
+        return " ".join(self._words)

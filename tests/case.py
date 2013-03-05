@@ -10,7 +10,7 @@ from os import pardir
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), pardir)))
 
-from sumy.document import Document, Paragraph, Sentence, Word
+from sumy.document import Document, Paragraph, Sentence
 
 
 def build_document(*sets_of_sentences):
@@ -45,8 +45,4 @@ def build_document_from_string(string):
 
 
 def build_sentence(sentence_as_string, is_heading=False):
-    return Sentence(map(Word, sentence_as_string.split()), is_heading)
-
-
-def to_words(*words):
-    return tuple(map(Word, words))
+    return Sentence(sentence_as_string.split(), is_heading)

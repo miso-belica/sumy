@@ -26,8 +26,8 @@ class LuhnMethod(AbstractSummarizationMethod):
             sentences_count, self.rate_sentence, words)
 
     def _get_significant_words(self, words):
-        words = filter(self._is_stopword, words)
-        words = tuple(self.stem_word(w) for w in words)
+        words = tuple(self.stem_word(w) for w in words
+            if w not in self._stop_words)
 
         # sort words by number of occurrences
         words = sorted((c, w) for w, c in Counter(words).items())
@@ -35,9 +35,6 @@ class LuhnMethod(AbstractSummarizationMethod):
         # take only best `significant_percentage` % words
         best_words_count = int(len(words) * self.significant_percentage)
         return tuple(w for _, w in words)[:best_words_count]
-
-    def _is_stopword(self, word):
-        return not word.is_stopword(self._stop_words)
 
     def rate_sentence(self, sentence, significant_stems):
         ratings = self._get_chunk_ratings(sentence, significant_stems)

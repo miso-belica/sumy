@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest, build_document, to_words
+from case import unittest, build_document
 
 
 class TestDocument(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestDocument(unittest.TestCase):
         )
 
         returned = sorted(frozenset(document.words))
-        expected = to_words(
+        expected = (
             "Nějaký",
             "Už",
             "abych",
