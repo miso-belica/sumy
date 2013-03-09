@@ -90,27 +90,15 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     def title_method(self, sentences_count):
         self.__check_null_words()
 
-        headings, sentences = self._split_sentences(self._document.sentences)
-
+        headings = self._document.headings
         significant_words = chain(*map(attrgetter("words"), headings))
         significant_words = map(self.stem_word, significant_words)
         significant_words = ffilter(self._is_null_word, significant_words)
         significant_words = frozenset(significant_words)
 
+        sentences = self._document.sentences
         return self._get_best_sentences(sentences, sentences_count,
             self._rate_sentence_by_title_method, significant_words)
-
-    def _split_sentences(self, sentences):
-        headings = []
-        common_sentences = []
-
-        for sentence in sentences:
-            if sentence.is_heading:
-                headings.append(sentence)
-            else:
-                common_sentences.append(sentence)
-
-        return tuple(headings), tuple(common_sentences)
 
     def _is_null_word(self, word):
         return word in self._null_words
@@ -122,7 +110,7 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     def location_method(self, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
         self.__check_null_words()
 
-        headings = filter(attrgetter("is_heading"), self._document.sentences)
+        headings = self._document.headings
         significant_words = chain(*map(attrgetter("words"), headings))
         significant_words = map(self.stem_word, significant_words)
         significant_words = ffilter(self._is_null_word, significant_words)
@@ -149,9 +137,8 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
                 rated_sentences[sentence] = rating
 
-        sentences = ffilter(attrgetter("is_heading"), self._document.sentences)
-        return self._get_best_sentences(sentences, sentences_count,
-            lambda s: rated_sentences[s])
+        return self._get_best_sentences(self._document.sentences,
+            sentences_count, lambda s: rated_sentences[s])
 
     def _rate_sentence_by_location_method(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)

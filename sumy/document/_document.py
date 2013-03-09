@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
+from ..utils import cached_property
 
 
 class Document(object):
@@ -14,11 +15,17 @@ class Document(object):
     def paragraphs(self):
         return self._paragraphs
 
-    @property
+    @cached_property
     def sentences(self):
-        return chain(*(p.sentences for p in self._paragraphs))
+        sentences = (p.sentences for p in self._paragraphs)
+        return tuple(chain(*sentences))
 
-    @property
+    @cached_property
+    def headings(self):
+        headings = (p.headings for p in self._paragraphs)
+        return tuple(chain(*headings))
+
+    @cached_property
     def words(self):
         words = (p.words for p in self._paragraphs)
-        return chain(*words)
+        return tuple(chain(*words))
