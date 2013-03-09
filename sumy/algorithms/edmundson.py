@@ -7,6 +7,7 @@ from collections import Counter
 from operator import attrgetter
 from itertools import chain
 from ._method import AbstractSummarizationMethod
+from .edmundson_cue import EdmundsonCueMethod
 
 try:
     from itertools import ifilterfalse as ffilter
@@ -21,6 +22,26 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     _bonus_words = _EMPTY_SET
     _stigma_words = _EMPTY_SET
     _null_words = _EMPTY_SET
+
+    def __init__(self, document, stemmer=None, cue_weight=0.0, key_weight=0.0,
+            title_weight=0.0, location_weight=0.0):
+        if stemmer:
+            super(EdmundsonMethod, self).__init__(document, stemmer)
+        else:
+            super(EdmundsonMethod, self).__init__(document)
+
+        self._ensure_correct_weights(cue_weight, key_weight, title_weight,
+            location_weight)
+
+        self._cue_weight = float(cue_weight)
+        self._key_weight = float(key_weight)
+        self._title_weight = float(title_weight)
+        self._location_weight = float(location_weight)
+
+    def _ensure_correct_weights(self, *weights):
+        for w in weights:
+            if w < 0.0:
+                raise ValueError("Negative wights are not allowed.")
 
     @property
     def bonus_words(self):
@@ -53,17 +74,11 @@ class EdmundsonMethod(AbstractSummarizationMethod):
         self.__check_bonus_words()
         self.__check_stigma_words()
 
-        return self._get_best_sentences(self._document.sentences,
-            sentences_count, self._rate_sentence_by_cue_method,
-            bunus_word_value, stigma_word_value)
+        summarization_method = EdmundsonCueMethod(self._document, self._stemmer,
+            self._bonus_words, self._stigma_words)
 
-    def _rate_sentence_by_cue_method(self, sentence, bunus_word_value,
-            stigma_word_value):
-        words = tuple(map(self.stem_word, sentence.words))
-        bonus_words_count = sum(w in self._bonus_words for w in words)
-        stigma_words_count = sum(w in self._stigma_words for w in words)
-
-        return bonus_words_count*bunus_word_value - stigma_words_count*stigma_word_value
+        return summarization_method(sentences_count, bunus_word_value,
+            stigma_word_value)
 
     def key_method(self, sentences_count, weight=0.5):
         self.__check_bonus_words()
