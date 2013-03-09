@@ -3,17 +3,11 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from operator import attrgetter
-from itertools import chain
 from ._method import AbstractSummarizationMethod
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
 from .edmundson_title import EdmundsonTitleMethod
-
-try:
-    from itertools import ifilterfalse as ffilter
-except ImportError:
-    from itertools import filterfalse as ffilter
+from .edmundson_location import EdmundsonLocationMethod
 
 
 _EMPTY_SET = frozenset()
@@ -97,45 +91,13 @@ class EdmundsonMethod(AbstractSummarizationMethod):
 
         return summarization_method(sentences_count)
 
-    def _is_null_word(self, word):
-        return word in self._null_words
-
     def location_method(self, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
         self.__check_null_words()
 
-        headings = self._document.headings
-        significant_words = chain(*map(attrgetter("words"), headings))
-        significant_words = map(self.stem_word, significant_words)
-        significant_words = ffilter(self._is_null_word, significant_words)
-        significant_words = frozenset(significant_words)
+        summarization_method = EdmundsonLocationMethod(self._document,
+            self._stemmer, self._null_words)
 
-        rated_sentences = {}
-        paragraphs = self._document.paragraphs
-        for paragraph_order, paragraph in enumerate(paragraphs):
-            sentences = tuple(ffilter(attrgetter("is_heading"), paragraph.sentences))
-            for sentence_order, sentence in enumerate(sentences):
-                rating = self._rate_sentence_by_location_method(sentence,
-                    significant_words)
-                rating *= w_h
-
-                if paragraph_order == 0:
-                    rating += w_p1
-                elif paragraph_order == len(paragraphs) - 1:
-                    rating += w_p2
-
-                if sentence_order == 0:
-                    rating += w_s1
-                elif sentence_order == len(sentences) - 1:
-                    rating += w_s2
-
-                rated_sentences[sentence] = rating
-
-        return self._get_best_sentences(self._document.sentences,
-            sentences_count, lambda s: rated_sentences[s])
-
-    def _rate_sentence_by_location_method(self, sentence, significant_words):
-        words = map(self.stem_word, sentence.words)
-        return sum(w in significant_words for w in words)
+        return summarization_method(sentences_count, w_h, w_p1, w_p2, w_s1, w_s2)
 
     def __check_bonus_words(self):
         if not self._bonus_words:
