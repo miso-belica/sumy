@@ -3,11 +3,11 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from collections import Counter
 from operator import attrgetter
 from itertools import chain
 from ._method import AbstractSummarizationMethod
 from .edmundson_cue import EdmundsonCueMethod
+from .edmundson_key import EdmundsonKeyMethod
 
 try:
     from itertools import ifilterfalse as ffilter
@@ -83,24 +83,10 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     def key_method(self, sentences_count, weight=0.5):
         self.__check_bonus_words()
 
-        words = map(self.stem_word, self._document.words)
-        words = filter(self._is_bonus_word, words)
-        word_counts = Counter(self.stem_word(w) for w in words)
-        word_frequencies = word_counts.values()
-        max_word_frequency = 1 if not word_frequencies else max(word_frequencies)
-        significant_words = tuple(w for w, c in word_counts.items()
-            if c/max_word_frequency > weight)
+        summarization_method = EdmundsonKeyMethod(self._document, self._stemmer,
+            self._bonus_words)
 
-        return self._get_best_sentences(self._document.sentences,
-            sentences_count, self._rate_sentence_by_key_method,
-            significant_words)
-
-    def _is_bonus_word(self, word):
-        return word in self._bonus_words
-
-    def _rate_sentence_by_key_method(self, sentence, significant_words):
-        words = map(self.stem_word, sentence.words)
-        return sum(w in significant_words for w in words)
+        return summarization_method(sentences_count, weight)
 
     def title_method(self, sentences_count):
         self.__check_null_words()
