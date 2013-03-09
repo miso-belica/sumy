@@ -49,6 +49,28 @@ class TestEdmundson(unittest.TestCase):
         sentences = summarize(10)
         self.assertEqual(len(sentences), 0)
 
+    def test_mixed_cue_key(self):
+        document = build_document_from_string("""
+            # This is cool heading
+            Because I am sentence I like words
+            And because I am string I like characters
+
+            # blank and heading
+            This is next paragraph because of blank line above
+            Here is the winner because contains words like cool and heading
+        """)
+
+        summarize = EdmundsonMethod(document, cue_weight=1, key_weight=1)
+        summarize.bonus_words = ("cool", "heading", "sentence", "words", "like", "because")
+        summarize.stigma_words = ("this", "is", "I", "am", "and",)
+
+        sentences = summarize(2)
+        self.assertEqual(len(sentences), 2)
+        self.assertEqual(to_unicode(sentences[0]),
+            "Because I am sentence I like words")
+        self.assertEqual(to_unicode(sentences[1]),
+            "Here is the winner because contains words like cool and heading")
+
     def test_cue_with_no_words(self):
         document = build_document()
         summarize = EdmundsonMethod(document)

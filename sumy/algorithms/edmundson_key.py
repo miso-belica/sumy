@@ -12,7 +12,7 @@ class EdmundsonKeyMethod(AbstractSummarizationMethod):
         super(EdmundsonKeyMethod, self).__init__(document, stemmer)
         self._bonus_words = bonus_words
 
-    def __call__(self, sentences_count, weight=0.5):
+    def __call__(self, sentences_count, weight):
         significant_words = self._compute_significant_words(weight)
 
         return self._get_best_sentences(self._document.sentences,
@@ -42,3 +42,13 @@ class EdmundsonKeyMethod(AbstractSummarizationMethod):
     def _rate_sentence(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
+
+    def rate_sentences(self, weight=0.5):
+        significant_words = self._compute_significant_words(weight)
+
+        rated_sentences = {}
+        for sentence in self._document.sentences:
+            rated_sentences[sentence] = self._rate_sentence(sentence,
+                significant_words)
+
+        return rated_sentences

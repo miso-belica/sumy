@@ -61,3 +61,7 @@ class EdmundsonLocationMethod(AbstractSummarizationMethod):
     def _rate_sentence(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
+
+    def rate_sentences(self, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
+        significant_words = self._compute_significant_words()
+        return self._rate_sentences(significant_words, w_h, w_p1, w_p2, w_s1, w_s2)

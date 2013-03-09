@@ -48,3 +48,11 @@ class EdmundsonCueMethod(AbstractSummarizationMethod):
                 stigma_words_count += 1
 
         return bonus_words_count, stigma_words_count
+
+    def rate_sentences(self, bunus_word_weight=1, stigma_word_weight=1):
+        rated_sentences = {}
+        for sentence in self._document.sentences:
+            rated_sentences[sentence] = self._rate_sentence(sentence,
+                bunus_word_weight, stigma_word_weight)
+
+        return rated_sentences

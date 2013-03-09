@@ -36,3 +36,13 @@ class EdmundsonTitleMethod(AbstractSummarizationMethod):
     def _rate_sentence(self, sentence, significant_words):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
+
+    def rate_sentences(self):
+        significant_words = self._compute_significant_words()
+
+        rated_sentences = {}
+        for sentence in self._document.sentences:
+            rated_sentences[sentence] = self._rate_sentence(sentence,
+                significant_words)
+
+        return rated_sentences
