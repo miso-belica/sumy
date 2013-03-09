@@ -8,6 +8,7 @@ from itertools import chain
 from ._method import AbstractSummarizationMethod
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
+from .edmundson_title import EdmundsonTitleMethod
 
 try:
     from itertools import ifilterfalse as ffilter
@@ -91,22 +92,13 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     def title_method(self, sentences_count):
         self.__check_null_words()
 
-        headings = self._document.headings
-        significant_words = chain(*map(attrgetter("words"), headings))
-        significant_words = map(self.stem_word, significant_words)
-        significant_words = ffilter(self._is_null_word, significant_words)
-        significant_words = frozenset(significant_words)
+        summarization_method = EdmundsonTitleMethod(self._document,
+            self._stemmer, self._null_words)
 
-        sentences = self._document.sentences
-        return self._get_best_sentences(sentences, sentences_count,
-            self._rate_sentence_by_title_method, significant_words)
+        return summarization_method(sentences_count)
 
     def _is_null_word(self, word):
         return word in self._null_words
-
-    def _rate_sentence_by_title_method(self, sentence, significant_words):
-        words = map(self.stem_word, sentence.words)
-        return sum(w in significant_words for w in words)
 
     def location_method(self, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
         self.__check_null_words()

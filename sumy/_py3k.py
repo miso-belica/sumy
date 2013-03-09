@@ -26,6 +26,12 @@ except NameError:
         return hasattr(object, "__call__")
 
 
+try:
+    from itertools import ifilterfalse as ffilter
+except ImportError:
+    from itertools import filterfalse as ffilter
+
+
 def to_string(object):
     return to_unicode(object) if PY3 else to_bytes(object)
 
