@@ -37,9 +37,10 @@ setup(
         "SVD"
     ],
     install_requires=[
-        # "numpy",  # required only for LSA summarization method
-        # "scipy",  # required only for LSA summarization method
     ],
+    extras_require={
+        "LSA": ["numpy", "scipy"],
+    },
     packages=[
         "sumy",
         "sumy.document",
