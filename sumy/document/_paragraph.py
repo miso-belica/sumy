@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
+from .._py3k import to_string
 from ..utils import cached_property
 from ._sentence import Sentence
 
@@ -27,3 +28,11 @@ class Paragraph(object):
     @cached_property
     def words(self):
         return tuple(chain(*(s.words for s in self._sentences)))
+
+    def __repr__(self):
+        return "<Paragraph with %d headings & %d sentences>" % (
+            len(self.headings),
+            len(self.sentences),
+        )
+
+    __str__ = __repr__
