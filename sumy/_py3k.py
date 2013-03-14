@@ -27,6 +27,12 @@ except NameError:
 
 
 try:
+    import urllib2 as urllib
+except ImportError:
+    from urllib import request as urllib
+
+
+try:
     from itertools import ifilterfalse as ffilter
 except ImportError:
     from itertools import filterfalse as ffilter
