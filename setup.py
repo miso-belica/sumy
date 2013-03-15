@@ -37,6 +37,7 @@ setup(
         "SVD"
     ],
     install_requires=[
+        "nltk",
     ],
     extras_require={
         "LSA": ["numpy", "scipy"],

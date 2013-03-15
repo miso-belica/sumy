@@ -3,6 +3,11 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+import sys
+
+from os.path import dirname, abspath, join
+from ._py3k import to_string
+
 
 def cached_property(getter):
     """
@@ -24,3 +29,9 @@ def cached_property(getter):
     decorator.__doc__ = getter.__doc__
 
     return property(decorator)
+
+
+def expand_resource_path(path):
+    directory = dirname(sys.modules["sumy"].__file__)
+    directory = abspath(directory)
+    return join(directory, to_string("data"), to_string(path))
