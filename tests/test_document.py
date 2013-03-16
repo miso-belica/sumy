@@ -14,7 +14,7 @@ class TestDocument(unittest.TestCase):
             ("Už už abych taky šel",),
         )
 
-        returned = sorted(frozenset(document.words))
+        returned = tuple(sorted(frozenset(document.words)))
         expected = (
             "Nějaký",
             "Už",
@@ -28,7 +28,7 @@ class TestDocument(unittest.TestCase):
             "zahrady",
             "šel"
         )
-        self.assertSequenceEqual(expected, returned)
+        self.assertEqual(expected, returned)
 
     def test_headings(self):
         document = build_document_from_string("""

@@ -13,33 +13,33 @@ class TestEdmundson(unittest.TestCase):
         document = build_document()
         summarize = EdmundsonMethod(document)
 
-        self.assertSequenceEqual(summarize.bonus_words, frozenset())
+        self.assertEqual(summarize.bonus_words, frozenset())
 
         words = ("word", "another", "and", "some", "next",)
         summarize.bonus_words = words
-        self.assertIsInstance(summarize.bonus_words, frozenset)
+        self.assertTrue(isinstance(summarize.bonus_words, frozenset))
         self.assertEqual(summarize.bonus_words, frozenset(words))
 
     def test_stigma_words_property(self):
         document = build_document()
         summarize = EdmundsonMethod(document)
 
-        self.assertSequenceEqual(summarize.stigma_words, frozenset())
+        self.assertEqual(summarize.stigma_words, frozenset())
 
         words = ("word", "another", "and", "some", "next",)
         summarize.stigma_words = words
-        self.assertIsInstance(summarize.stigma_words, frozenset)
+        self.assertTrue(isinstance(summarize.stigma_words, frozenset))
         self.assertEqual(summarize.stigma_words, frozenset(words))
 
     def test_null_words_property(self):
         document = build_document()
         summarize = EdmundsonMethod(document)
 
-        self.assertSequenceEqual(summarize.null_words, frozenset())
+        self.assertEqual(summarize.null_words, frozenset())
 
         words = ("word", "another", "and", "some", "next",)
         summarize.null_words = words
-        self.assertIsInstance(summarize.null_words, frozenset)
+        self.assertTrue(isinstance(summarize.null_words, frozenset))
         self.assertEqual(summarize.null_words, frozenset(words))
 
     def test_empty_document(self):
