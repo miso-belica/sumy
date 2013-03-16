@@ -7,7 +7,7 @@ import nltk
 
 from os import path
 from .utils import expand_resource_path
-from ._py3k import to_string
+from ._compat import to_string
 
 
 class Tokenizer(object):

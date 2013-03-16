@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from case import unittest
 from nose import SkipTest
-from sumy import _py3k as py3k
+from sumy import _compat as py3k
 
 
 BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode("utf8")

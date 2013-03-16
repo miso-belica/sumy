@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from case import unittest, build_document, build_sentence
 from sumy.algorithms.luhn import LuhnMethod
-from sumy._py3k import to_unicode
+from sumy._compat import to_unicode
 
 
 class TestLuhn(unittest.TestCase):

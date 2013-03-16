@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from case import unittest
 from os.path import dirname, join, abspath
-from sumy._py3k import to_string
+from sumy._compat import to_string
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.tokenizers import Tokenizer
 

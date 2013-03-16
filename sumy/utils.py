@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import sys
 
 from os.path import dirname, abspath, join
-from ._py3k import to_string
+from ._compat import to_string
 
 
 def cached_property(getter):

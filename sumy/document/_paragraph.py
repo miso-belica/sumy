@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
-from .._py3k import to_string
+from .._compat import to_string
 from ..utils import cached_property
 from ._sentence import Sentence
 

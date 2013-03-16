@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from ._py3k import to_string, to_bytes, unicode
+from ._compat import to_string, to_bytes, unicode
 
 
 class Object(object):

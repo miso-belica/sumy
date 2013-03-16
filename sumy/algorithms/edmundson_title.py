@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from operator import attrgetter
 from itertools import chain
-from .._py3k import ffilter
+from .._compat import ffilter
 from ._method import AbstractSummarizationMethod
 
 

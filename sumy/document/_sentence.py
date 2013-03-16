@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
 from .._object import Object
-from .._py3k import to_unicode
+from .._compat import to_unicode
 
 
 class Sentence(Object):
