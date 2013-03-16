@@ -39,6 +39,10 @@ setup(
     install_requires=[
         "nltk",
     ],
+    tests_require=[
+        "nose",
+        "coverage",
+    ],
     extras_require={
         "LSA": ["numpy", "scipy"],
     },

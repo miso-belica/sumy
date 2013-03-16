@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from case import unittest
+from nose import SkipTest
 from sumy import _py3k as py3k
 from sumy._object import Object
 
@@ -26,13 +27,17 @@ class TestObject(unittest.TestCase):
         self.assertEqual(type(str1), type(str2), *args)
         self.assertEqual(str1, str2, *args)
 
-    @unittest.skipIf(not py3k.PY3, "Python 2 doesn't support method `__bytes__`")
     def test_native_bytes(self):
+        if not py3k.PY3:
+            raise SkipTest("Python 2 doesn't support method `__bytes__`")
+
         returned = bytes(self.o)
         self.assertStringsEqual(BYTES_STRING, returned)
 
-    @unittest.skipIf(py3k.PY3, "Python 3 doesn't support method `__unicode__`")
     def test_native_unicode(self):
+        if py3k.PY3:
+            raise SkipTest("Python 3 doesn't support method `__unicode__`")
+
         returned = unicode(self.o)
         self.assertStringsEqual(UNICODE_STRING, returned)
 

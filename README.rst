@@ -26,6 +26,5 @@ Run tests via
 
 .. code-block:: bash
 
-    $ cd tests
-    $ python -tt -Wall -B -3 -m unittest discover
-    $ python3 -tt -Wall -B -m unittest discover
+    $ nosetests --with-coverage --cover-package=sumy --cover-erase tests
+    $ nosetests-3.3 --with-coverage --cover-package=sumy --cover-erase tests
