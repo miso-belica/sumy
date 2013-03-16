@@ -7,7 +7,7 @@ from __future__ import division, print_function, unicode_literals
 def precision(evaluated_sentences, reference_sentences):
     """
     Intrinsic method of evaluation for extracts. It is computed as
-    P(E) = A / B where:
+    P(E) = A / B, where:
 
     - A is count of common sentences occurring in both extracts.
     - B is count of sentences in evaluated extract.
@@ -25,7 +25,7 @@ def precision(evaluated_sentences, reference_sentences):
 def recall(evaluated_sentences, reference_sentences):
     """
     Intrinsic method of evaluation for extracts. It is computed as
-    R(E) = A / C where:
+    R(E) = A / C, where:
 
     - A is count of common sentences in both extracts.
     - C is count of sentences in reference extract.
