@@ -7,6 +7,7 @@ from case import unittest
 from os.path import dirname, join, abspath
 from sumy._py3k import to_string
 from sumy.parsers.plaintext import PlaintextParser
+from sumy.tokenizers import Tokenizer
 
 
 def expand_resource_path(file_name):
@@ -27,7 +28,7 @@ class TestParser(unittest.TestCase):
             TOTO JE AKOŽE NADPIS
             A toto je text pod ním, ktorý je textový.
             A tak ďalej...
-        """, "czech")
+        """, Tokenizer("czech"))
 
         document = parser.document
 
@@ -56,7 +57,7 @@ class TestParser(unittest.TestCase):
 
 
             A tak este dalej!
-        """, "czech")
+        """, Tokenizer("czech"))
 
         document = parser.document
 
