@@ -15,6 +15,7 @@ Here are some other summarizators:
 Installation
 ------------
 Currently only from git repo
+
 .. code-block:: bash
 
     $ [sudo] pip install git+git://github.com/miso-belica/sumy.git
