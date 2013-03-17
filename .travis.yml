@@ -5,8 +5,10 @@ python:
   - "2.7"
   # - "3.2"
   # - "3.3"
+before_install:
+  - sudo apt-get install -qq python-numpy python-scipy
 install:
-  - pip install nose numpy scipy --use-mirrors
+  - pip install nose --use-mirrors
   - python setup.py install
 script:
   - nosetests tests
