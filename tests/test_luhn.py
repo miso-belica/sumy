@@ -69,12 +69,48 @@ class TestLuhn(unittest.TestCase):
         self.assertEqual(to_unicode(returned[1]), "2 s 2 s 2 s s s s s s s s s 2")
         self.assertEqual(to_unicode(returned[2]), "3 s s 3 s s 3")
 
+    def test_various_words_with_significant_percentage(self):
+        document = build_document((
+            "1 a",
+            "2 b b",
+            "3 c c c",
+            "4 d d d",
+            "5 z z z z",
+            "6 e e e e e",
+        ))
+        luhn = LuhnMethod(document)
+        luhn.stop_words = ("1", "2", "3", "4", "5", "6")
+
+        returned = luhn(1)
+        self.assertEqual(len(returned), 1)
+        self.assertEqual(to_unicode(returned[0]), "6 e e e e e")
+
+        returned = luhn(2)
+        self.assertEqual(len(returned), 2)
+        self.assertEqual(to_unicode(returned[0]), "5 z z z z")
+        self.assertEqual(to_unicode(returned[1]), "6 e e e e e")
+
+        returned = luhn(3)
+        self.assertEqual(len(returned), 3)
+        self.assertEqual(to_unicode(returned[0]), "3 c c c")
+        self.assertEqual(to_unicode(returned[1]), "5 z z z z")
+        self.assertEqual(to_unicode(returned[2]), "6 e e e e e")
+
 
 class TestSentenceRating(unittest.TestCase):
     def setUp(self):
         self.luhn = LuhnMethod(build_document())
         self.sentence = build_sentence(
             "Nějaký muž šel kolem naší zahrady a žil pěkný život samotáře")
+
+    def test_significant_words(self):
+        self.luhn.significant_percentage = 1/5
+        words = self.luhn._get_significant_words((
+            "w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10",
+            "w1", "w2",
+        ))
+
+        self.assertEqual(tuple(sorted(words)), ("w1", "w2"))
 
     def test_zero_rating(self):
         significant_stems = ()

@@ -30,7 +30,7 @@ class LuhnMethod(AbstractSummarizationMethod):
             if w not in self._stop_words)
 
         # sort words by number of occurrences
-        words = sorted((c, w) for w, c in Counter(words).items())
+        words = sorted(((c, w) for w, c in Counter(words).items()), reverse=True)
 
         # take only best `significant_percentage` % words
         best_words_count = int(len(words) * self.significant_percentage)
