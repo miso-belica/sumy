@@ -31,3 +31,19 @@ def cosine_similarity(model1, model2):
             model1, model2))
 
     return numerator / denominator
+
+
+def unit_overlap(model1, model2):
+    if not (isinstance(model1, TfModel) and isinstance(model2, TfModel)):
+        raise ValueError(
+            "Arguments has to be instances of 'sumy.models.TfDocumentModel'")
+
+    terms1 = frozenset(model1.terms)
+    terms2 = frozenset(model2.terms)
+
+    if not terms1 and not terms2:
+        raise ValueError(
+            "Documents can't be empty. Please pass the valid documents.")
+
+    common_terms_count = len(terms1 & terms2)
+    return common_terms_count / (len(terms1) + len(terms2) - common_terms_count)

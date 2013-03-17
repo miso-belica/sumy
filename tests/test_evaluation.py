@@ -8,7 +8,7 @@ import unittest
 from sumy.tokenizers import Tokenizer
 from sumy.models import TfDocumentModel
 from sumy.evaluation import precision, recall, f_score
-from sumy.evaluation import cosine_similarity
+from sumy.evaluation import cosine_similarity, unit_overlap
 
 
 class TestCoselectionEvaluation(unittest.TestCase):
@@ -148,3 +148,41 @@ class TestContentBasedEvaluation(unittest.TestCase):
             tokenizer)
 
         self.assertAlmostEqual(cosine_similarity(model1, model2), 0.5)
+
+    def test_unit_overlap_empty(self):
+        tokenizer = Tokenizer("english")
+        model = TfDocumentModel("", tokenizer)
+
+        self.assertRaises(ValueError, unit_overlap, model, model)
+
+    def test_unit_overlap_wrong_arguments(self):
+        tokenizer = Tokenizer("english")
+        model = TfDocumentModel("", tokenizer)
+
+        self.assertRaises(ValueError, unit_overlap, "model", "model")
+        self.assertRaises(ValueError, unit_overlap, "model", model)
+        self.assertRaises(ValueError, unit_overlap, model, "model")
+
+    def test_unit_overlap_exact_match(self):
+        tokenizer = Tokenizer("czech")
+        model = TfDocumentModel("Veta aká sa len veľmi ťažko hľadá.", tokenizer)
+
+        self.assertAlmostEqual(unit_overlap(model, model), 1.0)
+
+    def test_unit_overlap_no_match(self):
+        tokenizer = Tokenizer("czech")
+        model1 = TfDocumentModel("Toto je moja veta. To sa nedá poprieť!",
+            tokenizer)
+        model2 = TfDocumentModel("Hento bolo jeho slovo, ale možno klame.",
+            tokenizer)
+
+        self.assertAlmostEqual(unit_overlap(model1, model2), 0.0)
+
+    def test_unit_overlap_half_match(self):
+        tokenizer = Tokenizer("czech")
+        model1 = TfDocumentModel("Veta aká sa len veľmi ťažko hľadá.",
+            tokenizer)
+        model2 = TfDocumentModel("Teta ktorá sa iba veľmi zle hľadá.",
+            tokenizer)
+
+        self.assertAlmostEqual(unit_overlap(model1, model2), 1/3)
