@@ -19,14 +19,6 @@ string_types = (bytes, unicode,)
 
 
 try:
-    callable = callable
-except NameError:
-    def callable(object):
-        """Checks if given object is callable."""
-        return hasattr(object, "__call__")
-
-
-try:
     import urllib2 as urllib
 except ImportError:
     from urllib import request as urllib

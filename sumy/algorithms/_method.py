@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 
 from collections import namedtuple
 from operator import attrgetter
-from .._compat import to_unicode, callable
+from .._compat import to_unicode
 
 
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
