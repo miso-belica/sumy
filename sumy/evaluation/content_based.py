@@ -34,6 +34,14 @@ def cosine_similarity(model1, model2):
 
 
 def unit_overlap(model1, model2):
+    """
+    Computes unit overlap of two text documents. Documents
+    has to be represented as TF models of non-empty document.
+
+    :returns float:
+        0 <= overlap <= 1, where 0 means no match and 1 means
+        exactly the same.
+    """
     if not (isinstance(model1, TfModel) and isinstance(model2, TfModel)):
         raise ValueError(
             "Arguments has to be instances of 'sumy.models.TfDocumentModel'")
