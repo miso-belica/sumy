@@ -1,6 +1,9 @@
 ============================
 Automatic text summarization
 ============================
+.. image:: https://api.travis-ci.org/miso-belica/sumy.png?branch=master
+   :target: https://travis-ci.org/miso-belica/sumy
+
 Here are some other summarizators:
 
 - https://github.com/thavelick/summarize/ (very simple)
