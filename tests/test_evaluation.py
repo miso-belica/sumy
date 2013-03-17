@@ -4,10 +4,13 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from case import unittest
+from sumy.tokenizers import Tokenizer
+from sumy.models import TfDocumentModel
 from sumy.evaluation import precision, recall, f_score
+from sumy.evaluation import cosine_similarity
 
 
-class TestEvaluation(unittest.TestCase):
+class TestCoselectionEvaluation(unittest.TestCase):
     def test_precision_empty_evaluated(self):
         self.assertRaises(ValueError, precision, (), ("s1", "s2", "s3", "s4", "s5"))
 
@@ -110,3 +113,37 @@ class TestEvaluation(unittest.TestCase):
         expected = (1.25 * p * r) / (0.25 * p + r)
 
         self.assertAlmostEqual(result, expected)
+
+
+class TestContentBasedEvaluation(unittest.TestCase):
+    def test_wrong_arguments(self):
+        text = "Toto je moja veta, to sa nedá poprieť."
+        model = TfDocumentModel(text, Tokenizer("czech"))
+
+        self.assertRaises(ValueError, cosine_similarity, text, text)
+        self.assertRaises(ValueError, cosine_similarity, text, model)
+        self.assertRaises(ValueError, cosine_similarity, model, text)
+
+    def test_cosine_exact_match(self):
+        text = "Toto je moja veta, to sa nedá poprieť."
+        model = TfDocumentModel(text, Tokenizer("czech"))
+
+        self.assertAlmostEqual(cosine_similarity(model, model), 1.0)
+
+    def test_cosine_no_match(self):
+        tokenizer = Tokenizer("czech")
+        model1 = TfDocumentModel("Toto je moja veta. To sa nedá poprieť!",
+            tokenizer)
+        model2 = TfDocumentModel("Hento bolo jeho slovo, ale možno klame.",
+            tokenizer)
+
+        self.assertAlmostEqual(cosine_similarity(model1, model2), 0.0)
+
+    def test_cosine_half_match(self):
+        tokenizer = Tokenizer("czech")
+        model1 = TfDocumentModel("Veta aká sa len veľmi ťažko hľadá.",
+            tokenizer)
+        model2 = TfDocumentModel("Teta ktorá sa iba veľmi zle hľadá.",
+            tokenizer)
+
+        self.assertAlmostEqual(cosine_similarity(model1, model2), 0.5)
