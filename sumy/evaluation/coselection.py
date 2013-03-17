@@ -75,7 +75,11 @@ def _divide_evaluation(numerator_sentences, denominator_sentences):
     denominator_sentences = frozenset(denominator_sentences)
     numerator_sentences = frozenset(numerator_sentences)
 
+    if len(numerator_sentences) == 0 or len(denominator_sentences) == 0:
+        raise ValueError("Both collections have to contain at least 1 sentence.")
+
     common_count = len(denominator_sentences & numerator_sentences)
     choosen_count = len(denominator_sentences)
 
-    return 0.0 if choosen_count == 0 else common_count / choosen_count
+    assert choosen_count != 0
+    return common_count / choosen_count

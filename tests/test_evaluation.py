@@ -9,14 +9,10 @@ from sumy.evaluation import precision, recall, f_score
 
 class TestEvaluation(unittest.TestCase):
     def test_precision_empty_evaluated(self):
-        result = precision((), ("s1", "s2", "s3", "s4", "s5"))
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError, precision, (), ("s1", "s2", "s3", "s4", "s5"))
 
     def test_precision_empty_reference(self):
-        result = precision(("s1", "s2", "s3", "s4", "s5"), ())
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError, precision, ("s1", "s2", "s3", "s4", "s5"), ())
 
     def test_precision_no_match(self):
         result = precision(("s1", "s2", "s3", "s4", "s5"), ("s6", "s7", "s8"))
@@ -40,14 +36,10 @@ class TestEvaluation(unittest.TestCase):
         self.assertAlmostEqual(result, 1.0)
 
     def test_recall_empty_evaluated(self):
-        result = recall((), ("s1", "s2", "s3", "s4", "s5"))
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError,  recall, (), ("s1", "s2", "s3", "s4", "s5"))
 
     def test_recall_empty_reference(self):
-        result = recall(("s1", "s2", "s3", "s4", "s5"), ())
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError,  recall, ("s1", "s2", "s3", "s4", "s5"), ())
 
     def test_recall_no_match(self):
         result = recall(("s1", "s2", "s3", "s4", "s5"), ("s6", "s7", "s8"))
@@ -71,14 +63,10 @@ class TestEvaluation(unittest.TestCase):
         self.assertAlmostEqual(result, 1.0)
 
     def test_basic_f_score_empty_evaluated(self):
-        result = f_score((), ("s1", "s2", "s3", "s4", "s5"))
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError, f_score, (), ("s1", "s2", "s3", "s4", "s5"))
 
     def test_basic_f_score_empty_reference(self):
-        result = f_score(("s1", "s2", "s3", "s4", "s5"), ())
-
-        self.assertEqual(result, 0.0)
+        self.assertRaises(ValueError, f_score, ("s1", "s2", "s3", "s4", "s5"), ())
 
     def test_basic_f_score_no_match(self):
         result = f_score(("s1", "s2", "s3", "s4", "s5"), ("s6", "s7", "s8"))
