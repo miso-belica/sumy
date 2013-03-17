@@ -27,6 +27,26 @@ class TfDocumentModel(object):
     def terms(self):
         return self._terms.keys()
 
+    def most_frequent_terms(self, count=0):
+        """
+        Returns ``count`` of terms sorted by their frequency
+        in descending order.
+
+        :parameter int count:
+            Max. number of returned terms. Value 0 means no limit (default).
+        """
+        # sort terms by number of occurrences in descending order
+        terms = sorted(self._terms.items(), key=lambda i: -i[1])
+
+        terms = tuple(i[0] for i in terms)
+        if count == 0:
+            return terms
+        elif count > 0:
+            return terms[:count]
+        else:
+            raise ValueError(
+                "Only non-negative values are allowed for count of terms.")
+
     def term_frequency(self, term):
         """Returns frequency of term in document."""
         return self._terms.get(term, 0)
