@@ -33,10 +33,10 @@ class TestTokenizer(unittest.TestCase):
             Ou jee, duffman is here.
         """)
 
-        expected = [
+        expected = (
             "I am a very nice sentence with comma, but..",
             "This is next sentence.",
             '"I\'m bored", said Pepek.',
             "Ou jee, duffman is here.",
-        ]
-        self.assertEqual(expected, map(unicode.strip, sentences))
+        )
+        self.assertEqual(expected, sentences)

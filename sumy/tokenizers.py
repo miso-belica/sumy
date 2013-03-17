@@ -7,7 +7,7 @@ import nltk
 
 from os import path
 from .utils import expand_resource_path
-from ._compat import to_string
+from ._compat import to_string, to_unicode, unicode
 
 
 class Tokenizer(object):
@@ -28,7 +28,8 @@ class Tokenizer(object):
         return nltk.data.load(to_string("file:") + file_path)
 
     def to_sentences(self, paragraph):
-        return self._sentence_tokenizer.tokenize(paragraph)
+        sentences = self._sentence_tokenizer.tokenize(to_unicode(paragraph))
+        return tuple(map(unicode.strip, sentences))
 
     def to_words(self, sentence):
-        return nltk.word_tokenize(sentence)
+        return nltk.word_tokenize(to_unicode(sentence))
