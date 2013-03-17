@@ -3,7 +3,8 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest
+import unittest
+
 from sumy.tokenizers import Tokenizer
 from sumy.models import TfDocumentModel
 

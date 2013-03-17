@@ -3,7 +3,9 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest, build_document, build_document_from_string
+import unittest
+
+from case import build_document, build_document_from_string
 from sumy.algorithms.edmundson import EdmundsonMethod
 from sumy._compat import to_unicode
 

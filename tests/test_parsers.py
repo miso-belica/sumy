@@ -3,7 +3,8 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest
+import unittest
+
 from os.path import dirname, join, abspath
 from sumy._compat import to_string
 from sumy.parsers.plaintext import PlaintextParser

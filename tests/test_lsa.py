@@ -3,7 +3,9 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from case import unittest, build_document
+import unittest
+
+from case import build_document
 from sumy.algorithms.lsa import LsaMethod
 from sumy._compat import to_unicode
 
