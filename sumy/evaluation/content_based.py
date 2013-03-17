@@ -17,7 +17,7 @@ def cosine_similarity(model1, model2):
     """
     if not (isinstance(model1, TfModel) and isinstance(model2, TfModel)):
         raise ValueError(
-            "Arguments has to be instances if 'sumy.models.TfDocumentModel'")
+            "Arguments has to be instances of 'sumy.models.TfDocumentModel'")
 
     terms = frozenset(model1.terms) | frozenset(model2.terms)
 
