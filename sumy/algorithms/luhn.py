@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from .._compat import Counter
+from ..models import TfDocumentModel
 from ._method import AbstractSummarizationMethod
 
 
@@ -29,12 +30,11 @@ class LuhnMethod(AbstractSummarizationMethod):
         words = tuple(self.stem_word(w) for w in words
             if w not in self._stop_words)
 
-        # sort words by number of occurrences
-        words = sorted(((c, w) for w, c in Counter(words).items()), reverse=True)
+        model = TfDocumentModel(words)
 
         # take only best `significant_percentage` % words
         best_words_count = int(len(words) * self.significant_percentage)
-        return tuple(w for _, w in words)[:best_words_count]
+        return model.most_frequent_terms(best_words_count)
 
     def rate_sentence(self, sentence, significant_stems):
         ratings = self._get_chunk_ratings(sentence, significant_stems)
