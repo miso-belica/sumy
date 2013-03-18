@@ -5,18 +5,9 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from os.path import dirname, join, abspath
-from sumy._compat import to_string
+from utils import expand_resource_path
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.tokenizers import Tokenizer
-
-
-def expand_resource_path(file_name):
-    return join(
-        abspath(dirname(__file__)),
-        to_string("data"),
-        to_string(file_name)
-    )
 
 
 class TestParser(unittest.TestCase):
