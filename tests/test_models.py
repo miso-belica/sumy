@@ -10,6 +10,25 @@ from sumy.models import TfDocumentModel
 
 
 class TestTfModel(unittest.TestCase):
+    def test_no_tokenizer_with_string(self):
+        self.assertRaises(ValueError, TfDocumentModel, "text without tokenizer")
+
+    def test_pretokenized_words(self):
+        model = TfDocumentModel(("w1", "W2", "w2", "W1"))
+
+        terms = tuple(sorted(model.terms))
+        self.assertEqual(terms, ("w1", "w2"))
+
+    def test_pretokenized_words_frequencies(self):
+        model = TfDocumentModel(("w3", "w3", "W3", "w1", "W2", "w2"))
+
+        self.assertEqual(model.term_frequency("w1"), 1)
+        self.assertEqual(model.term_frequency("w2"), 2)
+        self.assertEqual(model.term_frequency("w3"), 3)
+        self.assertEqual(model.term_frequency("w4"), 0)
+
+        self.assertEqual(model.most_frequent_terms(), ("w3", "w2", "w1"))
+
     def test_magnitude(self):
         tokenizer = Tokenizer("english")
         text = "w1 w2 w3 w4"
