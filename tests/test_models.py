@@ -5,6 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
+from sumy._compat import to_unicode
 from sumy.tokenizers import Tokenizer
 from sumy.models import TfDocumentModel
 
@@ -81,3 +82,16 @@ class TestTfModel(unittest.TestCase):
         model = TfDocumentModel("text", tokenizer)
 
         self.assertRaises(ValueError, model.most_frequent_terms, -1)
+
+    def test_normalized_words_frequencies(self):
+        words = map(to_unicode, (1, 2, 3, 4, 5, 3, 2, 4, 3, 5, 5, 4, 5, 4, 5))
+        model = TfDocumentModel(words)
+
+        self.assertAlmostEqual(model.normalized_term_frequency("1"), 1/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("2"), 2/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("3"), 3/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("4"), 4/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("5"), 5/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("6"), 0.0)
+
+        self.assertEqual(model.most_frequent_terms(), ("5", "4", "3", "2", "1"))

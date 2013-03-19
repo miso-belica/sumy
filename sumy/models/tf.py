@@ -23,6 +23,7 @@ class TfDocumentModel(object):
                 "Parameter ``words`` has to be sequence or string with tokenizer given.")
 
         self._terms = Counter(map(unicode.lower, words))
+        self._max_frequency = max(self._terms.values()) if self._terms else 1
 
     @property
     def magnitude(self):
@@ -57,8 +58,23 @@ class TfDocumentModel(object):
                 "Only non-negative values are allowed for count of terms.")
 
     def term_frequency(self, term):
-        """Returns frequency of term in document."""
+        """
+        Returns frequency of term in document.
+
+        :returns int:
+            Returns count of words in document.
+        """
         return self._terms.get(term, 0)
+
+    def normalized_term_frequency(self, term):
+        """
+        Returns normalized frequency of term in document.
+
+        :returns float:
+            0.0 <= frequency <= 1.0, where 0 means no occurence in document
+            and 1 the most frequent term in document.
+        """
+        return self._terms.get(term, 0.0) / self._max_frequency
 
     def __repr__(self):
         return "<TfDocumentModel %s>" % pformat(self._terms)
