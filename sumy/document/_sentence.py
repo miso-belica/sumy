@@ -4,11 +4,11 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
-from .._object import Object
-from .._compat import to_unicode
+from .._compat import to_unicode, unicode_compatible
 
 
-class Sentence(Object):
+@unicode_compatible
+class Sentence(object):
     __slots__ = ("_words", "_is_heading",)
 
     def __init__(self, words, is_heading=False):
@@ -23,5 +23,5 @@ class Sentence(Object):
     def is_heading(self):
         return self._is_heading
 
-    def _to_string(self):
+    def __unicode__(self):
         return " ".join(self._words)

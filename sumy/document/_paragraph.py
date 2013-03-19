@@ -4,11 +4,12 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
-from .._compat import to_string
+from .._compat import unicode_compatible
 from ..utils import cached_property
 from ._sentence import Sentence
 
 
+@unicode_compatible
 class Paragraph(object):
     def __init__(self, sentences):
         for sentence in sentences:
@@ -29,10 +30,11 @@ class Paragraph(object):
     def words(self):
         return tuple(chain(*(s.words for s in self._sentences)))
 
-    def __repr__(self):
+    def __unicode__(self):
         return "<Paragraph with %d headings & %d sentences>" % (
             len(self.headings),
             len(self.sentences),
         )
 
-    __str__ = __repr__
+    def __repr__(self):
+        return self.__str__()

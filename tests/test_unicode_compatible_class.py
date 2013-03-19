@@ -7,7 +7,6 @@ import unittest
 
 from nose import SkipTest
 from sumy import _compat as compat
-from sumy._object import Object
 
 
 BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode("utf8")
@@ -15,8 +14,9 @@ UNICODE_STRING = "ľščťžáýíééäúňô €đ€Ł¤"
 NATIVE_STRING = compat.to_string(UNICODE_STRING)
 
 
-class O(Object):
-    def _to_string(self):
+@compat.unicode_compatible
+class O(object):
+    def __unicode__(self):
         return UNICODE_STRING
 
 
