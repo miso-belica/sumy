@@ -5,9 +5,9 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from utils import build_document
 from sumy.algorithms.lsa import LsaMethod
 from sumy._compat import to_unicode
+from .utils import build_document
 
 
 class TestLsa(unittest.TestCase):

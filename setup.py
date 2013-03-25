@@ -44,6 +44,7 @@ setup(
         "nose",
         "coverage",
     ],
+    test_suite="nose.collector",
     extras_require={
         "LSA": ["numpy", "scipy"],
     },

@@ -5,9 +5,9 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from utils import expand_resource_path
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.tokenizers import Tokenizer
+from .utils import expand_resource_path
 
 
 class TestParser(unittest.TestCase):

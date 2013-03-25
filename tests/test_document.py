@@ -5,8 +5,8 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from utils import build_document, build_document_from_string
 from sumy._compat import to_unicode
+from .utils import build_document, build_document_from_string
 
 
 class TestDocument(unittest.TestCase):
