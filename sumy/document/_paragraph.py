@@ -12,11 +12,12 @@ from ._sentence import Sentence
 @unicode_compatible
 class Paragraph(object):
     def __init__(self, sentences):
+        sentences = tuple(sentences)
         for sentence in sentences:
             if not isinstance(sentence, Sentence):
                 raise TypeError("Only instances of class 'Sentence' are allowed.")
 
-        self._sentences = tuple(sentences)
+        self._sentences = sentences
 
     @cached_property
     def sentences(self):
