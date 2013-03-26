@@ -13,6 +13,7 @@ before_install:
   - sudo apt-get install -qq python-numpy python-scipy
 install:
   - pip install nose scipy --use-mirrors
+  - pip install git+git://github.com/miso-belica/readability.py.git
   - python setup.py install
 script:
   - nosetests tests
