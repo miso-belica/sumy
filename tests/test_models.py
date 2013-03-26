@@ -85,7 +85,7 @@ class TestTfModel(unittest.TestCase):
 
     def test_normalized_words_frequencies(self):
         words = map(to_unicode, (1, 2, 3, 4, 5, 3, 2, 4, 3, 5, 5, 4, 5, 4, 5))
-        model = TfDocumentModel(words)
+        model = TfDocumentModel(tuple(words))
 
         self.assertAlmostEqual(model.normalized_term_frequency("1"), 1/5)
         self.assertAlmostEqual(model.normalized_term_frequency("2"), 2/5)
