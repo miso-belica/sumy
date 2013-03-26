@@ -5,7 +5,9 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
+from sumy._compat import to_unicode
 from sumy.parsers.plaintext import PlaintextParser
+from sumy.parsers.html import HtmlParser
 from sumy.tokenizers import Tokenizer
 from .utils import expand_resource_path
 
@@ -69,3 +71,30 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual(len(document.paragraphs[4].headings), 0)
         self.assertEqual(len(document.paragraphs[4].sentences), 1)
+
+
+class TestHtmlParser(unittest.TestCase):
+    def test_annotated_text(self):
+        path = expand_resource_path("snippets/paragraphs.html")
+        url = "http://www.snippet.org/paragraphs.html"
+        parser = HtmlParser.from_file(path, url, Tokenizer("czech"))
+
+        document = parser.document
+
+        self.assertEqual(len(document.paragraphs), 2)
+
+        self.assertEqual(len(document.paragraphs[0].headings), 1)
+        self.assertEqual(len(document.paragraphs[0].sentences), 1)
+
+        self.assertEqual(to_unicode(document.paragraphs[0].headings[0]),
+            "Toto je nadpis prvej úrovne")
+        self.assertEqual(to_unicode(document.paragraphs[0].sentences[0]),
+            "Toto je prvý odstavec a to je fajn .")
+
+        self.assertEqual(len(document.paragraphs[1].headings), 0)
+        self.assertEqual(len(document.paragraphs[1].sentences), 2)
+
+        self.assertEqual(to_unicode(document.paragraphs[1].sentences[0]),
+            "Tento text je tu aby vyplnil prázdne miesto v srdci súboru .")
+        self.assertEqual(to_unicode(document.paragraphs[1].sentences[1]),
+            "Aj súbory majú predsa city .")
