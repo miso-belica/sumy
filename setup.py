@@ -38,7 +38,7 @@ setup(
         "SVD"
     ],
     dependency_links = [
-        "http://github.com/miso-belica/readability.py/tarball/master#egg=readability",
+        "http://github.com/miso-belica/readability.py/tarball/master",
     ],
     install_requires=[
         "nltk",
