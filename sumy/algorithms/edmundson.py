@@ -19,8 +19,8 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     _stigma_words = _EMPTY_SET
     _null_words = _EMPTY_SET
 
-    def __init__(self, document, stemmer=None, cue_weight=0.0, key_weight=0.0,
-            title_weight=0.0, location_weight=0.0):
+    def __init__(self, document, stemmer=None, cue_weight=1.0, key_weight=0.0,
+            title_weight=1.0, location_weight=1.0):
         if stemmer:
             super(EdmundsonMethod, self).__init__(document, stemmer)
         else:

@@ -46,7 +46,8 @@ class TestEdmundson(unittest.TestCase):
 
     def test_empty_document(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonMethod(document, cue_weight=0, key_weight=0,
+            title_weight=0, location_weight=0)
 
         sentences = summarize(10)
         self.assertEqual(len(sentences), 0)
@@ -62,7 +63,8 @@ class TestEdmundson(unittest.TestCase):
             Here is the winner because contains words like cool and heading
         """)
 
-        summarize = EdmundsonMethod(document, cue_weight=1, key_weight=1)
+        summarize = EdmundsonMethod(document, cue_weight=1, key_weight=1,
+            title_weight=0, location_weight=0)
         summarize.bonus_words = ("cool", "heading", "sentence", "words", "like", "because")
         summarize.stigma_words = ("this", "is", "I", "am", "and",)
 
