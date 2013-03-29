@@ -11,16 +11,16 @@ from .parser import DocumentParser
 
 class PlaintextParser(DocumentParser):
     @classmethod
-    def from_string(cls, string, language):
-        return cls(string, language)
+    def from_string(cls, string, tokenizer):
+        return cls(string, tokenizer)
 
     @classmethod
-    def from_file(cls, file_path, language):
+    def from_file(cls, file_path, tokenizer):
         with open(file_path) as file:
-            return cls(file.read(), language)
+            return cls(file.read(), tokenizer)
 
-    def __init__(self, text, language):
-        super(PlaintextParser, self).__init__(language)
+    def __init__(self, text, tokenizer):
+        super(PlaintextParser, self).__init__(tokenizer)
         self._text = to_unicode(text).strip()
 
     @cached_property
