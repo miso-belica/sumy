@@ -18,12 +18,12 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_string(cls, string, url, tokenizer):
-        return cls(string, url, tokenizer)
+        return cls(string, tokenizer, url)
 
     @classmethod
     def from_file(cls, file_path, url, tokenizer):
         with open(file_path, "rb") as file:
-            return cls(file.read(), url, tokenizer)
+            return cls(file.read(), tokenizer, url)
 
     @classmethod
     def from_url(cls, url, tokenizer):
@@ -31,11 +31,11 @@ class HtmlParser(DocumentParser):
         data = response.read()
         response.close()
 
-        return cls(data, url, tokenizer)
+        return cls(data, tokenizer, url)
 
-    def __init__(self, html_content, url, tokenizer):
+    def __init__(self, html_content, tokenizer, url=None):
         super(HtmlParser, self).__init__(tokenizer)
-        self._article = Article(html_content, to_unicode(url))
+        self._article = Article(html_content, url)
 
     @cached_property
     def document(self):
