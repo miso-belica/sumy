@@ -41,3 +41,22 @@ def get_stop_word(language):
 
     with open(path, "rb") as file:
         return frozenset(to_unicode(w.rstrip()) for w in file.readlines())
+
+
+class ItemsCount(object):
+    def __init__(self, value):
+        self._value = value
+
+    def __call__(self, sequence):
+        if isinstance(self._value, string_types):
+            if self._value.endswith("%"):
+                total_count = len(sequence)
+                percentage = int(self._value[:-1])
+                count = total_count*percentage // 100
+                return sequence[:count]
+            else:
+                return sequence[:int(self._value)]
+        elif isinstance(self._value, int):
+            return sequence[:self._value]
+        else:
+            ValueError("Unsuported value of items count '%s'." % self._value)

@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals
 
 from collections import namedtuple
 from operator import attrgetter
+from ..utils import ItemsCount
 from .._compat import to_unicode
 
 
@@ -40,7 +41,9 @@ class AbstractSummarizationMethod(object):
         # sort sentences by rating in descending order
         infos = sorted(infos, key=attrgetter("rating"), reverse=True)
         # get `count` first best rated sentences
-        infos = infos[:count]
+        if not isinstance(count, ItemsCount):
+            count = ItemsCount(count)
+        infos = count(infos)
         # sort sentences by their order in document
         infos = sorted(infos, key=attrgetter("order"))
 

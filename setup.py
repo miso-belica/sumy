@@ -41,6 +41,7 @@ setup(
         "http://github.com/miso-belica/readability.py/tarball/master",
     ],
     install_requires=[
+        "docopt>=0.6.1,<0.7",
         "nltk",
     ],
     tests_require=[
@@ -60,6 +61,11 @@ setup(
     package_data={"sumy": [
         "stopwords/*.txt",
     ]},
+    entry_points={
+        "console_scripts": [
+            "sumy=sumy.__main__:main",
+        ]
+    },
     classifiers=(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
