@@ -50,14 +50,16 @@ class HtmlParser(DocumentParser):
         for paragraph in annotated_text:
             sentences = []
 
+            current_text = ""
             for text, annotations in paragraph:
                 if annotations and ("h1" in annotations or "h2" in annotations or "h3" in annotations):
                     words = self.tokenize_words(text)
                     sentences.append(Sentence(words, is_heading=True))
-                else:
-                    words = map(self.tokenize_words, self.tokenize_sentences(text))
-                    sentences.extend(map(Sentence, words))
+                elif not (annotations and "pre" in annotations and "code" in annotations):
+                    current_text += " " + text
 
+            words = map(self.tokenize_words, self.tokenize_sentences(current_text))
+            sentences.extend(map(Sentence, words))
             paragraphs.append(Paragraph(sentences))
 
         return Document(paragraphs)
