@@ -39,7 +39,7 @@ from .algorithms.lsa import LsaMethod
 from .stemmers.cs import stem_word
 
 HEADERS = {
-    "User-Agent": "Sumy (Automatic text sumarizer) Version/%s" % __version__,
+    "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
 }
 PARSERS = {
     "html": HtmlParser,
@@ -48,26 +48,26 @@ PARSERS = {
 
 
 def build_luhn(document):
-    sumarizer = LuhnMethod(document, stem_word)
-    sumarizer.stop_words = get_stop_word("cs")
+    summarizer = LuhnMethod(document, stem_word)
+    summarizer.stop_words = get_stop_word("cs")
 
-    return sumarizer
+    return summarizer
 
 
 def build_edmundson(document):
-    sumarizer = EdmundsonMethod(document, stem_word)
-    sumarizer.null_words = get_stop_word("cs")
-    sumarizer.bonus_words = ("supr", "super", "nejlepší", "dobrý", "významný", "kvalitní", "optimální")
-    sumarizer.stigma_words = ("nejhorší", "zlý", "šeredný")
+    summarizer = EdmundsonMethod(document, stem_word)
+    summarizer.null_words = get_stop_word("cs")
+    summarizer.bonus_words = ("supr", "super", "nejlepší", "dobrý", "významný", "kvalitní", "optimální")
+    summarizer.stigma_words = ("nejhorší", "zlý", "šeredný")
 
-    return sumarizer
+    return summarizer
 
 
 def build_lsa(document):
-    sumarizer = LsaMethod(document, stem_word)
-    sumarizer.stop_words = get_stop_word("cs")
+    summarizer = LsaMethod(document, stem_word)
+    summarizer.stop_words = get_stop_word("cs")
 
-    return sumarizer
+    return summarizer
 
 
 AVAILABLE_METHODS = {
@@ -97,10 +97,10 @@ def handle_arguments(args):
         parser = PARSERS.get(args["--format"], PlaintextParser)
         input_stream = open(args["--file"], "rb")
 
-    sumarizer = AVAILABLE_METHODS["luhn"]
+    summarizer = AVAILABLE_METHODS["luhn"]
     for method, builder in AVAILABLE_METHODS.items():
         if args[method]:
-            sumarizer = builder
+            summarizer = builder
             break
 
     items_count = ItemsCount(args["--length"])
@@ -109,7 +109,7 @@ def handle_arguments(args):
     if input_stream is not sys.stdin:
         input_stream.close()
 
-    return sumarizer(parser.document), items_count
+    return summarizer(parser.document), items_count
 
 
 if __name__ == "__main__":
