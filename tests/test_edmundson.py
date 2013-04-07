@@ -227,7 +227,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_key_2(self):
         document = build_document(
-            ("Om nom nom nom nom", "Sure I sumarrize it, with bonus",),
+            ("Om nom nom nom nom", "Sure I summarize it, with bonus",),
             ("This is bonus test sentence with some extra words and bonus",)
         )
         summarize = EdmundsonSummarizer(document)
