@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from itertools import chain
-from .._compat import unicode_compatible
-from ..utils import cached_property
+from ..._compat import unicode_compatible
+from ...utils import cached_property
 from ._sentence import Sentence
 
 

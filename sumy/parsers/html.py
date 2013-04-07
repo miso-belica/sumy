@@ -9,7 +9,7 @@ import nltk
 from readability.readable import Article
 from .._compat import urllib, to_unicode, to_string
 from ..utils import cached_property
-from ..document import Sentence, Paragraph, Document
+from ..models.dom import Sentence, Paragraph, Document
 from .parser import DocumentParser
 
 

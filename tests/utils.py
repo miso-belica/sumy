@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from os.path import dirname, join, abspath
 from sumy._compat import to_string
-from sumy.document import Document, Paragraph, Sentence
+from sumy.models.dom import Document, Paragraph, Sentence
 
 
 def expand_resource_path(path):

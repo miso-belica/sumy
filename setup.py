@@ -54,9 +54,9 @@ setup(
     },
     packages=[
         "sumy",
-        "sumy.document",
         "sumy.evaluation",
         "sumy.models",
+        "sumy.models.dom",
         "sumy.parsers",
         "sumy.stemmers",
         "sumy.summarizers",

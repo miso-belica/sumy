@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import re
 
 from itertools import chain
-from .._compat import to_unicode, to_string, unicode_compatible
+from ..._compat import to_unicode, to_string, unicode_compatible
 
 
 _WORD_PATTERN = re.compile(r"^[^\W\d_]+$", re.UNICODE)
