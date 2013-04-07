@@ -30,13 +30,13 @@ from docopt import docopt
 from . import __version__
 from .utils import ItemsCount, get_stop_word
 from ._compat import urllib, to_string, to_unicode
-from .tokenizers import Tokenizer
+from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
 from .summarizers.luhn import LuhnSummarizer
 from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
-from .stemmers.cs import stem_word
+from .nlp.stemmers.cs import stem_word
 
 HEADERS = {
     "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,

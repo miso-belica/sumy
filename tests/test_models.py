@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy._compat import to_unicode
-from sumy.tokenizers import Tokenizer
+from sumy.nlp.tokenizers import Tokenizer
 from sumy.models import TfDocumentModel
 
 

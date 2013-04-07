@@ -58,7 +58,8 @@ setup(
         "sumy.models",
         "sumy.models.dom",
         "sumy.parsers",
-        "sumy.stemmers",
+        "sumy.nlp",
+        "sumy.nlp.stemmers",
         "sumy.summarizers",
     ],
     package_data={"sumy": [

@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.tokenizers import Tokenizer
+from sumy.nlp.tokenizers import Tokenizer
 from sumy.models import TfDocumentModel
 from sumy.evaluation import precision, recall, f_score
 from sumy.evaluation import cosine_similarity, unit_overlap

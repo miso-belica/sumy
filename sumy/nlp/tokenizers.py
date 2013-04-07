@@ -6,8 +6,8 @@ from __future__ import division, print_function, unicode_literals
 import nltk
 
 from os import path
-from .utils import expand_resource_path
-from ._compat import to_string, to_unicode, unicode
+from ..utils import expand_resource_path
+from .._compat import to_string, to_unicode, unicode
 
 
 class Tokenizer(object):

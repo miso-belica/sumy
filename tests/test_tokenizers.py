@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.tokenizers import Tokenizer
+from sumy.nlp.tokenizers import Tokenizer
 
 
 class TestTokenizer(unittest.TestCase):

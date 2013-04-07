@@ -8,7 +8,7 @@ import unittest
 from sumy._compat import to_unicode
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.parsers.html import HtmlParser
-from sumy.tokenizers import Tokenizer
+from sumy.nlp.tokenizers import Tokenizer
 from .utils import expand_resource_path
 
 
