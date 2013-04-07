@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.algorithms.luhn import LuhnMethod
+from sumy.algorithms.luhn import LuhnSummarizer
 from sumy._compat import to_unicode
 from .utils import build_document, build_sentence
 
@@ -13,14 +13,14 @@ from .utils import build_document, build_sentence
 class TestLuhn(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
 
         returned = luhn(10)
         self.assertEqual(len(returned), 0)
 
     def test_single_sentence(self):
         document = build_document(("Já jsem jedna věta",))
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
         luhn.stop_words = ("já", "jsem",)
 
         returned = luhn(10)
@@ -28,7 +28,7 @@ class TestLuhn(unittest.TestCase):
 
     def test_two_sentences(self):
         document = build_document(("Já jsem 1. věta", "A já ta 2. vítězná výhra"))
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
         luhn.stop_words = ("já", "jsem", "a", "ta",)
 
         returned = luhn(10)
@@ -38,7 +38,7 @@ class TestLuhn(unittest.TestCase):
 
     def test_two_sentences_but_one_winner(self):
         document = build_document(("Já jsem 1. ta věta", "A já ta 2. vítězná výhra"))
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
         luhn.stop_words = ("já", "jsem", "a", "ta",)
 
         returned = luhn(1)
@@ -51,7 +51,7 @@ class TestLuhn(unittest.TestCase):
             "2 s 2 s 2 s s s s s s s s s 2",
             "3 s s 3 s s 3",
         ))
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
         luhn.stop_words = ("s",)
 
         returned = luhn(1)
@@ -78,7 +78,7 @@ class TestLuhn(unittest.TestCase):
             "5 z z z z",
             "6 e e e e e",
         ))
-        luhn = LuhnMethod(document)
+        luhn = LuhnSummarizer(document)
         luhn.stop_words = ("1", "2", "3", "4", "5", "6")
 
         returned = luhn(1)
@@ -99,7 +99,7 @@ class TestLuhn(unittest.TestCase):
 
 class TestSentenceRating(unittest.TestCase):
     def setUp(self):
-        self.luhn = LuhnMethod(build_document())
+        self.luhn = LuhnSummarizer(build_document())
         self.sentence = build_sentence(
             "Nějaký muž šel kolem naší zahrady a žil pěkný život samotáře")
 

@@ -17,7 +17,7 @@ def null_stemmer(object):
     return to_unicode(object).lower()
 
 
-class AbstractSummarizationMethod(object):
+class AbstractSummarizer(object):
     def __init__(self, document, stemmer=null_stemmer):
         if not callable(stemmer):
             raise ValueError("Stemmer has to be callable object")

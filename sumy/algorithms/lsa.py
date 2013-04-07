@@ -7,10 +7,10 @@ import math
 import numpy
 
 from scipy.linalg import svd as singular_value_decomposition
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 
 
-class LsaMethod(AbstractSummarizationMethod):
+class LsaSummarizer(AbstractSummarizer):
     _stop_words = frozenset()
 
     @property

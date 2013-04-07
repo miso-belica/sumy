@@ -33,9 +33,9 @@ from ._compat import urllib, to_string, to_unicode
 from .tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
-from .algorithms.luhn import LuhnMethod
-from .algorithms.edmundson import EdmundsonMethod
-from .algorithms.lsa import LsaMethod
+from .algorithms.luhn import LuhnSummarizer
+from .algorithms.edmundson import EdmundsonSummarizer
+from .algorithms.lsa import LsaSummarizer
 from .stemmers.cs import stem_word
 
 HEADERS = {
@@ -48,14 +48,14 @@ PARSERS = {
 
 
 def build_luhn(document):
-    summarizer = LuhnMethod(document, stem_word)
+    summarizer = LuhnSummarizer(document, stem_word)
     summarizer.stop_words = get_stop_word("cs")
 
     return summarizer
 
 
 def build_edmundson(document):
-    summarizer = EdmundsonMethod(document, stem_word)
+    summarizer = EdmundsonSummarizer(document, stem_word)
     summarizer.null_words = get_stop_word("cs")
     summarizer.bonus_words = ("supr", "super", "nejlepší", "dobrý", "významný", "kvalitní", "optimální")
     summarizer.stigma_words = ("nejhorší", "zlý", "šeredný")
@@ -64,7 +64,7 @@ def build_edmundson(document):
 
 
 def build_lsa(document):
-    summarizer = LsaMethod(document, stem_word)
+    summarizer = LsaSummarizer(document, stem_word)
     summarizer.stop_words = get_stop_word("cs")
 
     return summarizer

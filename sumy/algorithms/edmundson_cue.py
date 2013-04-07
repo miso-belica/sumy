@@ -3,10 +3,10 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 
 
-class EdmundsonCueMethod(AbstractSummarizationMethod):
+class EdmundsonCueMethod(AbstractSummarizer):
     def __init__(self, document, stemmer, bonus_words, stigma_words):
         super(EdmundsonCueMethod, self).__init__(document, stemmer)
         self._bonus_words = bonus_words

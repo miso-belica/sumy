@@ -5,10 +5,10 @@ from __future__ import division, print_function, unicode_literals
 
 from .._compat import Counter
 from ..models import TfDocumentModel
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 
 
-class LuhnMethod(AbstractSummarizationMethod):
+class LuhnSummarizer(AbstractSummarizer):
     max_gap_size = 4
     significant_percentage = 1
     _stop_words = frozenset()

@@ -6,10 +6,10 @@ from __future__ import division, print_function, unicode_literals
 from itertools import chain
 from operator import attrgetter
 from .._compat import ffilter
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 
 
-class EdmundsonLocationMethod(AbstractSummarizationMethod):
+class EdmundsonLocationMethod(AbstractSummarizer):
     def __init__(self, document, stemmer, null_words):
         super(EdmundsonLocationMethod, self).__init__(document, stemmer)
         self._null_words = null_words

@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.algorithms.edmundson import EdmundsonMethod
+from sumy.algorithms.edmundson import EdmundsonSummarizer
 from sumy._compat import to_unicode
 from .utils import build_document, build_document_from_string
 
@@ -13,7 +13,7 @@ from .utils import build_document, build_document_from_string
 class TestEdmundson(unittest.TestCase):
     def test_bonus_words_property(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertEqual(summarize.bonus_words, frozenset())
 
@@ -24,7 +24,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_stigma_words_property(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertEqual(summarize.stigma_words, frozenset())
 
@@ -35,7 +35,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_null_words_property(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertEqual(summarize.null_words, frozenset())
 
@@ -46,7 +46,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_empty_document(self):
         document = build_document()
-        summarize = EdmundsonMethod(document, cue_weight=0, key_weight=0,
+        summarize = EdmundsonSummarizer(document, cue_weight=0, key_weight=0,
             title_weight=0, location_weight=0)
 
         sentences = summarize(10)
@@ -63,7 +63,7 @@ class TestEdmundson(unittest.TestCase):
             Here is the winner because contains words like cool and heading
         """)
 
-        summarize = EdmundsonMethod(document, cue_weight=1, key_weight=1,
+        summarize = EdmundsonSummarizer(document, cue_weight=1, key_weight=1,
             title_weight=0, location_weight=0)
         summarize.bonus_words = ("cool", "heading", "sentence", "words", "like", "because")
         summarize.stigma_words = ("this", "is", "I", "am", "and",)
@@ -77,20 +77,20 @@ class TestEdmundson(unittest.TestCase):
 
     def test_cue_with_no_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertRaises(ValueError, summarize.cue_method, 10)
 
     def test_cue_with_no_stigma_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("great", "very", "beautiful",)
 
         self.assertRaises(ValueError, summarize.cue_method, 10)
 
     def test_cue_with_no_bonus_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.stigma_words = ("useless", "bad", "spinach",)
 
         self.assertRaises(ValueError, summarize.cue_method, 10)
@@ -98,7 +98,7 @@ class TestEdmundson(unittest.TestCase):
     def test_cue_empty(self):
         document = build_document()
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
@@ -111,7 +111,7 @@ class TestEdmundson(unittest.TestCase):
             ("w w w", "W W W W",)
         )
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("X", "w",)
         summarize.stigma_words = ("stigma",)
 
@@ -125,7 +125,7 @@ class TestEdmundson(unittest.TestCase):
             ("b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2",)
         )
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
@@ -138,7 +138,7 @@ class TestEdmundson(unittest.TestCase):
             ("Pepek likes spinach",)
         )
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
@@ -169,7 +169,7 @@ class TestEdmundson(unittest.TestCase):
             )
         )
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
         summarize.stigma_words = ("s1", "s2", "s3",)
 
@@ -185,7 +185,7 @@ class TestEdmundson(unittest.TestCase):
     def test_key_empty(self):
         document = build_document()
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3",)
 
         sentences = summarize.key_method(10)
@@ -193,7 +193,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_key_without_bonus_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertRaises(ValueError, summarize.key_method, 10)
 
@@ -202,7 +202,7 @@ class TestEdmundson(unittest.TestCase):
             ("w1 w2 w3 w4", "I like music",),
             ("This is test sentence with some extra words",)
         )
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
 
         sentences = summarize.key_method(10)
@@ -217,7 +217,7 @@ class TestEdmundson(unittest.TestCase):
             ("w1 w2 w3 w4", "I like music",),
             ("This is test sentence with some extra words and bonus",)
         )
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
 
         sentences = summarize.key_method(1)
@@ -230,7 +230,7 @@ class TestEdmundson(unittest.TestCase):
             ("Om nom nom nom nom", "Sure I sumarrize it, with bonus",),
             ("This is bonus test sentence with some extra words and bonus",)
         )
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("nom", "bonus",)
 
         sentences = summarize.key_method(2)
@@ -244,7 +244,7 @@ class TestEdmundson(unittest.TestCase):
             ("w1", "w1 w1", "w1 w1 w1", "w1 w1 w1 w1", "w1 W1 W1 W1 w1",),
             ("x X x X",)
         )
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.bonus_words = ("w1", "X",)
 
         sentences = summarize.key_method(3)
@@ -262,7 +262,7 @@ class TestEdmundson(unittest.TestCase):
     def test_title_method_with_empty_document(self):
         document = build_document()
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("b1", "b2", "b3",)
 
         sentences = summarize.title_method(10)
@@ -270,7 +270,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_title_method_without_null_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertRaises(ValueError, summarize.title_method, 10)
 
@@ -280,7 +280,7 @@ class TestEdmundson(unittest.TestCase):
             ("And some next sentence but no heading",)
         )
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("this", "is", "some", "and",)
 
         sentences = summarize.title_method(10)
@@ -300,7 +300,7 @@ class TestEdmundson(unittest.TestCase):
             Here is the winner because contains words like cool and heading
         """)
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("this", "is", "I", "am", "and",)
 
         sentences = summarize.title_method(1)
@@ -319,7 +319,7 @@ class TestEdmundson(unittest.TestCase):
             Here is the winner because contains words like cool and heading
         """)
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("this", "is", "I", "am", "and",)
 
         sentences = summarize.title_method(2)
@@ -340,7 +340,7 @@ class TestEdmundson(unittest.TestCase):
             Here is the winner because contains words like cool and heading
         """)
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("this", "is", "I", "am", "and",)
 
         sentences = summarize.title_method(3)
@@ -355,7 +355,7 @@ class TestEdmundson(unittest.TestCase):
     def test_location_method_with_empty_document(self):
         document = build_document()
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("n1", "n2", "n3",)
 
         sentences = summarize.location_method(10)
@@ -363,7 +363,7 @@ class TestEdmundson(unittest.TestCase):
 
     def test_location_method_without_null_words(self):
         document = build_document()
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
 
         self.assertRaises(ValueError, summarize.location_method, 10)
 
@@ -382,7 +382,7 @@ class TestEdmundson(unittest.TestCase):
             h1 h2 = 2 + 1 + 1 = 4
         """)
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
 
         sentences = summarize.location_method(4)
@@ -408,7 +408,7 @@ class TestEdmundson(unittest.TestCase):
             h1 h2 = 2 + 1 + 0 = 3
         """)
 
-        summarize = EdmundsonMethod(document)
+        summarize = EdmundsonSummarizer(document)
         summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
 
         sentences = summarize.location_method(4, w_p1=0, w_p2=0)

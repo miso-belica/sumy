@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import defaultdict
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
 from .edmundson_title import EdmundsonTitleMethod
@@ -14,7 +14,7 @@ from .edmundson_location import EdmundsonLocationMethod
 _EMPTY_SET = frozenset()
 
 
-class EdmundsonMethod(AbstractSummarizationMethod):
+class EdmundsonSummarizer(AbstractSummarizer):
     _bonus_words = _EMPTY_SET
     _stigma_words = _EMPTY_SET
     _null_words = _EMPTY_SET
@@ -22,9 +22,9 @@ class EdmundsonMethod(AbstractSummarizationMethod):
     def __init__(self, document, stemmer=None, cue_weight=1.0, key_weight=0.0,
             title_weight=1.0, location_weight=1.0):
         if stemmer:
-            super(EdmundsonMethod, self).__init__(document, stemmer)
+            super(EdmundsonSummarizer, self).__init__(document, stemmer)
         else:
-            super(EdmundsonMethod, self).__init__(document)
+            super(EdmundsonSummarizer, self).__init__(document)
 
         self._ensure_correct_weights(cue_weight, key_weight, title_weight,
             location_weight)

@@ -4,10 +4,10 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from .._compat import Counter
-from ._method import AbstractSummarizationMethod
+from ._method import AbstractSummarizer
 
 
-class EdmundsonKeyMethod(AbstractSummarizationMethod):
+class EdmundsonKeyMethod(AbstractSummarizer):
     def __init__(self, document, stemmer, bonus_words):
         super(EdmundsonKeyMethod, self).__init__(document, stemmer)
         self._bonus_words = bonus_words
