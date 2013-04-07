@@ -56,7 +56,7 @@ setup(
         "sumy",
         "sumy.document",
         "sumy.stemmers",
-        "sumy.algorithms",
+        "sumy.summarizers",
     ],
     package_data={"sumy": [
         "stopwords/*.txt",

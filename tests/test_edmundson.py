@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.algorithms.edmundson import EdmundsonSummarizer
+from sumy.summarizers.edmundson import EdmundsonSummarizer
 from sumy._compat import to_unicode
 from .utils import build_document, build_document_from_string
 

@@ -33,9 +33,9 @@ from ._compat import urllib, to_string, to_unicode
 from .tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
-from .algorithms.luhn import LuhnSummarizer
-from .algorithms.edmundson import EdmundsonSummarizer
-from .algorithms.lsa import LsaSummarizer
+from .summarizers.luhn import LuhnSummarizer
+from .summarizers.edmundson import EdmundsonSummarizer
+from .summarizers.lsa import LsaSummarizer
 from .stemmers.cs import stem_word
 
 HEADERS = {

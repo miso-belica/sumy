@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.algorithms.luhn import LuhnSummarizer
+from sumy.summarizers.luhn import LuhnSummarizer
 from sumy._compat import to_unicode
 from .utils import build_document, build_sentence
 
