@@ -1,3 +1,4 @@
 include README.rst
 include LICENSE.rst
 include CHANGELOG.rst
+recursive-include sumy/data *

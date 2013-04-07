@@ -55,11 +55,15 @@ setup(
     packages=[
         "sumy",
         "sumy.document",
+        "sumy.evaluation",
+        "sumy.models",
+        "sumy.parsers",
         "sumy.stemmers",
         "sumy.summarizers",
     ],
     package_data={"sumy": [
-        "stopwords/*.txt",
+        "data/stopwords/*.txt",
+        "data/tokenizers/*.pickle",
     ]},
     entry_points={
         "console_scripts": [
