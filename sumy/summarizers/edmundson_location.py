@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 from itertools import chain
 from operator import attrgetter
 from .._compat import ffilter
-from ._method import AbstractSummarizer
+from ._summarizer import AbstractSummarizer
 
 
 class EdmundsonLocationMethod(AbstractSummarizer):

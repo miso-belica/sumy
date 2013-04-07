@@ -7,7 +7,7 @@ import math
 import numpy
 
 from scipy.linalg import svd as singular_value_decomposition
-from ._method import AbstractSummarizer
+from ._summarizer import AbstractSummarizer
 
 
 class LsaSummarizer(AbstractSummarizer):

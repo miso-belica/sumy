@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import defaultdict
-from ._method import AbstractSummarizer
+from ._summarizer import AbstractSummarizer
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
 from .edmundson_title import EdmundsonTitleMethod
