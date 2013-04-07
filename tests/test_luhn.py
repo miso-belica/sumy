@@ -47,27 +47,27 @@ class TestLuhn(unittest.TestCase):
 
     def test_three_sentences(self):
         document = build_document((
-            "1 s s s 1 s s s 1",
-            "2 s 2 s 2 s s s s s s s s s 2",
-            "3 s s 3 s s 3",
+            "wa s s s wa s s s wa",
+            "wb s wb s wb s s s s s s s s s wb",
+            "wc s s wc s s wc",
         ))
         luhn = LuhnSummarizer(document)
         luhn.stop_words = ("s",)
 
         returned = luhn(1)
         self.assertEqual(len(returned), 1)
-        self.assertEqual(to_unicode(returned[0]), "2 s 2 s 2 s s s s s s s s s 2")
+        self.assertEqual(to_unicode(returned[0]), "wb s wb s wb s s s s s s s s s wb")
 
         returned = luhn(2)
         self.assertEqual(len(returned), 2)
-        self.assertEqual(to_unicode(returned[0]), "2 s 2 s 2 s s s s s s s s s 2")
-        self.assertEqual(to_unicode(returned[1]), "3 s s 3 s s 3")
+        self.assertEqual(to_unicode(returned[0]), "wb s wb s wb s s s s s s s s s wb")
+        self.assertEqual(to_unicode(returned[1]), "wc s s wc s s wc")
 
         returned = luhn(3)
         self.assertEqual(len(returned), 3)
-        self.assertEqual(to_unicode(returned[0]), "1 s s s 1 s s s 1")
-        self.assertEqual(to_unicode(returned[1]), "2 s 2 s 2 s s s s s s s s s 2")
-        self.assertEqual(to_unicode(returned[2]), "3 s s 3 s s 3")
+        self.assertEqual(to_unicode(returned[0]), "wa s s s wa s s s wa")
+        self.assertEqual(to_unicode(returned[1]), "wb s wb s wb s s s s s s s s s wb")
+        self.assertEqual(to_unicode(returned[2]), "wc s s wc s s wc")
 
     def test_various_words_with_significant_percentage(self):
         document = build_document((
@@ -106,11 +106,11 @@ class TestSentenceRating(unittest.TestCase):
     def test_significant_words(self):
         self.luhn.significant_percentage = 1/5
         words = self.luhn._get_significant_words((
-            "w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10",
-            "w1", "w2",
+            "wa", "wb", "wc", "wd", "we", "wf", "wg", "wh", "wi", "wj",
+            "wa", "wb",
         ))
 
-        self.assertEqual(tuple(sorted(words)), ("w1", "w2"))
+        self.assertEqual(tuple(sorted(words)), ("wa", "wb"))
 
     def test_zero_rating(self):
         significant_stems = ()

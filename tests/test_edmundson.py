@@ -99,8 +99,8 @@ class TestEdmundson(unittest.TestCase):
         document = build_document()
 
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3",)
-        summarize.stigma_words = ("s1", "s2", "s3",)
+        summarize.bonus_words = ("ba", "bb", "bc",)
+        summarize.stigma_words = ("sa", "sb", "sc",)
 
         sentences = summarize.cue_method(10)
         self.assertEqual(len(sentences), 0)
@@ -122,71 +122,71 @@ class TestEdmundson(unittest.TestCase):
 
     def test_cue_1(self):
         document = build_document(
-            ("b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2",)
+            ("ba bb bc bb unknown ľščťžýáíé sb sc sb",)
         )
 
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3",)
-        summarize.stigma_words = ("s1", "s2", "s3",)
+        summarize.bonus_words = ("ba", "bb", "bc",)
+        summarize.stigma_words = ("sa", "sb", "sc",)
 
         sentences = summarize.cue_method(10)
         self.assertEqual(len(sentences), 1)
 
     def test_cue_2(self):
         document = build_document(
-            ("b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2",),
+            ("ba bb bc bb unknown ľščťžýáíé sb sc sb",),
             ("Pepek likes spinach",)
         )
 
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3",)
-        summarize.stigma_words = ("s1", "s2", "s3",)
+        summarize.bonus_words = ("ba", "bb", "bc",)
+        summarize.stigma_words = ("sa", "sb", "sc",)
 
         sentences = summarize.cue_method(10)
         self.assertEqual(len(sentences), 2)
         self.assertEqual(to_unicode(sentences[0]),
-            "b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2")
+            "ba bb bc bb unknown ľščťžýáíé sb sc sb")
         self.assertEqual(to_unicode(sentences[1]), "Pepek likes spinach")
 
         sentences = summarize.cue_method(1)
         self.assertEqual(len(sentences), 1)
         self.assertEqual(to_unicode(sentences[0]),
-            "b1 b2 b3 b2 unknown ľščťžýáíé s2 s3 s2")
+            "ba bb bc bb unknown ľščťžýáíé sb sc sb")
 
     def test_cue_3(self):
         document = build_document(
             (
-                "b1 "*10,
-                "b2 "*10,
-                " s1"*8 + " b2"*10,
-                "b2 b3 b1",
+                "ba "*10,
+                "bb "*10,
+                " sa"*8 + " bb"*10,
+                "bb bc ba",
             ),
             (),
             (
-                "b1b2b3 "*10,
-                "n1 n2 n3 n4 s1" + " b3"*10,
-                " b1 n"*10,
+                "babbbc "*10,
+                "na nb nc nd sa" + " bc"*10,
+                " ba n"*10,
             )
         )
 
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3",)
-        summarize.stigma_words = ("s1", "s2", "s3",)
+        summarize.bonus_words = ("ba", "bb", "bc",)
+        summarize.stigma_words = ("sa", "sb", "sc",)
 
         sentences = summarize.cue_method(5)
         self.assertEqual(len(sentences), 5)
-        self.assertEqual(to_unicode(sentences[0]), ("b1 "*10).strip())
-        self.assertEqual(to_unicode(sentences[1]), ("b2 "*10).strip())
-        self.assertEqual(to_unicode(sentences[2]), "b2 b3 b1")
+        self.assertEqual(to_unicode(sentences[0]), ("ba "*10).strip())
+        self.assertEqual(to_unicode(sentences[1]), ("bb "*10).strip())
+        self.assertEqual(to_unicode(sentences[2]), "bb bc ba")
         self.assertEqual(to_unicode(sentences[3]),
-            "n1 n2 n3 n4 s1 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3")
-        self.assertEqual(to_unicode(sentences[4]), ("b1 n "*10).strip())
+            "na nb nc nd sa bc bc bc bc bc bc bc bc bc bc")
+        self.assertEqual(to_unicode(sentences[4]), ("ba n "*10).strip())
 
     def test_key_empty(self):
         document = build_document()
 
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3",)
+        summarize.bonus_words = ("ba", "bb", "bc",)
 
         sentences = summarize.key_method(10)
         self.assertEqual(len(sentences), 0)
@@ -199,26 +199,26 @@ class TestEdmundson(unittest.TestCase):
 
     def test_key_no_bonus_words_in_document(self):
         document = build_document(
-            ("w1 w2 w3 w4", "I like music",),
+            ("wa wb wc wd", "I like music",),
             ("This is test sentence with some extra words",)
         )
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
+        summarize.bonus_words = ("ba", "bb", "bc", "bonus",)
 
         sentences = summarize.key_method(10)
         self.assertEqual(len(sentences), 3)
-        self.assertEqual(to_unicode(sentences[0]), "w1 w2 w3 w4")
+        self.assertEqual(to_unicode(sentences[0]), "wa wb wc wd")
         self.assertEqual(to_unicode(sentences[1]), "I like music")
         self.assertEqual(to_unicode(sentences[2]),
             "This is test sentence with some extra words")
 
     def test_key_1(self):
         document = build_document(
-            ("w1 w2 w3 w4", "I like music",),
+            ("wa wb wc wd", "I like music",),
             ("This is test sentence with some extra words and bonus",)
         )
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("b1", "b2", "b3", "bonus",)
+        summarize.bonus_words = ("ba", "bb", "bc", "bonus",)
 
         sentences = summarize.key_method(1)
         self.assertEqual(len(sentences), 1)
@@ -241,29 +241,29 @@ class TestEdmundson(unittest.TestCase):
 
     def test_key_3(self):
         document = build_document(
-            ("w1", "w1 w1", "w1 w1 w1", "w1 w1 w1 w1", "w1 W1 W1 W1 w1",),
+            ("wa", "wa wa", "wa wa wa", "wa wa wa wa", "wa Wa Wa Wa wa",),
             ("x X x X",)
         )
         summarize = EdmundsonSummarizer(document)
-        summarize.bonus_words = ("w1", "X",)
+        summarize.bonus_words = ("wa", "X",)
 
         sentences = summarize.key_method(3)
         self.assertEqual(len(sentences), 3)
-        self.assertEqual(to_unicode(sentences[0]), "w1 w1 w1")
-        self.assertEqual(to_unicode(sentences[1]), "w1 w1 w1 w1")
-        self.assertEqual(to_unicode(sentences[2]), "w1 W1 W1 W1 w1")
+        self.assertEqual(to_unicode(sentences[0]), "wa wa wa")
+        self.assertEqual(to_unicode(sentences[1]), "wa wa wa wa")
+        self.assertEqual(to_unicode(sentences[2]), "wa Wa Wa Wa wa")
 
         sentences = summarize.key_method(3, weight=0)
         self.assertEqual(len(sentences), 3)
-        self.assertEqual(to_unicode(sentences[0]), "w1 w1 w1 w1")
-        self.assertEqual(to_unicode(sentences[1]), "w1 W1 W1 W1 w1")
+        self.assertEqual(to_unicode(sentences[0]), "wa wa wa wa")
+        self.assertEqual(to_unicode(sentences[1]), "wa Wa Wa Wa wa")
         self.assertEqual(to_unicode(sentences[2]), "x X x X")
 
     def test_title_method_with_empty_document(self):
         document = build_document()
 
         summarize = EdmundsonSummarizer(document)
-        summarize.null_words = ("b1", "b2", "b3",)
+        summarize.null_words = ("ba", "bb", "bc",)
 
         sentences = summarize.title_method(10)
         self.assertEqual(len(sentences), 0)
@@ -356,7 +356,7 @@ class TestEdmundson(unittest.TestCase):
         document = build_document()
 
         summarize = EdmundsonSummarizer(document)
-        summarize.null_words = ("n1", "n2", "n3",)
+        summarize.null_words = ("na", "nb", "nc",)
 
         sentences = summarize.location_method(10)
         self.assertEqual(len(sentences), 0)
@@ -369,51 +369,51 @@ class TestEdmundson(unittest.TestCase):
 
     def test_location_method_1(self):
         document = build_document_from_string("""
-            # n1 n2 n3 h1 h2
-            h1 = 1 + 1 + 1 = 3
-            h1 h2 = 2 + 1 + 1 = 4
+            # na nb nc ha hb
+            ha = 1 + 1 + 1 = 3
+            ha hb = 2 + 1 + 1 = 4
 
             first = 1
-            h1 h2 h1 = 3
+            ha hb ha = 3
             last = 1
 
-            # h3 h4
-            h2 h3 h4 = 3 + 1 + 1 = 5
-            h1 h2 = 2 + 1 + 1 = 4
+            # hc hd
+            hb hc hd = 3 + 1 + 1 = 5
+            ha hb = 2 + 1 + 1 = 4
         """)
 
         summarize = EdmundsonSummarizer(document)
-        summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
+        summarize.null_words = ("na", "nb", "nc", "nd", "ne",)
 
         sentences = summarize.location_method(4)
         self.assertEqual(len(sentences), 4)
-        self.assertEqual(to_unicode(sentences[0]), "h1 = 1 + 1 + 1 = 3")
-        self.assertEqual(to_unicode(sentences[1]), "h1 h2 = 2 + 1 + 1 = 4")
-        self.assertEqual(to_unicode(sentences[2]), "h2 h3 h4 = 3 + 1 + 1 = 5")
-        self.assertEqual(to_unicode(sentences[3]), "h1 h2 = 2 + 1 + 1 = 4")
+        self.assertEqual(to_unicode(sentences[0]), "ha = 1 + 1 + 1 = 3")
+        self.assertEqual(to_unicode(sentences[1]), "ha hb = 2 + 1 + 1 = 4")
+        self.assertEqual(to_unicode(sentences[2]), "hb hc hd = 3 + 1 + 1 = 5")
+        self.assertEqual(to_unicode(sentences[3]), "ha hb = 2 + 1 + 1 = 4")
 
     def test_location_method_2(self):
         document = build_document_from_string("""
-            # n1 n2 n3 h1 h2
-            h1 = 1 + 1 + 0 = 2
+            # na nb nc ha hb
+            ha = 1 + 1 + 0 = 2
             middle = 0
-            h1 h2 = 2 + 1 + 0 = 3
+            ha hb = 2 + 1 + 0 = 3
 
             first = 1
-            h1 h2 h1 = 3
+            ha hb ha = 3
             last = 1
 
-            # h3 h4
-            h2 h3 h4 = 3 + 1 + 0 = 4
-            h1 h2 = 2 + 1 + 0 = 3
+            # hc hd
+            hb hc hd = 3 + 1 + 0 = 4
+            ha hb = 2 + 1 + 0 = 3
         """)
 
         summarize = EdmundsonSummarizer(document)
-        summarize.null_words = ("n1", "n2", "n3", "n4", "n5",)
+        summarize.null_words = ("na", "nb", "nc", "nd", "ne",)
 
         sentences = summarize.location_method(4, w_p1=0, w_p2=0)
         self.assertEqual(len(sentences), 4)
-        self.assertEqual(to_unicode(sentences[0]), "h1 h2 = 2 + 1 + 0 = 3")
-        self.assertEqual(to_unicode(sentences[1]), "h1 h2 h1 = 3")
-        self.assertEqual(to_unicode(sentences[2]), "h2 h3 h4 = 3 + 1 + 0 = 4")
-        self.assertEqual(to_unicode(sentences[3]), "h1 h2 = 2 + 1 + 0 = 3")
+        self.assertEqual(to_unicode(sentences[0]), "ha hb = 2 + 1 + 0 = 3")
+        self.assertEqual(to_unicode(sentences[1]), "ha hb ha = 3")
+        self.assertEqual(to_unicode(sentences[2]), "hb hc hd = 3 + 1 + 0 = 4")
+        self.assertEqual(to_unicode(sentences[3]), "ha hb = 2 + 1 + 0 = 3")

@@ -9,7 +9,7 @@ from itertools import chain
 from .._compat import to_unicode, to_string, unicode_compatible
 
 
-_WORD_PATTERN = re.compile(r"^[^\W_]+$", re.UNICODE)
+_WORD_PATTERN = re.compile(r"^[^\W_0-9]+$", re.UNICODE)
 
 
 @unicode_compatible
