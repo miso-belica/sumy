@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from .._compat import to_unicode
 from ..utils import cached_property
-from ..models.dom import Sentence, Paragraph, Document
+from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
 from .parser import DocumentParser
 
 
@@ -42,7 +42,7 @@ class PlaintextParser(DocumentParser):
         sentences = self._to_sentences(current_paragraph)
         paragraphs.append(Paragraph(sentences))
 
-        return Document(paragraphs)
+        return ObjectDocumentModel(paragraphs)
 
     def _to_sentences(self, lines):
         text = ""

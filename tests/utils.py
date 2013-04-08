@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 from os.path import dirname, join, abspath
 from sumy._compat import to_string
-from sumy.models.dom import Document, Paragraph, Sentence
+from sumy.models.dom import ObjectDocumentModel, Paragraph, Sentence
 
 
 def expand_resource_path(path):
@@ -22,7 +22,7 @@ def build_document(*sets_of_sentences):
 
         paragraphs.append(Paragraph(sentence_instances))
 
-    return Document(paragraphs)
+    return ObjectDocumentModel(paragraphs)
 
 
 def build_document_from_string(string):
@@ -40,7 +40,7 @@ def build_document_from_string(string):
             sentences.append(build_sentence(line))
 
     paragraphs.append(Paragraph(sentences))
-    return Document(paragraphs)
+    return ObjectDocumentModel(paragraphs)
 
 
 def build_sentence(sentence_as_string, is_heading=False):

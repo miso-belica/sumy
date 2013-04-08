@@ -9,7 +9,7 @@ import nltk
 from readability.readable import Article
 from .._compat import urllib, to_unicode, to_string
 from ..utils import cached_property
-from ..models.dom import Sentence, Paragraph, Document
+from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
 from .parser import DocumentParser
 
 
@@ -62,4 +62,4 @@ class HtmlParser(DocumentParser):
             sentences.extend(map(Sentence, words))
             paragraphs.append(Paragraph(sentences))
 
-        return Document(paragraphs)
+        return ObjectDocumentModel(paragraphs)

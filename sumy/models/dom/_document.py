@@ -7,7 +7,7 @@ from itertools import chain
 from ...utils import cached_property
 
 
-class Document(object):
+class ObjectDocumentModel(object):
     def __init__(self, paragraphs):
         self._paragraphs = tuple(paragraphs)
 
