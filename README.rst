@@ -6,13 +6,12 @@ Automatic text summarization
 
 Here are some other summarizators:
 
-- https://github.com/thavelick/summarize/ (very simple)
-- http://pypi.python.org/pypi/ots
-- http://libots.sourceforge.net/
-- http://textmining.zcu.cz/?lang=en&section=download
-- http://www.musutelsa.jamstudio.eu/
-- http://mff.bajecni.cz/index.php
-- http://www.summarization.com/mead/
+- https://github.com/thavelick/summarize/ - Python, TF (very simple)
+- `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF*IDF
+- `Almus: Automatic Text Summarizer <http://textmining.zcu.cz/?lang=en&section=download>`_ - Java, LSA (without source code)
+- `Musutelsa <http://www.musutelsa.jamstudio.eu/>`_ - Java, LSA (always freezes)
+- http://mff.bajecni.cz/index.php - C++
+- `MEAD <http://www.summarization.com/mead/>`_ - Perl, various methods + evaluation framework
 
 
 Installation
