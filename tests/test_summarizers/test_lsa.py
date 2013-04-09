@@ -7,7 +7,7 @@ import unittest
 
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy._compat import to_unicode
-from .utils import build_document
+from ..utils import build_document
 
 
 class TestLsa(unittest.TestCase):

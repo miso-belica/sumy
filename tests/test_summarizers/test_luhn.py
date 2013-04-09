@@ -7,7 +7,7 @@ import unittest
 
 from sumy.summarizers.luhn import LuhnSummarizer
 from sumy._compat import to_unicode
-from .utils import build_document, build_sentence
+from ..utils import build_document, build_sentence
 
 
 class TestLuhn(unittest.TestCase):

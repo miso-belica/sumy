@@ -7,7 +7,7 @@ import unittest
 
 from sumy.summarizers.edmundson import EdmundsonSummarizer
 from sumy._compat import to_unicode
-from .utils import build_document, build_document_from_string
+from ..utils import build_document, build_document_from_string
 
 
 class TestEdmundson(unittest.TestCase):
