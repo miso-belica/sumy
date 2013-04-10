@@ -47,24 +47,24 @@ PARSERS = {
 }
 
 
-def build_luhn(document):
-    summarizer = LuhnSummarizer(document, stem_word)
+def build_luhn(parser):
+    summarizer = LuhnSummarizer(parser.document, stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
 
 
-def build_edmundson(document):
-    summarizer = EdmundsonSummarizer(document, stem_word)
+def build_edmundson(parser):
+    summarizer = EdmundsonSummarizer(parser.document, stem_word)
     summarizer.null_words = get_stop_words("cs")
-    summarizer.bonus_words = ("supr", "super", "nejlepší", "dobrý", "významný", "kvalitní", "optimální")
-    summarizer.stigma_words = ("nejhorší", "zlý", "šeredný")
+    summarizer.bonus_words = parser.significant_words
+    summarizer.stigma_words = parser.stigma_words
 
     return summarizer
 
 
-def build_lsa(document):
-    summarizer = LsaSummarizer(document, stem_word)
+def build_lsa(parser):
+    summarizer = LsaSummarizer(parser.document, stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
@@ -109,7 +109,7 @@ def handle_arguments(args):
     if input_stream is not sys.stdin:
         input_stream.close()
 
-    return summarizer(parser.document), items_count
+    return summarizer(parser), items_count
 
 
 if __name__ == "__main__":

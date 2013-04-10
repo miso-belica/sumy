@@ -24,6 +24,23 @@ class PlaintextParser(DocumentParser):
         self._text = to_unicode(text).strip()
 
     @cached_property
+    def significant_words(self):
+        words = []
+        for paragraph in self.document.paragraphs:
+            for sentence in paragraph:
+                if sentence.is_heading:
+                    words.extend(sentence.words)
+
+        if words:
+            return tuple(words)
+        else:
+            return self.SIGNIFICANT_WORDS
+
+    @cached_property
+    def stigma_words(self):
+        return self.STIGMA_WORDS
+
+    @cached_property
     def document(self):
         current_paragraph = []
         paragraphs = []
