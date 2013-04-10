@@ -28,7 +28,7 @@ import sys
 
 from docopt import docopt
 from . import __version__
-from .utils import ItemsCount, get_stop_word
+from .utils import ItemsCount, get_stop_words
 from ._compat import urllib, to_string, to_unicode
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
@@ -49,14 +49,14 @@ PARSERS = {
 
 def build_luhn(document):
     summarizer = LuhnSummarizer(document, stem_word)
-    summarizer.stop_words = get_stop_word("cs")
+    summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
 
 
 def build_edmundson(document):
     summarizer = EdmundsonSummarizer(document, stem_word)
-    summarizer.null_words = get_stop_word("cs")
+    summarizer.null_words = get_stop_words("cs")
     summarizer.bonus_words = ("supr", "super", "nejlepší", "dobrý", "významný", "kvalitní", "optimální")
     summarizer.stigma_words = ("nejhorší", "zlý", "šeredný")
 
@@ -65,7 +65,7 @@ def build_edmundson(document):
 
 def build_lsa(document):
     summarizer = LsaSummarizer(document, stem_word)
-    summarizer.stop_words = get_stop_word("cs")
+    summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
 

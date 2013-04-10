@@ -34,7 +34,7 @@ def expand_resource_path(path):
     return join(directory, to_string("data"), to_string(path))
 
 
-def get_stop_word(language):
+def get_stop_words(language):
     path = expand_resource_path("stopwords/%s.txt" % language)
     if not exists(path):
         raise ValueError("Stop-words are not available for language %s." % language)
