@@ -125,6 +125,15 @@ class TestContentBasedEvaluation(unittest.TestCase):
         self.assertRaises(ValueError, cosine_similarity, text, model)
         self.assertRaises(ValueError, cosine_similarity, model, text)
 
+    def test_empty_model(self):
+        text = "Toto je moja veta, to sa nedá poprieť."
+        model = TfDocumentModel(text, Tokenizer("czech"))
+        empty_model = TfDocumentModel([])
+
+        self.assertRaises(ValueError, cosine_similarity, empty_model, empty_model)
+        self.assertRaises(ValueError, cosine_similarity, empty_model, model)
+        self.assertRaises(ValueError, cosine_similarity, model, empty_model)
+
     def test_cosine_exact_match(self):
         text = "Toto je moja veta, to sa nedá poprieť."
         model = TfDocumentModel(text, Tokenizer("czech"))

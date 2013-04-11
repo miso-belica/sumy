@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy._compat import to_unicode
+from sumy.models.dom import Paragraph
 from ..utils import build_document, build_document_from_string
 
 
@@ -60,3 +61,15 @@ class TestDocument(unittest.TestCase):
             "Nějaký jiný muž šel kolem vaší zahrady")
         self.assertEqual(to_unicode(document.sentences[2]),
             "Už už abych taky šel")
+
+    def test_only_instances_of_sentence_allowed(self):
+        document = build_document_from_string("""
+            Nějaký muž šel kolem naší zahrady
+            Nějaký jiný muž šel kolem vaší zahrady
+
+            # Nová myšlenka
+            Už už abych taky šel
+        """)
+
+        self.assertRaises(TypeError, Paragraph,
+            list(document.sentences) + ["Last sentence"])
