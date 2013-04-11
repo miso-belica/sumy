@@ -48,7 +48,7 @@ class LsaSummarizer(AbstractSummarizer):
         Creates matrix of shape |unique words|×|sentences| where cells
         contains number of occurences of words (rows) in senteces (cols).
         """
-        sentences = tuple(self._document.sentences)
+        sentences = self._document.sentences
 
         # create matrix |unique words|×|sentences| filled with zeroes
         matrix = numpy.zeros((len(dictionary), len(sentences)))
