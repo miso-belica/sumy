@@ -29,7 +29,7 @@ import sys
 from docopt import docopt
 from . import __version__
 from .utils import ItemsCount, get_stop_words
-from ._compat import urllib, to_string, to_unicode
+from ._compat import urllib, to_string, to_unicode, to_bytes, PY3
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
@@ -82,7 +82,10 @@ def main(args=None):
     method, items_count = handle_arguments(args)
 
     for sentence in method(items_count):
-        print(to_unicode(sentence))
+        if PY3:
+            print(to_unicode(sentence))
+        else:
+            print(to_bytes(sentence))
 
 
 def handle_arguments(args):
