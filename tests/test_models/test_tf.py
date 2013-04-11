@@ -84,17 +84,17 @@ class TestTfModel(unittest.TestCase):
         self.assertRaises(ValueError, model.most_frequent_terms, -1)
 
     def test_normalized_words_frequencies(self):
-        words = map(to_unicode, (1, 2, 3, 4, 5, 3, 2, 4, 3, 5, 5, 4, 5, 4, 5))
+        words = "a b c d e c b d c e e d e d e".split()
         model = TfDocumentModel(tuple(words))
 
-        self.assertAlmostEqual(model.normalized_term_frequency("1"), 1/5)
-        self.assertAlmostEqual(model.normalized_term_frequency("2"), 2/5)
-        self.assertAlmostEqual(model.normalized_term_frequency("3"), 3/5)
-        self.assertAlmostEqual(model.normalized_term_frequency("4"), 4/5)
-        self.assertAlmostEqual(model.normalized_term_frequency("5"), 5/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("a"), 1/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("b"), 2/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("c"), 3/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("d"), 4/5)
+        self.assertAlmostEqual(model.normalized_term_frequency("e"), 5/5)
         self.assertAlmostEqual(model.normalized_term_frequency("6"), 0.0)
 
-        self.assertEqual(model.most_frequent_terms(), ("5", "4", "3", "2", "1"))
+        self.assertEqual(model.most_frequent_terms(), ("e", "d", "c", "b", "a"))
 
     def test_normalized_words_frequencies_with_smoothing_term(self):
         words = "a b c d e c b d c e e d e d e".split()
