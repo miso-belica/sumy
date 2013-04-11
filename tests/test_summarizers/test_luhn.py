@@ -6,6 +6,10 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy.summarizers.luhn import LuhnSummarizer
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.nlp.stemmers.cs import stem_word
+from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
 from ..utils import build_document, build_sentence
 
@@ -95,6 +99,28 @@ class TestLuhn(unittest.TestCase):
         self.assertEqual(to_unicode(returned[0]), "3 c c c")
         self.assertEqual(to_unicode(returned[1]), "5 z z z z")
         self.assertEqual(to_unicode(returned[2]), "6 e e e e e")
+
+    def test_real_example(self):
+        parser = PlaintextParser.from_string(
+            "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením. "
+            "Přerostly až v reparát z jazyka na konci školního roku. "
+            "Nedopadl bohužel dobře a tak musel opakovat 6. třídu, což se chlapci ani trochu nelíbilo. "
+            "Připadal si, že je mezi malými dětmi a realizoval se tím, že si ve třídě "
+            "o rok mladších dětí budoval vedoucí pozici. "
+            "Dost razantně. Fyzickou převahu měl, takže to nedalo až tak moc práce.",
+            Tokenizer("czech")
+        )
+        summarizer = LuhnSummarizer(parser.document, stem_word)
+        summarizer.stop_words = get_stop_words("cs")
+        summarizer.significant_percentage = 0.12
+
+        returned = summarizer(2)
+        self.assertEqual(len(returned), 2)
+        self.assertEqual(to_unicode(returned[0]),
+            "Jednalo se o případ chlapce v 6. třídě , který měl problémy s učením .")
+        self.assertEqual(to_unicode(returned[1]),
+            "Připadal si , že je mezi malými dětmi a realizoval se tím , "
+            "že si ve třídě o rok mladších dětí budoval vedoucí pozici .")
 
 
 class TestSentenceRating(unittest.TestCase):
