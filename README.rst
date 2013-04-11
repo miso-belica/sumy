@@ -1,6 +1,6 @@
-============================
-Automatic text summarization
-============================
+=========================
+Automatic text summarizer
+=========================
 .. image:: https://api.travis-ci.org/miso-belica/sumy.png?branch=master
    :target: https://travis-ci.org/miso-belica/sumy
 
