@@ -4,7 +4,7 @@ Automatic text summarization
 .. image:: https://api.travis-ci.org/miso-belica/sumy.png?branch=master
    :target: https://travis-ci.org/miso-belica/sumy
 
-Here are some other summarizators:
+Here are some other summarizers:
 
 - https://github.com/thavelick/summarize/ - Python, TF (very simple)
 - `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF*IDF
