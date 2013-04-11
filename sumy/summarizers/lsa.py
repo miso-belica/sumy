@@ -62,7 +62,7 @@ class LsaSummarizer(AbstractSummarizer):
 
         return matrix
 
-    def _compute_term_frequency(self, matrix, smooth=0.5):
+    def _compute_term_frequency(self, matrix, smooth=0.4):
         assert 0.0 <= smooth < 1.0
 
         max_word_frequencies = numpy.max(matrix, axis=0)
