@@ -95,3 +95,16 @@ class TestTfModel(unittest.TestCase):
         self.assertAlmostEqual(model.normalized_term_frequency("6"), 0.0)
 
         self.assertEqual(model.most_frequent_terms(), ("5", "4", "3", "2", "1"))
+
+    def test_normalized_words_frequencies_with_smoothing_term(self):
+        words = "a b c d e c b d c e e d e d e".split()
+        model = TfDocumentModel(tuple(words))
+
+        self.assertAlmostEqual(model.normalized_term_frequency("a", 0.5), 0.5 + 1/10)
+        self.assertAlmostEqual(model.normalized_term_frequency("b", 0.5), 0.5 + 2/10)
+        self.assertAlmostEqual(model.normalized_term_frequency("c", 0.5), 0.5 + 3/10)
+        self.assertAlmostEqual(model.normalized_term_frequency("d", 0.5), 0.5 + 4/10)
+        self.assertAlmostEqual(model.normalized_term_frequency("e", 0.5), 0.5 + 5/10)
+        self.assertAlmostEqual(model.normalized_term_frequency("6", 0.5), 0.5)
+
+        self.assertEqual(model.most_frequent_terms(), ("e", "d", "c", "b", "a"))

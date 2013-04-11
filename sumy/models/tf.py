@@ -66,15 +66,23 @@ class TfDocumentModel(object):
         """
         return self._terms.get(term, 0)
 
-    def normalized_term_frequency(self, term):
+    def normalized_term_frequency(self, term, smooth=0.0):
         """
         Returns normalized frequency of term in document.
+        http://nlp.stanford.edu/IR-book/html/htmledition/maximum-tf-normalization-1.html
 
+        :parameter float smooth:
+            0.0 <= smooth <= 1.0, generally set to 0.4, although some
+            early work used the value 0.5. The term is a smoothing term
+            whose role is to damp the contribution of the second term.
+            It may be viewed as a scaling down of TF by the largest TF
+            value in document.
         :returns float:
             0.0 <= frequency <= 1.0, where 0 means no occurence in document
             and 1 the most frequent term in document.
         """
-        return self._terms.get(term, 0.0) / self._max_frequency
+        frequency = self.term_frequency(term) / self._max_frequency
+        return smooth + (1.0 - smooth)*frequency
 
     def __repr__(self):
         return "<TfDocumentModel %s>" % pformat(self._terms)
