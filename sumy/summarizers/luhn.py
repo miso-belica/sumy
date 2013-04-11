@@ -35,7 +35,10 @@ class LuhnSummarizer(AbstractSummarizer):
 
         # take only best `significant_percentage` % words
         best_words_count = int(len(words) * self.significant_percentage)
-        return model.most_frequent_terms(best_words_count)
+        words = model.most_frequent_terms(best_words_count)
+
+        # take only words contained multiple times in document
+        return tuple(t for t in words if model.term_frequency(t) > 1)
 
     def rate_sentence(self, sentence, significant_stems):
         ratings = self._get_chunk_ratings(sentence, significant_stems)

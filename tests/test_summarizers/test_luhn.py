@@ -41,13 +41,16 @@ class TestLuhn(unittest.TestCase):
         self.assertEqual(to_unicode(returned[1]), "A já ta 2. vítězná výhra")
 
     def test_two_sentences_but_one_winner(self):
-        document = build_document(("Já jsem 1. ta věta", "A já ta 2. vítězná výhra"))
+        document = build_document((
+            "Já jsem 1. vítězná ta věta",
+            "A já ta 2. vítězná věta"
+        ))
         luhn = LuhnSummarizer(document)
         luhn.stop_words = ("já", "jsem", "a", "ta",)
 
         returned = luhn(1)
         self.assertEqual(len(returned), 1)
-        self.assertEqual(to_unicode(returned[0]), "A já ta 2. vítězná výhra")
+        self.assertEqual(to_unicode(returned[0]), "A já ta 2. vítězná věta")
 
     def test_three_sentences(self):
         document = build_document((
@@ -112,7 +115,6 @@ class TestLuhn(unittest.TestCase):
         )
         summarizer = LuhnSummarizer(parser.document, stem_word)
         summarizer.stop_words = get_stop_words("cs")
-        summarizer.significant_percentage = 0.12
 
         returned = summarizer(2)
         self.assertEqual(len(returned), 2)
