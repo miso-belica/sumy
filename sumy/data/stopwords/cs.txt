@@ -103,6 +103,7 @@ máš
 máte
 me
 mezi
+měl
 mi
 mít
 mně
@@ -268,3 +269,4 @@ zatímco
 zda
 zde
 ze
+že
