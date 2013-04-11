@@ -64,19 +64,19 @@ def _remove_case(word):
             return word[:-4]
 
     if len(word) > 5:
-        if word[-3:] in {"ech", "ich", "ích", "ého", "ěmi", "emi", "ému",
-                         "ete", "eti", "iho", "ího", "ími", "imu"}:
+        if word[-3:] in ("ech", "ich", "ích", "ého", "ěmi", "emi", "ému",
+                         "ete", "eti", "iho", "ího", "ími", "imu"):
             return _palatalize(word[:-2])
-        if word[-3:] in {"ách", "ata", "aty", "ých", "ama", "ami",
-                         "ové", "ovi", "ými"}:
+        if word[-3:] in ("ách", "ata", "aty", "ých", "ama", "ami",
+                         "ové", "ovi", "ými"):
             return word[:-3]
 
     if len(word) > 4:
         if word.endswith("em"):
             return _palatalize(word[:-1])
-        if word[-2:] in {"es", "ém", "ím"}:
+        if word[-2:] in ("es", "ém", "ím"):
             return _palatalize(word[:-2])
-        if word[-2:] in {"ům", "at", "ám", "os", "us", "ým", "mi", "ou"}:
+        if word[-2:] in ("ům", "at", "ám", "os", "us", "ým", "mi", "ou"):
             return word[:-2]
 
     if len(word) > 3:
@@ -90,7 +90,7 @@ def _remove_case(word):
 
 def _remove_possessives(word):
     if len(word) > 5:
-        if word[-2:] in {"ov", "ův"}:
+        if word[-2:] in ("ov", "ův"):
             return word[:-2]
         if word.endswith("in"):
             return _palatalize(word[:-1])
@@ -99,7 +99,7 @@ def _remove_possessives(word):
 
 def _remove_comparative(word):
     if len(word) > 5:
-        if word[-3:] in {"ejš", "ějš"}:
+        if word[-3:] in ("ejš", "ějš"):
             return _palatalize(word[:-2])
     return word
 
@@ -108,23 +108,23 @@ def _remove_diminutive(word):
     if len(word) > 7 and word.endswith("oušek"):
         return word[:-5]
     if len(word) > 6:
-        if word[-4:] in {"eček", "éček", "iček", "íček", "enek", "ének",
-                         "inek", "ínek"}:
+        if word[-4:] in ("eček", "éček", "iček", "íček", "enek", "ének",
+                         "inek", "ínek"):
             return _palatalize(word[:-3])
-        if word[-4:] in {"áček", "aček", "oček", "uček", "anek", "onek",
-                         "unek", "ánek"}:
+        if word[-4:] in ("áček", "aček", "oček", "uček", "anek", "onek",
+                         "unek", "ánek"):
             return _palatalize(word[:-4])
     if len(word) > 5:
-        if word[-3:] in {"ečk", "éčk", "ičk", "íčk", "enk", "énk",
-                         "ink", "ínk"}:
+        if word[-3:] in ("ečk", "éčk", "ičk", "íčk", "enk", "énk",
+                         "ink", "ínk"):
             return _palatalize(word[:-3])
-        if word[-3:] in {"áčk", "ačk", "očk", "učk", "ank", "onk",
-                         "unk", "átk", "ánk", "ušk"}:
+        if word[-3:] in ("áčk", "ačk", "očk", "učk", "ank", "onk",
+                         "unk", "átk", "ánk", "ušk"):
             return word[:-3]
     if len(word) > 4:
-        if word[-2:] in {"ek", "ék", "ík", "ik"}:
+        if word[-2:] in ("ek", "ék", "ík", "ik"):
             return _palatalize(word[:-1])
-        if word[-2:] in {"ák", "ak", "ok", "uk"}:
+        if word[-2:] in ("ák", "ak", "ok", "uk"):
             return word[:-1]
     if len(word) > 3 and word[-1] == "k":
         return word[:-1]
@@ -134,7 +134,7 @@ def _remove_diminutive(word):
 def _remove_augmentative(word):
     if len(word) > 6 and word.endswith("ajzn"):
         return word[:-4]
-    if len(word) > 5 and word[-3:] in {"izn", "isk"}:
+    if len(word) > 5 and word[-3:] in ("izn", "isk"):
         return _palatalize(word[:-2])
     if len(word) > 4 and word.endswith("ák"):
         return word[:-2]
@@ -147,31 +147,31 @@ def _remove_derivational(word):
     if len(word) > 7:
         if word.endswith("ionář"):
             return _palatalize(word[:-4])
-        if word[-5:] in {"ovisk", "ovstv", "ovišt", "ovník"}:
+        if word[-5:] in ("ovisk", "ovstv", "ovišt", "ovník"):
             return word[:-5]
     if len(word) > 6:
-        if word[-4:] in {"ásek", "loun", "nost", "teln", "ovec", "ovík",
-                         "ovtv", "ovin", "štin"}:
+        if word[-4:] in ("ásek", "loun", "nost", "teln", "ovec", "ovík",
+                         "ovtv", "ovin", "štin"):
             return word[:-4]
-        if word[-4:] in {"enic", "inec", "itel"}:
+        if word[-4:] in ("enic", "inec", "itel"):
             return _palatalize(word[:-3])
     if len(word) > 5:
         if word.endswith("árn"):
             return word[:-3]
-        if word[-3:] in {"ěnk", "ián", "ist", "isk", "išt", "itb", "írn"}:
+        if word[-3:] in ("ěnk", "ián", "ist", "isk", "išt", "itb", "írn"):
             return _palatalize(word[:-2])
-        if word[-3:] in {"och", "ost", "ovn", "oun", "out", "ouš",
+        if word[-3:] in ("och", "ost", "ovn", "oun", "out", "ouš",
                          "ušk", "kyn", "čan", "kář", "néř", "ník",
-                         "ctv", "stv"}:
+                         "ctv", "stv"):
             return word[:-3]
     if len(word) > 4:
-        if word[-2:] in {"áč", "ač", "án", "an", "ář", "as"}:
+        if word[-2:] in ("áč", "ač", "án", "an", "ář", "as"):
             return word[:-2]
-        if word[-2:] in {"ec", "en", "ěn", "éř", "íř", "ic", "in", "ín",
-                         "it", "iv"}:
+        if word[-2:] in ("ec", "en", "ěn", "éř", "íř", "ic", "in", "ín",
+                         "it", "iv"):
             return _palatalize(word[:-1])
-        if word[-2:] in {"ob", "ot", "ov", "oň", "ul", "yn", "čk", "čn",
-                         "dl", "nk", "tv", "tk", "vk"}:
+        if word[-2:] in ("ob", "ot", "ov", "oň", "ul", "yn", "čk", "čn",
+                         "dl", "nk", "tv", "tk", "vk"):
             return word[:-2]
     if len(word) > 3 and word[-1] in "cčklnt":
         return word[:-1]
@@ -179,16 +179,16 @@ def _remove_derivational(word):
 
 
 def _palatalize(word):
-    if word[-2:] in {"ci", "ce", "či", "če"}:
+    if word[-2:] in ("ci", "ce", "či", "če"):
         return word[:-2] + "k"
 
-    if word[-2:] in {"zi", "ze", "ži", "že"}:
+    if word[-2:] in ("zi", "ze", "ži", "že"):
         return word[:-2] + "h"
 
-    if word[-3:] in {"čtě", "čti", "čtí"}:
+    if word[-3:] in ("čtě", "čti", "čtí"):
         return word[:-3] + "ck"
 
-    if word[-3:] in {"ště", "šti", "ští"}:
+    if word[-3:] in ("ště", "šti", "ští"):
         return word[:-3] + "sk"
 
     return word[:-1]
