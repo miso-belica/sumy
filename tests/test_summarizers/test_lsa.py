@@ -11,7 +11,7 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.nlp.stemmers.cs import stem_word
 from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
-from ..utils import build_document
+from ..utils import build_document, load_resource
 
 
 class TestLsa(unittest.TestCase):
@@ -45,6 +45,7 @@ class TestLsa(unittest.TestCase):
         self.assertEqual(to_unicode(sentences[1]), "This sentence is better than that above")
 
     def test_real_example(self):
+        """Source: http://www.prevko.cz/dite/skutecne-pribehy-deti"""
         parser = PlaintextParser.from_string(
             "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením. "
             "Přerostly až v reparát z jazyka na konci školního roku. "
@@ -63,3 +64,15 @@ class TestLsa(unittest.TestCase):
             "Jednalo se o případ chlapce v 6. třídě , který měl problémy s učením .")
         self.assertEqual(to_unicode(sentences[1]),
             "Nedopadl bohužel dobře a tak musel opakovat 6. třídu , což se chlapci ani trochu nelíbilo .")
+
+    def test_article_example(self):
+        """Source: http://www.prevko.cz/dite/skutecne-pribehy-deti"""
+        parser = PlaintextParser.from_string(
+            load_resource("articles/prevko_cz_1.txt"),
+            Tokenizer("czech")
+        )
+        summarizer = LsaSummarizer(parser.document, stem_word)
+        summarizer.stop_words = get_stop_words("cs")
+
+        sentences = summarizer(20)
+        self.assertEqual(len(sentences), 20)
