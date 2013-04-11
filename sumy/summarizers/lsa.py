@@ -39,12 +39,9 @@ class LsaSummarizer(AbstractSummarizer):
         """Creates mapping key = word, value = row index"""
         words = self._document.words
         unique_words = frozenset(self.stem_word(w) for w in words
-            if not self.is_stop_word(w))
+            if w not in self._stop_words)
 
         return dict((w, i) for i, w in enumerate(unique_words))
-
-    def is_stop_word(self, word):
-        return word in self._stop_words
 
     def _create_matrix(self, dictionary):
         """
