@@ -4,12 +4,18 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from os.path import dirname, join, abspath
-from sumy._compat import to_string
+from sumy._compat import to_string, to_unicode
 from sumy.models.dom import ObjectDocumentModel, Paragraph, Sentence
 
 
 def expand_resource_path(path):
     return join(abspath(dirname(__file__)), to_string("data"), to_string(path))
+
+
+def load_resource(path):
+    path = expand_resource_path(path)
+    with open(path, "rb") as file:
+        return to_unicode(file.read())
 
 
 def build_document(*sets_of_sentences):
