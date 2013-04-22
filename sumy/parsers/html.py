@@ -3,11 +3,8 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-import sys
-import nltk
-
 from readability.readable import Article
-from .._compat import urllib, to_unicode, to_string
+from .._compat import urllib
 from ..utils import cached_property
 from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
 from .parser import DocumentParser
