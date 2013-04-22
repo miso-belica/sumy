@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 from ..models import TfDocumentModel as TfModel
 
 
-def cosine_similarity(model1, model2):
+def cosine_similarity(evaluated_model, reference_model):
     """
     Computes cosine similarity of two text documents. Each document
     has to be represented as TF model of non-empty document.
@@ -15,25 +15,25 @@ def cosine_similarity(model1, model2):
         0 <= cos <= 1, where 0 means independence and 1 means
         exactly the same.
     """
-    if not (isinstance(model1, TfModel) and isinstance(model2, TfModel)):
+    if not (isinstance(evaluated_model, TfModel) and isinstance(reference_model, TfModel)):
         raise ValueError(
             "Arguments has to be instances of 'sumy.models.TfDocumentModel'")
 
-    terms = frozenset(model1.terms) | frozenset(model2.terms)
+    terms = frozenset(evaluated_model.terms) | frozenset(reference_model.terms)
 
     numerator = 0.0
     for term in terms:
-        numerator += model1.term_frequency(term) * model2.term_frequency(term)
+        numerator += evaluated_model.term_frequency(term) * reference_model.term_frequency(term)
 
-    denominator = model1.magnitude * model2.magnitude
+    denominator = evaluated_model.magnitude * reference_model.magnitude
     if denominator == 0.0:
         raise ValueError("Document model can't be empty. Given %r & %r" % (
-            model1, model2))
+            evaluated_model, reference_model))
 
     return numerator / denominator
 
 
-def unit_overlap(model1, model2):
+def unit_overlap(evaluated_model, reference_model):
     """
     Computes unit overlap of two text documents. Documents
     has to be represented as TF models of non-empty document.
@@ -42,12 +42,12 @@ def unit_overlap(model1, model2):
         0 <= overlap <= 1, where 0 means no match and 1 means
         exactly the same.
     """
-    if not (isinstance(model1, TfModel) and isinstance(model2, TfModel)):
+    if not (isinstance(evaluated_model, TfModel) and isinstance(reference_model, TfModel)):
         raise ValueError(
             "Arguments has to be instances of 'sumy.models.TfDocumentModel'")
 
-    terms1 = frozenset(model1.terms)
-    terms2 = frozenset(model2.terms)
+    terms1 = frozenset(evaluated_model.terms)
+    terms2 = frozenset(reference_model.terms)
 
     if not terms1 and not terms2:
         raise ValueError(
