@@ -7,7 +7,7 @@ Automatic text summarizer
 Here are some other summarizers:
 
 - https://github.com/thavelick/summarize/ - Python, TF (very simple)
-- `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF*IDF
+- `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF without normalization
 - `Almus: Automatic Text Summarizer <http://textmining.zcu.cz/?lang=en&section=download>`_ - Java, LSA (without source code)
 - `Musutelsa <http://www.musutelsa.jamstudio.eu/>`_ - Java, LSA (always freezes)
 - http://mff.bajecni.cz/index.php - C++
