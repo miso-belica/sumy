@@ -7,7 +7,7 @@ import math
 
 from pprint import pformat
 from collections import Sequence
-from .._compat import to_unicode, to_string, unicode, string_types, Counter
+from .._compat import to_unicode, unicode, string_types, Counter
 
 
 class TfDocumentModel(object):
