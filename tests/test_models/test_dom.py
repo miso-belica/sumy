@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy._compat import to_unicode
-from sumy.models.dom import Paragraph
+from sumy.models.dom import Paragraph, Sentence
 from ..utils import build_document, build_document_from_string
 
 
@@ -73,3 +73,16 @@ class TestDocument(unittest.TestCase):
 
         self.assertRaises(TypeError, Paragraph,
             list(document.sentences) + ["Last sentence"])
+
+    def test_sentences_equal(self):
+        sentence1 = Sentence(())
+        sentence2 = Sentence(())
+        self.assertEqual(sentence1, sentence2)
+
+        sentence1 = Sentence(("word", "another", "."))
+        sentence2 = Sentence(("word", "another", "."))
+        self.assertEqual(sentence1, sentence2)
+
+        sentence1 = Sentence(("word", "another"))
+        sentence2 = Sentence(("another", "word"))
+        self.assertNotEqual(sentence1, sentence2)

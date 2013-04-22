@@ -31,6 +31,16 @@ class Sentence(object):
     def _is_word(self, word):
         return bool(_WORD_PATTERN.search(word))
 
+    def __eq__(self, sentence):
+        assert isinstance(sentence, Sentence)
+        return self._is_heading is sentence._is_heading and self._words == sentence._words
+
+    def __ne__(self, sentence):
+        return not self.__eq__(sentence)
+
+    def __hash__(self):
+        return hash((self._is_heading, self._words))
+
     def __unicode__(self):
         return " ".join(self._words)
 

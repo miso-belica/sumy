@@ -69,6 +69,7 @@ setup(
     entry_points={
         "console_scripts": [
             "sumy=sumy.__main__:main",
+            "sumy_eval=sumy.evaluation.__main__:main",
         ]
     },
     classifiers=(
