@@ -44,4 +44,7 @@ class Sentence(object):
         return " ".join(self._words)
 
     def __repr__(self):
-        return to_string("<Sentence: %s>") % self.__str__()
+        return to_string("<%s: %s>") % (
+            "Heading" if self._is_heading else "Sentence",
+            self.__str__()
+        )
