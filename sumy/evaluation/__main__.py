@@ -4,9 +4,9 @@
 Sumy - evaluation of automatic text summary.
 
 Usage:
-    sumy_eval (luhn | edmundson | lsa) <reference_summary> [--length=<length>]
-    sumy_eval (luhn | edmundson | lsa) <reference_summary> [--length=<length>] --url=<url>
-    sumy_eval (luhn | edmundson | lsa) <reference_summary> [--length=<length>] --file=<file_path> --format=<file_format>
+    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>]
+    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>] --url=<url>
+    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>] --file=<file_path> --format=<file_format>
     sumy_eval --version
     sumy_eval --help
 
@@ -36,6 +36,7 @@ from .._compat import urllib, to_string
 from ..nlp.tokenizers import Tokenizer
 from ..parsers.html import HtmlParser
 from ..parsers.plaintext import PlaintextParser
+from ..summarizers.random import RandomSummarizer
 from ..summarizers.luhn import LuhnSummarizer
 from ..summarizers.edmundson import EdmundsonSummarizer
 from ..summarizers.lsa import LsaSummarizer
@@ -50,6 +51,10 @@ PARSERS = {
     "html": HtmlParser,
     "plaintext": PlaintextParser,
 }
+
+
+def build_random(parser):
+    return RandomSummarizer(parser.document)
 
 
 def build_luhn(parser):
@@ -94,6 +99,7 @@ def evaluate_unit_overlap(evaluated_sentences, reference_sentences):
 
 
 AVAILABLE_METHODS = {
+    "random": build_random,
     "luhn": build_luhn,
     "edmundson": build_edmundson,
     "lsa": build_lsa,
