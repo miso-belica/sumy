@@ -96,7 +96,8 @@ class HtmlParser(DocumentParser):
                 if annotations and ("h1" in annotations or "h2" in annotations or "h3" in annotations):
                     words = self.tokenize_words(text)
                     sentences.append(Sentence(words, is_heading=True))
-                elif not (annotations and "pre" in annotations and "code" in annotations):
+                # skip <pre> nodes
+                elif not (annotations and "pre" in annotations):
                     current_text += " " + text
 
             words = map(self.tokenize_words, self.tokenize_sentences(current_text))
