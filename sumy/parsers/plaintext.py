@@ -76,8 +76,10 @@ class PlaintextParser(DocumentParser):
             else:
                 text += " " + line
 
-        sentences = self.tokenize_sentences(text.strip())
-        sentence_objects += map(self._to_sentence, sentences)
+        text = text.strip()
+        if text:
+            sentences = self.tokenize_sentences(text)
+            sentence_objects += map(self._to_sentence, sentences)
 
         return sentence_objects
 
