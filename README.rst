@@ -33,6 +33,15 @@ Sumy contains command line utility for quick summarization of documents.
     $ sumy edmundson --length=3% --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
     $ sumy --help # for more info
 
+Various evaluation methods for some summarization method can be executed by
+commands below:
+
+.. code-block:: bash
+
+    $ sumy_eval lsa reference_summary.txt --url=http://www.zdrojak.cz/clanky/automaticke-zabezpeceni/
+    $ sumy_eval edmundson reference_summary.txt --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
+    $ sumy_eval --help # for more info
+
 
 Python API
 ----------
