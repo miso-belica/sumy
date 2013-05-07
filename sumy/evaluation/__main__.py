@@ -104,25 +104,30 @@ AVAILABLE_METHODS = {
     "edmundson": build_edmundson,
     "lsa": build_lsa,
 }
-AVAILABLE_EVALUATIONS = {
-    "Precision": precision,
-    "Recall": recall,
-    "F-score": f_score,
-    "Cosine similarity": evaluate_cosine_similarity,
-    "Unit overlap": evaluate_unit_overlap,
-}
+AVAILABLE_EVALUATIONS = (
+    ("Precision", False, precision),
+    ("Recall", False, recall),
+    ("F-score", False, f_score),
+    ("Cosine similarity", False, evaluate_cosine_similarity),
+    ("Cosine similarity (document)", True, evaluate_cosine_similarity),
+    ("Unit overlap", False, evaluate_unit_overlap),
+    ("Unit overlap (document)", True, evaluate_unit_overlap),
+)
 
 
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
-    method, items_count, reference_summary = handle_arguments(args)
+    method, items_count, reference_summary, document = handle_arguments(args)
 
     evaluated_sentences = method(items_count)
     reference_document = PlaintextParser.from_string(reference_summary, Tokenizer("czech"))
     reference_sentences = reference_document.document.sentences
 
-    for name, evaluate in AVAILABLE_EVALUATIONS.items():
-        result = evaluate(evaluated_sentences, reference_sentences)
+    for name, evaluate_document, evaluate in AVAILABLE_EVALUATIONS:
+        if evaluate_document:
+            result = evaluate(evaluated_sentences, document.sentences)
+        else:
+            result = evaluate(evaluated_sentences, reference_sentences)
         print("%s: %f" % (name, result))
 
 
@@ -153,7 +158,7 @@ def handle_arguments(args):
     with open(args["<reference_summary>"], "rb") as file:
         reference_summmary = file.read().decode("utf8")
 
-    return summarizer(parser), items_count, reference_summmary
+    return summarizer(parser), items_count, reference_summmary, parser.document
 
 
 if __name__ == "__main__":
