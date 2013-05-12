@@ -52,7 +52,8 @@ class ItemsCount(object):
             if self._value.endswith("%"):
                 total_count = len(sequence)
                 percentage = int(self._value[:-1])
-                count = total_count*percentage // 100
+                # at least one sentence should be choosen
+                count = max(1, total_count*percentage // 100)
                 return sequence[:count]
             else:
                 return sequence[:int(self._value)]
