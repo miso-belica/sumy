@@ -11,6 +11,8 @@ from ._summarizer import AbstractSummarizer
 
 
 class LsaSummarizer(AbstractSummarizer):
+    MIN_DIMENSIONS = 3
+    REDUCTION_RATIO = 1/1
     _stop_words = frozenset()
 
     @property
@@ -79,9 +81,12 @@ class LsaSummarizer(AbstractSummarizer):
     def _compute_ranks(self, sigma, v_matrix):
         assert len(sigma) == v_matrix.shape[1]
 
-        powered_sigma = tuple(s**2 for s in sigma)
-        ranks = []
+        dimensions = max(LsaSummarizer.MIN_DIMENSIONS,
+            int(len(sigma)*LsaSummarizer.REDUCTION_RATIO))
+        powered_sigma = tuple(s**2 if i < dimensions else 0.0
+            for i, s in enumerate(sigma))
 
+        ranks = []
         # iterate over columns of matrix (rows of transposed matrix)
         for column_vector in v_matrix.T:
             rank = sum(s*v**2 for s, v in zip(powered_sigma, column_vector))
