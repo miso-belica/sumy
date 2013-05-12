@@ -14,6 +14,7 @@ class DocumentParser(object):
         "význačný",
         "důležitý",
         "slavný",
+        "zajímavý",
         "eminentní",
         "vlivný",
         "supr",
