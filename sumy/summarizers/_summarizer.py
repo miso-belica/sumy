@@ -8,13 +8,10 @@ from collections import namedtuple
 from operator import attrgetter
 from ..utils import ItemsCount
 from .._compat import to_unicode
+from ..nlp.stemmers import null_stemmer
 
 
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
-
-
-def null_stemmer(object):
-    return to_unicode(object).lower()
 
 
 class AbstractSummarizer(object):
