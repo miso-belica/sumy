@@ -119,10 +119,10 @@ class TestLuhn(unittest.TestCase):
         returned = summarizer(2)
         self.assertEqual(len(returned), 2)
         self.assertEqual(to_unicode(returned[0]),
-            "Jednalo se o případ chlapce v 6. třídě , který měl problémy s učením .")
+            "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením.")
         self.assertEqual(to_unicode(returned[1]),
-            "Připadal si , že je mezi malými dětmi a realizoval se tím , "
-            "že si ve třídě o rok mladších dětí budoval vedoucí pozici .")
+            "Připadal si, že je mezi malými dětmi a realizoval se tím, "
+            "že si ve třídě o rok mladších dětí budoval vedoucí pozici.")
 
 
 class TestSentenceRating(unittest.TestCase):

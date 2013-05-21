@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy._compat import to_unicode
+from sumy.nlp.tokenizers import Tokenizer
 from sumy.models.dom import Paragraph, Sentence
 from ..utils import build_document, build_document_from_string
 
@@ -75,14 +76,14 @@ class TestDocument(unittest.TestCase):
             list(document.sentences) + ["Last sentence"])
 
     def test_sentences_equal(self):
-        sentence1 = Sentence(())
-        sentence2 = Sentence(())
+        sentence1 = Sentence("", Tokenizer("czech"))
+        sentence2 = Sentence("", Tokenizer("czech"))
         self.assertEqual(sentence1, sentence2)
 
-        sentence1 = Sentence(("word", "another", "."))
-        sentence2 = Sentence(("word", "another", "."))
+        sentence1 = Sentence("word another.", Tokenizer("czech"))
+        sentence2 = Sentence("word another.", Tokenizer("czech"))
         self.assertEqual(sentence1, sentence2)
 
-        sentence1 = Sentence(("word", "another"))
-        sentence2 = Sentence(("another", "word"))
+        sentence1 = Sentence("word another", Tokenizer("czech"))
+        sentence2 = Sentence("another word", Tokenizer("czech"))
         self.assertNotEqual(sentence1, sentence2)

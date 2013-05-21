@@ -3,45 +3,39 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-import re
-
+from ...utils import cached_property
 from ..._compat import to_unicode, to_string, unicode_compatible
-
-
-_WORD_PATTERN = re.compile(r"^[^\W\d_]+$", re.UNICODE)
 
 
 @unicode_compatible
 class Sentence(object):
-    __slots__ = ("_words", "_is_heading",)
+    __slots__ = ("_text", "_cached_property_words", "_tokenizer", "_is_heading",)
 
-    def __init__(self, words, is_heading=False):
-        self._words = tuple(map(to_unicode, words))
+    def __init__(self, text, tokenizer, is_heading=False):
+        self._text = to_unicode(text).strip()
+        self._tokenizer = tokenizer
         self._is_heading = bool(is_heading)
 
-    @property
+    @cached_property
     def words(self):
-        return tuple(filter(self._is_word, self._words))
+        return self._tokenizer.to_words(self._text)
 
     @property
     def is_heading(self):
         return self._is_heading
 
-    def _is_word(self, word):
-        return bool(_WORD_PATTERN.search(word))
-
     def __eq__(self, sentence):
         assert isinstance(sentence, Sentence)
-        return self._is_heading is sentence._is_heading and self._words == sentence._words
+        return self._is_heading is sentence._is_heading and self._text == sentence._text
 
     def __ne__(self, sentence):
         return not self.__eq__(sentence)
 
     def __hash__(self):
-        return hash((self._is_heading, self._words))
+        return hash((self._is_heading, self._text))
 
     def __unicode__(self):
-        return " ".join(self._words)
+        return self._text
 
     def __repr__(self):
         return to_string("<%s: %s>") % (

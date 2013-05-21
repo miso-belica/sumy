@@ -151,9 +151,9 @@ class TestContentBasedEvaluation(unittest.TestCase):
 
     def test_cosine_half_match(self):
         tokenizer = Tokenizer("czech")
-        model1 = TfDocumentModel("Veta aká sa len veľmi ťažko hľadá.",
+        model1 = TfDocumentModel("Veta aká sa tu len veľmi ťažko hľadá",
             tokenizer)
-        model2 = TfDocumentModel("Teta ktorá sa iba veľmi zle hľadá.",
+        model2 = TfDocumentModel("Teta ktorá sa tu iba veľmi zle hľadá",
             tokenizer)
 
         self.assertAlmostEqual(cosine_similarity(model1, model2), 0.5)
@@ -189,9 +189,9 @@ class TestContentBasedEvaluation(unittest.TestCase):
 
     def test_unit_overlap_half_match(self):
         tokenizer = Tokenizer("czech")
-        model1 = TfDocumentModel("Veta aká sa len veľmi ťažko hľadá.",
+        model1 = TfDocumentModel("Veta aká sa tu len veľmi ťažko hľadá",
             tokenizer)
-        model2 = TfDocumentModel("Teta ktorá sa iba veľmi zle hľadá.",
+        model2 = TfDocumentModel("Teta ktorá sa tu iba veľmi zle hľadá",
             tokenizer)
 
         self.assertAlmostEqual(unit_overlap(model1, model2), 1/3)

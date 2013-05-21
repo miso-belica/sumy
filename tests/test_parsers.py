@@ -89,12 +89,12 @@ class TestHtmlParser(unittest.TestCase):
         self.assertEqual(to_unicode(document.paragraphs[0].headings[0]),
             "Toto je nadpis prvej úrovne")
         self.assertEqual(to_unicode(document.paragraphs[0].sentences[0]),
-            "Toto je prvý odstavec a to je fajn .")
+            "Toto je prvý odstavec a to je fajn.")
 
         self.assertEqual(len(document.paragraphs[1].headings), 0)
         self.assertEqual(len(document.paragraphs[1].sentences), 2)
 
         self.assertEqual(to_unicode(document.paragraphs[1].sentences[0]),
-            "Tento text je tu aby vyplnil prázdne miesto v srdci súboru .")
+            "Tento text je tu aby vyplnil prázdne miesto v srdci súboru.")
         self.assertEqual(to_unicode(document.paragraphs[1].sentences[1]),
-            "Aj súbory majú predsa city .")
+            "Aj súbory majú predsa city.")

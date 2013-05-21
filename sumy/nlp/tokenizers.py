@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+import re
 import nltk
 
 from os import path
@@ -12,6 +13,9 @@ from .._compat import to_string, to_unicode, unicode
 
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
+
+    _WORD_PATTERN = re.compile(r"^[^\W\d_]+$", re.UNICODE)
+
     def __init__(self, language):
         self._language = language
         self._sentence_tokenizer = self._sentence_tokenizer(language)
@@ -32,4 +36,8 @@ class Tokenizer(object):
         return tuple(map(unicode.strip, sentences))
 
     def to_words(self, sentence):
-        return nltk.word_tokenize(to_unicode(sentence))
+        words = nltk.word_tokenize(to_unicode(sentence))
+        return tuple(filter(self._is_word, words))
+
+    def _is_word(self, word):
+        return bool(Tokenizer._WORD_PATTERN.search(word))

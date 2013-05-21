@@ -4,8 +4,12 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from os.path import dirname, join, abspath
+from sumy.nlp.tokenizers import Tokenizer
 from sumy._compat import to_string, to_unicode
 from sumy.models.dom import ObjectDocumentModel, Paragraph, Sentence
+
+
+_TOKENIZER = Tokenizer("czech")
 
 
 def expand_resource_path(path):
@@ -50,4 +54,4 @@ def build_document_from_string(string):
 
 
 def build_sentence(sentence_as_string, is_heading=False):
-    return Sentence(sentence_as_string.split(), is_heading)
+    return Sentence(sentence_as_string, _TOKENIZER, is_heading)

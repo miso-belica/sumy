@@ -61,9 +61,9 @@ class TestLsa(unittest.TestCase):
         sentences = summarizer(2)
         self.assertEqual(len(sentences), 2)
         self.assertEqual(to_unicode(sentences[0]),
-            "Jednalo se o případ chlapce v 6. třídě , který měl problémy s učením .")
+            "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením.")
         self.assertEqual(to_unicode(sentences[1]),
-            "Nedopadl bohužel dobře a tak musel opakovat 6. třídu , což se chlapci ani trochu nelíbilo .")
+            "Nedopadl bohužel dobře a tak musel opakovat 6. třídu, což se chlapci ani trochu nelíbilo.")
 
     def test_article_example(self):
         """Source: http://www.prevko.cz/dite/skutecne-pribehy-deti"""
