@@ -54,18 +54,18 @@ PARSERS = {
 
 
 def build_random(parser):
-    return RandomSummarizer(parser.document)
+    return RandomSummarizer()
 
 
 def build_luhn(parser):
-    summarizer = LuhnSummarizer(parser.document, stem_word)
+    summarizer = LuhnSummarizer(stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
 
 
 def build_edmundson(parser):
-    summarizer = EdmundsonSummarizer(parser.document, stem_word)
+    summarizer = EdmundsonSummarizer(stem_word)
     summarizer.null_words = get_stop_words("cs")
     summarizer.bonus_words = parser.significant_words
     summarizer.stigma_words = parser.stigma_words
@@ -74,7 +74,7 @@ def build_edmundson(parser):
 
 
 def build_lsa(parser):
-    summarizer = LsaSummarizer(parser.document, stem_word)
+    summarizer = LsaSummarizer(stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
@@ -117,9 +117,9 @@ AVAILABLE_EVALUATIONS = (
 
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
-    method, items_count, reference_summary, document = handle_arguments(args)
+    summarizer, document, items_count, reference_summary = handle_arguments(args)
 
-    evaluated_sentences = method(items_count)
+    evaluated_sentences = summarizer(document, items_count)
     reference_document = PlaintextParser.from_string(reference_summary, Tokenizer("czech"))
     reference_sentences = reference_document.document.sentences
 
@@ -143,10 +143,10 @@ def handle_arguments(args):
         parser = PARSERS.get(args["--format"], PlaintextParser)
         input_stream = open(args["--file"], "rb")
 
-    summarizer = AVAILABLE_METHODS["luhn"]
+    summarizer_builder = AVAILABLE_METHODS["luhn"]
     for method, builder in AVAILABLE_METHODS.items():
         if args[method]:
-            summarizer = builder
+            summarizer_builder = builder
             break
 
     items_count = ItemsCount(args["--length"])
@@ -158,7 +158,7 @@ def handle_arguments(args):
     with open(args["<reference_summary>"], "rb") as file:
         reference_summmary = file.read().decode("utf8")
 
-    return summarizer(parser), items_count, reference_summmary, parser.document
+    return summarizer_builder(parser), parser.document, items_count, reference_summmary
 
 
 if __name__ == "__main__":

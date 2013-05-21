@@ -23,34 +23,34 @@ class LsaSummarizer(AbstractSummarizer):
     def stop_words(self, words):
         self._stop_words = frozenset(map(self.normalize_word, words))
 
-    def __call__(self, sentences_count):
-        dictionary = self._create_dictionary()
+    def __call__(self, document, sentences_count):
+        dictionary = self._create_dictionary(document)
         # empty document
         if not dictionary:
             return ()
 
-        matrix = self._create_matrix(dictionary)
+        matrix = self._create_matrix(document, dictionary)
         matrix = self._compute_term_frequency(matrix)
         u, sigma, v = singular_value_decomposition(matrix, full_matrices=False)
 
         ranks = iter(self._compute_ranks(sigma, v))
-        return self._get_best_sentences(self._document.sentences,
-            sentences_count, lambda s: next(ranks))
+        return self._get_best_sentences(document.sentences, sentences_count,
+            lambda s: next(ranks))
 
-    def _create_dictionary(self):
+    def _create_dictionary(self, document):
         """Creates mapping key = word, value = row index"""
-        words = self._document.words
+        words = document.words
         unique_words = frozenset(self.stem_word(w) for w in words
             if w not in self._stop_words)
 
         return dict((w, i) for i, w in enumerate(unique_words))
 
-    def _create_matrix(self, dictionary):
+    def _create_matrix(self, document, dictionary):
         """
         Creates matrix of shape |unique words|×|sentences| where cells
         contains number of occurences of words (rows) in senteces (cols).
         """
-        sentences = self._document.sentences
+        sentences = document.sentences
 
         # create matrix |unique words|×|sentences| filled with zeroes
         matrix = numpy.zeros((len(dictionary), len(sentences)))

@@ -10,20 +10,20 @@ from ._summarizer import AbstractSummarizer
 
 
 class EdmundsonLocationMethod(AbstractSummarizer):
-    def __init__(self, document, stemmer, null_words):
-        super(EdmundsonLocationMethod, self).__init__(document, stemmer)
+    def __init__(self, stemmer, null_words):
+        super(EdmundsonLocationMethod, self).__init__(stemmer)
         self._null_words = null_words
 
-    def __call__(self, sentences_count, w_h, w_p1, w_p2, w_s1, w_s2):
-        significant_words = self._compute_significant_words()
-        rated_sentences = self._rate_sentences(significant_words, w_h, w_p1,
+    def __call__(self, document, sentences_count, w_h, w_p1, w_p2, w_s1, w_s2):
+        significant_words = self._compute_significant_words(document)
+        rated_sentences = self._rate_sentences(document, significant_words, w_h, w_p1,
             w_p2, w_s1, w_s2)
 
-        return self._get_best_sentences(self._document.sentences,
+        return self._get_best_sentences(document.sentences,
             sentences_count, lambda s: rated_sentences[s])
 
-    def _compute_significant_words(self):
-        headings = self._document.headings
+    def _compute_significant_words(self, document):
+        headings = document.headings
 
         significant_words = chain(*map(attrgetter("words"), headings))
         significant_words = map(self.stem_word, significant_words)
@@ -34,9 +34,9 @@ class EdmundsonLocationMethod(AbstractSummarizer):
     def _is_null_word(self, word):
         return word in self._null_words
 
-    def _rate_sentences(self, significant_words, w_h, w_p1, w_p2, w_s1, w_s2):
+    def _rate_sentences(self, document, significant_words, w_h, w_p1, w_p2, w_s1, w_s2):
         rated_sentences = {}
-        paragraphs = self._document.paragraphs
+        paragraphs = document.paragraphs
 
         for paragraph_order, paragraph in enumerate(paragraphs):
             sentences = paragraph.sentences
@@ -62,6 +62,6 @@ class EdmundsonLocationMethod(AbstractSummarizer):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
 
-    def rate_sentences(self, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
-        significant_words = self._compute_significant_words()
-        return self._rate_sentences(significant_words, w_h, w_p1, w_p2, w_s1, w_s2)
+    def rate_sentences(self, document, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
+        significant_words = self._compute_significant_words(document)
+        return self._rate_sentences(document, significant_words, w_h, w_p1, w_p2, w_s1, w_s2)

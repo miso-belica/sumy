@@ -17,17 +17,17 @@ from ..utils import build_document, load_resource
 class TestLsa(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        summarizer = LsaSummarizer(document)
+        summarizer = LsaSummarizer()
 
-        sentences = summarizer(10)
+        sentences = summarizer(document, 10)
         self.assertEqual(len(sentences), 0)
 
     def test_single_sentence(self):
         document = build_document(("I am the sentence you like",))
-        summarizer = LsaSummarizer(document)
+        summarizer = LsaSummarizer()
         summarizer.stopwords = ("I", "am", "the",)
 
-        sentences = summarizer(10)
+        sentences = summarizer(document, 10)
         self.assertEqual(len(sentences), 1)
         self.assertEqual(to_unicode(sentences[0]), "I am the sentence you like")
 
@@ -36,10 +36,10 @@ class TestLsa(unittest.TestCase):
             ("I am the sentence you like", "Do you like me too",),
             ("This sentence is better than that above", "Are you kidding me",)
         )
-        summarizer = LsaSummarizer(document)
+        summarizer = LsaSummarizer()
         summarizer.stopwords = ("I", "am", "the", "you", "are", "me", "is", "than", "that", "this",)
 
-        sentences = summarizer(2)
+        sentences = summarizer(document, 2)
         self.assertEqual(len(sentences), 2)
         self.assertEqual(to_unicode(sentences[0]), "I am the sentence you like")
         self.assertEqual(to_unicode(sentences[1]), "This sentence is better than that above")
@@ -55,10 +55,10 @@ class TestLsa(unittest.TestCase):
             "Dost razantně. Fyzickou převahu měl, takže to nedalo až tak moc práce.",
             Tokenizer("czech")
         )
-        summarizer = LsaSummarizer(parser.document, stem_word)
+        summarizer = LsaSummarizer(stem_word)
         summarizer.stop_words = get_stop_words("cs")
 
-        sentences = summarizer(2)
+        sentences = summarizer(parser.document, 2)
         self.assertEqual(len(sentences), 2)
         self.assertEqual(to_unicode(sentences[0]),
             "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením.")
@@ -71,8 +71,8 @@ class TestLsa(unittest.TestCase):
             load_resource("articles/prevko_cz_1.txt"),
             Tokenizer("czech")
         )
-        summarizer = LsaSummarizer(parser.document, stem_word)
+        summarizer = LsaSummarizer(stem_word)
         summarizer.stop_words = get_stop_words("cs")
 
-        sentences = summarizer(20)
+        sentences = summarizer(parser.document, 20)
         self.assertEqual(len(sentences), 20)

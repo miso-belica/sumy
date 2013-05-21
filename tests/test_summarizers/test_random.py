@@ -13,18 +13,18 @@ from ..utils import build_document, build_document_from_string
 class TestRandom(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        summarizer = RandomSummarizer(document)
+        summarizer = RandomSummarizer()
 
-        sentences = summarizer(10)
+        sentences = summarizer(document, 10)
         self.assertEqual(len(sentences), 0)
 
     def test_less_sentences_than_requested(self):
         document = build_document_from_string("""
             This is only one sentence.
         """)
-        summarizer = RandomSummarizer(document)
+        summarizer = RandomSummarizer()
 
-        sentences = summarizer(10)
+        sentences = summarizer(document, 10)
         self.assertEqual(len(sentences), 1)
         self.assertEqual(to_unicode(sentences[0]), "This is only one sentence.")
 
@@ -35,9 +35,9 @@ class TestRandom(unittest.TestCase):
             Second sentence.
             Third sentence.
         """)
-        summarizer = RandomSummarizer(document)
+        summarizer = RandomSummarizer()
 
-        sentences = summarizer(4)
+        sentences = summarizer(document, 4)
         self.assertEqual(len(sentences), 3)
         self.assertEqual(to_unicode(sentences[0]), "First sentence.")
         self.assertEqual(to_unicode(sentences[1]), "Second sentence.")
@@ -57,7 +57,7 @@ class TestRandom(unittest.TestCase):
             And are green in my editor
             But someone doesn't like them :(
         """)
-        summarizer = RandomSummarizer(document)
+        summarizer = RandomSummarizer()
 
-        sentences = summarizer(4)
+        sentences = summarizer(document, 4)
         self.assertEqual(len(sentences), 4)

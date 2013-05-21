@@ -17,25 +17,25 @@ from ..utils import build_document, build_sentence
 class TestLuhn(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        luhn = LuhnSummarizer(document)
+        summarizer = LuhnSummarizer()
 
-        returned = luhn(10)
+        returned = summarizer(document, 10)
         self.assertEqual(len(returned), 0)
 
     def test_single_sentence(self):
         document = build_document(("Já jsem jedna věta",))
-        luhn = LuhnSummarizer(document)
-        luhn.stop_words = ("já", "jsem",)
+        summarizer = LuhnSummarizer()
+        summarizer.stop_words = ("já", "jsem",)
 
-        returned = luhn(10)
+        returned = summarizer(document, 10)
         self.assertEqual(len(returned), 1)
 
     def test_two_sentences(self):
         document = build_document(("Já jsem 1. věta", "A já ta 2. vítězná výhra"))
-        luhn = LuhnSummarizer(document)
-        luhn.stop_words = ("já", "jsem", "a", "ta",)
+        summarizer = LuhnSummarizer()
+        summarizer.stop_words = ("já", "jsem", "a", "ta",)
 
-        returned = luhn(10)
+        returned = summarizer(document, 10)
         self.assertEqual(len(returned), 2)
         self.assertEqual(to_unicode(returned[0]), "Já jsem 1. věta")
         self.assertEqual(to_unicode(returned[1]), "A já ta 2. vítězná výhra")
@@ -45,10 +45,10 @@ class TestLuhn(unittest.TestCase):
             "Já jsem 1. vítězná ta věta",
             "A já ta 2. vítězná věta"
         ))
-        luhn = LuhnSummarizer(document)
-        luhn.stop_words = ("já", "jsem", "a", "ta",)
+        summarizer = LuhnSummarizer()
+        summarizer.stop_words = ("já", "jsem", "a", "ta",)
 
-        returned = luhn(1)
+        returned = summarizer(document, 1)
         self.assertEqual(len(returned), 1)
         self.assertEqual(to_unicode(returned[0]), "A já ta 2. vítězná věta")
 
@@ -58,19 +58,19 @@ class TestLuhn(unittest.TestCase):
             "wb s wb s wb s s s s s s s s s wb",
             "wc s s wc s s wc",
         ))
-        luhn = LuhnSummarizer(document)
-        luhn.stop_words = ("s",)
+        summarizer = LuhnSummarizer()
+        summarizer.stop_words = ("s",)
 
-        returned = luhn(1)
+        returned = summarizer(document, 1)
         self.assertEqual(len(returned), 1)
         self.assertEqual(to_unicode(returned[0]), "wb s wb s wb s s s s s s s s s wb")
 
-        returned = luhn(2)
+        returned = summarizer(document, 2)
         self.assertEqual(len(returned), 2)
         self.assertEqual(to_unicode(returned[0]), "wb s wb s wb s s s s s s s s s wb")
         self.assertEqual(to_unicode(returned[1]), "wc s s wc s s wc")
 
-        returned = luhn(3)
+        returned = summarizer(document, 3)
         self.assertEqual(len(returned), 3)
         self.assertEqual(to_unicode(returned[0]), "wa s s s wa s s s wa")
         self.assertEqual(to_unicode(returned[1]), "wb s wb s wb s s s s s s s s s wb")
@@ -85,19 +85,19 @@ class TestLuhn(unittest.TestCase):
             "5 z z z z",
             "6 e e e e e",
         ))
-        luhn = LuhnSummarizer(document)
-        luhn.stop_words = ("1", "2", "3", "4", "5", "6")
+        summarizer = LuhnSummarizer()
+        summarizer.stop_words = ("1", "2", "3", "4", "5", "6")
 
-        returned = luhn(1)
+        returned = summarizer(document, 1)
         self.assertEqual(len(returned), 1)
         self.assertEqual(to_unicode(returned[0]), "6 e e e e e")
 
-        returned = luhn(2)
+        returned = summarizer(document, 2)
         self.assertEqual(len(returned), 2)
         self.assertEqual(to_unicode(returned[0]), "5 z z z z")
         self.assertEqual(to_unicode(returned[1]), "6 e e e e e")
 
-        returned = luhn(3)
+        returned = summarizer(document, 3)
         self.assertEqual(len(returned), 3)
         self.assertEqual(to_unicode(returned[0]), "3 c c c")
         self.assertEqual(to_unicode(returned[1]), "5 z z z z")
@@ -113,10 +113,10 @@ class TestLuhn(unittest.TestCase):
             "Dost razantně. Fyzickou převahu měl, takže to nedalo až tak moc práce.",
             Tokenizer("czech")
         )
-        summarizer = LuhnSummarizer(parser.document, stem_word)
+        summarizer = LuhnSummarizer(stem_word)
         summarizer.stop_words = get_stop_words("cs")
 
-        returned = summarizer(2)
+        returned = summarizer(parser.document, 2)
         self.assertEqual(len(returned), 2)
         self.assertEqual(to_unicode(returned[0]),
             "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením.")
@@ -127,13 +127,13 @@ class TestLuhn(unittest.TestCase):
 
 class TestSentenceRating(unittest.TestCase):
     def setUp(self):
-        self.luhn = LuhnSummarizer(build_document())
+        self.summarizer = LuhnSummarizer()
         self.sentence = build_sentence(
             "Nějaký muž šel kolem naší zahrady a žil pěkný život samotáře")
 
     def test_significant_words(self):
-        self.luhn.significant_percentage = 1/5
-        words = self.luhn._get_significant_words((
+        self.summarizer.significant_percentage = 1/5
+        words = self.summarizer._get_significant_words((
             "wa", "wb", "wc", "wd", "we", "wf", "wg", "wh", "wi", "wj",
             "wa", "wb",
         ))
@@ -142,67 +142,67 @@ class TestSentenceRating(unittest.TestCase):
 
     def test_zero_rating(self):
         significant_stems = ()
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 0)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)
 
     def test_single_word(self):
         significant_stems = ("muž",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 0)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)
 
     def test_single_word_before_end(self):
         significant_stems = ("život",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 0)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)
 
     def test_single_word_at_end(self):
         significant_stems = ("samotáře",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 0)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)
 
     def test_two_chunks_too_far(self):
         significant_stems = ("šel", "žil",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 0)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)
 
     def test_two_chunks_at_begin(self):
         significant_stems = ("muž", "šel",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 2)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 2)
 
     def test_two_chunks_before_end(self):
         significant_stems = ("pěkný", "život",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 2)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 2)
 
     def test_two_chunks_at_end(self):
         significant_stems = ("pěkný", "samotáře",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 4/3)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 4/3)
 
     def test_three_chunks_at_begin(self):
         significant_stems = ("nějaký", "muž", "šel",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 3)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 3)
 
     def test_three_chunks_at_end(self):
         significant_stems = ("pěkný", "život", "samotáře",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 3)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 3)
 
     def test_three_chunks_with_gaps(self):
         significant_stems = ("muž", "šel", "zahrady",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 9/5)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 9/5)
 
     def test_chunks_with_user_gap(self):
-        self.luhn.max_gap_size = 6
+        self.summarizer.max_gap_size = 6
         significant_stems = ("muž", "šel", "pěkný",)
-        self.assertEqual(self.luhn.rate_sentence(self.sentence, significant_stems), 9/8)
+        self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 9/8)
 
     def test_three_chunks_with_1_gap(self):
         sentence = build_sentence("w s w s w")
         significant_stems = ("w",)
 
-        self.assertEqual(self.luhn.rate_sentence(sentence, significant_stems), 9/5)
+        self.assertEqual(self.summarizer.rate_sentence(sentence, significant_stems), 9/5)
 
     def test_three_chunks_with_2_gap(self):
         sentence = build_sentence("w s s w s s w")
         significant_stems = ("w",)
 
-        self.assertEqual(self.luhn.rate_sentence(sentence, significant_stems), 9/7)
+        self.assertEqual(self.summarizer.rate_sentence(sentence, significant_stems), 9/7)
 
     def test_three_chunks_with_3_gap(self):
         sentence = build_sentence("w s s s w s s s w")
         significant_stems = ("w",)
 
-        self.assertEqual(self.luhn.rate_sentence(sentence, significant_stems), 1)
+        self.assertEqual(self.summarizer.rate_sentence(sentence, significant_stems), 1)

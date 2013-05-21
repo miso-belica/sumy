@@ -74,10 +74,10 @@ Or you can use sumy like a library in your project.
         url = "http://www.zsstritezuct.estranky.cz/clanky/predmety/cteni/jak-naucit-dite-spravne-cist.html"
         parser = HtmlParser.from_url(url, Tokenizer("czech"))
 
-        summarizer = LsaSummarizer(parser.document, stem_word)
+        summarizer = LsaSummarizer(stem_word)
         summarizer.stop_words = get_stop_words("cs")
 
-        for sentence in summarizer(20):
+        for sentence in summarizer(parser.document, 20):
             print(sentence)
 
 

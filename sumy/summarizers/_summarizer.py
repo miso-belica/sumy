@@ -15,11 +15,10 @@ SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
 
 
 class AbstractSummarizer(object):
-    def __init__(self, document, stemmer=null_stemmer):
+    def __init__(self, stemmer=null_stemmer):
         if not callable(stemmer):
             raise ValueError("Stemmer has to be callable object")
 
-        self._document = document
         self._stemmer = stemmer
 
     def __call__(self, sentences_count):

@@ -21,9 +21,9 @@ class LuhnSummarizer(AbstractSummarizer):
     def stop_words(self, words):
         self._stop_words = frozenset(map(self.normalize_word, words))
 
-    def __call__(self, sentences_count):
-        words = self._get_significant_words(self._document.words)
-        return self._get_best_sentences(self._document.sentences,
+    def __call__(self, document, sentences_count):
+        words = self._get_significant_words(document.words)
+        return self._get_best_sentences(document.sentences,
             sentences_count, self.rate_sentence, words)
 
     def _get_significant_words(self, words):

@@ -10,19 +10,19 @@ from ._summarizer import AbstractSummarizer
 
 
 class EdmundsonTitleMethod(AbstractSummarizer):
-    def __init__(self, document, stemmer, null_words):
-        super(EdmundsonTitleMethod, self).__init__(document, stemmer)
+    def __init__(self, stemmer, null_words):
+        super(EdmundsonTitleMethod, self).__init__(stemmer)
         self._null_words = null_words
 
-    def __call__(self, sentences_count):
-        sentences = self._document.sentences
-        significant_words = self._compute_significant_words()
+    def __call__(self, document, sentences_count):
+        sentences = document.sentences
+        significant_words = self._compute_significant_words(document)
 
         return self._get_best_sentences(sentences, sentences_count,
             self._rate_sentence, significant_words)
 
-    def _compute_significant_words(self):
-        heading_words = map(attrgetter("words"), self._document.headings)
+    def _compute_significant_words(self, document):
+        heading_words = map(attrgetter("words"), document.headings)
 
         significant_words = chain(*heading_words)
         significant_words = map(self.stem_word, significant_words)
@@ -37,11 +37,11 @@ class EdmundsonTitleMethod(AbstractSummarizer):
         words = map(self.stem_word, sentence.words)
         return sum(w in significant_words for w in words)
 
-    def rate_sentences(self):
-        significant_words = self._compute_significant_words()
+    def rate_sentences(self, document):
+        significant_words = self._compute_significant_words(document)
 
         rated_sentences = {}
-        for sentence in self._document.sentences:
+        for sentence in document.sentences:
             rated_sentences[sentence] = self._rate_sentence(sentence,
                 significant_words)
 

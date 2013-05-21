@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from collections import defaultdict
+from ..nlp.stemmers import null_stemmer
 from ._summarizer import AbstractSummarizer
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
@@ -19,12 +20,9 @@ class EdmundsonSummarizer(AbstractSummarizer):
     _stigma_words = _EMPTY_SET
     _null_words = _EMPTY_SET
 
-    def __init__(self, document, stemmer=None, cue_weight=1.0, key_weight=0.0,
+    def __init__(self, stemmer=null_stemmer, cue_weight=1.0, key_weight=0.0,
             title_weight=1.0, location_weight=1.0):
-        if stemmer:
-            super(EdmundsonSummarizer, self).__init__(document, stemmer)
-        else:
-            super(EdmundsonSummarizer, self).__init__(document)
+        super(EdmundsonSummarizer, self).__init__(stemmer)
 
         self._ensure_correct_weights(cue_weight, key_weight, title_weight,
             location_weight)
@@ -63,23 +61,23 @@ class EdmundsonSummarizer(AbstractSummarizer):
     def null_words(self, collection):
         self._null_words = frozenset(map(self.stem_word, collection))
 
-    def __call__(self, sentences_count):
+    def __call__(self, document, sentences_count):
         ratings = defaultdict(int)
 
         if self._cue_weight > 0.0:
             method = self._build_cue_method_instance()
-            ratings = self._update_ratings(ratings, method.rate_sentences())
+            ratings = self._update_ratings(ratings, method.rate_sentences(document))
         if self._key_weight > 0.0:
             method = self._build_key_method_instance()
-            ratings = self._update_ratings(ratings, method.rate_sentences())
+            ratings = self._update_ratings(ratings, method.rate_sentences(document))
         if self._title_weight > 0.0:
             method = self._build_title_method_instance()
-            ratings = self._update_ratings(ratings, method.rate_sentences())
+            ratings = self._update_ratings(ratings, method.rate_sentences(document))
         if self._location_weight > 0.0:
             method = self._build_location_method_instance()
-            ratings = self._update_ratings(ratings, method.rate_sentences())
+            ratings = self._update_ratings(ratings, method.rate_sentences(document))
 
-        return self._get_best_sentences(self._document.sentences,
+        return self._get_best_sentences(document.sentences,
             sentences_count, lambda s: ratings[s])
 
     def _update_ratings(self, ratings, new_ratings):
@@ -90,46 +88,43 @@ class EdmundsonSummarizer(AbstractSummarizer):
 
         return ratings
 
-    def cue_method(self, sentences_count, bunus_word_value=1, stigma_word_value=1):
+    def cue_method(self, document, sentences_count, bunus_word_value=1, stigma_word_value=1):
         summarization_method = self._build_cue_method_instance()
-        return summarization_method(sentences_count, bunus_word_value,
+        return summarization_method(document, sentences_count, bunus_word_value,
             stigma_word_value)
 
     def _build_cue_method_instance(self):
         self.__check_bonus_words()
         self.__check_stigma_words()
 
-        return EdmundsonCueMethod(self._document, self._stemmer,
-            self._bonus_words, self._stigma_words)
+        return EdmundsonCueMethod(self._stemmer, self._bonus_words, self._stigma_words)
 
-    def key_method(self, sentences_count, weight=0.5):
+    def key_method(self, document, sentences_count, weight=0.5):
         summarization_method = self._build_key_method_instance()
-        return summarization_method(sentences_count, weight)
+        return summarization_method(document, sentences_count, weight)
 
     def _build_key_method_instance(self):
         self.__check_bonus_words()
 
-        return  EdmundsonKeyMethod(self._document, self._stemmer,
-            self._bonus_words)
+        return  EdmundsonKeyMethod(self._stemmer, self._bonus_words)
 
-    def title_method(self, sentences_count):
+    def title_method(self, document, sentences_count):
         summarization_method = self._build_title_method_instance()
-        return summarization_method(sentences_count)
+        return summarization_method(document, sentences_count)
 
     def _build_title_method_instance(self):
         self.__check_null_words()
 
-        return EdmundsonTitleMethod(self._document, self._stemmer, self._null_words)
+        return EdmundsonTitleMethod(self._stemmer, self._null_words)
 
-    def location_method(self, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
+    def location_method(self, document, sentences_count, w_h=1, w_p1=1, w_p2=1, w_s1=1, w_s2=1):
         summarization_method = self._build_location_method_instance()
-        return summarization_method(sentences_count, w_h, w_p1, w_p2, w_s1, w_s2)
+        return summarization_method(document, sentences_count, w_h, w_p1, w_p2, w_s1, w_s2)
 
     def _build_location_method_instance(self):
         self.__check_null_words()
 
-        return EdmundsonLocationMethod(self._document, self._stemmer,
-            self._null_words)
+        return EdmundsonLocationMethod(self._stemmer, self._null_words)
 
     def __check_bonus_words(self):
         if not self._bonus_words:

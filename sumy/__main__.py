@@ -48,14 +48,14 @@ PARSERS = {
 
 
 def build_luhn(parser):
-    summarizer = LuhnSummarizer(parser.document, stem_word)
+    summarizer = LuhnSummarizer(stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
 
 
 def build_edmundson(parser):
-    summarizer = EdmundsonSummarizer(parser.document, stem_word)
+    summarizer = EdmundsonSummarizer(stem_word)
     summarizer.null_words = get_stop_words("cs")
     summarizer.bonus_words = parser.significant_words
     summarizer.stigma_words = parser.stigma_words
@@ -64,7 +64,7 @@ def build_edmundson(parser):
 
 
 def build_lsa(parser):
-    summarizer = LsaSummarizer(parser.document, stem_word)
+    summarizer = LsaSummarizer(stem_word)
     summarizer.stop_words = get_stop_words("cs")
 
     return summarizer
@@ -79,9 +79,9 @@ AVAILABLE_METHODS = {
 
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
-    method, items_count = handle_arguments(args)
+    summarizer, parser, items_count = handle_arguments(args)
 
-    for sentence in method(items_count):
+    for sentence in summarizer(parser.document, items_count):
         if PY3:
             print(to_unicode(sentence))
         else:
@@ -100,10 +100,10 @@ def handle_arguments(args):
         parser = PARSERS.get(args["--format"], PlaintextParser)
         input_stream = open(args["--file"], "rb")
 
-    summarizer = AVAILABLE_METHODS["luhn"]
+    summarizer_builder = AVAILABLE_METHODS["luhn"]
     for method, builder in AVAILABLE_METHODS.items():
         if args[method]:
-            summarizer = builder
+            summarizer_builder = builder
             break
 
     items_count = ItemsCount(args["--length"])
@@ -112,7 +112,7 @@ def handle_arguments(args):
     if input_stream is not sys.stdin:
         input_stream.close()
 
-    return summarizer(parser), items_count
+    return summarizer_builder(parser), parser, items_count
 
 
 if __name__ == "__main__":

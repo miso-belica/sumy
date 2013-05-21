@@ -11,9 +11,9 @@ from ._summarizer import AbstractSummarizer
 class RandomSummarizer(AbstractSummarizer):
     """Summarizer that picks sentences randomly."""
 
-    def __call__(self, sentences_count):
-        ratings = self._get_random_ratings(self._document.sentences)
-        return self._get_best_sentences(self._document.sentences,
+    def __call__(self, document, sentences_count):
+        ratings = self._get_random_ratings(document.sentences)
+        return self._get_best_sentences(document.sentences,
             sentences_count, self.rate_sentence, ratings)
 
     def _get_random_ratings(self, sentences):
