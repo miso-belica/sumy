@@ -4,9 +4,15 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import math
-import numpy
+try:
+    import numpy
+except ImportError:
+    numpy = None
 
-from scipy.linalg import svd as singular_value_decomposition
+try:
+    from scipy.linalg import svd as singular_value_decomposition
+except ImportError:
+    singular_value_decomposition = None
 from ._summarizer import AbstractSummarizer
 
 
@@ -24,6 +30,8 @@ class LsaSummarizer(AbstractSummarizer):
         self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, document, sentences_count):
+        self._ensure_dependecies_installed()
+
         dictionary = self._create_dictionary(document)
         # empty document
         if not dictionary:
@@ -36,6 +44,12 @@ class LsaSummarizer(AbstractSummarizer):
         ranks = iter(self._compute_ranks(sigma, v))
         return self._get_best_sentences(document.sentences, sentences_count,
             lambda s: next(ranks))
+
+    def _ensure_dependecies_installed(self):
+        if numpy is None:
+            raise ValueError("LSA summarizer requires NumPy & SciPy. Please, install them by command 'pip install numpy scipy'.")
+        elif singular_value_decomposition is None:
+            raise ValueError("LSA summarizer requires SciPy. Please, install it by command 'pip install scipy'.")
 
     def _create_dictionary(self, document):
         """Creates mapping key = word, value = row index"""

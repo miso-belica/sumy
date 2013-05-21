@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
+import sumy.summarizers.lsa as lsa_module
 
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
@@ -15,6 +16,26 @@ from ..utils import build_document, load_resource
 
 
 class TestLsa(unittest.TestCase):
+    def test_numpy_not_installed(self):
+        summarizer = LsaSummarizer()
+
+        numpy = lsa_module.numpy
+        lsa_module.numpy = None
+
+        self.assertRaises(ValueError, summarizer, build_document(), 10)
+
+        lsa_module.numpy = numpy
+
+    def test_scipy_not_installed(self):
+        summarizer = LsaSummarizer()
+
+        scipy = lsa_module.singular_value_decomposition
+        lsa_module.singular_value_decomposition = None
+
+        self.assertRaises(ValueError, summarizer, build_document(), 10)
+
+        lsa_module.singular_value_decomposition = scipy
+
     def test_empty_document(self):
         document = build_document()
         summarizer = LsaSummarizer()
