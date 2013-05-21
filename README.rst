@@ -24,7 +24,8 @@ Here are some other summarizers:
 
 Installation
 ------------
-Currently only from git repo
+Currently only from git repo (make sure you have
+`Python installed <https://python-guide.readthedocs.org/en/latest/#getting-started>`_)
 
 .. code-block:: bash
 
