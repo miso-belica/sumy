@@ -29,6 +29,15 @@ Currently only from git repo (make sure you have
 
 .. code-block:: bash
 
+    $ wget https://github.com/miso-belica/sumy/archive/master.zip # download the sources
+    $ unzip master.zip # extract the downloaded file
+    $ cd sumy-master/
+    $ [sudo] python setup.py install # install the package
+
+Or simply run:
+
+.. code-block:: bash
+
     $ [sudo] pip install git+git://github.com/miso-belica/sumy.git
 
 
