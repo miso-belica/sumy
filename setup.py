@@ -41,7 +41,7 @@ setup(
         "singular value decomposition",
         "SVD"
     ],
-    dependency_links = [
+    dependency_links=[
         "http://github.com/miso-belica/readability.py/tarball/master",
     ],
     install_requires=[
