@@ -9,7 +9,7 @@ import sumy.summarizers.lsa as lsa_module
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
-from sumy.nlp.stemmers.cs import stem_word
+from sumy.nlp.stemmers.czech import stem_word
 from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
 from ..utils import build_document, load_resource
@@ -77,7 +77,7 @@ class TestLsa(unittest.TestCase):
             Tokenizer("czech")
         )
         summarizer = LsaSummarizer(stem_word)
-        summarizer.stop_words = get_stop_words("cs")
+        summarizer.stop_words = get_stop_words("czech")
 
         sentences = summarizer(parser.document, 2)
         self.assertEqual(len(sentences), 2)
@@ -93,7 +93,7 @@ class TestLsa(unittest.TestCase):
             Tokenizer("czech")
         )
         summarizer = LsaSummarizer(stem_word)
-        summarizer.stop_words = get_stop_words("cs")
+        summarizer.stop_words = get_stop_words("czech")
 
         sentences = summarizer(parser.document, 20)
         self.assertEqual(len(sentences), 20)

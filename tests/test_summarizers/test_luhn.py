@@ -8,7 +8,7 @@ import unittest
 from sumy.summarizers.luhn import LuhnSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
-from sumy.nlp.stemmers.cs import stem_word
+from sumy.nlp.stemmers.czech import stem_word
 from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
 from ..utils import build_document, build_sentence
@@ -114,7 +114,7 @@ class TestLuhn(unittest.TestCase):
             Tokenizer("czech")
         )
         summarizer = LuhnSummarizer(stem_word)
-        summarizer.stop_words = get_stop_words("cs")
+        summarizer.stop_words = get_stop_words("czech")
 
         returned = summarizer(parser.document, 2)
         self.assertEqual(len(returned), 2)

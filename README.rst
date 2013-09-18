@@ -76,7 +76,7 @@ Or you can use sumy like a library in your project.
     from sumy.parsers.html import HtmlParser
     from sumy.nlp.tokenizers import Tokenizer
     from sumy.summarizers.lsa import LsaSummarizer
-    from sumy.nlp.stemmers.cs import stem_word
+    from sumy.nlp.stemmers.czech import stem_word
     from sumy.utils import get_stop_words
 
 
@@ -85,7 +85,7 @@ Or you can use sumy like a library in your project.
         parser = HtmlParser.from_url(url, Tokenizer("czech"))
 
         summarizer = LsaSummarizer(stem_word)
-        summarizer.stop_words = get_stop_words("cs")
+        summarizer.stop_words = get_stop_words("czech")
 
         for sentence in summarizer(parser.document, 20):
             print(sentence)

@@ -36,7 +36,7 @@ from .parsers.plaintext import PlaintextParser
 from .summarizers.luhn import LuhnSummarizer
 from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
-from .nlp.stemmers.cs import stem_word
+from .nlp.stemmers.czech import stem_word
 
 HEADERS = {
     "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
@@ -49,14 +49,14 @@ PARSERS = {
 
 def build_luhn(parser):
     summarizer = LuhnSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("cs")
+    summarizer.stop_words = get_stop_words("czech")
 
     return summarizer
 
 
 def build_edmundson(parser):
     summarizer = EdmundsonSummarizer(stem_word)
-    summarizer.null_words = get_stop_words("cs")
+    summarizer.null_words = get_stop_words("czech")
     summarizer.bonus_words = parser.significant_words
     summarizer.stigma_words = parser.stigma_words
 
@@ -65,7 +65,7 @@ def build_edmundson(parser):
 
 def build_lsa(parser):
     summarizer = LsaSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("cs")
+    summarizer.stop_words = get_stop_words("czech")
 
     return summarizer
 
