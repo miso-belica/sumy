@@ -10,6 +10,7 @@ Here are some other summarizers:
 - `Sumtract: Second project for UW LING 572 <https://github.com/stefanbehr/sumtract>`_ - Python
 - `Simple program that summarize text <https://github.com/xhresko/text-summarizer>`_ - Python, TF without normalization
 - `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF without normalization
+- `Intro to Computational Linguistics <https://github.com/kylehardgrave/summarizer>`_ - Java, LexRank
 
 - `Automatic Document Summarizer <https://github.com/himanshujindal/Automatic-Text-Summarizer>`_ - Java, Bipartite HITS (no sources)
 - `Pythia <https://github.com/giorgosera/pythia/blob/dev/analysis/summarization/summarization.py>`_ - Python, LexRank & Centroid
