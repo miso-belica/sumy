@@ -61,3 +61,6 @@ class ItemsCount(object):
             return sequence[:self._value]
         else:
             ValueError("Unsuported value of items count '%s'." % self._value)
+
+    def __repr__(self):
+        return to_string("<ItemsCount: %r>" % self._value)
