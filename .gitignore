@@ -5,3 +5,6 @@ __pycache__/
 
 # tests
 .coverage
+
+# working folders
+/experiments/
