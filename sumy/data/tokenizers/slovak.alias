@@ -1,0 +1,3 @@
+See aliases in class 'sumy.nlp.tokenizers.Tokenizer'.
+Czech tokenizer is good choice of alias for slovak language.
+Feel free to contribute if you have better/specialized slovak tokenizer :)

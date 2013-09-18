@@ -15,10 +15,17 @@ class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
     _WORD_PATTERN = re.compile(r"^[^\W\d_]+$", re.UNICODE)
+    LANGUAGE_ALIASES = {
+        "slovak": "czech",
+    }
 
     def __init__(self, language):
         self._language = language
-        self._sentence_tokenizer = self._sentence_tokenizer(language)
+
+        tokenizer_language = language
+        if language in self.LANGUAGE_ALIASES:
+            tokenizer_language = self.LANGUAGE_ALIASES[language]
+        self._sentence_tokenizer = self._sentence_tokenizer(tokenizer_language)
 
     @property
     def language(self):

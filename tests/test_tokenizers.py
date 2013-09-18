@@ -41,3 +41,21 @@ class TestTokenizer(unittest.TestCase):
             "Ou jee, duffman is here.",
         )
         self.assertEqual(expected, sentences)
+
+    def test_slovak_alias_into_czech_tokenizer(self):
+        tokenizer = Tokenizer("slovak")
+        self.assertEqual(tokenizer.language, "slovak")
+
+        sentences = tokenizer.to_sentences("""
+            Je to veľmi fajn. Bodaj by nie.
+            Ale na druhej strane čo je to oproti inému?
+            To nechám na čitateľa.
+        """)
+
+        expected = (
+            "Je to veľmi fajn.",
+            "Bodaj by nie.",
+            "Ale na druhej strane čo je to oproti inému?",
+            "To nechám na čitateľa.",
+        )
+        self.assertEqual(expected, sentences)
