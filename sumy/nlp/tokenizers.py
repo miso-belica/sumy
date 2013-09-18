@@ -22,9 +22,7 @@ class Tokenizer(object):
     def __init__(self, language):
         self._language = language
 
-        tokenizer_language = language
-        if language in self.LANGUAGE_ALIASES:
-            tokenizer_language = self.LANGUAGE_ALIASES[language]
+        tokenizer_language = self.LANGUAGE_ALIASES.get(language, language)
         self._sentence_tokenizer = self._sentence_tokenizer(tokenizer_language)
 
     @property
