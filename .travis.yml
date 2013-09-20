@@ -15,5 +15,6 @@ install:
   - pip install nose scipy --use-mirrors
   - pip install git+git://github.com/miso-belica/readability.py.git
   - python setup.py install
+  - python -c "import nltk; nltk.download('punkt')"
 script:
   - nosetests tests
