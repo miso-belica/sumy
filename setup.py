@@ -68,7 +68,6 @@ setup(
     ],
     package_data={"sumy": [
         "data/stopwords/*.txt",
-        "data/tokenizers/*.pickle",
     ]},
     entry_points={
         "console_scripts": [

@@ -10,7 +10,23 @@ from sumy.nlp.tokenizers import Tokenizer
 
 class TestTokenizer(unittest.TestCase):
     def test_missing_language(self):
-        self.assertRaises(ValueError, Tokenizer, "french")
+        self.assertRaises(LookupError, Tokenizer, "klingon")
+
+    def test_ensure_czech_tokenizer_available(self):
+        tokenizer = Tokenizer("czech")
+        self.assertEqual("czech", tokenizer.language)
+
+        sentences = tokenizer.to_sentences("""
+            Měl jsem sen, že toto je sen. Bylo to také zvláštní.
+            Jakoby jsem plaval v moři rekurze.
+        """)
+
+        expected = (
+            "Měl jsem sen, že toto je sen.",
+            "Bylo to také zvláštní.",
+            "Jakoby jsem plaval v moři rekurze.",
+        )
+        self.assertEqual(expected, sentences)
 
     def test_language_getter(self):
         tokenizer = Tokenizer("english")
