@@ -79,6 +79,11 @@ class LsaSummarizer(AbstractSummarizer):
         return matrix
 
     def _compute_term_frequency(self, matrix, smooth=0.4):
+        """
+        Computes TF metrics for each sentence (column) in the given matrix.
+        You can read more about smoothing parameter at URL below:
+        http://nlp.stanford.edu/IR-book/html/htmledition/maximum-tf-normalization-1.html
+        """
         assert 0.0 <= smooth < 1.0
 
         max_word_frequencies = numpy.max(matrix, axis=0)
