@@ -21,7 +21,7 @@ class AbstractSummarizer(object):
 
         self._stemmer = stemmer
 
-    def __call__(self, sentences_count):
+    def __call__(self, document, sentences_count):
         raise NotImplementedError("This method should be overriden in subclass")
 
     def stem_word(self, word):
