@@ -98,7 +98,7 @@ class LsaSummarizer(AbstractSummarizer):
         return matrix
 
     def _compute_ranks(self, sigma, v_matrix):
-        assert len(sigma) == v_matrix.shape[1]
+        assert len(sigma) == v_matrix.shape[0]
 
         dimensions = max(LsaSummarizer.MIN_DIMENSIONS,
             int(len(sigma)*LsaSummarizer.REDUCTION_RATIO))

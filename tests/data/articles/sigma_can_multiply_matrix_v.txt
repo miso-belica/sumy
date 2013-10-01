@@ -1,0 +1,393 @@
+- 53 -
+
+
+
+enabling real-time transactions
+on a network, said method for
+configuring said value-added
+network switch compromising
+the steps of:
+switching to a transactional
+application in response to a user
+specification from a network
+application,
+
+said transactional application
+providing a user with a plurality
+of transactional services
+managed by at least one value-
+added network service provider,
+
+said value-added network
+service provider keeping a
+transaction flow captive,
+said plurality of transactional
+services being performed
+interactively and in real time;
+transmitting a transaction
+request from said transactional
+application; and
+processing said transaction
+request.
+Limitation of Claim 11
+
+The method for configuring said
+value-added network switch as
+claimed in claim 10 wherein
+said step of switching to a
+transactional application further
+comprises the steps of:
+receiving said user
+specification;
+enabling a switch to said
+transactional application; and
+
+real-time transactions on a
+network, said configurable
+value-added network switch
+
+means for switching to a
+transactional application in
+response to a user
+specification from a network
+application
+said transactional application
+providing a user with a
+plurality of transactional
+services managed by at least
+one value-added network
+service provider
+said value-added network
+service provider keeping a
+transaction flow captive
+said plurality of transactional
+services being performed
+interactively and in real time
+means for transmitting a
+transaction request from said
+transactional application
+means for processing said
+transaction request
+Corresponding limitation in
+Claim 2
+The configurable value-added
+network switch as claimed in
+claim 1 wherein said means
+for switching to a
+transactional application
+further comprises:
+means for receiving said user
+specification;
+means for enabling a switch
+to said transactional
+
+IV(B)(1)(b)
+
+IV(B)(1)(c)
+
+IV(B)(1)(d)
+
+IV(B)(1)(e)
+
+IV(B)(1)(f)
+
+IV(B)(1)(g)
+
+Section
+
+IV(B)(2)
+
+IV(B)(2)(a)
+
+IV(B)(2)(b)
+
+
+
+- 54 -
+
+
+
+IV(B)(2)(c)
+
+Section
+
+IV(B)(3)
+
+activating said transactional
+application.
+Limitation of Claim 12
+
+The method for configuring said
+value-added network switch as
+claimed in claim 11 wherein
+said step of activating said
+transactional application further
+includes
+a step of creating a transaction
+link between said network
+application and said
+transactional application.
+Limitation of Claim 15
+
+application; and
+means for activating said
+transactional application.
+Corresponding limitation in
+Claim 3
+The configurable value-added
+network switch as claimed in
+claim 2 wherein said means
+for activating said
+transactional application
+further includes
+means for creating a
+transaction link between said
+network application and said
+transactional application
+Corresponding limitation in
+5
+The configurable value-added
+network switch as claimed in
+claim 1
+wherein said means for
+processing said transaction
+request further comprises
+means for coupling said
+means for transmitting to a
+host means
+Corresponding limitation in
+6
+The method for configuring said
+The configurable value-added
+value-added network switch as
+network switch as claimed in
+claimed in claim 15
+claim 5
+wherein said host means
+wherein said host means
+contains data corresponding to
+contains data corresponding
+said transaction request.
+to said transaction request
+8.  Gifford anticipates claim 14.
+Claim  14  corresponds  to  claim  4,  except  instead  of  "value-added  network
+
+The method for configuring said
+value-added network switch as
+claimed in claim 10
+wherein said step of processing
+said transaction request further
+comprises the step of
+transmitting said transaction
+request to a host means.
+
+Section
+
+IV(B)(6)
+
+Limitation of Claim 16
+
+IV(B)(3)
+
+Section
+
+IV(B)(5)
+
+IV(B)(5)
+
+IV(B)(6)
+
+service provider" recited in claim 4, claim 14 recites an "Internet service provider."
+
+
+
+- 55 -
+
+
+
+As  noted  in  Section  IV(B)(4),  Chelliah  teaches  the  limitations  of  claim  4.  To  the
+
+extent  that  an  "Internet  service  provider"  differs  from  a  "value-added  network
+
+service provider," Petitioner notes  that  the  store  relied upon  in Section  IV(B)(4)  to
+
+disclose "value-added network service provider" also discloses an "Internet service
+
+provider"  because  the  stores  are  accessible  over  the  Internet.  (See  Section
+
+IV(B)(1)(c).) Thus, Chelliah discloses the limitations of claim 14.
+
+9.  Gifford anticipates claim 17.
+Claim 17 depends from claim 10 and further recites "wherein said value-
+
+added network service providers cooperate to provide said plurality of
+
+transactional services to said user." Gifford teaches that at least two different
+
+entities cooperate to provide transactional services to the user. The first is the
+
+content provider that controls the merchant (e.g., in the example of FIG. 2, the
+
+content provider is the New York Times). (Sirbu Decl., ¶ 83.) The second is the
+
+entity that facilitates payment via the payment computer (e.g., Mastercard, Visa,
+
+American Express, or Discover in the embodiment of FIG. 5). (Sirbu Decl., ¶ 83.)
+
+The merchant computer 63, 64 and the payment computer 68 (and their associated
+
+entities) "cooperate" to perform the purchase. (Sirbu Decl., ¶ 83; see also Gifford,
+
+3:15-25.)
+
+10.  Gifford anticipates independent claim 35.
+Independent claim 35 recites similar features as claim 1. Thus, Petitioner has
+
+
+
+- 56 -
+
+
+
+provided  the  following  claim  chart  indicating  the  correspondence  between
+
+limitations of claim 35 and claim 1.
+
+Limitation
+
+A configurable value-added network
+system for enabling real-time
+transactions on a network, said
+configurable value-added network
+system comprising:
+
+means for switching to a transactional
+application in response to a user
+specification from a network
+application,
+
+said transactional application providing
+a user with a plurality of transactional
+services managed by at least one value-
+added network service provider,
+
+said value-added network service
+provider keeping a transaction flow
+captive,
+
+said plurality of transactional services
+being performed interactively and in
+real time;
+
+means for activating an agent to create a
+transaction link between said user
+application and said transactional
+application
+
+Corresponding
+limitation in Claim 1
+A configurable value-
+added network switch
+for enabling real-time
+transactions on a
+network, said
+configurable value-
+added network switch,
+comprising:
+means for switching to a
+transactional application
+in response to a user
+specification from a
+network application,
+said transactional
+application providing a
+user with a plurality of
+transactional services
+managed by at least one
+value-added network
+service provider,
+said value-added
+network service provider
+keeping a transaction
+flow captive,
+said plurality of
+transactional services
+being performed
+interactively and in real
+time,
+See section (a) below.
+
+Section
+
+IV(B)(1)(a)
+
+IV(B)(1)(b)
+
+IV(B)(1)(c)
+
+IV(B)(1)(d)
+
+IV(B)(1)(e)
+
+See
+subsection
+(a) below
+
+
+
+- 57 -
+
+
+
+means for transmitting a transaction
+request from said transactional
+application; and
+
+IV(B)(1)(f)
+
+means for transmitting a
+transaction request from
+said transactional
+application;
+See section (b) below.
+
+a host means for processing said
+transaction request and retrieving data
+corresponding to said transaction
+request.
+(a)  Gifford  teaches  "means  for  activating  an  agent  to  create  a
+transaction
+link  between  said  user  application  and  said
+transactional application."
+
+See
+subsection
+(b) below
+
+The  structure  in  the  ‘500  Patent  corresponding  to  "means  for  activating  an
+
+agent  to  create  a  transaction  link  between  said  user  application  and  said
+
+transactional  application"  is  a  graphical  user  interface.    Gifford  discloses  this
+
+limitation.
+
+FIG. 3 of Gifford  shows a purchase  screen  that  includes  links 5, 6, 7, and 8,
+
+which  activate  the  agent.  (Sirbu  Decl.,  ¶  84;  see  also  Gifford,  5:19-29.)
+
+Specifically, when  the  user  selects  link  5,  by,  for  example,  clicking with  a mouse,
+
+an  HTTP  request  is  generated  by  the  buyer  computer  and  transmitted  to  the
+
+merchant  computer.  (Sirbu Decl.,  ¶ 84) A person of ordinary  skill  in  the  art would
+
+appreciate  that  this HTTP  request  causes  the web  server  to  activate  an  application
+
+on  the  merchant  computer  that  keeps  the  response  to  the  HTTP  request  pending
+
+while  the  merchant  computer  is  waiting  for  a  communications  from  the  payment
+
+computer  indicating  the purchase has been approved. (Sirbu Decl., ¶ 84) Thus,  this
+
+application  functions  as  an  agent  to  create  (and  maintain)  a  transaction  link
