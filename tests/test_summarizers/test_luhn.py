@@ -140,6 +140,19 @@ class TestSentenceRating(unittest.TestCase):
 
         self.assertEqual(tuple(sorted(words)), ("wa", "wb"))
 
+    def test_stop_words_not_in_significant_words(self):
+        self.summarizer.stop_words = ["stop", "Halt", "SHUT", "HmMm"]
+        words = self.summarizer._get_significant_words([
+            "stop", "Stop", "StOp", "STOP",
+            "halt", "Halt", "HaLt", "HALT",
+            "shut", "Shut", "ShUt", "SHUT",
+            "hmmm", "Hmmm", "HmMm", "HMMM",
+            "some", "relevant", "word",
+            "some", "more", "relevant", "word",
+        ])
+
+        self.assertEqual(tuple(sorted(words)), ("relevant", "some", "word"))
+
     def test_zero_rating(self):
         significant_stems = ()
         self.assertEqual(self.summarizer.rate_sentence(self.sentence, significant_stems), 0)

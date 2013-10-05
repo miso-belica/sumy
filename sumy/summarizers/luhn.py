@@ -27,8 +27,8 @@ class LuhnSummarizer(AbstractSummarizer):
             sentences_count, self.rate_sentence, words)
 
     def _get_significant_words(self, words):
-        words = tuple(self.stem_word(w) for w in words
-            if w not in self._stop_words)
+        words = map(self.normalize_word, words)
+        words = tuple(self.stem_word(w) for w in words if w not in self._stop_words)
 
         model = TfDocumentModel(words)
 

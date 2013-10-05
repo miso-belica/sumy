@@ -53,9 +53,8 @@ class LsaSummarizer(AbstractSummarizer):
 
     def _create_dictionary(self, document):
         """Creates mapping key = word, value = row index"""
-        words = document.words
-        unique_words = frozenset(self.stem_word(w) for w in words
-            if w not in self._stop_words)
+        words = map(self.normalize_word, document.words)
+        unique_words = frozenset(self.stem_word(w) for w in words if w not in self._stop_words)
 
         return dict((w, i) for i, w in enumerate(unique_words))
 

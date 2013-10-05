@@ -38,6 +38,20 @@ class TestLsa(unittest.TestCase):
 
         lsa_module.singular_value_decomposition = scipy
 
+    def test_dictionary_without_stop_words(self):
+        summarizer = LsaSummarizer()
+        summarizer.stop_words = ["stop", "Halt", "SHUT", "HmMm"]
+
+        document = build_document(
+            ("stop halt shut hmmm", "Stop Halt Shut Hmmm",),
+            ("StOp HaLt ShUt HmMm", "STOP HALT SHUT HMMM",),
+            ("Some relevant sentence", "Some moRe releVant sentEnce",),
+        )
+
+        expected = frozenset(["some", "more", "relevant", "sentence"])
+        dictionary = summarizer._create_dictionary(document)
+        self.assertEqual(expected, frozenset(dictionary.keys()))
+
     def test_empty_document(self):
         document = build_document()
         summarizer = LsaSummarizer()
