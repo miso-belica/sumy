@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 import sumy.summarizers.lsa as lsa_module
 
+from nose import SkipTest
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -103,6 +104,20 @@ class TestLsa(unittest.TestCase):
         """Source: https://github.com/miso-belica/sumy/issues/5"""
         parser = PlaintextParser.from_string(
             load_resource("articles/sigma_can_multiply_matrix_v.txt"),
+            Tokenizer("english")
+        )
+        summarizer = LsaSummarizer(english_stemmer)
+        summarizer.stop_words = get_stop_words("english")
+
+        sentences = summarizer(parser.document, 20)
+        self.assertEqual(len(sentences), 20)
+
+    def test_issue_5_svd_converges(self):
+        """Source: https://github.com/miso-belica/sumy/issues/5"""
+        raise SkipTest("Can't reproduce the issue.")
+
+        parser = PlaintextParser.from_string(
+            load_resource("articles/svd_converges.txt"),
             Tokenizer("english")
         )
         summarizer = LsaSummarizer(english_stemmer)

@@ -1,0 +1,3874 @@
+UNITED STATES PATENT AND TRADEMARK OFFICE
+
+
+
+
+
+
+
+
+
+
+
+BEFORE THE PATENT TRIAL
+AND APPEAL BOARD
+
+
+
+
+
+
+
+
+PETITION FOR INTER PARTES REVIEW
+OF U.S. PATENT NO. 5,987,500
+
+
+
+
+Filed on behalf of SAP America, Inc.
+Lori A. Gordon
+By:
+Michael Q. Lee
+
+
+Sterne, Kessler, Goldstein & Fox PLLC
+1100 New York Avenue, NW
+
+
+Washington, D.C.
+
+
+
+Tel:  (202) 371-2600
+Fax: (202) 371-2540
+
+
+
+
+
+
+
+
+
+
+OF CONT
+TABLE O
+TENTS
+
+.... 2 
+.... 4 
+.... 4 
+..... 4 
+..... 5 
+..... 5 
+.... 6 
+.. 12 
+
+... 12 
+.. 16 
+.. 23 
+.. 25 
+.. 27 
+.. 29 
+.. 30 
+.. 30 
+.. 33 
+.. 34 
+.. 35 
+
+... 39 
+.. 41 
+.. 47 
+.. 49 
+.. 50 
+.. 51 
+.. 53 
+.. 53 
+.. 55 
+.. 56 
+.. 56 
+.. 60 
+
+I. 
+II. 
+III. 
+
+) ...............
+.................
+.................
+7 C.F.R. §
+Notice (37
+Mandatory
+M
+42.8(a)(1)
+.................
+.................
+R. § 42.104
+g (37 C.F.R
+r Standing
+Grounds for
+G
+4(a)) ..........
+.................
+.................
+Id
+dentificatio
+on of Chal
+lenge (37 C
+C.F.R. § 42
+2.104(b)) .
+.................
+.................
+challenge
+nds for the
+utory groun
+Statu
+A. 
+................
+.................
+.................
+.................
+or Art .......
+ion of Prio
+Citat
+B. 
+.................
+.................
+.................
+Claim
+C. 
+m Construc
+ction ........
+.................
+.................
+.................
+.................
+1. 
+Summary
+y of the ‘50
+00 Patent .
+.................
+.................
+.................
+ANTICIPAT
+SED ON A
+NGES BAS
+CHALLEN
+IV.  C
+TION .......
+A
+A.
+-12, 14-17
+  Grou
+und 1: Chel
+lliah antici
+ipates claim
+ms 1-6, 10
+7, and
+.................
+.................
+.................
+................
+.................
+35. ...
+.................
+Chelliah
+anticipates
+dent claim
+1. 
+s independ
+1 ..............
+.................
+Chelliah
+2. 
+anticipates
+s dependen
+nt claim 2.
+ ................
+.................
+Chelliah
+ ................
+.................
+s dependen
+anticipates
+3. 
+nt claim 3.
+Chelliah
+ ................
+s dependen
+anticipates
+4. 
+nt claim 4.
+.................
+Chelliah
+5. 
+anticipates
+s dependen
+nt claim 5.
+ ................
+.................
+Chelliah
+ ................
+nt claim 6.
+s dependen
+anticipates
+6. 
+.................
+Chelliah
+and 16. ......
+0-12, 15, a
+s claims 10
+anticipates
+7. 
+.................
+Chelliah
+8. 
+anticipates
+s claim 14
+. ...............
+.................
+.................
+Chelliah
+. ...............
+.................
+s claim 17
+anticipates
+9. 
+.................
+Chelliah
+35. ...........
+dent claim
+s independ
+anticipates
+10. 
+.................
+ms  1-6,  10-
+Grou
+und  2: Giff
+ford  anticip
+pates  claim
+-12,  14-17
+7,  and
+.................
+.................
+.................
+................
+.................
+35. ...
+.................
+Gifford a
+1 ................
+ent claim 1
+independe
+anticipates
+1. 
+.................
+2. 
+Gifford a
+anticipates
+dependent
+t claim 2. .
+.................
+.................
+.................
+dependent
+anticipates
+Gifford a
+3. 
+t claim 3. .
+.................
+.................
+dependent
+anticipates
+Gifford a
+4. 
+t claim 4. .
+.................
+Gifford a
+5. 
+anticipates
+dependent
+t claim 5. .
+.................
+.................
+6. 
+Gifford a
+anticipates
+dependent
+t claim 6. .
+.................
+.................
+-12, 15, an
+nd 16. ........
+claims 10
+anticipates
+Gifford a
+7. 
+.................
+claim 14. .
+Gifford a
+8. 
+anticipates
+.................
+.................
+.................
+9. 
+Gifford a
+anticipates
+claim 17. .
+.................
+.................
+.................
+35. .............
+ent claim 3
+independe
+anticipates
+Gifford a
+10. 
+.................
+Conclusion
+C
+n ................
+.................
+.................
+.................
+.................
+................
+
+ABC
+
+B
+B.
+
+ 
+
+V. 
+
+
+
+- i -
+
+
+
+Petitioner SAP America, Inc. ("SAP") petitions the United States Patent
+
+Office to institute an inter partes review of claims 1-6, 10-12, 14-17, and 35
+
+(collectively, the “challenged claims” or “claims under review”) of United States
+
+Patent No. 5,987,500 to Arunachalam (“the ’500 patent”). According to Office
+
+records, the ʼ500 patent is assigned to Pi-Net International, Inc. (“Pi-Net” or
+
+“Patent Owner”).  A copy of the ’500 patent is provided as SAP 1001.
+
+Although the '500 Patent purports to be the first to introduce real-time
+
+transactions over a network, electronic commerce over networks such as the World
+
+Wide Web was known well before the '500 Patent's earliest possible priority date.
+
+In fact, the ‘500 Patent acknowledges that two-way, interactive, real-time
+
+transactions over the World Wide Web existed prior to the filing date of the '500
+
+Patent. ('500 Patent, 1:50-2:7.) For example, robust systems with diverse
+
+functionality, such as electronic malls (i.e., applications accessible over the World
+
+Wide Web that allow users to perform real-time transactions with a variety of
+
+different merchants) and electronic payment systems were well known before the
+
+'500 Patent.  Because the prior art references discussed in this petition teach real-
+
+time electronic commerce and predate the '500 Patent, this petition presents
+
+grounds of rejection that are reasonably likely to prevail, and it should be granted
+
+on all grounds.
+
+
+
+
+
+- 1 -
+
+
+
+I.  Mandatory Notice (37 C.F.R. § 42.8(a)(1))
+REAL  PARTY  IN  INTEREST:    The  real  party-in-interest  of  Petitioner  is  SAP
+
+America, Inc. (“SAP”).
+
+RELATED MATTERS:  Petitioner notes that U.S. Patent No. 5,987,500 is
+
+involved in the following current proceedings that may affect or may be affected
+
+by a decision in this proceeding:  Pi-Net International, Inc v. 1st Valley Credit
+
+Union, No. 5:12-cv-01989 (C.D.Cal.); Pi-Net International, Inc v. Ace Rent A Car
+
+Inc, No. 2:12-cv-04303 (C.D.Cal.); Pi-Net International, Inc v. Avis Budget Group
+
+Inc et al, No. 2:12-cv-04036 (C.D.Cal.); Pi-Net International Inc v. Cal Poly
+
+Federal Credit Union, No. 2:12-cv-09703 (C.D.Cal.); Pi-Net International Inc v.
+
+Dollar Thrifty Automotive Group Inc et al, No. 2:12-cv-04270 (C.D.Cal.); Pi-Net
+
+International Inc v. Enterprise Holdings Inc, No. 2:12-cv-03970 (C.D.Cal.); Pi-Net
+
+International Inc v. In-land Valley Federal Credit Union, No. 5:12-cv-01990
+
+(C.D.Cal.); Pi-Net International Inc v. Media City Community Credit Union, No.
+
+2:12-cv-09699 (C.D.Cal.); Pi-Net International Inc v. Payless Car Rental System
+
+Inc, No. 2:12-cv-04394 (C.D.Cal.); Pi-Net International Inc v. South Bay Credit
+
+Union, No. 2:12-cv-09705 (C.D.Cal.); Pi-Net International Inc V. The Hertz
+
+Corporation et al, No. 2:12-cv-10012 (C.D.Cal.); Pi-Net International Inc v. U-
+
+Haul International Inc, No. 2:12-cv-04301 (C.D.Cal.); Pi-Net International, Inc. v.
+
+Bank of America, N.A. et al., No. 1:12-cv-00280 (D. Del.); Pi-Net International
+
+
+
+- 2 -
+
+
+
+Inc. v. Capital One Financial Corporation et al, No. 1:12-cv-00356 (D.Del.); Pi-
+
+Net International, Inc v. Citizens Financial Group, Inc., No. 1:12cv-00355
+
+(D.Del.) (the “Concurrent Litigation”); Pi-Net International Inc. v. JP Morgan
+
+Chase & Co, No. 1:12-cv-00282 (D.Del.); Pi-Net International Inc. v. Sovereign
+
+Bank N.A, No. 1:12-cv-00354 (D.Del.); Pi-Net International Inc. v. UBS Financial
+
+Services Inc, No. 1:12-cv-00353 (D.Del.); Pi-Net International Inc. v. Wilmington
+
+Trust Company et al, No. 1:12-cv-00281 (D.Del.); Pi-Net International Inc. v.
+
+WSFS Financial Corporation et al, No. 1:12-cv-00352 (D.Del.); Pi-Net
+
+International, Inc v. Bridge Bank, No. 5:12-cv-04959 (N.D.Cal.); Pi-Net
+
+International, Inc v. Commonwealth Central Credit Union, No. 5:12-cv-05730
+
+(N.D.Cal.); Pi-Net International, Inc. v. Mission National Bank, No. 3:12-cv-
+
+04960 (N.D.Cal.); Pi-Net International, Inc. v. First National Bank Of Northern
+
+California, No. 3:12-cv-04957 (N.D.Cal.); Pi-Net International, Inc. v. My Credit
+
+Union, No. 3:12-cv-05733 (N.D.Cal.); Pi-Net International, Inc. v. San Jose Credit
+
+Union, No. 4:12-cv-05732 (N.D.Cal.); Pi-Net International, Inc. v. My Credit
+
+Union, No. 4:12-cv-05733.
+
+SERVICE  INFORMATION:   Please address all correspondence  to  the  lead counsel
+
+as  shown  below.    Petitioner  consents  to  electronic  service  by  email  at  the  email
+
+address provided below.
+
+  LEAD AND BACKUP COUNSEL:
+
+
+
+- 3 -
+
+
+
+Lead Counsel
+
+Backup Counsel
+
+Lori A. Gordon, Reg. No. 50,636
+
+Michael Q. Lee, Reg. No. 35,239
+
+
+
+STERNE, KESSLER, GOLDSTEIN & FOX
+
+STERNE, KESSLER, GOLDSTEIN & FOX
+
+1100 New York Avenue, N.W.
+
+1100 New York Avenue, N.W.
+
+Washington, D.C. 20005-3932
+
+Washington, D.C. 20005-3932
+
+Tel.:  202-772-8862
+
+Fax:  202-371-2600
+
+
+
+
+
+Tel.:  202-772-8674
+
+Fax:  202-371-2600
+
+
+
+
+
+lgordon-PTAB@skgf.com
+
+mlee-PTAB@skgf.com
+
+II.  Grounds for Standing (37 C.F.R. § 42.104(a))
+The undersigned and SAP certify that the ’500 patent is available for review.
+
+Because  the  ’500  patent  has  an  effective  filing  date  of  November    13,  1995,  35
+
+U.S.C.  §  311(c)'s  timing  requirements  do  not  apply.    See  AIA  Technical
+
+Corrections  Bill,  H.R.  6621,  112th  Cong.  §  1(d)(1)  (2013)  (enacted).    SAP  also
+
+certifies  that  it  is  not  estopped  from  requesting  an  inter  partes  review  challenging
+
+claims 1- 6, 10-12, 14-17, and 35 on the grounds identified in the petition.
+
+III.
+
+Identification of Challenge (37 C.F.R. § 42.104(b))
+A.
+Statutory grounds for the challenge
+SAP  request  inter  partes  review  of  claims  1-6,  10-12,  14-17  and  35
+
+(collectively referred to herein as the “challenged claims”):
+
+
+
+
+
+Ground  1:    Claims  1-6,  10-12,  14-17,  and  35  are  unpatentable  under  35
+
+- 4 -
+
+
+
+U.S.C. § 102(e) as anticipated by U.S. Patent No. 5,710,887 to Chelliah, et al.
+
+Ground  2:  Claims  1-6,  10-12,  14-17,  and  35  are  unpatentable  under  35
+
+U.S.C. § 102(e) as anticipated by U.S. Patent No. 5,724,424 to Gifford.
+
+B.  Citation of Prior Art
+The  earliest  possible  priority  date  is  November  13,  1995.1  The  following
+
+prior art references are applied in the above grounds:
+
+U.S. Patent No. 5,710,887  to Chelliah et. al.  (“Chelliah”) qualifies as prior
+
+art  under  at  least  §  102(e)  because  it  was  filed  on  August  29,  1995,  prior  to  the
+
+filing date of the ‘500 patent.  Chelliah is provided as SAP 1003.
+
+U.S.  Patent  No.  5,724,424  to  Gifford  (“Gifford”)  qualifies  as  prior  art
+
+under  at  least  §  102(e)  because  it  has  an  effective  filing  date  of  December  16,
+
+1993, prior to the filing date of the ‘500 patent.  Gifford is provided as SAP 1004.
+
+C.  Claim Construction
+Except  for  the  claim  terms  explicitly  set  forth  below  in  section  III.C.2,  the
+
+claim  terms  of  the  ‘500  patent  are  to  be  given  their  broadest  reasonable
+
+interpretation,  as understood by one of ordinary  skill  in  the  art  and  consistent with
+
+the disclosure.  A brief summary of the ‘500 patent is provided in section III.C.1.
+
+
+1 Solely for purposes of petition,  it  is assumed  that  the  '500 Patent  is entitled
+to priority to Provisional Application No. 60/006,634 filed November 13, 1995.
+
+
+
+- 5 -
+
+
+
+1.
+
+Summary of the ‘500 Patent
+(a)  Background
+According  to  the  '500  Patent,  before  its  earliest  possible  filing  date  "[t]he
+
+ability to complete robust real-time, two-way transactions" was not "truly available
+
+on  the Web."  ('500 Patent, 2:27-28.) One option  available  to  users was  "deferred,"
+
+i.e.,  non-real-time,  transactions  (e.g.,  using  email)  that  were  "not  processed  until
+
+the  email  [was]  received,  read,  and  the  person  or  system  reading  the  email
+
+execute[d]  the  transaction."  ('500  Patent,  1:29-32.)  This  option  thus  employed  a
+
+"strictly  []  one-way  browse mode  communications  link, with  the  e-mail  providing
+
+limited, deferred transactional capabilities." ('500 Patent, 1:47-49.)
+
+But the '500 Patent admits that well known technologies existed that allowed
+
+for  "two-way"  transactions  on  the  Web  using  Common  Gateway  Interface  (CGI)
+
+applications.  ('500  Patent,  1:50-52.)  These  CGI  scripts  featured  real-time
+
+transactions,  e.g.,  making  payments  on  a  loan.  ('500  Patent,  1:64-66;  DEC.)  The
+
+‘500  Patent,  however,  contends  that  these  CGI  scripts  were  not  a  "viable  solution
+
+for merchants with a large number of services." ('500 patent, 1:60-2:7.)
+
+(b)  The '500 Patent's Disclosure
+The  '500  Patent  sought  to  provide  "a  method  and  apparatus  for  providing
+
+real-time,  two-way  transactional  capabilities  on  the  Web."  ('500  Patent,  2:32-34.)
+
+FIG.  8  of  the  '500  Patent  provides  a  flow  diagram  in which  the  user  first  connects
+
+to  a  Web  server  and  issues  a  request  for  a  transactional  application.  ('500  Patent,
+
+
+
+- 6 -
+
+
+
+9:18-20.)  An  "exchange"  then  presents  the  user  with  a  list  of  applications  and,  in
+
+response  to  the  user's  selection,  switches  the  user  to  the  selected  application.  ('500
+
+Patent,  9:22-26.)  An  "object  routing  component"  then  executes  the  user's  request.
+
+('500 Patent, 9:25-28.)
+
+FIG. 7 of  '500 Patent shows a value added network (VAN) switch 520. ('500
+
+Patent,  8:34-35.)  VAN  switch  520  includes  a  boundary  service  701,  a  switching
+
+service  702,  a management  service  703,  and  an  application  service  704. Boundary
+
+service  701  "provides  the  interface  to  the  on-line  service  provider."  ('500  Patent,
+
+8:39-40.)  Switching  service  702  routes  user  connections  to  specific  software
+
+modules,  multiplexes  and  prioritizes  requests,  and  facilitates  access  to  financial
+
+networks  (e.g.,  banking  networks)  using  the  Internet.  ('500  Patent,  8:44-52.)
+
+Management  service  803  includes  tools  that  are  "used  by  the  end  users  to manage
+
+network  resources."  ('500 Patent, 8:58-60.) Also, application  service 804  "includes
+
+POSvc [point of service] applications." ('500 Patent, 9:2-3.)
+
+(c)  Claim Terms for Construction
+(i)
+ “Value-added network”” Terms
+The  ‘500  Patent  uses  the  term  “value-added  network”  (or  “value  added
+
+network”)  only  in  the  context  of  a  value-added  network  service  or  a  value-added
+
+network switch.   The ‘500 Patent, however, does not provide definition of a value-
+
+
+
+- 7 -
+
+
+
+added  network.    (Sirbu Decl.,2  ¶  15.). Under  the  broadest  reasonable  construction,
+
+a  "value-added  network"  is  a  network  that  provides  additional  value  or  services
+
+relative  to  a  network  (e.g.,  a  connection  between  two  nodes).  (Sirbu  Decl.,  ¶  15)
+
+Value-added  services  include,  for  example,  packet  switching,  encryption,  or
+
+authentication.  (Sirbu  Decl.,  ¶  15.)  Because  the  Internet  is  a  packet-switched
+
+network,  it  is a  "value-added network."  (Sirbu Decl., ¶ 15.) Moreover, because  the
+
+World Wide Web  is provided over  the  Internet,  it also  is a "value-added network."
+
+(Sirbu Decl., ¶ 15.)
+
+VALUE-ADDED NETWORK SWITCH (CLAIMS 1, 10, AND 35)
+
+The plain and ordinary meaning of a  "switch"  is a hardware and/or  software
+
+module  that  facilitates  the  movement  of  data  between  two  or  more  computers.
+
+(Sirbu Decl., ¶ 16.) The  '500 Patent does not provide a definition contradicting this
+
+plain  meaning.  (Sirbu  Decl.,  ¶  16.)  Thus,  under  the  broadest  reasonable
+
+interpretation,  a  "value-added  network  switch"  at  least  encompasses  a  hardware
+
+and/or  software  module  resident  on  one  or  more  computers  accessible  over  the
+
+Internet or the World Wide Web that facilitates the movement of data between two
+
+or more computers. (Sirbu Decl., ¶ 16.)
+
+VALUE-ADDED NETWORK SERVICE PROVIDER (CLAIMS 1, 10, AND 35)
+
+Generally, a service provider is a party that provides a service to an end user.
+
+
+2 The Sirbu Declaration is provided as SAP 1002.
+
+
+
+- 8 -
+
+
+
+The  '500  Patent  describes  that  a  merchant  is  an  example  of  a  "service  provider."
+
+(Sirbu  Decl.,  ¶  17;  see  also  '500  Patent,  7:20-25  ("three-way  transaction  can  be
+
+expanded  to  n-way  transactions,  where  n  represents  a  predetermined  number  of
+
+merchants  or  other  service  providers  who  have  agreed  to  cooperate  to  provide
+
+services  to  users"  (emphasis  added).).  Thus,  a  "value-added  network  service
+
+provider" includes at least a party such as a merchant which provides services over
+
+a value-added network (e.g., the Internet or the WWW). (Sirbu Decl., ¶ 17.)
+
+(ii)  “Transactional application” (claims 1, 10, and 35)
+A  transactional  application  is  simply  an  application  that  supports  one  or
+
+
+
+more  transactions.  (See  Sirbu  Decl.,  ¶  18.)  The  '500  Patent  describes  an  explicit
+
+definition  of  the  term  "transaction"  as  "any  type  of  commercial  or  other  type  of
+
+interaction  that  a  user  may  want  to  perform."  ('500  Patent,  5:19-22.)  The  '500
+
+Patent provides examples of applications supporting one or more transactions.  For
+
+example,  the  ‘500  Patent  describes  that  a  POSvc  application  is  a  type  of
+
+transactional  application.  ('500  Patent,  6:11-14.)  The  '500  Patent  further  defines  a
+
+POSvc  application  as  "an  application  that  can  execute  the  type  of  transaction  that
+
+the  user  may  be  interested  in  performing."  ('500  Patent,  6:30-32.)  Thus,  a
+
+"transactional  application"  is  an  application  that  allows  a  user  to  execute  any  type
+
+of interaction that the user may want to perform. (Sirbu Decl., ¶ 19.).
+
+
+
+- 9 -
+
+
+
+(iii)  “Transactional services” (claims 1, 10, and 35)
+The  ‘500  Patent  does  not  provide  an  explicit  definition  of  the  term
+
+“transactional  services.”  (Sirbu  Decl.,  ¶  20.)  However,  the  '500  Patent  provides
+
+examples  of  "services."  A  bank  can  offer,  as  "services,"  the  ability  to  complete  a
+
+transfer  between  a  checking  and  a  savings  ('500  Patent,  7:4-8),  buy  a  car  from  a
+
+dealer ('500 Patent, 7:15-16), or request a car loan ('500 Patent, 7:16.). Thus, in the
+
+context  of  the  '500  Patent,  a  "transactional  service"  is  functionality  that  allows  a
+
+user to perform a specific type of transaction. (Sirbu Decl., ¶ 20.)
+
+(iv)  “Transaction link” (claims 3, 12, and 35)
+In claims 3 and 12,  the  term “transaction  link” appears as "a  transaction  link
+
+between  said  network  application  and  said  transactional  application"  and  in  claim
+
+35  the  term  appears  as  "a  transaction  link  between  said  user  application  and  said
+
+transactional  application."  Under  the  broadest  reasonable  interpretation  and  in  the
+
+context  of  claims  3,  12,  and  35,  this  term  is  any  type  of  connection  between  a
+
+"network  application"  or  a  "user  application"  and  a  "transactional  application."
+
+(Sirbu Decl., ¶ 21.)
+
+(v)
+In  claims  1,  10,  and  35,  a  network  application  is  an  element  that  provides  a
+
+“Network application” (claims 1, 10, and 35)
+
+"user  specification"  (e.g.,  to  a  value-added  network  switch).  Thus,  in  accordance
+
+with  its  broadest  reasonable  interpretation,  a  "network  application"  is  any
+
+application  that  communicates  a  user  specification  using  a  network  (e.g.,  a  Web
+
+
+
+- 10 -
+
+
+
+browser). (Sirbu Decl., ¶ 22.)
+
+(vi)
+
+ “Keeping a  transaction  flow captive”  (claims 1,
+10, and 35)
+
+The  plain  and  ordinary  meaning  of  "transaction  flow"  is  the  series  of  steps
+
+that  carry  out  a  transaction.  (Sirbu  Decl.,  ¶  23.)  Further,  the  plain  and  ordinary
+
+meaning  of  captive  is  maintaining  control.  (Sirbu  Decl.,  ¶  23.)  Thus,  as  best
+
+understood,  under  the  broadest  reasonable  interpretation,  "keeping  a  transaction
+
+flow  captive”  is maintaining  control  over  the  steps  used  to  carry  out  a  transaction.
+
+(Sirbu Decl., ¶ 23.)
+
+(d)  Means-plus-function limitations
+In  compliance  with  37  C.F.R.  §  42.204(b)(3),  an  identification  of  the
+
+structure  corresponding  to  the  claimed  function of means-plus-function  limitations
+
+recited in the challenged claims is provided below.
+
+Claims  Element/Function
+1, 2, 35  Means for switching
+1, 5, 35  Means for transmitting
+1, 5, 35  Means for processing
+2, 4  Means for receiving
+
+2
+
+Means for enabling a
+switch
+
+2, 3  Means for activating said
+transactional application
+
+Corresponding Structure
+Switching service 702 ('500 Patent, 8:44-46.)
+Boundary service 701 ('500 Patent, 8:39-43.)
+Bank "Back Office" ('500 Patent, 6:54-65.)
+The  portion  of  switching  service  702    that
+receives  user
+a
+communications  over
+network('500 Patent, 8:46-49.)
+The  portion  of  switching  service  702  that
+routes  user  connections  ('500  Patent,  8:44-
+55.)
+The  portion  of  switching  service  702  that
+activates  an  application  ('500  Patent,  8:44-
+
+
+
+- 11 -
+
+
+
+for presenti
+Means f
+ing
+
+for submitt
+Means f
+ting
+
+for creating
+Means f
+g a
+transacti
+ion link
+
+5
+5.)
+that
+undary  ser
+on  of  bou
+The  portio
+rvice  701
+plication  (
+('500
+nterfaces  t
+to  the  ne
+etwork  app
+Patent, 8:39
+9-43.)
+rvice  702
+that
+tching  ser
+on  of  swit
+The  portio
+. 5C,
+outputs data
+a to the use
+er. ('500 Pa
+atent, FIG.
+6:40-47.)
+rvice  702
+tching  ser
+on  of  swit
+The  portio
+that
+00 Patent, F
+u
+ubmits use
+er specifica
+ations.  ('50
+FIG.
+C, 6:40-47
+7.)
+that
+ank  "Back
+of  the  Ba
+A  portion
+k  Office"
+des  a
+processes  re
+eceived  re
+quests,  and
+d/or  includ
+ch  as  the  B
+s  data,  suc
+that  stores
+epository  t
+e
+Bank
+"B
+Back  Offi
+ice"  data
+repository
+y  ('500  Pa
+atent,
+6
+6:54-65.)
+An  interm
+ediary  to
+Patent, 6:61
+1-65.)
+0  Patent,  9
+erface  ('500
+al  user  inte
+A  graphica
+ng an  A
+for activatin
+Means f
+9:22-
+agent to
+create a
+2
+23.)
+transacti
+ion link
+
+t  means  (
+the  host
+('500
+
+for couplin
+Means f
+ng
+
+eans3,4
+Host me
+
+nP
+Ti
+
+To6
+
+5 Apr
+Ts
+
+AP
+
+3
+
+4
+
+4
+
+5, 6,
+15, 16,
+35
+
+5
+
+35
+
+-17, and 35
+10-12, 14-
+5.
+
+'500  Paten
+nt —  the  l
+
+imited  num
+mber
+
+ANTICIPA
+SED ON A
+ATION
+
+IV.  C
+CHALLEN
+NGES BA
+  Grou
+icipates cla
+elliah anti
+und 1: Che
+A.
+aims 1-6,
+ame  proble
+olves  the  sa
+Chelliah  so
+em  as  the
+
+A C
+
+bu Decl., ¶
+tions. (Sirb
+ed applicat
+twork-base
+ided by net
+an be provi
+ces that ca
+of servi
+¶ 24.)
+
+Specific
+line  comm
+e  for  on-l
+architecture
+omputer  a
+vides  "a  co
+lliah  prov
+cally,  Che
+merce
+
+of  comme
+ull  range  o
+enable  a  fu
+ucture  to  e
+c  infrastru
+n  electronic
+defines  an
+which  d
+ercial
+
+
+
+
+3
+35 U.S.C.
+m invokes 3
+at this term
+concede tha
+does not c
+Petitioner
+§ 112(6).
+4
+sible
+rm  to  the  e
+Petitioner
+r  has  provi
+ided  a  con
+nstruction  f
+for  this  ter
+extent  pos
+given  th
+6 and claim
+15, and 16
+aims 5, 6,
+tions  in cla
+ting recitat
+gly conflict
+he seeming
+m 35.
+as best und
+"Host m
+means" is c
+onstrued a
+and analyze
+ed herein a
+derstood.
+
+
+
+- 12 -
+
+
+
+transactions  analogous  to  those  occurring  in  physical  commerce."  (Chelliah,  5:58-
+
+61.)  FIG.  1  of  Chelliah  (reproduced  below  with  annotations),  illustrates  an
+
+embodiment of Chelliah's electronic mall. (Sirbu Decl., ¶ 24.)
+
+One or more computers
+providing access to the
+Web via a browser
+
+114
+
+115
+
+Applications
+running on a
+computer
+accessible over
+the Web
+
+External systems
+that fulfill  a
+transaction
+
+
+
+
+
+
+
+
+
+Using a web browser running on a PC (user interface 13), a customer can
+
+"enter" Chelliah's electronic mall. (Chelliah, 6:28-31, 12:1-9; Sirbu Decl., ¶ 25.)
+
+The electronic mall includes a number of different applications running on a
+
+server, e.g., a web server. (Sirbu Decl., ¶ 25.) Upon entry, the user is presented
+
+with various storefront options presented as icons on the browser. (Chelliah, 6:37-
+
+40; Sirbu Decl, ¶ 25.) The user then enters a specific store by clicking on its
+
+
+
+- 13 -
+
+
+
+particular icon.  (Sirbu Decl., ¶ 25.) The selection  is communicated to the
+
+electronic mall by the user's browser. (Sirbu Decl., ¶ 25; see also Chelliah, 6:37-
+
+40.) Upon receiving the user's selection, internal commerce subsystems 116 are
+
+invoked by the selected electronic storefront 14. (Sirbu Decl., ¶ 25; see also
+
+Chelliah, 6:40-43.) In particular, interfaces 22 and 24 are used to transmit the user's
+
+request to internal commerce subsystems 116. (Sirbu Decl., ¶ 25.)
+
+Internal commerce subsystems 116 can include, for example, an incentives
+
+system, an observations subsystem, and/or a sales reprsentative system. (Sirbu
+
+Decl., ¶ 26; see also Chelliah, 9:4-6.) For example, once a user enters a particular
+
+storefront, the selected electronic storefront 14 calls a sales representative factory
+
+115. (Sirbu Decl., ¶ 26; see also Chelliah, 13:27-32.) Sales representative factor
+
+115 creates an instance of sales representative program object 114. (Sirbu Decl., ¶
+
+26; see also Chelliah, 13:33-35.) Thereafter, a WWW session can be initiated
+
+between sales representative program object 114 and the customer. (Sirbu Decl., ¶
+
+26; see also Chelliah, 14:45-51.) In particular, sales representative program object
+
+114 operates like a virtual sales person and figuratively accompanies the customer
+
+through the virtual store and provides the customer with a number of different
+
+services, e.g., providing pricing information, authorizing a purchase method,
+
+applying discounts, shipping items, and arranging for payment. (Sirbu Decl., ¶ 26;
+
+see also Chelliah, 13:48-53.) When the customer selects an item for purchase, the
+
+
+
+- 14 -
+
+
+
+customer's browser transmits a request to execute the purchase transaction to sales
+
+representative program object 114 (i.e., using an HTTP request). (Sirbu Decl., ¶
+
+26; see also Chelliah, 15:24-28.) Sales representative program object 114 then
+
+routes this transaction request by calling payment handler interface 124 (included
+
+in interfaces 22 of FIG. 1 of Chelliah) to validate the method of payment. (Sirbu
+
+Decl., ¶ 26; see also Chelliah, 16:27-31.) Payment handler interface 124 calls an
+
+external payment handler 126 (included in one of external commerce subsystems
+
+18 in FIG. 1 of Chelliah) to obtain authorization to charge the customer's account.
+
+(Sirbu Decl., ¶ 26; see also Chelliah, 16:57-59.) Thereafter, sales representative
+
+program object 114 calls order fulfillment subsystem 128 (included in interfaces 22
+
+of FIG. 1 of Chelliah) and provides it with the items that the customer ordered.
+
+(Sirbu Decl., ¶ 26; see also Chelliah, 17:23-26.) Order fulfillment legacy
+
+subsystem 130 (included in one of external commerce subsystems 18 of FIG. 1 of
+
+Chelliah) performs the activities needed to ship the selected products to the
+
+customer. (Sirbu Decl., ¶ 26; see also Chelliah, 17:26-30.) Finally, after the
+
+selected products are indicated as shipped, order fullfillment subsystem 128 calls
+
+payment handler 124, which in turn calls external payment handler 126 to charge
+
+pursuant to a payment order. (Sirbu Decl., ¶ 26; see also Chelliah, 17:46-51.)
+
+Petitioner has provided a second annotated version of FIG. 1 of Chelliah below to
+
+illustrate how Chelliah's disclosure maps to the challenged claims.
+
+
+
+- 15 -
+
+
+
+
+
+Network
+application
+
+
+
+
+VAN
+Switch
+
+Transactional
+application
+
+Means for
+transmitting
+Means for
+processing
+
+Host means
+
+Means for
+switching
+
+114
+
+
+
+115
+
+dB
+
+dB
+
+dB
+
+VAN
+System
+
+
+
+1.
+
+Chelliah anticipates independent claim 1
+(a)  Chelliah  teaches  “A  configurable  value-added  network  switch
+for enabling real-time transactions on a network”
+
+As shown above in FIG. 1 of Chelliah (annotated to show correspondence to
+
+the challenged claims), Chelliah discloses a set of applications  that collectively are
+
+the  recited  “VAN  switch.”  (Sirbu  Decl.,  ¶  27.)  In  particular,  the  storefront
+
+applications  14  receive  data  in  the  form  of  a  request  from  a  browser  running  on
+
+user  interface  13  via  a  value-added  network,  i.e.,  the  Internet.  (Sirbu  Decl.,  ¶  27;
+
+see also Chelliah,   6:13-19; DEC.) This  request  is switched or  routed by  interfaces
+
+
+
+- 16 -
+
+
+
+24  and  26  to  sale  representative  factory  115  (shown  in  FIG.  6  of Chelliah).  (Sirbu
+
+Decl.,  ¶  27;  see  also  Chelliah  6:53-56,  13:33-40,  17:23-30).  Accordingly,  these
+
+elements constitute the recited VAN switch.
+
+Moreover, Chelliah's VAN  switch  is  "configurable."  (Sirbu Decl.  ¶¶  28-29.)
+
+In  particular,  store  management  dashboards  20  allow  a  store's  management  to
+
+configure  aspects  of Chelliah's VAN  switch.  (Sirbu Decl.,  ¶  28;  see  also Chelliah,
+
+6:47-51.)  For  example,  the  store  management  can  configure  Chelliah's  VAN
+
+switch  to provide an  in-store sale as an  incentive  to a customer. (Sirbu Decl., ¶ 28;
+
+see  also  Chelliah,  6:51-52.)  Further,  as  described  below,  the  Chelliah's  VAN
+
+switch enables "real-time" transactions.
+
+(b) Chelliah  teaches  "means  for  switching  to  a  transactional  application
+in response to a user specification from a network application."
+
+As  discussed  above,  the  structure  for  the  “means  for  switching”  is  the
+
+switching  service  702  of  the  ‘500  Patent.    The  function  of  this  limitation  is
+
+“switching  to  a  transactional  application  in  response  to  a  user  specification  from  a
+
+network application.”  Chelliah discloses this limitation.
+
+The sales program object 114of Chelliah is an application5 that allows a user
+
+to  engage  in  a  variety  of  transactions  such  as  obtaining  pricing  information,
+
+authorizing a payment method, applying discounts, shipping items, or arranging for
+
+
+5 A person of ordinary skill in the art would appreciate that a program object
+is an “application.”  (Sirbu Decl., ¶ 30; see also Chelliah, 9:30-38.)
+
+
+
+- 17 -
+
+
+
+payment. (Sirbu Decl., ¶ 30; see also Chelliah, 13:48-54.)
+
+The  electronic  storefronts  14,  interfaces  22  and  24,  and  sales  representative
+
+factory 115 switch or route the customer to sales representative program object 114
+
+(the recited “transactional application”) in response to a user specification received
+
+from  a  network  application.  (Sirbu Decl.,  ¶  31.) As  noted  above, when  a  customer
+
+“enters”  a  particular  store,  electronic  storefront  14  receives  a  request  (i.e.,  an
+
+HTTP  request)  from  the  customer's  web  browser  selecting  a  specific  storefront.
+
+(Sirbu  Decl.,  ¶  31;  Chelliah,  6:37-40.)  Such  request  from  the  customer/user
+
+corresponds  to  the  recited  “user  specification.”    (Sirbu  Decl.,  ¶  31.)  The  user's
+
+browser corresponds to the recited “network application.” (Sirbu Decl., ¶ 31.)
+
+Responsive  to  the  request  from  the  browser,  the  particular  electronic
+
+storefront  14  calls  sales  representative  factory  115  (through  interfaces  22  and  24).
+
+(Sirbu  Decl.,  ¶  32;  see  also  Chelliah,  13:33-40.)  Sales  representative  factory  then
+
+creates  sales  respresentative  program  object  114.  (Sirbu  Decl.,  ¶  32;  see  also
+
+Chelliah,  13:33-40.)  Thereafter,  the  customer  interacts  with  sales  representative
+
+program  object  114  in  a  WWW  session.  (Sirbu  Decl.,  ¶  32;  see  also  Chelliah,
+
+13:48-53;  14:45-51.)  Thus,  electronic  storefronts  14,  interfaces  22  and  24,  and
+
+sales  representative  factory  115  switch  the  customer  to  sales  representative
+
+program object 114. (See Sibru Decl., ¶ 32.)
+
+
+
+
+
+Moreover, Chelliah perfoms switching  in  the same way as switching service
+
+- 18 -
+
+
+
+702  of  the  '500  Patent.  In  particular,  switching  service  702  performs  switching  by
+
+routing  user  connections.  ('500  Patent,  8:46-49.)  Similarly,  Chelliah  performs
+
+switching  by  activating  the  sales  representative  program  object  114  and  routing
+
+subsequent  communications  from  the  customer  to  sales  representative  program
+
+object  114.    (Sirbu Decl.,  ¶  33;  see  also Chelliah,  13:34-40,  13:4853.) Further,  the
+
+result  of  Chelliah's  switching  is  identical  to  that  of  switching  service  702—the
+
+customer  interacts with  sales  representative  program  object  114.  (See  Sirbu Decl.,
+
+¶ 33; see also Chelliah, 12:34-42.)
+
+(c)  Chelliah  teaches  "said  transactional  application  providing  a  user
+with  a  plurality  of  transactional  services managed  by  at  least  one
+value-added network service provider."
+
+Chelliah's sales representative program object 114 (the recited "transactional
+
+application") provides the user with a plurality of transactional services:
+
+After  the  Sales  Representative  Object  114  is  created,  it
+figuratively  accompanies  the  customer  through  the  store,  provides
+pricing  information,  authorizes  the  purchase  method  (e.g.,  VISA),
+applies  any  applicable  discounts  (e.g.,  in-store  price  discounts  or
+coupon-based  price  discounts),  and  completes  the  sale  (e.g.,  ships  the
+items and arranges for payment). (Chelliah, 13:48-53.)
+
+The  entity  providing  a  store  represented  in  Chelliah's  electronic  mall  by  an
+
+electronic  storefront  14  is  a  "value-added  network  service  provider."  (Sirbu Decl.,
+
+¶  34.)  In  particular,  electronic  storefront  14  is  accessible  over  a  value-added
+
+
+
+- 19 -
+
+
+
+network  (i.e.,  the  Internet).  (Sirbu  Decl.,  ¶  35;  see  also  Chelliah,  12:1-9.)  Further,
+
+the sales representative program object associated with each storefront 14 provides
+
+a  number  of  transactional  services  (e.g.,  a  list  of  items  for  purchase  and  prices,
+
+shipping  items,  arranging  for  payment,  and  applying  discounts)  through  sales
+
+representative  object  114.  (See  Sirbu  Decl.,  ¶  35;  see  also  Chelliah,  10:56-11:3.)
+
+Moreover,  the entity providing  the store manages  its  transactional services  through
+
+store  management  dashboard  20.  (Sirbu  Decl.,  ¶  35;  see  also  Chelliah,  19:59-
+
+20:19; DEC.)
+
+(d)  Chelliah  teaches  "said  value-added  network  service  provider
+keeping a transaction flow captive."
+
+As  discussed  above,  “keeping  a  transaction  flow  captive”  is  maintaining
+
+control  over  the  steps  used  to  carry  out  a  transaction.  (Sirbu Decl.,  ¶  23.) Chelliah
+
+discloses  this  limitation.  A  store  in  Chelliah,  through  its  associated  sales
+
+representative program object 114, maintains control over the transaction flow:
+
+The  Sales  Representative  Program  Object  114  has  access  to
+information,  kept  by  the  store,  about  the  customer  and  also  controls
+the  flow  of  a  transaction  processing  session  and  forms  part  of  an
+Internal Commerce Subsystem 16 shown in FIG. 1.
+
+(Chelliah, 10:35-39; emphasis added).
+
+(e)  Chelliah  teaches  "said  plurality  of  transactional  services  being
+performed interactively and in real time."
+
+The  transactions  offered  by  the  sales  representative  program  object  are
+
+
+
+- 20 -
+
+
+
+performed "interactively":
+
+When  the  customer  12  selects  items  for  purchase,  User
+Interface  13  calls Sales Representative Program Object  114  to  inform
+that program object of the selected item. (Chelliah, 14:52-54.)
+…
+In  response  to  output  from  the  function  call  given  directly
+above,  and  as  shown  in  Step  181,  Sales  Representative  Program
+Object  114  calls  User  Interface  13  to  obtain  the  customer's  selected
+method  of  payment. As  shown  in  detail  in FIG.  8A,  in  step  181 Sales
+Representative Program Object 114 calls User Interface 13, passing to
+it  the  list  of  payment  method  tokens  that  correspond  to  the  payment
+methods for which the customer is authorized. (Chelliah, 16:4-11.)
+
+These transactions are further performed in "real-time":
+
+As  the  customer  decides  what  items  to  purchase,  External
+
+Commerce  Subsystems  18  may  be
+the
+to  complete
+invoked
+transaction. For example, VISA's credit card network may be used for
+payment  followed  by  FedEx's  Powership  shipping  management
+software for shipping. (Chelliah, 6:44-48.)
+
+(f)  Chelliah  teaches  "means  for  transmitting  a  transaction  request
+from said transactional application"
+
+The  structure  in  the  '500 Patent  corresponding  to  this  limitation  is  boundary
+
+service 701, which provides  "the  interfaces between VAN  switch 520,  the  Internet
+
+and  the  Web,  and  multi-media  end  user  devices  such  as  PCs,  televisions  or
+
+telephones."  ('500 Patent, 8:39-42.)   The  function of  the  limitation  is  “transmitting
+
+
+
+- 21 -
+
+
+
+a  transaction  request  from  said  transaction  application.”    This  limitation  is
+
+disclosed by Chelliah.
+
+As  noted  above  in  Section  IV(A)(1)(b),  sales  representative  program  object
+
+114  is  the  recited  "transactional  application."  When  a  user  initiates  a  payment
+
+transaction  in  Chelliah,  the  sales  representative  program  object  114  transmits  an
+
+object-oriented function call to payment handler interface 124. (Sirbu Decl., ¶¶ 39-
+
+40.)    The  sales  representative  program  object  114  transmits  this  object-oriented
+
+function  call  to  request  a  transaction  (e.g.,  payment  validation).  (Sirbu  Decl.,  ¶¶
+
+39-40.)  The  payment  handler  interface  124  transmits  the  transaction  request  to
+
+external  payment  handler  interface  126  for  processing.  (Sirbu Decl.,  ¶¶  39-40;  see
+
+also Chelliah, 11:40-49).
+
+(g)  Chelliah teaches "means for processing said transaction request."
+The  structure  of  the  “means  for  processing”  is  the  Bank  Back  Office.    The
+
+function is “processing said transaction request.”  Chelliah discloses this limitation.
+
+The payment handler 126 of Chelliah receives a transaction request from the
+
+sales  representative  program  object  114  via  the  payment  handler  interface  124.
+
+(Sirbu  Decl.,  ¶  41.)  The  payment  handler  126  processes  the  received  transaction
+
+request  to validate payment and  thereby complete  the purchase. (Sirbu Decl., ¶ 41;
+
+see  also Chelliah,  12:56-65,  16:57-59,  17:46-51.) Moreover,  payment  handler  126
+
+processes the transaction request in the same way as the Bank "Back Office" in the
+
+
+
+- 22 -
+
+
+
+'500 Patent, i.e., operating on received and stored data:
+
+For  example,  other  Payment  Handler  systems  might  include
+CheckFree's  automatic  check  handling  system  for  non  credit-card
+acceptors  or  in-house  "legacy  systems"  for  large  department  store
+chains.  Therefore,  the  system  architecture  must  accommodate  a  wide
+variety of existing subsystems. (Chelliah, 8:53-58.)
+
+Moreover,  the  result  of Chelliah's  payment  handlers  is  the  same:  the  transaction  is
+
+processed. (See Sirbu Decl., ¶ 42; see also Chelliah, 12:63-65.)
+
+Chelliah anticipates dependent claim 2.
+
+2.
+Claim  2  depends  from  claim  1  and  additionally  recites  "wherein  said means
+
+for  switching  to  a  transactional  application  further  comprises: means  for  receiving
+
+said  user  specification;  means  for  enabling  a  switch  to  said  transactional
+
+application; and  means for activating said transactional application."
+
+(a)  Chelliah teaches "means for receiving said user specification."
+The  structure  in  the  ‘500  patent  corresponding  to  this  limitation  is  the
+
+portion  of  boundary  service  701  that  receives  requests  over  the  Internet. As  noted
+
+in  Section  IV(A)(1)(b),  in  Chelliah,  the  request  from  the  web  browser  running  on
+
+user  interface  13  corresponds  to  the  recited  "user  specification."  Chelliah  teaches
+
+that  storefronts  14  receive  the  request  (the  “user  specification”)  from  the  web
+
+browser  over  the  Internet.  (Sirbu  Decl.,  ¶  43;  see  also  Chelliah,  6:37-43.)    Thus,
+
+Chelliah's  storefront  14  provides  the  equivalent  function  and  corresponding
+
+
+
+- 23 -
+
+
+
+structure of this limitation.
+
+(b)  Chelliah
+teaches  "means
+transactional application."
+
+for  enabling  a  switch
+
+to  said
+
+The  structure  in  the  '500 Patent  corresponding  to  this  limitation  is  boundary
+
+service  701.  Boundary  service  701  provides  "the  interfaces  between  VAN  switch
+
+520,  the  Internet  and  the  Web,  and  multi-media  end  user  devices  such  as  PCs,
+
+televisions,  or  telephones."  ('500  Patent,  8:36-39.)    The  function  of  this  limitation
+
+is  “enabling  a  switch  to  said  transactional  application.”    Chelliah  discloses  this
+
+limitation.
+
+Like  the  boundary  service  701  of  the  ‘500  Patent,  Chelliah  discloses
+
+interfaces  26  and  24  to  the  transactional  application  (i.e.,  sales  representative
+
+program  object  114)  that  route  the  received  user  selection  to  internal  commerce
+
+subsystems.  (Sirbu Decl., ¶ 44; see also Chelliah, 6:26-36.) Thus, Chelliah  teaches
+
+the function and structure of this limitation.
+
+(c)  Chelliah  teaches  "means  for  activating  said  transactional
+application."
+
+The  structure  in  the  '500  Patent  corresponding  to  this  limitation  is  a
+
+graphical  user  interface  that  provides  a  list  of  transactional  applications.      The
+
+function  of  this  limitation  is  “activating  said  transactional  application."    Chelliah
+
+discloses  this  limitation  because  Chelliah  discloses  a  graphical  user  interface  that
+
+displays  icons  the  customer  can  select  to  initiate  activation  of  a  particular
+
+
+
+- 24 -
+
+
+
+transactional application:
+
+A  Customer  12  enters  the  electronic  mall  via  a  user  interface
+13,  where  the  customer  is  presented  with  a  choice  of  displayed
+Electronic  Storefronts  14.  The  user  interface  13  may  be  a  personal
+computer, set-top box, a touch sensitive screen, a touch tone telephone
+or  any  other  device  capable  of  reproducing  to  audio  or  video
+information  to  a  human  being.  It  typically  includes  an  input  means
+such as a keyboard or computer "mouse"  through which  the computer
+can  input  information  into  the  system.    (Chelliah,  6:28-36;  emphasis
+added; see also Sirbu Decl., ¶ 46.)
+
+Chelliah  discloses  that  interfaces  26  and  24  routes  the  user's  selection  to
+
+sales  representative  factory  115  (included  in  internal  commerce  subsystems  16.
+
+(Sirbu  Decl.,  ¶  25.)  Sale  representative  factory  115  creates  sales  representative
+
+program  object  114  (the  recited  “transactional  application”)  in  response  to  a
+
+customer  selection  in  a  graphical  interface.  (Sirbu  Decl.,  ¶  45;  see  also  Chelliah,
+
+6:37-40,  13:33-35;  DEC.)  One  of  ordinary  skill  in  the  art  would  appreciate  that
+
+"creating" an application  is one  form of "activating" an application.  (Sirbu Decl., ¶
+
+45.)
+
+Chelliah anticipates dependent claim 3.
+
+3.
+Claim 3 depends  from claim 2 and additionally recites, "wherein said means
+
+
+
+for  activating  said  transactional  application  further  includes  means  for  creating  a
+
+transaction
+
+link  between  said  network  application  and  said
+
+transactional
+
+
+
+- 25 -
+
+
+
+application."   The  structure  corresponding  to  the  “means  for  creating  a  transaction
+
+link”  is  the  portion  of  the  boundary  service  701  that  provides  "the  interfaces
+
+between  VAN  switch  520,  the  Internet  and  the  Web,  and  multi-media  end  user
+
+devices  such  as  PCs,  televisions,  or  telephones."  ('500  Patent,  8:36-39.)    Chelliah
+
+discloses this limitation.
+
+As  discussed  above,  the  “means  for  activating”  equates  to  Chelliah’s
+
+graphical  user  interface  from  which  a  customer  can  select  a  particular  electronic
+
+store, interfaces 26 and 24, and sales representative factory 115.  Like the interface
+
+portion  of  the  boundary  service  701,  Chelliah's  interface  26  interfaces  the  web
+
+browser  to  sales  representative  program  object  114.  (Sirbu  Decl.,  ¶  47;  Chelliah,
+
+13:35-39)  Chelliah's  interface  26  creates  a  connection  (transaction  link)  between
+
+the  user's  browser  (i.e.,  the  “network  application”)  and  the  sales  representative
+
+program  object  (the  “transactional  application”).  (Sirbu Decl.,  ¶  47.)  In  particular,
+
+one skilled  in  the art would appreciate  that  interface 26  links  the web-based model
+
+(implemented  by  storefronts  14)  and  the  distributed  object-oriented  model
+
+(implemented  by  internal  commerce  subsystems  16  including  sales  representative
+
+program  object  114).  (Sirbu  Decl.,  ¶  47.)  In  doing  so,  interface  26  creates  a
+
+"transaction link" between the web browser (i.e., the recited “network application”)
+
+and  sales  representative  program  object  114  (the  recited  “transactional
+
+application”). (Sirbu Decl., ¶ 48.)
+
+
+
+- 26 -
+
+
+
+Chelliah anticipates dependent claim 4.
+
+4.
+Claim 4 depends  from claim 2 and additionally recites, "wherein said means
+
+for  receiving  said  user  specification  further  comprises:  means  for  presenting  said
+
+user with  a  list  of  transactional  applications,  each  of  said  transactional  application
+
+being  associated  with  a  particular  value-added  network  service  provider;  and
+
+means  for  submitting  said  user  specification  according  to  a  user's  selection  of  said
+
+transactional application from said list of transactional applications."
+
+(a)  Chelliah  teaches  “means  for  presenting  said  user  with  a  list  of
+transactional  applications,  each  of  said  transactional  application
+being  associated  with  a  particular  value-added  network  service
+provider.”
+
+The  structure  corresponding  to  this  limitation  is  the  portion  of  switching
+
+service  702  that  outputs  data  to  the  user.  The  function  of  this  limitation  is
+
+"presenting  said  user  with  a  list  of  transactional  applications,  each  of  said
+
+transactional  application  being  associated  with  a  particular  value-added  network
+
+service provider." Chelliah teaches this limitation.
+
+Chelliah  teaches  providing  customer  12  with  a  menu  of  icons  (the  recited
+
+"list  of  transactional  applications")  each  of  which  corresponding  to  a  particular
+
+electronic  storefront  14.  (Chelliah,  6:37-40.)  Because  a  selection  of  a  particular
+
+electronic  storefront  14  corresponds  to  a  particular  instance  of  sales  representative
+
+program object 114 (the recited "transactional application"), each  item  in  the menu
+
+constitutes a representation of a   particular  transactional application. (See Chelliah,
+
+
+
+- 27 -
+
+
+
+14:10-14  (each  sales  representative program object being  instantiated with a  list of
+
+distributor  program  object  118  particular  to  the  electronic  store  14.))  Moreover,
+
+each  electronic  store  12  and  its  corresponding  instantiation  of  sales  representative
+
+program  object  114  is  managed  by  the  associated  store  (the  recited  "value-added
+
+network service provider). Thus, Chelliah teaches this limitation.
+
+(b)  Chelliah  teaches  “means  for  submitting  said  user  specification
+according  to  a  user's  selection  of  said  transactional  application
+from said list of transactional applications.”
+
+The  structure  corresponding  to  this  limitation  is  the  portion  of  switching
+
+service  702  that  submits  user  specifications.  The  function  of  this  limitation  is
+
+"submitting  said  user  specification  according  to  a  user's  selection  of  said
+
+transactional  application  from  said  list  of  transactional  applications."  Chelliah
+
+discloses this limitation.
+
+Chelliah's  interfaces  26  and  24  receive  the  user's  specification  (i.e.,  the
+
+request  from  the  web  browser  running  on  user  interface  13)  and  submits  the  user
+
+specification  according  to  the  user's  selection  from  the  menu  of  icons  (the  recited
+
+"list  of  transactional  application)  by  generating  a  corresponding  object-oriented
+
+function  call  that  can  be  used  by  the  object-oriented  programs  that  constitute
+
+internal  commerce  subsystems  116.  (Sirbu  Decl.,  ¶  25.)  Thus,  Chelliah  discloses
+
+this limitation.
+
+
+
+- 28 -
+
+
+
+Chelliah anticipates dependent claim 5.
+
+5.
+Claim 5 depends from claim 1 and additionally recites, "wherein said means
+
+
+
+for processing said transaction request further comprises means for coupling said
+
+means for transmitting to a host means."  The "host means"6 equates, for example,
+
+to the portion of the Bank "Back Office" that processes received requests and/or a
+
+repository that stores data. The structure corresponding to the "means for coupling"
+
+is an intermediary to the "host means."
+
+
+
+As noted above in section IV(A)(1)(g), Chelliah's payment handler 126 is
+
+equivalent to the recited “means for processing" the transaction request. As would
+
+have been appreciated by one of ordinary skill in the art, external payment handlers
+
+such as Chelliah's payment handler 126 inherently include a data repository (such
+
+as a card-issuing bank server) that stores information corresponding to the
+
+customer involved in the transaction (e.g., the customer’s account number and
+
+account balance) and a network for accessing that data repository. (Sirbu Decl., ¶
+
+49.) Accordingly, the card-issuing bank server discloses the recited "host means"
+
+because it includes a data repository that stores information relevant to a payment
+
+request. (Sirbu Decl., ¶ 49.) The card-issuing bank server also processes such data
+
+when processing transaction requests. Moreover, the payment handler's network is
+
+equivalent to the "means for coupling" because it is an intermediary that couples
+
+
+6 Petitioner does not concede that this term invokes 35 U.S.C. § 112(f).
+
+
+
+- 29 -
+
+
+
+Chelliah's means for transmitting (i.e., payment handler interface 124) to the card-
+
+issuing bank server or other data repository (the recited “host means”). (Sirbu
+
+Decl., ¶ 49.)
+
+Chelliah anticipates dependent claim 6.
+
+6.
+Claim 6 depends from claim 5 and additionally recites, "wherein said host
+
+
+
+means contains data corresponding to said transaction request." As described above
+
+with respect to claim 5, the structure in the ‘500 patent corresponding to the "host
+
+means" is the Bank "Back Office" data repository.  As also noted above in Section
+
+IV(A)(5), the external payment handlers 126 of Chelliah inherently store user
+
+information such as account numbers, account balances, etc. (Sirbu Decl., ¶ 50).
+
+Because account numbers and account balances “correspond to a transaction
+
+request,” Chelliah teaches this limitation.
+
+Chelliah anticipates claims 10-12, 15, and 16.
+
+7.
+Independent claim 10 and its dependent claims 11, 12, 15, and 16 recite
+
+
+
+similar features as independent claim 1 and its dependent claims 2, 3, 5, and 6.
+
+The following claim chart indicates the correspondence between the limitations of
+
+claims 10-12, 15, and 16 and the limitations of claims 1-3, 5, and 6.  Accordingly,
+
+claims 10-12, 15 and 16 are anticipated by Chelliah for the same reasons as
+
+provided above for claims 1-3, 5 and 6.
+
+Limitation of Claim 10
+
+Corresponding
+Limitation of Claim 1
+
+Section
+
+
+
+- 30 -
+
+
+
+A method for configuring a value-added
+network switch for enabling real-time
+transactions on a network, said method
+for configuring said value-added
+network switch compromising the steps
+of:
+
+switching to a transactional application
+in response to a user specification from
+a network application,
+
+said transactional application providing
+a user with a plurality of transactional
+services managed by at least one value-
+added network service provider,
+
+said value-added network service
+provider keeping a transaction flow
+captive,
+
+said plurality of transactional services
+being performed interactively and in
+real time;
+
+transmitting a transaction request from
+said transactional application; and
+
+processing said transaction request.
+
+A configurable value-
+added network switch
+for enabling real-time
+transactions on a
+network, said
+configurable value-
+added network switch,
+comprising
+means for switching to
+a transactional
+application in response
+to a user specification
+from a network
+application,
+said transactional
+application providing a
+user with a plurality of
+transactional services
+managed by at least
+one value-added
+network service
+provider,
+said value-added
+network service
+provider keeping a
+transaction flow
+captive,
+said plurality of
+transactional services
+being performed
+interactively and in real
+time;
+means for transmitting
+a transaction request
+from said transactional
+application;
+means for processing
+said transaction
+request.
+
+IV(A)(1)(a)
+
+IV(A)(1)(b)
+
+IV(A)(1)(c)
+
+IV(A)(1)(d)
+
+IV(A)(1)(e)
+
+IV(A)(1)(f)
+
+IV(A)(1)(g)
+
+
+
+- 31 -
+
+
+
+Limitation of Claim 11
+
+Limitation of Claim 12
+
+receiving said user specification;
+
+enabling a switch to said transactional
+application; and
+
+The method for configuring said value-
+added network switch as claimed in
+claim 10 wherein said step of switching
+to a transactional application further
+comprises the steps of:
+
+Corresponding
+Limitation of Claim 2
+The configurable
+value-added network
+switch as claimed in
+claim 1 wherein said
+means for switching to
+a transactional
+application further
+comprises:
+means for receiving
+said user specification;
+means for enabling a
+switch to said
+transactional
+application; and
+activating said transactional application.  means for activating
+said transactional
+application.
+Corresponding
+Limitation of Claim 3
+The configurable
+value-added network
+switch as claimed in
+claim 2 wherein said
+means for activating
+said transactional
+application further
+includes
+means for creating a
+transaction link
+between said network
+application and said
+transactional
+application
+Similar Limitation of
+Claim 5
+The configurable
+value-added network
+
+The method for configuring said value-
+added network switch as claimed in
+claim 11 wherein said step of activating
+said transactional application further
+includes
+
+a step of creating a transaction link
+between said network application and
+said transactional application.
+
+Limitation of Claim 15
+
+The method for configuring said value-
+added network switch as claimed in
+
+
+
+- 32 -
+
+Section
+
+IV(A)(2)
+
+IV(A)(2)(a)
+
+IV(A)(2)(b)
+
+IV(A)(2)(c)
+
+Section
+
+IV(A)(3)
+
+IV(A)(3)
+
+Section
+
+IV(A)(5)
+
+
+
+claim 10
+
+wherein said step of processing said
+transaction request further comprises the
+step of transmitting said transaction
+request to a host means.
+
+Limitation of Claim 16
+
+The method for configuring said value-
+added network switch as claimed in
+claim 15
+
+wherein said host means contains data
+corresponding to said transaction
+request.
+
+switch as claimed in
+claim 1
+wherein said means for
+processing said
+transaction request
+further comprises
+means for coupling
+said means for
+transmitting to a host
+means
+Corresponding
+Limitation of Claim 6
+The configurable
+value-added network
+switch as claimed in
+claim 5
+wherein said host
+means contains data
+corresponding to said
+transaction request
+
+IV(A)(5)
+
+Section
+
+IV(A)(6)
+
+IV(A)(6)
+
+Chelliah anticipates claim 14.
+
+8.
+Claim  14  corresponds  to  claim  4,  except  instead  of  "value-added  network
+
+service provider" recited in claim 4, claim 14 recites an "Internet service provider."
+
+As  noted  in  Section  IV(A)(4),  Chelliah  teaches  the  limitations  of  claim  4.  To  the
+
+extent  that  an  "Internet  service  provider"  differs  from  a  "value-added  network
+
+service provider", Petitioner notes  that  the store  relied upon  in Section  IV(A)(4)  to
+
+disclose "value-added network service provider" also discloses an "Internet service
+
+provider"  because  the  stores  are  accessible  over  the  Internet.  (See  Section
+
+IV(A)(1)(c).) Thus, Chelliah discloses the limitations of claim 14.
+
+
+
+- 33 -
+
+
+
+Chelliah anticipates claim 17.
+
+9.
+Claim  17  depends  from  claim  10  and  further  recites  "wherein  said  value-
+
+added  network  service  providers  cooperate
+
+to  provide  said  plurality  of
+
+transactional services to said user." Chelliah discloses this limitation.
+
+The  external  commerce  subsystems  18  (e.g.,  VISA,  Fedex,  and  AVP)  of
+
+Chelliah  provide  a  variety  of  transactional  services  (e.g.,  payment  authorization,
+
+shipping and tax calculating, etc.) to a user.
+
+They could include: Customer Accounts Subsystem, Participant
+Subsystem;  Order  Fulfillment;  Payment  Handler;  Product  Database;
+Shipping; and Tax.
+Examples  of  well-known  existing  implementations  of  these
+subsystems  are:  VISA's  computerized  credit  card  network  (Payment
+Handler),  various  catalog  sales'  central  warehouse  operations  (Order
+Fulfillment),  FedEx's  on-site,  personal  computer-based  shipping
+calculator (Shipping), and AVP's tax calculator (Taxing).
+(Chelliah, 8:41-50; see also Sirbu Decl., ¶ 51.)
+
+These  services  are  provided  by multiple  service  providers  (e.g., VISA, Fedex,  and
+
+AVP).
+
+The  different  external  commerce  subsystems  18  of  Chelliah  "cooperate"  to
+
+provide  the  transactional  services  by  working  together  to  complete  a  purchase.
+
+(Sirbu  Decl.,  ¶  52)  For  example,  the  payment  service  provider  and  the  shipping
+
+service  provider  cooperate  to  provide  the  payment  service.  (Sirbu  Decl.,  ¶  52)
+
+
+
+- 34 -
+
+
+
+Specifically,  payment  handler  126  (provided  by  the  payment  service  provider)  is
+
+invoked to convert an “authorization to charge” to a “payment order” only after the
+
+product  is  indicated  as  shipped  by  order  fulfillment  legacy  system  130  (provided
+
+by  the  shipping  service  provider).  (Sirbu Decl.,  ¶  52;  see  also   Chelliah,  17:23-30,
+
+17:46-52.)
+
+10.  Chelliah anticipates independent claim 35.
+Independent  claim  35  recites  similar  features  as  claim  1.  The  following
+
+claim  chart  indicates  the  correspondence  between  the  limitations  of  claim  35  and
+
+the limitations of claim 1.
+
+Limitation
+
+A configurable value-added network
+system for enabling real-time
+transactions on a network, said
+configurable value-added network
+system comprising:
+
+means for switching to a transactional
+application in response to a user
+specification from a network application,
+
+said transactional application providing a
+user with a plurality of transactional
+services managed by at least one value-
+added network service provider,
+
+Section
+
+IV(A)(1)(a)
+
+IV(A)(1)(b)
+
+IV(A)(1)(c)
+
+Corresponding
+limitation in Claim 1
+A configurable value-
+added network switch
+for enabling real-time
+transactions on a
+network, said
+configurable value-
+added network switch,
+comprising
+means for switching to a
+transactional application
+in response to a user
+specification from a
+network application,
+said transactional
+application providing a
+user with a plurality of
+transactional services
+managed by at least one
+value-added network
+service provider,
+
+
+
+- 35 -
+
+
+
+said value-added network service
+provider keeping a transaction flow
+captive,
+
+said plurality of transactional services
+being performed interactively and in real
+time;
+
+means for activating an agent to create a
+transaction link between said user
+application and said transactional
+application
+means for transmitting a transaction
+request from said transactional
+application; and
+
+a host means for processing said
+transaction request and retrieving data
+corresponding to said transaction
+request.
+
+IV(A)(1)(d)
+
+said value-added
+network service provider
+keeping a transaction
+flow captive,
+said plurality of
+transactional services
+being performed
+interactively and in real
+time,
+See subsection (a) below  See
+subsection
+(a) below
+
+IV(A)(1)(e)
+
+IV(A)(1)(f)
+
+means for transmitting a
+transaction request from
+said transactional
+application;
+See subsection (b) below  See
+subsection
+(b) below
+
+a)  Chelliah  teaches  "means  for  activating  an  agent  to  create  a
+transaction
+link  between  said  user  application  and  said
+transactional application."
+
+The  structure  in  the  ‘500  patent  corresponding  to  "means  for  activating  an
+
+agent  to  create  a  transaction  link  between  said  user  application  and  said
+
+transactional  application"  is  a  graphical  user  interface.    Chelliah  discloses  this
+
+limitation.
+
+As  described  above,  the  system  of  Chelliah  provides  a  graphical  user
+
+interface  including  icons  that  the  customer  can  select  to  choose  a  particular
+
+
+
+- 36 -
+
+  (
+
+
+
+electronic storefront7:
+
+The customer enters a particular electronic store by selecting its
+Electronic  Storefront  14,  e.g.,  by  clicking  on  an  icon  with  a
+conventional  selection  or  input  device  such  as  a  mouse/curser  device
+touchpad. (Chelliah, 6:37-40.)
+Chelliah's  graphical  user  interface  performs  the  function  of  "activating  an  agent  to
+
+create  a  transaction  link  between  said  user  application  and  said  transactional
+
+application."  When  the  customer  "enters"  a  storefront  14  (i.e.,  by  clicking  on  the
+
+icon  in  the graphical user  interface), a participant program object 112  (an agent)  is
+
+activated:
+
+When  the  Customer  12  "enters"  a  Storefront  14,  Participant
+
+Program  Object  112  is  retrieved  from  the  Participant  Subsystem  and
+activated. Storefront 14 determines what Distributor Objects 118 exist
+to  distribute  coupons  that  can  be  used  by  this  storefront.  (Chelliah,
+13:23-25.)
+The  participant  program  object  112  is  the  recited  “agent.”  Participant  program
+
+object  112  creates  a  transaction  link  between  the  customer's  web  browser  (the
+
+recited "user application") and sales representative program object 114 (the recited
+
+"transactional  application")  by  providing  a
+
+token
+
+that  allows  for  secure
+
+communications between  the web browser and sales representative program object
+
+
+7  Sales  representative  program  object  114  is  initiated  and  receives  requests
+from  the  customer  as  a  result  of  the  customer's  interaction  with  electronic
+storefronts 14. (Sirbu Decl., ¶¶ 25-26.)
+
+
+
+- 37 -
+
+
+
+b)  Chelliah  teaches  "a  host  means  for  processing  said  transaction
+request  and  retrieving  data  corresponding  to  said  transaction
+request."
+
+  (
+
+The  structure  in  the  ‘500  patent  corresponding  to  "a  host  means  for
+
+processing  said  transaction  request  and  retrieving  data  corresponding  to  said
+
+transaction  request,"  is  a  portion  of  the  Bank  "Back  Office."  As  noted  above  in
+
+Section  IV(A)(1)(g)  with  respect  to  claim  1,  Chelliah's  payment  handler  discloses
+
+the  relevant  portions  of  the Bank  "Back Office"  and  thus  teaches  the  recited  “host
+
+114. (Sirbu Decl., ¶ 54; Chelliah, 10:14-17, 10:28-30.)
+
+means.”
+
+Chelliah's  payment  handler  126  performs  the  function  of  "processing  said
+
+transaction  request  and  retrieving  data  corresponding  to  said  transaction  request."
+
+In particular, the Payment Handler processes a transaction request by converting an
+
+“authorization to charge” to a “payment order”:
+
+Payment  Handler  Interface  124  again  calls  External  Payment
+Handler 126 to convert the authorization to charge to a payment order.
+(Chelliah, 17:49-51.)
+Further,  the  Payment  Handler  retrieves  "data  corresponding  to  said
+
+transaction request" in the form of, e.g., charge acknowledgements:
+
+For example, if the customer selects a Visa credit card as a payment
+method, then Payment Handler Interface 124 will call the VISAnet
+
+
+
+- 38 -
+
+
+
+account.8 E
+sy
+ystem for a
+authorizati
+ion to char
+ge the sele
+ected Visa
+External
+that the
+erface 124
+andler Inte
+Payment Ha
+6 notifies P
+andler 126
+Payment Ha
+pted. (Chel
+harge to th
+he selected
+ payment m
+method wi
+ill be accep
+lliah,
+6:61-67.)
+
+P c 1 B G
+
+B.
+
+  Grou
+17, and 35.
+10-12, 14-1
+aims 1-6, 1
+cipates cla
+fford antic
+und 2: Gif
+.
+e  '500  Pate
+m  that  the
+me  problem
+ves  the  sam
+Gifford  solv
+ent  sought
+
+to  solve—
+—  the
+
+limited
+
+number  o
+of  services
+
+that  can
+
+d  applicati
+work-based
+ed  by  netw
+be  provide
+ions.
+
+Gifford
+
+ior  to  No
+d  that  pr
+described
+ovember
+
+nt  indepen
+o  merchan
+1995  “no
+ndent
+
+mechan
+sers  to  ut
+permits  us
+rks  that  p
+ter  networ
+or  comput
+vailable  fo
+nism  is  av
+tilize
+
+s,  and  dem
+debit  cards
+dit  cards,  d
+uch  as  cred
+ruments  su
+ncial  instr
+tional  finan
+convent
+mand
+
+(Gifford, 1
+alances.”  (
+account ba
+deposit
+1:25-31.)
+
+imitations,
+erceived  li
+s  these  pe
+To  address
+T
+,  Gifford
+
+provides
+
+"[a]  comp
+plete
+
+system
+
+for  the  pu
+urchasing
+
+of  goods
+
+uter  netwo
+er  a  compu
+mation  ove
+or  inform
+ork."
+
+(Gifford
+ow, illustra
+duced belo
+ford, reprod
+. 1 of Giffo
+mple, FIG
+t.) For exam
+d, Abstract
+ates a
+
+tem 200 th
+k sales syst
+network
+hat:
+
+1:46-49.)
+
+7  to  interc
+f  buyer  co
+plurality  o
+connect  a  p
+network  6
+mploys  a  n
+omputers
+merchant
+omputer
+64,  each  m
+61  and  62,
+computers
+s  63  and  6
+merchant  c
+65  and  66
+atabases  6
+isement  da
+tal  adverti
+ctive  digit
+with  respec
+6,  and  a
+a  buyer
+payment  c
+omputer  6
+68.  A  use
+er  of  the
+  system
+employs
+omputer  t
+erchant  com
+m  the  me
+ments  from
+advertisem
+o  retrieve
+mputers,
+used  to
+nd  to  purc
+chase  goo
+ds  of  inte
+rest.  A  pa
+ayment  com
+mputer  is
+
+
+
+8
+Handler. (C
+Payment H
+mple of the P
+VISAnet i
+is an exam
+Chelliah, 1
+
+e 6 w p c a
+
+
+
+- 39 -
+
+
+
+authorize a purchase transaction. (Gifford, 4:44-52.)
+
+Gifford  further  notes  "[t]he  software  architecture  underlying  the  particular
+
+preferred embodiment  is based upon  the hypertext conventions of  the World Wide
+
+Web." (Gifford, 4:61-64.)
+
+
+
+As shown in FIG. 6 of Gifford, the user activates a link that results in "the
+
+HTTP request 20 for a specific document with a specified URL." (Sirbu Decl., ¶
+
+59; see also Gifford, 5:51-53.) The merchant then returns the document
+
+(advertisements or lists of goods/services that can be purchased) specified by the
+
+URL. The user can select a link in this document to send another HTTP request
+
+(e.g., to request a purchase) to the merchant computer. (Sirbu Decl., ¶ 59; see also
+
+Gifford, 5:57-59.) The merchant computer can then send a payment order to a
+
+payment system/computer. (Sirbu Decl., ¶ 59; see also Gifford, 6:9-11.)
+
+
+
+"If  the  payment  system  authorizes  the  request,  an  authorization  message  at
+
+29  is  returned  to  the buyer computer, and  the merchant computer checks at 30  that
+
+the  authorization  message  came  from
+
+the  payment  computer  using
+
+the
+
+authenticator  mechanism  described  below."  (Gifford,  6:52-56.)  The  merchant
+
+computer  can  then  complete  the  transaction:  "the  merchant  computer  performs
+
+fulfillment  at  30,  returning  the  purchased  product  in  response  at  31."  (Gifford,
+
+6:57-59.)  Annotated  FIG.  1  of  Gifford  illustrates  how  the  elements  of  Gifford’s
+
+system map to the limitations of the challenged claims.
+
+
+
+- 40 -
+
+
+
+
+
+Transactional
+application
+
+Network
+Application
+
+Financial
+Network
+
+VAN
+System
+
+VAN
+Switch
+
+Host
+Means
+
+Means for
+processing
+
+
+
+1.  Gifford anticipates independent claim 1
+(a)  Gifford  teaches  “A  configurable  value-added  network  switch
+for enabling real-time transactions on a network”
+
+Gifford's  merchant  computers  63  and  64  and  payment  computer  68
+
+collectively  function  as  a  VAN  switch.  (Sirbu  Decl.,  ¶  61.)  In  particular,  a  buyer
+
+accesses merchant computer 63 over network 67. (Sirbu Decl., ¶ 61; see also 4:44-
+
+48.) Gifford makes clear that network 67 can be the World Wide Web and thus is a
+
+value-added  network.  (Sirbu  Decl.,  ¶  59;  see  also  Gifford,  4:61-64.)  Moreover,
+
+merchant  computers  63  and  64  and  payment  computer  68  route  a  purchase
+
+transaction  request  received  from  buyer  computers  61  and  62  to  a  financial
+
+network and therefore are collectively a “VAN switch.” (Sirbu Decl., ¶ 61; see also
+
+
+
+- 41 -
+
+
+
+Gifford,  6:39-49  (describing  routing  from  buyer  computers  61  and  62  to  the
+
+merchant computers 63 and 64 and  to  the payment  computer 68), 9:14-18  (routing
+
+from  the  payment  computer  68  to  the  external  financial  network).)    Moreover,  a
+
+person  of  ordinary  skill  in  the  art would  recognize  that  computers  63,  64,    and  68
+
+are "configurable." (Sirbu Decl., ¶ 61.)
+
+(b)  Gifford
+for  switching  to  a  transactional
+teaches  "means
+application  in  response  to  a  user  specification  from  a  network
+application"
+
+
+
+The structure  in  the ‘500 Patent corresponding  to  this  limitation  is switching
+
+service 702.   Gifford discloses this limitation.
+
+As  illustrated  in  the  annotated  figures  from  Gifford  reproduced  below,
+
+Gifford  discloses  switching  from  an  application  that  provides  an  overview  screen
+
+(FIG.  2)  to  an  application  that  provides  digital  advertisements  of  items  (i.e.,
+
+different  articles)  available  for  purchase  (FIG.  3)  in  response  to  a  request  received
+
+from  buyer  computer  61  when  user  selects  link  1  in  the  overview  screen.  (Sirbu
+
+Decl.,  ¶  59;  see  also  Gifford,  5:7-13.)  The  application  that  provides  the  digital
+
+advertisement  of  items  is  the  recited  “transactional  application”  and  the  reqeust
+
+received from buyer computer 61 is the "user specification."
+
+
+
+- 42 -
+
+
+
+Clicking link 1 results in buyer
+computer 61 transmitting a request to
+merchant computer 63
+
+Responsive to the request, merchant
+computer 63 calls an application that delivers
+this webpage to buyer computer 61
+
+
+
+
+
+For example, Gifford discloses:
+
+An  initial  user  inquiry  19  from  activating  link  1  results  in  the  HTTP
+request  20  for  a  specific  document  with  a  specified  URL.  The  URL
+specifies  the name of  the merchant computer. The merchant computer
+retrieves  the  document  given  the  URL  at  21,  and  returns  it  to  the
+buyer computer at 22. (Gifford, 5:51-56)
+
+Further,  the  result  of  Gifford's  switching  is  identical  to  the  result  of  switching
+
+service  702—the  user  is  switched  to  the  transactional  application  (running  on
+
+merchant computer 63). (Sirbu Decl., ¶ 64; see also Gifford, 5:54-57.)
+
+(c)  Gifford  teaches  "said  transactional  application  providing  a  user
+with  a  plurality  of  transactional  services managed  by  at  least  one
+value-added network service provider"
+
+
+
+As  shown  in  FIG.  3  of  Gifford  (reproduced  below  with  annotations),  the
+
+digital  advertisement  screen  provides  a  plurality  of  items  available  for  purchase.
+
+
+
+- 43 -
+
+
+
+(Sirbu  Decl.,  ¶  64;  see  also  Gifford,  5:19-20.)  In  the  example  of  FIG.  3,  Gifford
+
+lists  3  items  for  sale.  Selecting  any  of  these  items  results  in  the  purchase  of  the
+
+selected items. (Sirbu Decl., ¶ 64.)
+
+Service 1
+
+Service 2
+Service 3
+
+
+
+One  of  ordinary  skill  in  the  art  would  appreciate  that  the  functionality
+
+corresponding  to  each  of  these  items  is  a  "transactional  service,"  because  each
+
+operates  to  perform  a  user-specified  transaction  (e.g.,  the  purchase  of  a  user-
+
+selected  news  item,  and  the  download  of  the  news  item  to  the  buyer  computer  61
+
+for  viewing  by  the  user).  (Sirbu Decl.,  ¶  66.) Moreover,  a  person  of  ordinary  skill
+
+in  the  art  would  appreciate  that  a  merchant  manages  the  items  available  for
+
+purchase  (e.g.,  selecting  news  items  that  can  be  purchased,  setting  their  respective
+
+prices, etc.) through interaction with the merchant computer. (Sirbu Decl., ¶ 66; see
+
+also Gifford, 5:22-24.)
+
+(d)  Gifford  teaches  "said  value-added  network  service  provider
+keeping a transaction flow captive."
+
+As  discussed  above,  “keeping  a  transaction  flow  captive”  is  maintaining
+
+
+
+- 44 -
+
+
+
+control  over  the  steps  used  to  carry  out  a  transaction.  (Sirbu  Decl.,  ¶  23.)  Gifford
+
+teaches  that  the  merchant  retains  control  over  the  transaction  flow.  For  example,
+
+interactions  with  the  buyer  computer  61  and  payment  computer  68  in  the
+
+information  flow  of FIG.  6  of Gifford  are  responsive  to  actions  of  and  directed  by
+
+the merchant computers 63 and 64. (Sirbu Decl., ¶ 67.)
+
+(e)  Gifford  teaches  "said  plurality  of  transactional  services  being
+performed interactively and in real time."
+
+The services provided to a user by Gifford are performed "interactively":
+
+Accordingly,  therefore,  it  is  a  primary  objective  of  this
+invention  to  provide  a  user  interactive  network  sales  system  in which
+the  user  can  freely  use  any  merchant  of  choice  and  utilize  existing
+financial  instruments  for  payment.  (Gifford,  1:50-53;  emphasis
+added.)
+Further, these services are performed in "real-time":
+
+A  payment  system  authenticates  a  payment  order,  checks  for
+
+sufficient  funds  or  credit,  and
+transfer
+then  originates  funds
+transactions  to carry out  the payment order. (Gifford, 3:1-3; emphasis
+added.)
+(f)  Gifford  teaches  "means  for  transmitting  a  transaction  request
+from said transactional application"
+
+The  structure  in  the  '500 Patent  corresponding  to  this  limitation  is  boundary
+
+service 701, which provides  "the  interfaces between VAN  switch 520,  the  Internet
+
+and  the  Web,  and  multi-media  end  user  devices  such  as  PCs,  televisions  or
+
+telephones."  ('500  Patent,  8:39-42.) Merchant  computers  63,  64  of  Gifford,  which
+
+
+
+- 45 -
+
+
+
+control  the  transaction  between  the  end  user  (i.e.,  buyer  computer  61)  and  the
+
+payment  computer  68  via  the  Internet  87  are  equivalent  to  this  limitation.  (Sirbu
+
+Decl., ¶ 70.)
+
+In  particular,  as  discussed  above  with  reference  to  annotated  FIG.  3  of
+
+Gifford  (provided  above),  the  user  interacts  with  the  recited  “transactional
+
+application”  (i.e.,  the  application  in Gifford  that provides digital  advertisements of
+
+items)  to  select  an  item  for  purchase.    Such  selection  by  the  user  causes  this
+
+“transaction application”  to  transmit a  transaction request  to download  the selected
+
+news item to the buyer computer 61.
+
+Other  transaction  requests  are  also  transmitted.    For  example,  responsive  to
+
+the  user’s  interaction  with  the  “transactional  application”  and  resulting  requests
+
+transmitted  by  the  “transactional  application,”  the  merchant  computer  63,  64
+
+queues  and  sends  a  payment  order  corresponding  to  the  purchase  to  the  payment
+
+computer  68.    (Sirbu  Decl.,  ¶  70.)  The  payment  computer  68  uses  the  payment
+
+order to process the transaction:
+
+If  the  merchant  computer  is  able  to  construct  a  complete
+payment order at 26  the payment order  is  sent  to a payment computer
+for  authorization  at  27.  If  a  payment  order  can  be  constructed,
+processing continues at 28. (Gifford, 6:9-13.)
+
+(g)  Gifford teaches "means for processing said transaction request."
+The  structure  of  the  “means  for  processing”  is  the  Bank  Back  Office.    The
+
+
+
+- 46 -
+
+
+
+function is “processing said transaction request.”  Gifford discloses this limitation.
+
+The  payment  computer  68  of  Gifford  processes  transaction  requests  and
+
+therefore  is  equivalent  to  the  “means  for  processing.”  (Sirbu  Decl.,  ¶  71;  see  also
+
+Gifford,  2:66-3:1.)  In  particular,  the  payment  computer  68  (shown  as  payment
+
+computer  72  in  FIG.  13)  receives  a  payment  transaction  request  in  the  form  of  a
+
+payment  order  from  merchant  computer  63,  64  and  processes  the  request  by,  for
+
+example,  verifying  the  authenticator  and  requesting  authorization  from  a  real-time
+
+financial authorization network. (Sirbu Decl., ¶ 71; see also Gifford, FIG. 14 (steps
+
+82-90),  6:48-49  (merchant  computer  sending  the  payment  order  to  the  payment
+
+computer),  8:27-30  (verifying  authenticator),  9:14-18  (requesting  authorization
+
+from a real-time financial authorization network).)
+
+Moreover,  the merchant  computers  63,  64  and  the  databases  65,  66,  as well
+
+as  the  payment  computer  68,  process  requests  in  the  same way  as  the Bank  "Back
+
+Office"  of  the  '500  Patent,  using  databases  or  data  repositories.  For  example,  one
+
+skilled in the art would appreciate that verifying an authenticator requires access to
+
+stored data. (Sirbu Decl., ¶ 72.)
+
+2.  Gifford anticipates dependent claim 2.
+Claim 2 depends  from claim 1 and additionally recites, "wherein said means
+
+for  switching  to  a  transactional  application  further  comprises: means  for  receiving
+
+said  user  specification;  means  for  enabling  a  switch  to  said  transactional
+
+
+
+- 47 -
+
+
+
+application; and  means for activating said transactional application."
+
+(a)  Gifford teaches "means for receiving said user specification."
+The  structure  in  the  ‘500  patent  corresponding  to  this  limitation  is  the
+
+portion  of  boundary  service  701  that  receives  requests  over  the  Internet.    Gifford
+
+teaches  receiving  user  specifications  at  merchant  computer  63,  64  in  the  form  of
+
+HTTP requests:
+
+The  buyer  computer  displays  the  resulting  HTML  document  at
+23. When  the  user  activates  link  5,  an HTTP  request  25  is  sent  to  the
+merchant  computer  requesting  the  document.  (Gifford,  4:56-59;
+emphasis added; see also Sirbu Decl., ¶¶ 73-74.)
+
+(b)  Gifford teaches "means for enabling a switch to said transactional
+application."
+
+The  structure  in  the  ‘500  Patent  corresponding  to  this  limitation  is  the
+
+portion  of    boundary  service  701  that  passes  information  from  the  network
+
+application  to  the  transactional  application.  In  a  like  manner,  Gifford's  merchant
+
+computer  provides  an  interface,  in  the  form  of  links  to  the  digital  advertisements
+
+screen (shown in FIG. 3), which allow information to be passed to the transactional
+
+application.  (Sirbu Decl.,  ¶  75;  see  also  Gifford,  5:8-13.)    Thus, Gifford  discloses
+
+this limitation. In particular, with reference to annotated FIG. 3 of Gifford (above),
+
+the  merchant  computer  provides  an  interface,  in  the  form  of  links  to  the  digital
+
+advertisements  screen  (shown  in FIG.  3), which  allow  information  to  be  passed  to
+
+the transactional application. (Sirbu Decl., ¶¶ 75-76; see also Gifford, 5:8-13.)
+
+
+
+- 48 -
+
+
+
+(c)  Gifford
+teaches  "means
+application."
+
+for  activating  said
+
+transactional
+
+The  structure  in  the  ‘500  Patent  corresponding  to  this  limitation  is  a
+
+graphical  user  interface  that  displays  a  list  of  applications.  Gifford  discloses  this
+
+limitation.  In  particular,  the  "overview  screen"  of  Gifford  (shown  in  FIG.  2)
+
+provides  links  that,  when  activated,  cause  the  merchant  computer  to  activate  the
+
+digital advertisement application:
+
+FIG. 2 shows an overview screen that has been retrieved from a
+merchant  computer  by  a  buyer  computer  and  displayed  by  the  buyer
+computer.  It  includes  links  1,  2,  and  3  that  when  activated  by  a  user
+cause the buyer's computer to take specified actions. (Gifford, 5:8-11.)
+
+For  example, FIG.  2  of Gifford  illustrates  an  "overview  screen"  that  is  a  graphical
+
+user interface that provides a list of applications. (Sirbu Decl., ¶ 78.)
+
+3.  Gifford anticipates dependent claim 3.
+Claim 3 depends  from claim 2 and additionally recites, "wherein said means
+
+for  activating  said  transactional  application  further  includes  means  for  creating  a
+
+transaction
+
+link  between  said  network  application  and  said
+
+transactional
+
+application."  The  structure  in  the  ‘500  patent  corresponding  to  the  “means  for
+
+creating”  is  boundary  service  701.  Boundary  service  701  provides  "the  interfaces
+
+between  VAN  switch  520,  the  Internet  and  the  Web,  and  multi-media  end  user
+
+devices  such  as  PCs,  televisions,  or  telephones."  ('500  Patent,  8:36-39.)  Similarly,
+
+Gifford  teaches  the  "overview  screen"  of  FIG.  2  (identified  above  as  teaching  the
+
+
+
+- 49 -
+
+
+
+means  for  activating)  as  including  links  1,  2,  and  3.  (Sirbu  Decl.,  ¶  79;  see  also
+
+Gifford,  5:9-10.)  These  links,  when  activated  by  a  user,  create  a  connection  (a
+
+transaction  link)  between  the  network  application  running  on  the  buyer  computer
+
+61  and  the  digital  advertisements  application  (i.e.,  the  transactional  application).
+
+(Sirbu Decl.,  ¶  79;  see  also Gifford,  5:12-14.) The  overview  screen  and  links  1,  2,
+
+and  3  teach  the  function  and  structure  of  the  “means  for  creating.”  Thus,  Gifford
+
+discloses this limitation.
+
+4.  Gifford anticipates dependent claim 4.
+Claim 4 depends  from claim 2 and additionally recites, "wherein said means
+
+for  receiving  said  user  specification  further  comprises:  means  for  presenting  said
+
+user with  a  list  of  transactional  applications,  each  of  said  transactional  application
+
+being  associated  with  a  particular  value-added  network  service  provider;  and
+
+means  for  submitting  said  user  specification  according  to  a  user's  selection  of  said
+
+transactional application from said list of transactional applications."
+
+(a)  Gifford  teaches  “means  for  presenting  said  user  with  a  list  of
+transactional  applications,  each  of  said  transactional  application
+being  associated  with  a  particular  value-added  network  service
+provider.”
+
+The  structure  corresponding  to  this  limitation  is  the  portion  of  switching
+
+service  702  that  outputs  data  to  the  user.  The  function  of  this  limitation  is
+
+"presenting  said  user  with  a  list  of  transactional  applications,  each  of  said
+
+transactional  application  being  associated  with  a  particular  value-added  network
+
+
+
+- 50 -
+
+
+
+service provider." Gifford  teaches  this  limitation. Specifically, FIG. 2 of Gifford  is
+
+an  overview  screen  that  provides  a  list  of  transactional  applications  in  the  form  of
+
+links  to,  for  example,  digital  advertisements  and  audio  content.  (Gifford,  5:7-17.)
+
+Each  of  these  applications  is  associated  with  a  particular  value-added  network
+
+service provider (e.g.,  the digital advertisements are associated with  the New York
+
+Times). (See Sirbu Decl., ¶ 83.) Thus, Gifford teaches this limitation.
+
+(b)  Chelliah  teaches  “means  for  submitting  said  user  specification
+according  to  a  user's  selection  of  said  transactional  application
+from said list of transactional applications.”
+
+The  structure  corresponding  to  this  limitation  is  the  portion  of  switching
+
+service  702  that  submits  user  specifications.  The  function  of  this  limitation  is
+
+"submitting  said  user  specification  according  to  a  user's  selection  of  said
+
+transactional  application  from  said  list  of  transactional  applications."  Gifford
+
+discloses  this  limitation.  Specifically, Gifford  discloses merchant  computer  63,  64
+
+as  submitting  the  user's  specification  (i.e.,  the HTTP  request  from  buyer  computer
+
+61)  to  an  application  that  retrieves  digital  advertisements  to  be  sent  to  the  user  in
+
+response  to  the  user's  request.  (See  Gifford,  5:49-59.)  Thus,  Gifford  discloses  this
+
+limitation.
+
+5.  Gifford anticipates dependent claim 5.
+Claim 5 depends from claim 1 and additionally recites, "wherein said means
+
+
+
+for processing said transaction request further comprises means for coupling said
+
+
+
+- 51 -
+
+
+
+means for transmitting to a host means."  The "host means"9 equates, for example,
+
+to the portion of the Bank "Back Office" that processes received requests and/or a
+
+repository that stores data. The structure corresponding to the "means for coupling"
+
+is a network of the Bank "Back Office."
+
+
+
+As noted above in section IV(B)(1)(g), Gifford's payment computer 68 is
+
+equivalent to the recited “means for processing “the transaction request. A person
+
+of ordinary skill in the art would have appreciated that Gifford's external financial
+
+system necessarily included data repositories included in card-issuing bank servers.
+
+(Sirbu Decl., ¶ 80.) These bank servers are the “host means.” In particular, the
+
+bank servers process and store data used to determine whether to approve a
+
+transaction request (e.g., account numbers and balances). (Sirbu Decl., ¶ 80).
+
+
+
+Moreover, the payment computer 68 acts as an intermediary between, and
+
+thereby couples, the merchant computers 63, 64 (corresponding to the recited
+
+“means for transmitting”) and the external financial system (including the recited
+
+“host means”). (Sirbu Decl., ¶ 81). In particular, the payment computer 68 receives
+
+a transaction request from merchant computers 63, 64 (Gifford, 6:39-49) and
+
+transmits an appropriate request for authorization to the external financial network
+
+(Gifford 9:14-18). (Sirbu Decl., ¶ 81.)
+
+
+9 Petitioner does not concede that this term invokes 35 U.S.C. § 112(f).
+
+
+
+- 52 -
+
+
+
+6.  Gifford anticipates dependent claim 6.
+Claim 6 depends from claim 5 and additionally recites, "wherein said host
+
+
+
+means contains data corresponding to said transaction request." As explained
+
+above in section IV(B)(5), the card-issuing bank server of Gifford's external
+
+financial system (corresponding to the recited “host means”) necessarily includes
+
+one or more data repositories that store information needed to determine whether
+
+to approve an authorization request. (Sirbu Decl., ¶ 82) This information can
+
+include, for example, account numbers and balances. (Sirbu Decl., ¶ 82.) Because
+
+account numbers and balances correspond to a transaction request (the transaction
+
+request being the authorization request from merchant computer 63 pertaining to a
+
+specific account), Gifford teaches this limitation. (Sirbu Decl., ¶ 82.)
+
+7.  Gifford anticipates claims 10-12, 15, and 16.
+Independent claim 10 and its dependent claims 11, 12, 15, and 16 recite
+
+
+
+similar features as independent claim 1 and its dependent claims 2, 3, 5 and 6,
+
+respectively. Thus, claims 10, 11, 12, 15 and 16 are anticipated by Gifford for the
+
+same reasons as discussed above for claims 1, 2, 3, 5 and 6.  Petitioner has
+
+provided the following claim chart indicating the correspondence between claims
+
+10-12, 15, and 16 and claims 1-3, 5, and 6, respectively.
+
+Limitation of Claim 10
+
+A method for configuring a
+value-added network switch for
+
+Corresponding limitation in
+Claim 1
+A configurable value-added
+network switch for enabling
+
+Section
+
+IV(B)(1)(a)
+
+
+
+- 53 -
+
+
+
+enabling real-time transactions
+on a network, said method for
+configuring said value-added
+network switch compromising
+the steps of:
+switching to a transactional
+application in response to a user
+specification from a network
+application,
+
+said transactional application
+providing a user with a plurality
+of transactional services
+managed by at least one value-
+added network service provider,
+
+said value-added network
+service provider keeping a
+transaction flow captive,
+said plurality of transactional
+services being performed
+interactively and in real time;
+transmitting a transaction
+request from said transactional
+application; and
+processing said transaction
+request.
+Limitation of Claim 11
+
+The method for configuring said
+value-added network switch as
+claimed in claim 10 wherein
+said step of switching to a
+transactional application further
+comprises the steps of:
+receiving said user
+specification;
+enabling a switch to said
+transactional application; and
+
+real-time transactions on a
+network, said configurable
+value-added network switch
+
+means for switching to a
+transactional application in
+response to a user
+specification from a network
+application
+said transactional application
+providing a user with a
+plurality of transactional
+services managed by at least
+one value-added network
+service provider
+said value-added network
+service provider keeping a
+transaction flow captive
+said plurality of transactional
+services being performed
+interactively and in real time
+means for transmitting a
+transaction request from said
+transactional application
+means for processing said
+transaction request
+Corresponding limitation in
+Claim 2
+The configurable value-added
+network switch as claimed in
+claim 1 wherein said means
+for switching to a
+transactional application
+further comprises:
+means for receiving said user
+specification;
+means for enabling a switch
+to said transactional
+
+IV(B)(1)(b)
+
+IV(B)(1)(c)
+
+IV(B)(1)(d)
+
+IV(B)(1)(e)
+
+IV(B)(1)(f)
+
+IV(B)(1)(g)
+
+Section
+
+IV(B)(2)
+
+IV(B)(2)(a)
+
+IV(B)(2)(b)
+
+
+
+- 54 -
+
+
+
+IV(B)(2)(c)
+
+Section
+
+IV(B)(3)
+
+activating said transactional
+application.
+Limitation of Claim 12
+
+The method for configuring said
+value-added network switch as
+claimed in claim 11 wherein
+said step of activating said
+transactional application further
+includes
+a step of creating a transaction
+link between said network
+application and said
+transactional application.
+Limitation of Claim 15
+
+application; and
+means for activating said
+transactional application.
+Corresponding limitation in
+Claim 3
+The configurable value-added
+network switch as claimed in
+claim 2 wherein said means
+for activating said
+transactional application
+further includes
+means for creating a
+transaction link between said
+network application and said
+transactional application
+Corresponding limitation in
+5
+The configurable value-added
+network switch as claimed in
+claim 1
+wherein said means for
+processing said transaction
+request further comprises
+means for coupling said
+means for transmitting to a
+host means
+Corresponding limitation in
+6
+The method for configuring said
+The configurable value-added
+value-added network switch as
+network switch as claimed in
+claimed in claim 15
+claim 5
+wherein said host means
+wherein said host means
+contains data corresponding to
+contains data corresponding
+said transaction request.
+to said transaction request
+8.  Gifford anticipates claim 14.
+Claim  14  corresponds  to  claim  4,  except  instead  of  "value-added  network
+
+The method for configuring said
+value-added network switch as
+claimed in claim 10
+wherein said step of processing
+said transaction request further
+comprises the step of
+transmitting said transaction
+request to a host means.
+
+Section
+
+IV(B)(6)
+
+Limitation of Claim 16
+
+IV(B)(3)
+
+Section
+
+IV(B)(5)
+
+IV(B)(5)
+
+IV(B)(6)
+
+service provider" recited in claim 4, claim 14 recites an "Internet service provider."
+
+
+
+- 55 -
+
+
+
+As  noted  in  Section  IV(B)(4),  Chelliah  teaches  the  limitations  of  claim  4.  To  the
+
+extent  that  an  "Internet  service  provider"  differs  from  a  "value-added  network
+
+service provider," Petitioner notes  that  the  store  relied upon  in Section  IV(B)(4)  to
+
+disclose "value-added network service provider" also discloses an "Internet service
+
+provider"  because  the  stores  are  accessible  over  the  Internet.  (See  Section
+
+IV(B)(1)(c).) Thus, Chelliah discloses the limitations of claim 14.
+
+9.  Gifford anticipates claim 17.
+Claim 17 depends from claim 10 and further recites "wherein said value-
+
+added network service providers cooperate to provide said plurality of
+
+transactional services to said user." Gifford teaches that at least two different
+
+entities cooperate to provide transactional services to the user. The first is the
+
+content provider that controls the merchant (e.g., in the example of FIG. 2, the
+
+content provider is the New York Times). (Sirbu Decl., ¶ 83.) The second is the
+
+entity that facilitates payment via the payment computer (e.g., Mastercard, Visa,
+
+American Express, or Discover in the embodiment of FIG. 5). (Sirbu Decl., ¶ 83.)
+
+The merchant computer 63, 64 and the payment computer 68 (and their associated
+
+entities) "cooperate" to perform the purchase. (Sirbu Decl., ¶ 83; see also Gifford,
+
+3:15-25.)
+
+10.  Gifford anticipates independent claim 35.
+Independent claim 35 recites similar features as claim 1. Thus, Petitioner has
+
+
+
+- 56 -
+
+
+
+provided  the  following  claim  chart  indicating  the  correspondence  between
+
+limitations of claim 35 and claim 1.
+
+Limitation
+
+A configurable value-added network
+system for enabling real-time
+transactions on a network, said
+configurable value-added network
+system comprising:
+
+means for switching to a transactional
+application in response to a user
+specification from a network
+application,
+
+said transactional application providing
+a user with a plurality of transactional
+services managed by at least one value-
+added network service provider,
+
+said value-added network service
+provider keeping a transaction flow
+captive,
+
+said plurality of transactional services
+being performed interactively and in
+real time;
+
+means for activating an agent to create a
+transaction link between said user
+application and said transactional
+application
+
+Corresponding
+limitation in Claim 1
+A configurable value-
+added network switch
+for enabling real-time
+transactions on a
+network, said
+configurable value-
+added network switch,
+comprising:
+means for switching to a
+transactional application
+in response to a user
+specification from a
+network application,
+said transactional
+application providing a
+user with a plurality of
+transactional services
+managed by at least one
+value-added network
+service provider,
+said value-added
+network service provider
+keeping a transaction
+flow captive,
+said plurality of
+transactional services
+being performed
+interactively and in real
+time,
+See section (a) below.
+
+Section
+
+IV(B)(1)(a)
+
+IV(B)(1)(b)
+
+IV(B)(1)(c)
+
+IV(B)(1)(d)
+
+IV(B)(1)(e)
+
+See
+subsection
+(a) below
+
+
+
+- 57 -
+
+
+
+means for transmitting a transaction
+request from said transactional
+application; and
+
+IV(B)(1)(f)
+
+means for transmitting a
+transaction request from
+said transactional
+application;
+See section (b) below.
+
+a host means for processing said
+transaction request and retrieving data
+corresponding to said transaction
+request.
+(a)  Gifford  teaches  "means  for  activating  an  agent  to  create  a
+transaction
+link  between  said  user  application  and  said
+transactional application."
+
+See
+subsection
+(b) below
+
+The  structure  in  the  ‘500  Patent  corresponding  to  "means  for  activating  an
+
+agent  to  create  a  transaction  link  between  said  user  application  and  said
+
+transactional  application"  is  a  graphical  user  interface.    Gifford  discloses  this
+
+limitation.
+
+FIG. 3 of Gifford  shows a purchase  screen  that  includes  links 5, 6, 7, and 8,
+
+which  activate  the  agent.  (Sirbu  Decl.,  ¶  84;  see  also  Gifford,  5:19-29.)
+
+Specifically, when  the  user  selects  link  5,  by,  for  example,  clicking with  a mouse,
+
+an  HTTP  request  is  generated  by  the  buyer  computer  and  transmitted  to  the
+
+merchant  computer.  (Sirbu Decl.,  ¶ 84) A person of ordinary  skill  in  the  art would
+
+appreciate  that  this HTTP  request  causes  the web  server  to  activate  an  application
+
+on  the  merchant  computer  that  keeps  the  response  to  the  HTTP  request  pending
+
+while  the  merchant  computer  is  waiting  for  a  communications  from  the  payment
+
+computer  indicating  the purchase has been approved. (Sirbu Decl., ¶ 84) Thus,  this
+
+application  functions  as  an  agent  to  create  (and  maintain)  a  transaction  link
+
+
+
+- 58 -
+
+
+
+between  the  user’s  web  browser  and  the  transactional  application.  (Sirbu  Decl.,  ¶
+
+84.) Further, the "overview screen" of FIG. 2 of Gifford (which includes links 1, 2,
+
+and  3)  is  a  graphical  user  interface.  (Sirbu Decl.,  ¶  85;  see  also Gifford,  5:50-56.)
+
+Thus, Gifford discloses this limitation.
+
+(b)  Gifford  teaches  "a  host  means  for  processing  said  transaction
+request  and  retrieving  data  corresponding  to  said  transaction
+request."
+
+Gifford  teaches  the  function  and  the  structure  corresponding  to  this
+
+limitation.  In  particular,  Gifford  teaches  an  external  financial  system  that
+
+corresponds  to  the  recited  “host  means.”  In  response  to  an  authorization  request,
+
+the  external  financial  system  determines  whether  to  approve  the  request.  (Sirbu
+
+Decl.,  ¶  86;  see  also  Gifford,  9:14-18.)  One  of  ordinary  skill  in  the  art  would
+
+appreciate  that  in  determining  whether  to  approve  the  request,  the  external
+
+financial  system  necessarily  accesses  data  corresponding  to  the  request  (e.g.,  an
+
+account  number  corresponding  to  the  buyer).  (Sirbu Decl.,  ¶  86.) Accordingly,  the
+
+external financial system discloses this limitation.
+
+
+
+
+
+
+
+- 59 -
+
+
+
+
+
+APPENDIX A
+
+
+EXHIBIT LIST:  INTER PARTES REVIEW OF '500 PATENT
+
+
+SAP
+Exhibit #
+
+1001
+
+1002
+
+1003
+
+Description
+
+U.S. Patent No. 5,987,500  to Arunachalam  (filed  Jun. 20, 1997;  issued Nov. 16,
+1999) ("the '500 patent").
+
+Declaration  of  Dr.  Marvin  Sirbu  (including  Curriculum  Vita  of  Dr.  Sirbu,
+attached as Appendix A)
+
+U.S. Patent No. 5,710,887  to Chelliah et al. (filed Aug. 29, 1995;  issued Jan. 20,
+1998).
+
+1004
+
+U.S. Patent No. 5,724,424 to Gifford (filed Nov. 29, 1995; issued Mar. 3, 1998).
+
+
+
+
+
+
