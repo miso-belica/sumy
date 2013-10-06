@@ -57,8 +57,8 @@ class ItemsCount(object):
                 return sequence[:count]
             else:
                 return sequence[:int(self._value)]
-        elif isinstance(self._value, int):
-            return sequence[:self._value]
+        elif isinstance(self._value, (int, float)):
+            return sequence[:int(self._value)]
         else:
             ValueError("Unsuported value of items count '%s'." % self._value)
 
