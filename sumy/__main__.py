@@ -4,9 +4,9 @@
 Sumy - automatic text summarizer.
 
 Usage:
-    sumy (luhn | edmundson | lsa) [--length=<length>]
-    sumy (luhn | edmundson | lsa) [--length=<length>] --url=<url>
-    sumy (luhn | edmundson | lsa) [--length=<length>] --file=<file_path> --format=<file_format>
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>]
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] --url=<url>
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] --file=<file_path> --format=<file_format>
     sumy --version
     sumy --help
 
@@ -36,6 +36,8 @@ from .parsers.plaintext import PlaintextParser
 from .summarizers.luhn import LuhnSummarizer
 from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
+from .summarizers.graph import GraphSummarizer
+from .summarizers.lex_rank import LexRankSummarizer
 from .nlp.stemmers.czech import stem_word
 
 HEADERS = {
@@ -70,10 +72,26 @@ def build_lsa(parser):
     return summarizer
 
 
+def build_graph(parser):
+    summarizer = GraphSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    return summarizer
+
+
+def build_lex_rank(parser):
+    summarizer = LexRankSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    return summarizer
+
+
 AVAILABLE_METHODS = {
     "luhn": build_luhn,
     "edmundson": build_edmundson,
     "lsa": build_lsa,
+    "graph": build_graph,
+    "lex-rank": build_lex_rank,
 }
 
 

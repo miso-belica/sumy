@@ -4,9 +4,9 @@
 Sumy - evaluation of automatic text summary.
 
 Usage:
-    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>]
-    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>] --url=<url>
-    sumy_eval (random | luhn | edmundson | lsa) <reference_summary> [--length=<length>] --file=<file_path> --format=<file_format>
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>]
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] --url=<url>
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] --file=<file_path> --format=<file_format>
     sumy_eval --version
     sumy_eval --help
 
@@ -40,6 +40,8 @@ from ..summarizers.random import RandomSummarizer
 from ..summarizers.luhn import LuhnSummarizer
 from ..summarizers.edmundson import EdmundsonSummarizer
 from ..summarizers.lsa import LsaSummarizer
+from ..summarizers.graph import GraphSummarizer
+from ..summarizers.lex_rank import LexRankSummarizer
 from ..nlp.stemmers.czech import stem_word
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
 
@@ -80,6 +82,20 @@ def build_lsa(parser):
     return summarizer
 
 
+def build_graph(parser):
+    summarizer = GraphSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    return summarizer
+
+
+def build_lex_rank(parser):
+    summarizer = LexRankSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    return summarizer
+
+
 def evaluate_cosine_similarity(evaluated_sentences, reference_sentences):
     evaluated_words = tuple(chain(*(s.words for s in evaluated_sentences)))
     reference_words = tuple(chain(*(s.words for s in reference_sentences)))
@@ -103,6 +119,8 @@ AVAILABLE_METHODS = {
     "luhn": build_luhn,
     "edmundson": build_edmundson,
     "lsa": build_lsa,
+    "graph": build_graph,
+    "lex-rank": build_lex_rank,
 }
 AVAILABLE_EVALUATIONS = (
     ("Precision", False, precision),
