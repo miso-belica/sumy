@@ -48,8 +48,9 @@ Sumy contains command line utility for quick summarization of documents.
 
 .. code-block:: bash
 
-    $ sumy luhn --url=http://www.zdrojak.cz/clanky/automaticke-zabezpeceni/
-    $ sumy edmundson --length=3% --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
+    $ sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization # what's summarization?
+    $ sumy luhn --language=czech --url=http://www.zdrojak.cz/clanky/automaticke-zabezpeceni/
+    $ sumy edmundson --language=czech --length=3% --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
     $ sumy --help # for more info
 
 Various evaluation methods for some summarization method can be executed by
@@ -57,8 +58,9 @@ commands below:
 
 .. code-block:: bash
 
-    $ sumy_eval lsa reference_summary.txt --url=http://www.zdrojak.cz/clanky/automaticke-zabezpeceni/
-    $ sumy_eval edmundson reference_summary.txt --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
+    $ sumy_eval lex-rank reference_summary.txt --url=http://en.wikipedia.org/wiki/Automatic_summarization
+    $ sumy_eval lsa reference_summary.txt --language=czech --url=http://www.zdrojak.cz/clanky/automaticke-zabezpeceni/
+    $ sumy_eval edmundson reference_summary.txt --language=czech --url=http://cs.wikipedia.org/wiki/Bitva_u_Lipan
     $ sumy_eval --help # for more info
 
 

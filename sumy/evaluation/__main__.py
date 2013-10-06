@@ -4,9 +4,9 @@
 Sumy - evaluation of automatic text summary.
 
 Usage:
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>]
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] --url=<url>
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] --file=<file_path> --format=<file_format>
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>]
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --url=<url>
+    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
     sumy_eval --version
     sumy_eval --help
 
@@ -17,6 +17,7 @@ Options:
     --format=<format>    Format of input file. [default: plaintext]
     --length=<length>    Length of summarizied text. It may be count of sentences
                          or percentage of input text. [default: 20%]
+    --language=<lang>    Natural language of summarizied text. [default: english]
     --version            Displays version of application.
     --help               Displays this text.
 
@@ -42,7 +43,7 @@ from ..summarizers.edmundson import EdmundsonSummarizer
 from ..summarizers.lsa import LsaSummarizer
 from ..summarizers.graph import GraphSummarizer
 from ..summarizers.lex_rank import LexRankSummarizer
-from ..nlp.stemmers.czech import stem_word
+from ..nlp.stemmers import Stemmer
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
 
 
@@ -55,43 +56,43 @@ PARSERS = {
 }
 
 
-def build_random(parser):
+def build_random(parser, language):
     return RandomSummarizer()
 
 
-def build_luhn(parser):
-    summarizer = LuhnSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_luhn(parser, language):
+    summarizer = LuhnSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_edmundson(parser):
-    summarizer = EdmundsonSummarizer(stem_word)
-    summarizer.null_words = get_stop_words("czech")
+def build_edmundson(parser, language):
+    summarizer = EdmundsonSummarizer(Stemmer(language))
+    summarizer.null_words = get_stop_words(language)
     summarizer.bonus_words = parser.significant_words
     summarizer.stigma_words = parser.stigma_words
 
     return summarizer
 
 
-def build_lsa(parser):
-    summarizer = LsaSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_lsa(parser, language):
+    summarizer = LsaSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_graph(parser):
-    summarizer = GraphSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_graph(parser, language):
+    summarizer = GraphSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_lex_rank(parser):
-    summarizer = LexRankSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_lex_rank(parser, language):
+    summarizer = LexRankSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
@@ -138,7 +139,8 @@ def main(args=None):
     summarizer, document, items_count, reference_summary = handle_arguments(args)
 
     evaluated_sentences = summarizer(document, items_count)
-    reference_document = PlaintextParser.from_string(reference_summary, Tokenizer("czech"))
+    reference_document = PlaintextParser.from_string(reference_summary,
+        Tokenizer(args["--language"]))
     reference_sentences = reference_document.document.sentences
 
     for name, evaluate_document, evaluate in AVAILABLE_EVALUATIONS:
@@ -169,7 +171,7 @@ def handle_arguments(args):
 
     items_count = ItemsCount(args["--length"])
 
-    parser = parser(input_stream.read(), Tokenizer("czech"))
+    parser = parser(input_stream.read(), Tokenizer(args["--language"]))
     if input_stream is not sys.stdin:
         input_stream.close()
 

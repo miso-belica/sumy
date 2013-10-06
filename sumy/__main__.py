@@ -4,9 +4,9 @@
 Sumy - automatic text summarizer.
 
 Usage:
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>]
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] --url=<url>
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] --file=<file_path> --format=<file_format>
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>]
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>] --url=<url>
+    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
     sumy --version
     sumy --help
 
@@ -16,6 +16,7 @@ Options:
     --format=<format>  Format of input file. [default: plaintext]
     --length=<length>  Length of summarizied text. It may be count of sentences
                        or percentage of input text. [default: 20%]
+    --language=<lang>  Natural language of summarizied text. [default: english]
     --version          Displays version of application.
     --help             Displays this text.
 
@@ -38,7 +39,7 @@ from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
 from .summarizers.graph import GraphSummarizer
 from .summarizers.lex_rank import LexRankSummarizer
-from .nlp.stemmers.czech import stem_word
+from .nlp.stemmers import Stemmer
 
 HEADERS = {
     "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
@@ -49,39 +50,39 @@ PARSERS = {
 }
 
 
-def build_luhn(parser):
-    summarizer = LuhnSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_luhn(parser, language):
+    summarizer = LuhnSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_edmundson(parser):
-    summarizer = EdmundsonSummarizer(stem_word)
-    summarizer.null_words = get_stop_words("czech")
+def build_edmundson(parser, language):
+    summarizer = EdmundsonSummarizer(Stemmer(language))
+    summarizer.null_words = get_stop_words(language)
     summarizer.bonus_words = parser.significant_words
     summarizer.stigma_words = parser.stigma_words
 
     return summarizer
 
 
-def build_lsa(parser):
-    summarizer = LsaSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_lsa(parser, language):
+    summarizer = LsaSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_graph(parser):
-    summarizer = GraphSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_graph(parser, language):
+    summarizer = GraphSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
 
-def build_lex_rank(parser):
-    summarizer = LexRankSummarizer(stem_word)
-    summarizer.stop_words = get_stop_words("czech")
+def build_lex_rank(parser, language):
+    summarizer = LexRankSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
 
     return summarizer
 
@@ -126,11 +127,11 @@ def handle_arguments(args):
 
     items_count = ItemsCount(args["--length"])
 
-    parser = parser(input_stream.read(), Tokenizer("czech"))
+    parser = parser(input_stream.read(), Tokenizer(args["--language"]))
     if input_stream is not sys.stdin:
         input_stream.close()
 
-    return summarizer_builder(parser), parser, items_count
+    return summarizer_builder(parser, args["--language"]), parser, items_count
 
 
 if __name__ == "__main__":
