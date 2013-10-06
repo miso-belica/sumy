@@ -178,7 +178,7 @@ def handle_arguments(args):
     with open(args["<reference_summary>"], "rb") as file:
         reference_summmary = file.read().decode("utf8")
 
-    return summarizer_builder(parser), parser.document, items_count, reference_summmary
+    return summarizer_builder(parser, args["--language"]), parser.document, items_count, reference_summmary
 
 
 if __name__ == "__main__":
