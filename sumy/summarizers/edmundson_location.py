@@ -16,11 +16,10 @@ class EdmundsonLocationMethod(AbstractSummarizer):
 
     def __call__(self, document, sentences_count, w_h, w_p1, w_p2, w_s1, w_s2):
         significant_words = self._compute_significant_words(document)
-        rated_sentences = self._rate_sentences(document, significant_words, w_h, w_p1,
+        ratings = self._rate_sentences(document, significant_words, w_h, w_p1,
             w_p2, w_s1, w_s2)
 
-        return self._get_best_sentences(document.sentences,
-            sentences_count, lambda s: rated_sentences[s])
+        return self._get_best_sentences(document.sentences, sentences_count, ratings)
 
     def _compute_significant_words(self, document):
         headings = document.headings

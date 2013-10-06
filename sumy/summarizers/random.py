@@ -12,15 +12,13 @@ class RandomSummarizer(AbstractSummarizer):
     """Summarizer that picks sentences randomly."""
 
     def __call__(self, document, sentences_count):
-        ratings = self._get_random_ratings(document.sentences)
-        return self._get_best_sentences(document.sentences,
-            sentences_count, self.rate_sentence, ratings)
+        sentences = document.sentences
+        ratings = self._get_random_ratings(sentences)
+
+        return self._get_best_sentences(sentences, sentences_count, ratings)
 
     def _get_random_ratings(self, sentences):
         ratings = list(range(len(sentences)))
         random.shuffle(ratings)
 
         return dict((s, r) for s, r in zip(sentences, ratings))
-
-    def rate_sentence(self, sentence, ratings):
-        return ratings[sentence]

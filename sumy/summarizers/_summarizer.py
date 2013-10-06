@@ -30,7 +30,12 @@ class AbstractSummarizer(object):
     def normalize_word(self, word):
         return to_unicode(word).lower()
 
-    def _get_best_sentences(self, sentences, count, rate, *args, **kwargs):
+    def _get_best_sentences(self, sentences, count, rating, *args, **kwargs):
+        rate = rating
+        if isinstance(rating, dict):
+            assert not args and not kwargs
+            rate = lambda s: rating[s]
+
         infos = (SentenceInfo(s, o, rate(s, *args, **kwargs))
             for o, s in enumerate(sentences))
 

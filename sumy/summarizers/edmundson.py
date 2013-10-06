@@ -77,8 +77,7 @@ class EdmundsonSummarizer(AbstractSummarizer):
             method = self._build_location_method_instance()
             ratings = self._update_ratings(ratings, method.rate_sentences(document))
 
-        return self._get_best_sentences(document.sentences,
-            sentences_count, lambda s: ratings[s])
+        return self._get_best_sentences(document.sentences, sentences_count, ratings)
 
     def _update_ratings(self, ratings, new_ratings):
         assert len(ratings) == 0 or len(ratings) == len(new_ratings)
