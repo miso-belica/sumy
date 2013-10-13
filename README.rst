@@ -6,6 +6,7 @@ Automatic text summarizer
 
 Here are some other summarizers:
 
+- `TextTeaser <https://github.com/MojoJolo/textteaser>`_ - Scala
 - https://github.com/thavelick/summarize/ - Python, TF (very simple)
 - `Sumtract: Second project for UW LING 572 <https://github.com/stefanbehr/sumtract>`_ - Python
 - `Simple program that summarize text <https://github.com/xhresko/text-summarizer>`_ - Python, TF without normalization
