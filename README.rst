@@ -6,16 +6,16 @@ Automatic text summarizer
 
 Here are some other summarizers:
 
-- `TextTeaser <https://github.com/MojoJolo/textteaser>`_ - Scala
 - https://github.com/thavelick/summarize/ - Python, TF (very simple)
-- `Sumtract: Second project for UW LING 572 <https://github.com/stefanbehr/sumtract>`_ - Python
-- `Simple program that summarize text <https://github.com/xhresko/text-summarizer>`_ - Python, TF without normalization
+- `Reduction <https://github.com/adamfabish/Reduction>`_ - Python, TextRank (simple)
 - `Open Text Summarizer <http://libots.sourceforge.net/>`_ - C, TF without normalization
+- `Simple program that summarize text <https://github.com/xhresko/text-summarizer>`_ - Python, TF without normalization
 - `Intro to Computational Linguistics <https://github.com/kylehardgrave/summarizer>`_ - Java, LexRank
 
+- `Sumtract: Second project for UW LING 572 <https://github.com/stefanbehr/sumtract>`_ - Python
+- `TextTeaser <https://github.com/MojoJolo/textteaser>`_ - Scala
 - `Automatic Document Summarizer <https://github.com/himanshujindal/Automatic-Text-Summarizer>`_ - Java, Bipartite HITS (no sources)
 - `Pythia <https://github.com/giorgosera/pythia/blob/dev/analysis/summarization/summarization.py>`_ - Python, LexRank & Centroid
-- `Reduction <https://github.com/adamfabish/Reduction>`_ - Python, some graph method
 - `SWING <https://github.com/WING-NUS/SWING>`_ - Ruby
 - `Topic Networks <https://github.com/bobflagg/Topic-Networks>`_ - R, topic models & bipartite graphs
 - `Almus: Automatic Text Summarizer <http://textmining.zcu.cz/?lang=en&section=download>`_ - Java, LSA (without source code)
