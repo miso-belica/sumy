@@ -4,9 +4,9 @@
 Sumy - automatic text summarizer.
 
 Usage:
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>]
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>] --url=<url>
-    sumy (luhn | edmundson | lsa | graph | lex-rank) [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>]
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] --url=<url>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
     sumy --version
     sumy --help
 
@@ -37,7 +37,7 @@ from .parsers.plaintext import PlaintextParser
 from .summarizers.luhn import LuhnSummarizer
 from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
-from .summarizers.graph import GraphSummarizer
+from .summarizers.text_rank import TextRankSummarizer
 from .summarizers.lex_rank import LexRankSummarizer
 from .nlp.stemmers import Stemmer
 
@@ -73,8 +73,8 @@ def build_lsa(parser, language):
     return summarizer
 
 
-def build_graph(parser, language):
-    summarizer = GraphSummarizer(Stemmer(language))
+def build_text_rank(parser, language):
+    summarizer = TextRankSummarizer(Stemmer(language))
     summarizer.stop_words = get_stop_words(language)
 
     return summarizer
@@ -91,7 +91,7 @@ AVAILABLE_METHODS = {
     "luhn": build_luhn,
     "edmundson": build_edmundson,
     "lsa": build_lsa,
-    "graph": build_graph,
+    "text-rank": build_text_rank,
     "lex-rank": build_lex_rank,
 }
 

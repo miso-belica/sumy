@@ -5,7 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.summarizers.graph import GraphSummarizer
+from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.nlp.stemmers.english import stem_word
@@ -14,17 +14,17 @@ from sumy._compat import to_unicode
 from ..utils import build_document, build_sentence
 
 
-class TestGraph(unittest.TestCase):
+class TestTextRank(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        summarizer = GraphSummarizer(stem_word)
+        summarizer = TextRankSummarizer(stem_word)
 
         returned = summarizer(document, 10)
         self.assertEqual(len(returned), 0)
 
     def test_single_sentence(self):
         document = build_document(("I am one sentence",))
-        summarizer = GraphSummarizer()
+        summarizer = TextRankSummarizer()
         summarizer.stop_words = ("I", "am",)
 
         returned = summarizer(document, 10)
@@ -32,7 +32,7 @@ class TestGraph(unittest.TestCase):
 
     def test_two_sentences(self):
         document = build_document(("I am that 1. sentence", "And I am 2. winning prize"))
-        summarizer = GraphSummarizer()
+        summarizer = TextRankSummarizer()
         summarizer.stop_words = ("I", "am", "and", "that",)
 
         returned = summarizer(document, 10)
@@ -41,7 +41,7 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(to_unicode(returned[1]), "And I am 2. winning prize")
 
     def test_stop_words_correctly_removed(self):
-        summarizer = GraphSummarizer()
+        summarizer = TextRankSummarizer()
         summarizer.stop_words = ["stop", "Halt", "SHUT", "HmMm"]
 
         document = build_document(
@@ -74,7 +74,7 @@ class TestGraph(unittest.TestCase):
             "And I am 2. sentence - winning sentence",
             "And I am 3. sentence - winner is my 2nd name",
         ])
-        summarizer = GraphSummarizer()
+        summarizer = TextRankSummarizer()
         summarizer.stop_words = ["I", "am", "and", "that"]
 
         returned = summarizer(document, 1)

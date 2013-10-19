@@ -4,9 +4,9 @@
 Sumy - evaluation of automatic text summary.
 
 Usage:
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>]
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --url=<url>
-    sumy_eval (random | luhn | edmundson | lsa | graph | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
+    sumy_eval (random | luhn | edmundson | lsa | text-rank | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>]
+    sumy_eval (random | luhn | edmundson | lsa | text-rank | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --url=<url>
+    sumy_eval (random | luhn | edmundson | lsa | text-rank | lex-rank) <reference_summary> [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
     sumy_eval --version
     sumy_eval --help
 
@@ -41,7 +41,7 @@ from ..summarizers.random import RandomSummarizer
 from ..summarizers.luhn import LuhnSummarizer
 from ..summarizers.edmundson import EdmundsonSummarizer
 from ..summarizers.lsa import LsaSummarizer
-from ..summarizers.graph import GraphSummarizer
+from ..summarizers.text_rank import TextRankSummarizer
 from ..summarizers.lex_rank import LexRankSummarizer
 from ..nlp.stemmers import Stemmer
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
@@ -83,8 +83,8 @@ def build_lsa(parser, language):
     return summarizer
 
 
-def build_graph(parser, language):
-    summarizer = GraphSummarizer(Stemmer(language))
+dtext-rank build_text_rank(parser, language):
+    summarizer = TextRankSummarizer(Stemmer(language))
     summarizer.stop_words = get_stop_words(language)
 
     return summarizer
@@ -120,7 +120,7 @@ AVAILABLE_METHODS = {
     "luhn": build_luhn,
     "edmundson": build_edmundson,
     "lsa": build_lsa,
-    "graph": build_graph,
+    "text-rank": build_text_rank,
     "lex-rank": build_lex_rank,
 }
 AVAILABLE_EVALUATIONS = (

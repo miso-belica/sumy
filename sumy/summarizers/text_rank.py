@@ -9,7 +9,7 @@ from collections import defaultdict
 from ._summarizer import AbstractSummarizer
 
 
-class GraphSummarizer(AbstractSummarizer):
+class TextRankSummarizer(AbstractSummarizer):
     """Source: https://github.com/adamfabish/Reduction"""
 
     _stop_words = frozenset()
