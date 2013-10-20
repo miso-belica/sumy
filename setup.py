@@ -23,7 +23,7 @@ with open("LICENSE.rst") as file:
 setup(
     name="sumy",
     version=sumy.__version__,
-    description="Module for automatic text summarization of HTML documents.",
+    description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     author="Michal Belica",
     author_email="miso.belica@gmail.com",
@@ -31,15 +31,15 @@ setup(
     license=license,
     keywords=[
         "data mining",
-        "text summarization",
+        "automatic summarization",
         "data reduction",
         "web-data extraction",
         "NLP",
         "natural language processing",
         "latent semantic analysis",
         "LSA",
-        "singular value decomposition",
-        "SVD"
+        "TextRank",
+        "LexRank",
     ],
     dependency_links=[
         "http://github.com/miso-belica/readability.py/tarball/master",
@@ -62,9 +62,9 @@ setup(
         "sumy.evaluation",
         "sumy.models",
         "sumy.models.dom",
-        "sumy.parsers",
         "sumy.nlp",
         "sumy.nlp.stemmers",
+        "sumy.parsers",
         "sumy.summarizers",
     ],
     package_data={"sumy": [
@@ -78,18 +78,24 @@ setup(
             "sumy_eval-%s = sumy.evaluation.__main__:main" % VERSION_SUFFIX,
         ]
     },
-    classifiers=(
-        "Development Status :: 1 - Planning",
+    classifiers=[
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
-        "Natural Language :: Czech",
         "License :: OSI Approved :: Apache Software License",
+
+        "Natural Language :: Czech",
+        "Natural Language :: Slovak",
+        "Natural Language :: English",
+        "Natural Language :: German",
+
         "Topic :: Education",
         "Topic :: Internet",
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Text Processing :: Filters",
         "Topic :: Text Processing :: Linguistic",
         "Topic :: Text Processing :: Markup :: HTML",
+
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",
@@ -99,5 +105,5 @@ setup(
         "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: Implementation :: CPython",
-    ),
+    ],
 )

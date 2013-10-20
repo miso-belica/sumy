@@ -1,3 +1,5 @@
+.. _Python: http://www.python.org/
+
 =========================
 Automatic text summarizer
 =========================
@@ -26,8 +28,24 @@ Here are some other summarizers:
 
 Installation
 ------------
-Currently only from git repo (make sure you have
-`Python installed <https://python-guide.readthedocs.org/en/latest/#getting-started>`_)
+Make sure you have Python_ 2.6+/3.2+ and `pip <https://crate.io/packages/pip/>`_
+(`Windows <http://docs.python-guide.org/en/latest/starting/install/win/>`_,
+`Linux <http://docs.python-guide.org/en/latest/starting/install/linux/>`_) installed.
+Run simply (preferred way):
+
+.. code-block:: bash
+
+    $ [sudo] pip install sumy
+
+
+Or for the fresh version:
+
+.. code-block:: bash
+
+    $ [sudo] pip install git+git://github.com/miso-belica/sumy.git
+
+
+Or if you have to:
 
 .. code-block:: bash
 
@@ -35,12 +53,6 @@ Currently only from git repo (make sure you have
     $ unzip master.zip # extract the downloaded file
     $ cd sumy-master/
     $ [sudo] python setup.py install # install the package
-
-Or simply run:
-
-.. code-block:: bash
-
-    $ [sudo] pip install git+git://github.com/miso-belica/sumy.git
 
 
 Usage
