@@ -90,19 +90,24 @@ Or you can use sumy like a library in your project.
 
     from sumy.parsers.html import HtmlParser
     from sumy.nlp.tokenizers import Tokenizer
-    from sumy.summarizers.lsa import LsaSummarizer
-    from sumy.nlp.stemmers.czech import stem_word
+    from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+    from sumy.nlp.stemmers import Stemmer
     from sumy.utils import get_stop_words
+
+
+    LANGUAGE = "czech"
+    SENTENCES_COUNT = 10
 
 
     if __name__ == "__main__":
         url = "http://www.zsstritezuct.estranky.cz/clanky/predmety/cteni/jak-naucit-dite-spravne-cist.html"
-        parser = HtmlParser.from_url(url, Tokenizer("czech"))
+        parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+        stemmer = Stemmer(LANGUAGE)
 
-        summarizer = LsaSummarizer(stem_word)
-        summarizer.stop_words = get_stop_words("czech")
+        summarizer = Summarizer(stemmer)
+        summarizer.stop_words = get_stop_words(LANGUAGE)
 
-        for sentence in summarizer(parser.document, 20):
+        for sentence in summarizer(parser.document, SENTENCES_COUNT):
             print(sentence)
 
 
