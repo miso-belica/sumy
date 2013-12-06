@@ -114,18 +114,6 @@ class TestLsa(unittest.TestCase):
         sentences = summarizer(parser.document, 20)
         self.assertEqual(len(sentences), 20)
 
-    def test_issue_5_sigma_can_multiply_matrix_v(self):
-        """Source: https://github.com/miso-belica/sumy/issues/5"""
-        parser = PlaintextParser.from_string(
-            load_resource("articles/sigma_can_multiply_matrix_v.txt"),
-            Tokenizer("english")
-        )
-        summarizer = LsaSummarizer(english_stemmer)
-        summarizer.stop_words = get_stop_words("english")
-
-        sentences = summarizer(parser.document, 20)
-        self.assertEqual(len(sentences), 20)
-
     def test_issue_5_svd_converges(self):
         """Source: https://github.com/miso-belica/sumy/issues/5"""
         raise SkipTest("Can't reproduce the issue.")
