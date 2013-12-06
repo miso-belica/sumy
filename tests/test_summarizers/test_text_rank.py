@@ -6,12 +6,9 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
 from sumy.nlp.stemmers.english import stem_word
-from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
-from ..utils import build_document, build_sentence
+from ..utils import build_document
 
 
 class TestTextRank(unittest.TestCase):
