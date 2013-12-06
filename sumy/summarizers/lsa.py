@@ -66,7 +66,10 @@ class LsaSummarizer(AbstractSummarizer):
         sentences = document.sentences
 
         # create matrix |unique words|×|sentences| filled with zeroes
-        matrix = numpy.zeros((len(dictionary), len(sentences)))
+        words_count = len(dictionary)
+        sentences_count = len(sentences)
+        assert words_count >= sentences_count, "Number of words (%d) should be larger than number of sentences (%d)" % (words_count, sentences_count)
+        matrix = numpy.zeros((words_count, sentences_count))
 
         for col, sentence in enumerate(sentences):
             for word in map(self.stem_word, sentence.words):
@@ -97,7 +100,7 @@ class LsaSummarizer(AbstractSummarizer):
         return matrix
 
     def _compute_ranks(self, sigma, v_matrix):
-        assert len(sigma) == v_matrix.shape[0]
+        assert len(sigma) == v_matrix.shape[0], "Matrices should be multiplicable"
 
         dimensions = max(LsaSummarizer.MIN_DIMENSIONS,
             int(len(sigma)*LsaSummarizer.REDUCTION_RATIO))
