@@ -77,3 +77,17 @@ class TestTextRank(unittest.TestCase):
         returned = summarizer(document, 1)
         self.assertEqual(len(returned), 1)
         self.assertEqual(to_unicode(returned[0]), "And I am 2. sentence - winning sentence")
+
+    def test_sentences_rating(self):
+        document = build_document([
+            "a c e g",
+            "a b c d e f g",
+            "b d f",
+        ])
+        summarizer = TextRankSummarizer()
+        summarizer.stop_words = ["I", "am", "and", "that"]
+
+        ratings = summarizer.rate_sentences(document)
+        self.assertEqual(len(ratings), 3)
+        self.assertTrue(ratings[document.sentences[1]] > ratings[document.sentences[0]])
+        self.assertTrue(ratings[document.sentences[0]] > ratings[document.sentences[2]])

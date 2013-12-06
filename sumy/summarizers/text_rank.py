@@ -5,6 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import math
 
+from itertools import combinations
 from collections import defaultdict
 from ._summarizer import AbstractSummarizer
 
@@ -30,11 +31,10 @@ class TextRankSummarizer(AbstractSummarizer):
         sentences_words = [(s, self._to_words_set(s)) for s in document.sentences]
         ratings = defaultdict(float)
 
-        for i, (sentence1, words1) in enumerate(sentences_words):
-            for sentence2, words2 in sentences_words[i + 1:]:
-                rank = self._rate_sentences_edge(words1, words2)
-                ratings[sentence1] += rank
-                ratings[sentence2] += rank
+        for (sentence1, words1), (sentence2, words2) in combinations(sentences_words, 2):
+            rank = self._rate_sentences_edge(words1, words2)
+            ratings[sentence1] += rank
+            ratings[sentence2] += rank
 
         return ratings
 
