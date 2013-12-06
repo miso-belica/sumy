@@ -16,6 +16,7 @@ Here are some other summarizers:
 
 - `Sumtract: Second project for UW LING 572 <https://github.com/stefanbehr/sumtract>`_ - Python
 - `TextTeaser <https://github.com/MojoJolo/textteaser>`_ - Scala
+-  `PyTeaser <https://github.com/xiaoxu193/PyTeaser>`_ - TextTeaser port in Python
 - `Automatic Document Summarizer <https://github.com/himanshujindal/Automatic-Text-Summarizer>`_ - Java, Bipartite HITS (no sources)
 - `Pythia <https://github.com/giorgosera/pythia/blob/dev/analysis/summarization/summarization.py>`_ - Python, LexRank & Centroid
 - `SWING <https://github.com/WING-NUS/SWING>`_ - Ruby
