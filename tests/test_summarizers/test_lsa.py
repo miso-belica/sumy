@@ -28,16 +28,6 @@ class TestLsa(unittest.TestCase):
 
         lsa_module.numpy = numpy
 
-    def test_scipy_not_installed(self):
-        summarizer = LsaSummarizer()
-
-        scipy = lsa_module.singular_value_decomposition
-        lsa_module.singular_value_decomposition = None
-
-        self.assertRaises(ValueError, summarizer, build_document(), 10)
-
-        lsa_module.singular_value_decomposition = scipy
-
     def test_dictionary_without_stop_words(self):
         summarizer = LsaSummarizer()
         summarizer.stop_words = ["stop", "Halt", "SHUT", "HmMm"]
