@@ -54,7 +54,7 @@ setup(
     ],
     test_suite="nose.collector",
     extras_require={
-        "LSA": ["numpy", "scipy"],
+        "LSA": ["numpy"],
         "LexRank": ["numpy"],
     },
     packages=[

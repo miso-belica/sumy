@@ -10,7 +10,7 @@ except ImportError:
     numpy = None
 
 try:
-    from scipy.linalg import svd as singular_value_decomposition
+    from numpy.linalg import svd as singular_value_decomposition
 except ImportError:
     singular_value_decomposition = None
 from ._summarizer import AbstractSummarizer
@@ -47,9 +47,7 @@ class LsaSummarizer(AbstractSummarizer):
 
     def _ensure_dependecies_installed(self):
         if numpy is None:
-            raise ValueError("LSA summarizer requires NumPy & SciPy. Please, install them by command 'pip install numpy scipy'.")
-        elif singular_value_decomposition is None:
-            raise ValueError("LSA summarizer requires SciPy. Please, install it by command 'pip install scipy'.")
+            raise ValueError("LSA summarizer requires NumPy. Please, install it by command 'pip install numpy'.")
 
     def _create_dictionary(self, document):
         """Creates mapping key = word, value = row index"""
