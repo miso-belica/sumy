@@ -46,7 +46,7 @@ class LexRankSummarizer(AbstractSummarizer):
 
     def _ensure_dependecies_installed(self):
         if numpy is None:
-            raise ValueError("LSA summarizer requires NumPy. Please, install them by command 'pip install numpy'.")
+            raise ValueError("LexRank summarizer requires NumPy. Please, install it by command 'pip install numpy'.")
 
     def _to_words_set(self, sentence):
         words = map(self.normalize_word, sentence.words)
