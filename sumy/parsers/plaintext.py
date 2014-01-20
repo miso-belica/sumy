@@ -27,9 +27,8 @@ class PlaintextParser(DocumentParser):
     def significant_words(self):
         words = []
         for paragraph in self.document.paragraphs:
-            for sentence in paragraph:
-                if sentence.is_heading:
-                    words.extend(sentence.words)
+            for heading in paragraph.headings:
+                words.extend(heading.words)
 
         if words:
             return tuple(words)
