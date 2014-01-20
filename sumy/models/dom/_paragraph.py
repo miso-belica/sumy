@@ -11,6 +11,13 @@ from ._sentence import Sentence
 
 @unicode_compatible
 class Paragraph(object):
+    __slots__ = (
+        "_sentences",
+        "_cached_property_sentences",
+        "_cached_property_headings",
+        "_cached_property_words",
+    )
+
     def __init__(self, sentences):
         sentences = tuple(sentences)
         for sentence in sentences:
