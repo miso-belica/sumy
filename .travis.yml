@@ -17,7 +17,6 @@ before_install:
   - sudo apt-get install -qq python-numpy
 install:
   - pip install nose --use-mirrors
-  - pip install git+git://github.com/miso-belica/readability.py.git
   - python setup.py install
   # - python -c "import nltk; nltk.download('punkt')"
 script:
