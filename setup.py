@@ -41,13 +41,10 @@ setup(
         "TextRank",
         "LexRank",
     ],
-    dependency_links=[
-        "http://github.com/miso-belica/readability.py/tarball/master#egg=readability-0.1.11",
-    ],
     install_requires=[
         "docopt>=0.6.1,<0.7",
+        "breadability",
         "nltk",
-        "readability>=0.1.11,<0.2.0",
     ],
     tests_require=[
         "nose",

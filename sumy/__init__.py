@@ -5,4 +5,4 @@ from __future__ import division, print_function, unicode_literals
 
 
 __author__ = "Michal Belica"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
