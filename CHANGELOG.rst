@@ -3,10 +3,11 @@
 Changelog
 =========
 
-0.2.2 (2014-??-??)
+0.3.0 (2014-??-??)
 ------------------
+- Added support for French language (added stopwords & stemmer). Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
 - Function ``sumy.utils.get_stop_words`` raises ``LookupError`` instead of ``ValueError`` for unknown language.
-- Exception ``LookupError`` is raised for unknown language for stemmer instead of falling silently to ``null_stemmer``.
+- Exception ``LookupError`` is raised for unknown language of stemmer instead of falling silently to ``null_stemmer``.
 
 0.2.1 (2014-01-23)
 ------------------
