@@ -83,7 +83,7 @@ def build_lsa(parser, language):
     return summarizer
 
 
-dtext-rank build_text_rank(parser, language):
+def build_text_rank(parser, language):
     summarizer = TextRankSummarizer(Stemmer(language))
     summarizer.stop_words = get_stop_words(language)
 
