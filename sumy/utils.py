@@ -37,7 +37,7 @@ def expand_resource_path(path):
 def get_stop_words(language):
     path = expand_resource_path("stopwords/%s.txt" % language)
     if not exists(path):
-        raise ValueError("Stop-words are not available for language %s." % language)
+        raise LookupError("Stop-words are not available for language %s." % language)
 
     with open(path, "rb") as file:
         return frozenset(to_unicode(w.rstrip()) for w in file.readlines())

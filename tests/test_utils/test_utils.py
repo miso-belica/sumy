@@ -10,7 +10,7 @@ from sumy.utils import get_stop_words, ItemsCount
 
 class TestUtils(unittest.TestCase):
     def test_missing_stop_words_language(self):
-        self.assertRaises(ValueError, get_stop_words, "klingon")
+        self.assertRaises(LookupError, get_stop_words, "klingon")
 
     def test_percentage_items_count(self):
         count = ItemsCount("20%")
