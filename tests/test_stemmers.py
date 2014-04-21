@@ -10,6 +10,9 @@ from sumy.nlp.stemmers import null_stemmer, Stemmer
 
 class TestStemmers(unittest.TestCase):
     """Simple tests to make sure all stemmers share the same API."""
+    def test_missing_stop_words_language(self):
+        self.assertRaises(LookupError, Stemmer, "klingon")
+
     def test_null_stemmer(self):
         self.assertEqual("ľščťžýáíé", null_stemmer("ľŠčŤžÝáÍé"))
 
