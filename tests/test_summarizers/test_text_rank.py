@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import unittest
 
 from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.nlp.stemmers.english import stem_word
+from sumy.nlp.stemmers import Stemmer
 from sumy._compat import to_unicode
 from ..utils import build_document
 
@@ -14,7 +14,7 @@ from ..utils import build_document
 class TestTextRank(unittest.TestCase):
     def test_empty_document(self):
         document = build_document()
-        summarizer = TextRankSummarizer(stem_word)
+        summarizer = TextRankSummarizer(Stemmer("english"))
 
         returned = summarizer(document, 10)
         self.assertEqual(len(returned), 0)

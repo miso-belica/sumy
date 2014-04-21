@@ -10,8 +10,7 @@ from nose import SkipTest
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
-from sumy.nlp.stemmers.czech import stem_word
-from sumy.nlp.stemmers.english import stem_word as english_stemmer
+from sumy.nlp.stemmers import Stemmer
 from sumy.utils import get_stop_words
 from sumy._compat import to_unicode
 from ..utils import build_document, load_resource
@@ -82,7 +81,7 @@ class TestLsa(unittest.TestCase):
             "Dost razantně. Fyzickou převahu měl, takže to nedalo až tak moc práce.",
             Tokenizer("czech")
         )
-        summarizer = LsaSummarizer(stem_word)
+        summarizer = LsaSummarizer(Stemmer("czech"))
         summarizer.stop_words = get_stop_words("czech")
 
         sentences = summarizer(parser.document, 2)
@@ -98,7 +97,7 @@ class TestLsa(unittest.TestCase):
             load_resource("articles/prevko_cz_1.txt"),
             Tokenizer("czech")
         )
-        summarizer = LsaSummarizer(stem_word)
+        summarizer = LsaSummarizer(Stemmer("czech"))
         summarizer.stop_words = get_stop_words("czech")
 
         sentences = summarizer(parser.document, 20)
@@ -112,7 +111,7 @@ class TestLsa(unittest.TestCase):
             load_resource("articles/svd_converges.txt"),
             Tokenizer("english")
         )
-        summarizer = LsaSummarizer(english_stemmer)
+        summarizer = LsaSummarizer(Stemmer("english"))
         summarizer.stop_words = get_stop_words("english")
 
         sentences = summarizer(parser.document, 20)

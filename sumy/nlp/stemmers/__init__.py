@@ -3,9 +3,10 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+import nltk.stem.snowball as nltk_stemmers_module
+
 from .czech import stem_word as czech_stemmer
-from .german import stem_word as german_stemmer
-from .english import stem_word as english_stemmer
+
 from ..._compat import to_unicode
 
 
@@ -15,16 +16,17 @@ def null_stemmer(object):
 
 
 class Stemmer(object):
-    NULL = null_stemmer
-    _LANGUAGES = {
-        "czech": czech_stemmer,
-        "slovak": czech_stemmer,
-        "german": german_stemmer,
-        "english": english_stemmer,
-    }
-
     def __init__(self, language):
-        self._stemmer = self._LANGUAGES.get(language, self.NULL)
+        self._stemmer = null_stemmer
+        if language.lower() in ('czech', 'slovak'):
+            self._stemmer = czech_stemmer
+            return
+        stemmer_classname = language.capitalize() + 'Stemmer'
+        try:
+            stemmer_class = getattr(nltk_stemmers_module, stemmer_classname)
+        except AttributeError:
+            raise LookupError("Stemmer is not available for language %s." % language)
+        self._stemmer = stemmer_class().stem
 
     def __call__(self, word):
         return self._stemmer(word)
