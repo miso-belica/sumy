@@ -5,12 +5,23 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 
-from sumy.utils import get_stop_words, ItemsCount
+from sumy.utils import get_stop_words, read_stop_words, ItemsCount
 
 
 class TestUtils(unittest.TestCase):
+    def test_ok_stop_words_language(self):
+        stop_words = get_stop_words("french")
+        self.assertTrue(len(stop_words) > 1, str(len(stop_words)))
+
     def test_missing_stop_words_language(self):
         self.assertRaises(LookupError, get_stop_words, "klingon")
+
+    def test_ok_custom_stopwords_file(self):
+        stop_words = read_stop_words("sumy/data/stopwords/slovak.txt")
+        self.assertTrue(len(stop_words) > 1, str(len(stop_words)))
+
+    def test_custom_stop_words_file_not_found(self):
+        self.assertRaises(IOError, read_stop_words, "sumy/data/stopwords/klingon.txt")
 
     def test_percentage_items_count(self):
         count = ItemsCount("20%")
