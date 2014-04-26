@@ -5,6 +5,8 @@ Changelog
 
 0.3.0 (2014-??-??)
 ------------------
+- Added possibility to specify format of input document for URL & stdin. Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
+- Added possibility to specify custom file with stop-word in CLI. Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
 - Added support for French language (added stopwords & stemmer). Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
 - Function ``sumy.utils.get_stop_words`` raises ``LookupError`` instead of ``ValueError`` for unknown language.
 - Exception ``LookupError`` is raised for unknown language of stemmer instead of falling silently to ``null_stemmer``.
