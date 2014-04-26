@@ -16,9 +16,6 @@ with open("README.rst") as readme:
     with open("CHANGELOG.rst") as changelog:
         long_description = readme.read() + "\n\n" + changelog.read()
 
-with open("LICENSE.rst") as file:
-    license = file.read()
-
 
 setup(
     name="sumy",
@@ -28,7 +25,7 @@ setup(
     author="Michal Belica",
     author_email="miso.belica@gmail.com",
     url="https://github.com/miso-belica/sumy",
-    license=license,
+    license="Apache License, Version 2.0",
     keywords=[
         "data mining",
         "automatic summarization",
@@ -86,6 +83,7 @@ setup(
         "Natural Language :: Slovak",
         "Natural Language :: English",
         "Natural Language :: German",
+        "Natural Language :: French",
 
         "Topic :: Education",
         "Topic :: Internet",
