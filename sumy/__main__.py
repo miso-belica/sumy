@@ -70,6 +70,8 @@ def main(args=None):
         else:
             print(to_bytes(sentence))
 
+    return 0
+
 
 def handle_arguments(args, default_input_stream=sys.stdin):
     language = args["--language"]
