@@ -38,9 +38,12 @@ def get_stop_words(language):
     path = expand_resource_path("stopwords/%s.txt" % language)
     if not exists(path):
         raise LookupError("Stop-words are not available for language %s." % language)
+    return read_stop_words(path)
 
-    with open(path, "rb") as file:
-        return frozenset(to_unicode(w.rstrip()) for w in file.readlines())
+
+def read_stop_words(filename):
+    with open(filename, "rb") as open_file:
+        return frozenset(to_unicode(w.rstrip()) for w in open_file.readlines())
 
 
 class ItemsCount(object):

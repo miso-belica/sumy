@@ -4,21 +4,23 @@
 Sumy - automatic text summarizer.
 
 Usage:
-    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>]
-    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] --url=<url>
-    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] --file=<file_path> --format=<file_format>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>]
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --url=<url>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --file=<file_path>
     sumy --version
     sumy --help
 
 Options:
-    --url=<url>        URL address of summarizied message.
-    --file=<file>      Path to file with summarizied text.
-    --format=<format>  Format of input file. [default: plaintext]
-    --length=<length>  Length of summarizied text. It may be count of sentences
-                       or percentage of input text. [default: 20%]
-    --language=<lang>  Natural language of summarizied text. [default: english]
-    --version          Displays version of application.
-    --help             Displays this text.
+    --length=<length>        Length of summarized text. It may be count of sentences
+                             or percentage of input text. [default: 20%]
+    --language=<lang>        Natural language of summarized text. [default: english]
+    --stopwords=<file_path>  Path to a file containing a list of stopwords. One word per line in UTF-8 encoding.
+                             If it's not provided default list of stop-words is used according to chosen language.
+    --format=<format>        Format of input document. Possible values: html, plaintext
+    --url=<url>              URL address of the web page to summarize.
+    --file=<file_path>       Path to the text file to summarize.
+    --version                Displays current application version.
+    --help                   Displays this text.
 
 """
 
@@ -29,7 +31,7 @@ import sys
 
 from docopt import docopt
 from . import __version__
-from .utils import ItemsCount, get_stop_words
+from .utils import ItemsCount, get_stop_words, read_stop_words
 from ._compat import urllib, to_string, to_unicode, to_bytes, PY3
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
@@ -49,50 +51,12 @@ PARSERS = {
     "plaintext": PlaintextParser,
 }
 
-
-def build_luhn(parser, language):
-    summarizer = LuhnSummarizer(Stemmer(language))
-    summarizer.stop_words = get_stop_words(language)
-
-    return summarizer
-
-
-def build_edmundson(parser, language):
-    summarizer = EdmundsonSummarizer(Stemmer(language))
-    summarizer.null_words = get_stop_words(language)
-    summarizer.bonus_words = parser.significant_words
-    summarizer.stigma_words = parser.stigma_words
-
-    return summarizer
-
-
-def build_lsa(parser, language):
-    summarizer = LsaSummarizer(Stemmer(language))
-    summarizer.stop_words = get_stop_words(language)
-
-    return summarizer
-
-
-def build_text_rank(parser, language):
-    summarizer = TextRankSummarizer(Stemmer(language))
-    summarizer.stop_words = get_stop_words(language)
-
-    return summarizer
-
-
-def build_lex_rank(parser, language):
-    summarizer = LexRankSummarizer(Stemmer(language))
-    summarizer.stop_words = get_stop_words(language)
-
-    return summarizer
-
-
 AVAILABLE_METHODS = {
-    "luhn": build_luhn,
-    "edmundson": build_edmundson,
-    "lsa": build_lsa,
-    "text-rank": build_text_rank,
-    "lex-rank": build_lex_rank,
+    "luhn": LuhnSummarizer,
+    "edmundson": EdmundsonSummarizer,
+    "lsa": LsaSummarizer,
+    "text-rank": TextRankSummarizer,
+    "lex-rank": LexRankSummarizer,
 }
 
 
@@ -107,31 +71,49 @@ def main(args=None):
             print(to_bytes(sentence))
 
 
-def handle_arguments(args):
-    parser = PARSERS["plaintext"]
-    input_stream = sys.stdin
+def handle_arguments(args, default_input_stream=sys.stdin):
+    language = args["--language"]
+    document_format = args['--format']
 
     if args["--url"] is not None:
-        parser = PARSERS["html"]
+        parser = PARSERS[document_format or "html"]
         request = urllib.Request(args["--url"], headers=HEADERS)
         input_stream = urllib.urlopen(request)
     elif args["--file"] is not None:
-        parser = PARSERS.get(args["--format"], PlaintextParser)
+        parser = PARSERS[document_format or "plaintext"]
         input_stream = open(args["--file"], "rb")
-
-    summarizer_builder = AVAILABLE_METHODS["luhn"]
-    for method, builder in AVAILABLE_METHODS.items():
-        if args[method]:
-            summarizer_builder = builder
-            break
+    else:
+        parser = PARSERS[document_format or "plaintext"]
+        input_stream = default_input_stream
 
     items_count = ItemsCount(args["--length"])
 
-    parser = parser(input_stream.read(), Tokenizer(args["--language"]))
+    if args['--stopwords']:
+        stop_words = read_stop_words(args['--stopwords'])
+    else:
+        stop_words = get_stop_words(language)
+
+    parser = parser(input_stream.read(), Tokenizer(language))
     if input_stream is not sys.stdin:
         input_stream.close()
 
-    return summarizer_builder(parser, args["--language"]), parser, items_count
+    stemmer = Stemmer(language)
+
+    summarizer_class = next(cls for name, cls in AVAILABLE_METHODS.items() if args[name])
+    summarizer = build_summarizer(summarizer_class, stop_words, stemmer, parser)
+
+    return summarizer, parser, items_count
+
+
+def build_summarizer(summarizer_class, stop_words, stemmer, parser):
+    summarizer = summarizer_class(stemmer)
+    if summarizer_class is EdmundsonSummarizer:
+        summarizer.null_words = stop_words
+        summarizer.bonus_words = parser.significant_words
+        summarizer.stigma_words = parser.stigma_words
+    else:
+        summarizer.stop_words = stop_words
+    return summarizer
 
 
 if __name__ == "__main__":

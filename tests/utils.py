@@ -3,6 +3,11 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 from os.path import dirname, join, abspath
 from sumy.nlp.tokenizers import Tokenizer
 from sumy._compat import to_string, to_unicode

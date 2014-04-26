@@ -1,0 +1,4 @@
+word
+slovo
+Wort
+mot
