@@ -8,3 +8,6 @@ __pycache__/
 
 # working folders
 /experiments/
+
+# IDE files
+.idea
