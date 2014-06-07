@@ -73,12 +73,7 @@ class TestLsa(unittest.TestCase):
     def test_real_example(self):
         """Source: http://www.prevko.cz/dite/skutecne-pribehy-deti"""
         parser = PlaintextParser.from_string(
-            "Jednalo se o případ chlapce v 6. třídě, který měl problémy s učením. "
-            "Přerostly až v reparát z jazyka na konci školního roku. "
-            "Nedopadl bohužel dobře a tak musel opakovat 6. třídu, což se chlapci ani trochu nelíbilo. "
-            "Připadal si, že je mezi malými dětmi a realizoval se tím, že si ve třídě "
-            "o rok mladších dětí budoval vedoucí pozici. "
-            "Dost razantně. Fyzickou převahu měl, takže to nedalo až tak moc práce.",
+            load_resource("snippets/prevko.txt"),
             Tokenizer("czech")
         )
         summarizer = LsaSummarizer(Stemmer("czech"))
