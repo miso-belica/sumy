@@ -3,7 +3,7 @@
 Changelog
 =========
 
-0.3.0 (2014-??-??)
+0.3.0 (2014-06-07)
 ------------------
 - Added possibility to specify format of input document for URL & stdin. Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
 - Added possibility to specify custom file with stop-words in CLI. Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.
