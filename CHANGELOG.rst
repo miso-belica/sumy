@@ -11,7 +11,7 @@ Changelog
 - Function ``sumy.utils.get_stop_words`` raises ``LookupError`` instead of ``ValueError`` for unknown language.
 - Exception ``LookupError`` is raised for unknown language of stemmer instead of falling silently to ``null_stemmer``.
 
-0.2.1 (2014-01-23)
+0.3.0 (2014-01-23)
 ------------------
 - Fixed installation of my own readability fork. Added ``breadability`` to the dependencies instead of it `#8 <https://github.com/miso-belica/sumy/issues/8>`_. Thanks to `@pratikpoddar <https://github.com/pratikpoddar>`_.
 
