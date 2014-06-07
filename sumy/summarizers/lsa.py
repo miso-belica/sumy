@@ -4,6 +4,9 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import math
+
+from warnings import warn
+
 try:
     import numpy
 except ImportError:
@@ -63,12 +66,17 @@ class LsaSummarizer(AbstractSummarizer):
         """
         sentences = document.sentences
 
-        # create matrix |unique words|×|sentences| filled with zeroes
         words_count = len(dictionary)
         sentences_count = len(sentences)
-        assert words_count >= sentences_count, "Number of words (%d) should be larger than number of sentences (%d)" % (words_count, sentences_count)
-        matrix = numpy.zeros((words_count, sentences_count))
+        if words_count < sentences_count:
+            message = (
+                "Number of words (%d) is lower than number of sentences (%d). "
+                "LSA algorithm may not work properly."
+            )
+            warn(message % (words_count, sentences_count))
 
+        # create matrix |unique words|×|sentences| filled with zeroes
+        matrix = numpy.zeros((words_count, sentences_count))
         for col, sentence in enumerate(sentences):
             for word in map(self.stem_word, sentence.words):
                 # only valid words is counted (not stop-words, ...)
