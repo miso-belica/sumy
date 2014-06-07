@@ -1,12 +1,14 @@
 language:
   - python
 python:
+  # https://github.com/travis-ci/travis-ci/issues/2219#issuecomment-41804942
   - "2.6"
   - "2.7"
+  - "2.7_with_system_site_packages"
   # - "3.2"
+  # - "3.2_with_system_site_packages"
   # - "3.3"
-virtualenv:
-  system_site_packages: true
+  # - "3.4"
 before_install:
   # download NLTK corpora manually - https://github.com/nltk/nltk/issues/565
   - wget https://s3.amazonaws.com/textblob/nltk_data.tar.gz
