@@ -6,7 +6,6 @@ except ImportError:
     from distutils.core import setup
 
 import sys
-import sumy
 
 
 VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
@@ -19,7 +18,7 @@ with open("README.rst") as readme:
 
 setup(
     name="sumy",
-    version=sumy.__version__,
+    version="0.2.1",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     author="Michal Belica",
