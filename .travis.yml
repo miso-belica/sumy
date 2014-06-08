@@ -19,7 +19,6 @@ before_install:
   - sudo apt-get install -qq python-numpy
 install:
   - if [[ $TRAVIS_PYTHON_VERSION == 3* ]]; then pip install 'http://www.nltk.org/nltk3-alpha/nltk-3.0a4.zip'; fi
-  - pip install nose --use-mirrors
   - python setup.py install
   # - python -c "import nltk; nltk.download('punkt')"
 script:
