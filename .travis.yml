@@ -5,10 +5,10 @@ python:
   - "2.6"
   - "2.7"
   - "2.7_with_system_site_packages"
-  # - "3.2"
-  # - "3.2_with_system_site_packages"
-  # - "3.3"
-  # - "3.4"
+  - "3.2"
+  - "3.2_with_system_site_packages"
+  - "3.3"
+  - "3.4"
 before_install:
   # download NLTK corpora manually - https://github.com/nltk/nltk/issues/565
   - wget https://s3.amazonaws.com/textblob/nltk_data.tar.gz
@@ -18,6 +18,7 @@ before_install:
   - sudo apt-get install -qq gfortran libatlas-base-dev
   - sudo apt-get install -qq python-numpy
 install:
+  - if [[ $TRAVIS_PYTHON_VERSION == 3* ]]; then pip install 'http://www.nltk.org/nltk3-alpha/nltk-3.0a4.zip'; fi
   - pip install nose --use-mirrors
   - python setup.py install
   # - python -c "import nltk; nltk.download('punkt')"
