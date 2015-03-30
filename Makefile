@@ -5,10 +5,11 @@ VERSION=patch
 
 
 test:
-	nosetests-2.6 && nosetests-3.2 && nosetests-2.7 && nosetests-3.3
+	nosetests-2.6 && nosetests-3.2 && nosetests-2.7 && nosetests-3.3 && nosetests-3.4
 
 publish: test
-	${PYTHON} setup.py register sdist bdist_wheel upload
+	${PYTHON} setup.py register sdist bdist_wheel
+	twine upload dist/*
 
 bump: test
 	bumpversion ${VERSION} --config-file setup.cfg
