@@ -6,6 +6,13 @@ Automatic text summarizer
 .. image:: https://api.travis-ci.org/miso-belica/sumy.png?branch=master
    :target: https://travis-ci.org/miso-belica/sumy
 
+Simple library and command line utility for extracting summary from HTML pages or plain texts. The package also contains simple evaluation framework for text summaries. Implemented summarization methods:
+
+- **Luhn** - heurestic method, `reference <http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5392672>`_
+- **Edmundson** heurestic method with previous statistic research, `reference <http://dl.acm.org/citation.cfm?doid=321510.321519>`_
+- **Latent Semantic Analysis, LSA** - one of the algorithm from http://scholar.google.com/citations?user=0fTuW_YAAAAJ&hl=en I think the author is using more advanced algorithms now. `Steinberger, J. a Ježek, K. Using latent semantic an and summary evaluation. In In Proceedings ISIM '04. 2004. S. 93-100. <http://www.kiv.zcu.cz/~jstein/publikace/isim2004.pdf>`_
+- **LexRank** and **TextRank** - these two are some sort of combination of a few resources that I found on the internet. I really don't remember the sources. Probably `Wikipedia <https://en.wikipedia.org/wiki/Automatic_summarization#Unsupervised_approaches:_TextRank_and_LexRank>`_ and some papers in 1st page of Google :)
+
 Here are some other summarizers:
 
 - https://github.com/thavelick/summarize/ - Python, TF (very simple)
