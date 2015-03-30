@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 try:
     from setuptools import setup
@@ -39,8 +39,8 @@ setup(
     ],
     install_requires=[
         "docopt>=0.6.1,<0.7",
-        "breadability",
-        "nltk",
+        "breadability>=0.1.20",
+        "nltk>=3.0.2",
     ],
     tests_require=[
         "nose",
@@ -99,6 +99,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: Implementation :: CPython",
     ],
 )
