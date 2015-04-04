@@ -50,4 +50,4 @@ class TestMain(unittest.TestCase):
     def test_handle_wrong_format(self):
         wrong_args = self.DEFAULT_ARGS.copy()
         wrong_args.update({'--url': 'URL', '--format': 'text'})
-        self.assertRaises(KeyError, handle_arguments, wrong_args, default_input_stream=StringIO("Whatever."))
+        self.assertRaises(ValueError, handle_arguments, wrong_args, default_input_stream=StringIO("Whatever."))

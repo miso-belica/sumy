@@ -74,8 +74,12 @@ def main(args=None):
 
 
 def handle_arguments(args, default_input_stream=sys.stdin):
-    language = args["--language"]
     document_format = args['--format']
+    if document_format is not None and document_format not in PARSERS:
+        raise ValueError("Unsupported format of input document. Possible values are: %s. Given: %s." % (
+            ", ".join(PARSERS.keys()),
+            document_format,
+        ))
 
     if args["--url"] is not None:
         parser = PARSERS[document_format or "html"]
@@ -90,6 +94,7 @@ def handle_arguments(args, default_input_stream=sys.stdin):
 
     items_count = ItemsCount(args["--length"])
 
+    language = args["--language"]
     if args['--stopwords']:
         stop_words = read_stop_words(args['--stopwords'])
     else:

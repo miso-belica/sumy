@@ -152,6 +152,13 @@ def main(args=None):
 
 
 def handle_arguments(args):
+    document_format = args["--format"]
+    if document_format is not None and document_format not in PARSERS:
+        raise ValueError("Unsupported format of input document. Possible values are: %s. Given: %s." % (
+            ", ".join(PARSERS.keys()),
+            document_format,
+        ))
+
     parser = PARSERS["plaintext"]
     input_stream = sys.stdin
 
@@ -160,7 +167,7 @@ def handle_arguments(args):
         request = urllib.Request(args["--url"], headers=HEADERS)
         input_stream = urllib.urlopen(request)
     elif args["--file"] is not None:
-        parser = PARSERS.get(args["--format"], PlaintextParser)
+        parser = PARSERS.get(document_format, PlaintextParser)
         input_stream = open(args["--file"], "rb")
 
     summarizer_builder = AVAILABLE_METHODS["luhn"]
