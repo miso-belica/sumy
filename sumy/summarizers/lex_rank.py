@@ -137,8 +137,7 @@ class LexRankSummarizer(AbstractSummarizer):
                 for j in range(sentences_count):
                     next_p[i] += transposed_matrix[j, i] * p_vector[j]
 
-            p_vector = next_p
-
             lambda_val = sum((next_p[i] - p_vector[i])**2 for i in range(sentences_count))
+            p_vector = next_p
 
         return p_vector
