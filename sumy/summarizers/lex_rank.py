@@ -78,7 +78,7 @@ class LexRankSummarizer(AbstractSummarizer):
             for term in sentence:
                 if term not in idf_metrics:
                     n_j = sum(1 for s in sentences if term in s)
-                    idf_metrics[term] = sentences_count / n_j
+                    idf_metrics[term] = math.log(sentences_count / (1+n_j))
 
         return idf_metrics
 
@@ -139,5 +139,6 @@ class LexRankSummarizer(AbstractSummarizer):
 
             lambda_val = sum((next_p[i] - p_vector[i])**2 for i in range(sentences_count))
             p_vector = next_p
-
+            print (lambda_val)
+            print ("sai challa hai")
         return p_vector
