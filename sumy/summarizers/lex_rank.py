@@ -139,6 +139,4 @@ class LexRankSummarizer(AbstractSummarizer):
 
             lambda_val = sum((next_p[i] - p_vector[i])**2 for i in range(sentences_count))
             p_vector = next_p
-            print (lambda_val)
-            print ("sai challa hai")
         return p_vector
