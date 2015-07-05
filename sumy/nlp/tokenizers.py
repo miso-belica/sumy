@@ -22,7 +22,7 @@ class Tokenizer(object):
     # note the final point in these items must not be included
     LANGUAGE_EXTRA_ABREVS = {
         "english": ['e.g', 'al', 'i.e'],
-        "german": ['al', 'z.B'],
+        "german": ['al', 'z.B', 'Inc','engl','z. B', 'vgl', 'lat', 'bzw', 'S'],
     }
 
     def __init__(self, language):
