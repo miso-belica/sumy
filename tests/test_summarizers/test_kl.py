@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
-import scipy.stats
 
 from sumy.models.dom._sentence import Sentence
 from sumy.summarizers.kl import KLSummarizer
