@@ -13,7 +13,7 @@ class SumBasicSummarizer(AbstractSummarizer):
     """
     SumBasic: a frequency-based summarization system that adjusts word frequencies as 
     sentences are extracted.
-    Source: research.microsoft.com/pubs/67448/tr-2005-101.ps
+    Source: http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf
 
     """
 
