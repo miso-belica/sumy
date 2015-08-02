@@ -4,8 +4,6 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
-from collections import Counter
-
 
 from sumy.models.dom._sentence import Sentence
 from sumy.summarizers.sum_basic import SumBasicSummarizer
@@ -63,25 +61,29 @@ class TestSumBasic(unittest.TestCase):
         
         words = ["one", "two", "three", "four"]
         freq = summarizer._compute_word_freq(words)
-        self.assertEqual(freq["one"], 1)
-        self.assertEqual(freq["two"], 1)
-        self.assertEqual(freq["three"], 1)
-        self.assertEqual(freq["four"], 1)
+        self.assertEqual(freq.get("one", 0), 1)
+        self.assertEqual(freq.get("two", 0), 1)
+        self.assertEqual(freq.get("three", 0), 1)
+        self.assertEqual(freq.get("four", 0), 1)
         
         words = ["one", "one", "two", "two"]
         freq = summarizer._compute_word_freq(words)
-        self.assertEqual(freq["one"], 2)
-        self.assertEqual(freq["two"], 2)
-        self.assertEqual(freq["three"], 0)
+        self.assertEqual(freq.get("one", 0), 2)
+        self.assertEqual(freq.get("two", 0), 2)
+        self.assertEqual(freq.get("three", 0), 0)
 
     def test_get_all_content_words_in_doc(self):
         summarizer = self._build_summarizer(self.EMPTY_STOP_WORDS)
         s0 = Sentence("One two three.", Tokenizer("english"))
         s1 = Sentence("One two three.", Tokenizer("english"))
         document = build_document([s0, s1])
-        content_words = Counter(summarizer._get_all_content_words_in_doc(document.sentences))
+
+        content_words = summarizer._get_all_content_words_in_doc(document.sentences)
+        content_words_freq = {}
+        for w in content_words:
+            content_words_freq[w] = content_words_freq.get(w, 0) + 1
         content_words_correct = {"one": 2, "two": 2, "three": 2}
-        self.assertEqual(content_words, content_words_correct)
+        self.assertEqual(content_words_freq, content_words_correct)
 
 
     def test_compute_tf(self):

@@ -2,7 +2,6 @@
 
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
-from collections import Counter
 import math
 
 from ._summarizer import AbstractSummarizer
@@ -36,8 +35,11 @@ class SumBasicSummarizer(AbstractSummarizer):
     def _filter_out_stop_words(self, words):
         return [w for w in words if w not in self.stop_words]
 
-    def _compute_word_freq(self, list_of_words):        
-        return Counter(list_of_words)
+    def _compute_word_freq(self, list_of_words):
+        word_freq = {}
+        for w in list_of_words:
+            word_freq[w] = word_freq.get(w, 0) + 1
+        return word_freq
 
     def _get_all_content_words_in_doc(self, sentences):
         all_words = self._get_all_words_in_doc(sentences)
