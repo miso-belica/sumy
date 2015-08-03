@@ -26,7 +26,6 @@ class TestMain(unittest.TestCase):
         'lsa': True,
         'luhn': False,
         'text-rank': False,
-        'sum-basic': False,
         'kl': False,
     }
 
