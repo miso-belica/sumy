@@ -41,7 +41,6 @@ from .summarizers.edmundson import EdmundsonSummarizer
 from .summarizers.lsa import LsaSummarizer
 from .summarizers.text_rank import TextRankSummarizer
 from .summarizers.lex_rank import LexRankSummarizer
-from .summarizers.sum_basic import SumBasicSummarizer
 from .summarizers.kl import KLSummarizer
 from .nlp.stemmers import Stemmer
 
