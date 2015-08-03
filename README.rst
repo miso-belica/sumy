@@ -13,7 +13,6 @@ Simple library and command line utility for extracting summary from HTML pages o
 - **Latent Semantic Analysis, LSA** - one of the algorithm from http://scholar.google.com/citations?user=0fTuW_YAAAAJ&hl=en I think the author is using more advanced algorithms now. `Steinberger, J. a Ježek, K. Using latent semantic an and summary evaluation. In In Proceedings ISIM '04. 2004. S. 93-100. <http://www.kiv.zcu.cz/~jstein/publikace/isim2004.pdf>`_
 - **LexRank** - Unsupervised approach inspired by algorithms PageRank and HITS, `reference <http://tangra.si.umich.edu/~radev/lexrank/lexrank.pdf>`_
 - **TextRank** - some sort of combination of a few resources that I found on the internet. I really don't remember the sources. Probably `Wikipedia <https://en.wikipedia.org/wiki/Automatic_summarization#Unsupervised_approaches:_TextRank_and_LexRank>`_ and some papers in 1st page of Google :)
-- **SumBasic** - Method that is often used as a baseline in the literature.  Source: `Read about SumBasic <http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf>`_
 - **KL-Sum** - Method that greedily adds sentences to a summary so long as it decreases the KL Divergence. Source: `Read about KL-Sum <http://www.aclweb.org/anthology/N09-1041>`_
 
 Here are some other summarizers:
