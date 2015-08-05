@@ -26,6 +26,7 @@ class TestMain(unittest.TestCase):
         'lsa': True,
         'luhn': False,
         'text-rank': False,
+        'kl': False,
     }
 
     def test_ok_args(self):

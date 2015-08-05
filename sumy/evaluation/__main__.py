@@ -43,6 +43,7 @@ from ..summarizers.edmundson import EdmundsonSummarizer
 from ..summarizers.lsa import LsaSummarizer
 from ..summarizers.text_rank import TextRankSummarizer
 from ..summarizers.lex_rank import LexRankSummarizer
+from ..summarizers.kl import KLSummarizer
 from ..nlp.stemmers import Stemmer
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
 
@@ -97,6 +98,13 @@ def build_lex_rank(parser, language):
     return summarizer
 
 
+def build_kl(parser, language):
+    summarizer = KLSummarizer(Stemmer(language))
+    summarizer.stop_words = get_stop_words(language)
+
+    return summarizer
+
+
 def evaluate_cosine_similarity(evaluated_sentences, reference_sentences):
     evaluated_words = tuple(chain(*(s.words for s in evaluated_sentences)))
     reference_words = tuple(chain(*(s.words for s in reference_sentences)))
@@ -122,6 +130,7 @@ AVAILABLE_METHODS = {
     "lsa": build_lsa,
     "text-rank": build_text_rank,
     "lex-rank": build_lex_rank,
+    "kl": build_kl,
 }
 AVAILABLE_EVALUATIONS = (
     ("Precision", False, precision),
