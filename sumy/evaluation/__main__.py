@@ -45,6 +45,7 @@ from ..summarizers.text_rank import TextRankSummarizer
 from ..summarizers.lex_rank import LexRankSummarizer
 from ..nlp.stemmers import Stemmer
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
+from . import rouge_1, rouge_2, rouge_l_sentence_level, rouge_l_summary_level 
 
 
 HEADERS = {
@@ -131,6 +132,10 @@ AVAILABLE_EVALUATIONS = (
     ("Cosine similarity (document)", True, evaluate_cosine_similarity),
     ("Unit overlap", False, evaluate_unit_overlap),
     ("Unit overlap (document)", True, evaluate_unit_overlap),
+    ("Rouge-1", False, rouge_1),
+    ("Rouge-2", False, rouge_2),
+    ("Rouge-L (Sentence Level)", False, rouge_l_sentence_level),
+    ("Rouge-L (Summary Level)", False, rouge_l_summary_level)
 )
 
 
