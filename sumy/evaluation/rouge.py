@@ -199,29 +199,6 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
 	return _f_lcs(lcs, m, n)
 
 
-
-# def _union_lcs(evaluated_sentences, reference_sentences):
-# 	'''
-# 	LCS score of the union longest common subsequence between reference sentence
-# 	and candidate summary.
-# 	'''
-# 	if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0: 
-# 		raise (ValueError("Collections must contain at least 1 sentence."))
-
-# 	union_lcs_sum_across_all_references = 0
-# 	for ref_s in reference_sentences:
-# 		lcs_union = set()
-# 		reference_words = _split_into_words([ref_s])
-# 		combined_lcs_count = 0	
-# 		for eval_s in evaluated_sentences:
-# 			evaluated_words = _split_into_words([eval_s])
-# 			lcs = set(_recon_lcs(reference_words, evaluated_words))
-# 			combined_lcs_count += len(lcs)
-# 			lcs_union = lcs_union.union(lcs)
-	
-# 		union_lcs_count = len(lcs_union)
-# 		union_lcs_sum_across_all_references += union_lcs_count / combined_lcs_count
-# 	return union_lcs_sum_across_all_references
 def _union_lcs(evaluated_sentences, reference_sentence):
 	'''
 	Returns LCS_u(r_i, C) which is the LCS score of the union longest common subsequence 
@@ -247,6 +224,7 @@ def _union_lcs(evaluated_sentences, reference_sentence):
 	union_lcs_count = len(lcs_union)
 	union_lcs_value = union_lcs_count / combined_lcs_length
 	return union_lcs_value
+	
 
 def rouge_l_summary_level(evaluated_sentences, reference_sentences):
 	"""
