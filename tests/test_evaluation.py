@@ -300,4 +300,9 @@ class TestRougeEvaluation(unittest.TestCase):
         self.assertAlmostEqual(_union_lcs(candidates, reference[0]),  4/5)
 
     def test_rouge_l_summary_level(self):
-        pass
+        reference_text = "one two three four five. one two three four five."
+        reference = PlaintextParser(reference_text, Tokenizer("english")).document.sentences
+
+        candidate_text = "one two six seven eight. one three eight nine five."
+        candidates = PlaintextParser(candidate_text, Tokenizer("english")).document.sentences
+        rouge_l_summary_level(candidates, reference)
