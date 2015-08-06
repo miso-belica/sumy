@@ -35,6 +35,7 @@ def _get_word_ngrams(n, sentences):
 def _get_index_of_lcs(x, y):
 	return len(x), len(y)
 
+
 def _len_lcs(x, y):
 	'''
 	Returns the length of the Longest Common Subsequence between sequences x
@@ -61,7 +62,6 @@ def _lcs (x, y):
 	:param y: collection of words
 	:returns table: dictionary of coord and len lcs
 	'''
-
 	n, m = _get_index_of_lcs(x, y)
 	table = dict()
 	for i in range(n + 1):
@@ -105,9 +105,6 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
 	Sourece: http://research.microsoft.com/en-us/um/people/cyl/download/
 	papers/rouge-working-note-v1.3.1.pdf
 
-	TODO: Implement such that it can use multiple reference
-		  summaries 
-
 	:param evaluated_sentences: 
 		The sentences that have been picked by the summarizer
 	:param reference_sentences:
@@ -118,7 +115,6 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
 		exactly the same.
 	:raises ValueError: raises exception if a param has len <= 0
 	"""
-
 	if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0: 
 		raise (ValueError("Collections must contain at least 1 sentence."))
 
@@ -136,6 +132,14 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
 def rouge_1(evaluated_sentences, reference_sentences):
 	'''
 	Rouge-N where N=1.  This is a commonly used metric.
+
+	:param evaluated_sentences: 
+		The sentences that have been picked by the summarizer
+	:param reference_sentences:
+		The sentences from the referene set
+	:returns: 
+		float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
+		exactly the same.
 	'''
 	return rouge_n(evaluated_sentences, reference_sentences, 1)
 
@@ -143,6 +147,14 @@ def rouge_1(evaluated_sentences, reference_sentences):
 def rouge_2(evaluated_sentences, reference_sentences):
 	'''
 	Rouge-N where N=2.  This is a commonly used metric.
+
+	:param evaluated_sentences: 
+		The sentences that have been picked by the summarizer
+	:param reference_sentences:
+		The sentences from the referene set
+	:returns: 
+		float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
+		exactly the same.
 	'''
 	return rouge_n(evaluated_sentences, reference_sentences, 2)
 
@@ -164,6 +176,7 @@ def _f_lcs(llcs, m, n):
 	num = (1 + (beta ** 2)) * r_lcs * p_lcs 
 	denom = r_lcs + ((beta ** 2) * p_lcs)
 	return num / denom
+
 
 def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
 	"""
@@ -208,6 +221,13 @@ def _union_lcs(evaluated_sentences, reference_sentence):
 	“w1 w2” and the longest common subsequence of r_i and c2 is “w1 w3 w5”. The 
 	union longest common subsequence of r_i, c1, and c2 is “w1 w2 w3 w5” and 
 	LCS_u(r_i, C) = 4/5.
+
+	:param evaluated_sentences: 
+		The sentences that have been picked by the summarizer
+	:param reference_sentence:
+		One of the sentences in the reference summaries
+	:returns float: LCS_u(r_i, C)
+	:raises ValueError: raises exception if a param has len <= 0
 	'''
 	if len(evaluated_sentences) <= 0: 
 		raise (ValueError("Collections must contain at least 1 sentence."))
@@ -224,7 +244,7 @@ def _union_lcs(evaluated_sentences, reference_sentence):
 	union_lcs_count = len(lcs_union)
 	union_lcs_value = union_lcs_count / combined_lcs_length
 	return union_lcs_value
-	
+
 
 def rouge_l_summary_level(evaluated_sentences, reference_sentences):
 	"""
@@ -250,7 +270,6 @@ def rouge_l_summary_level(evaluated_sentences, reference_sentences):
 		The sentences from the referene set
 	:returns float: F_lcs
 	:raises ValueError: raises exception if a param has len <= 0
-
 	"""
 	if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0: 
 		raise (ValueError("Collections must contain at least 1 sentence."))
