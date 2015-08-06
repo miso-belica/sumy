@@ -297,7 +297,7 @@ class TestRougeEvaluation(unittest.TestCase):
         candidate_text = "one two six seven eight. one three eight nine five."
         candidates = PlaintextParser(candidate_text, Tokenizer("english")).document.sentences
 
-        self.assertAlmostEqual(_union_lcs(candidates, reference),  4/5)
+        self.assertAlmostEqual(_union_lcs(candidates, reference[0]),  4/5)
 
     def test_rouge_l_summary_level(self):
         pass
