@@ -55,20 +55,20 @@ class TestLexRank(unittest.TestCase):
         metrics = summarizer._compute_idf(sentences)
 
         expected = {
-            "this": 6/2,
-            "is": 6/3,
-            "yes": 6/2,
-            "simple": 6/2,
-            "sentence": 6/3,
-            "too": 6/1,
-            "not": 6/1,
-            "every": 6/2,
-            "makes": 6/1,
-            "me": 6/1,
-            "happy": 6/2,
-            "day": 6/1,
+            "this": math.log(6/3),
+            "is": math.log(6/4),
+            "yes": math.log(6/3),
+            "simple": math.log(6/3),
+            "sentence": math.log(6/4),
+            "too": math.log(6/2),
+            "not": math.log(6/2),
+            "every": math.log(6/3),
+            "makes": math.log(6/2),
+            "me": math.log(6/2),
+            "happy": math.log(6/3),
+            "day": math.log(6/2),
         }
-        self.assertEqual(expected, metrics)
+        assert expected == metrics
 
     def test_modified_cosine_computation(self):
         summarizer = LexRankSummarizer()

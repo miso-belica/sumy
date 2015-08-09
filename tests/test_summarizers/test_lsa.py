@@ -4,9 +4,9 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
+import pytest
 import sumy.summarizers.lsa as lsa_module
 
-from nose import SkipTest
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -98,7 +98,7 @@ class TestLsa(unittest.TestCase):
 
     def test_issue_5_svd_converges(self):
         """Source: https://github.com/miso-belica/sumy/issues/5"""
-        raise SkipTest("Can't reproduce the issue.")
+        pytest.skip("Can't reproduce the issue.")
 
         parser = PlaintextParser.from_string(
             load_resource("articles/svd_converges.txt"),

@@ -19,6 +19,8 @@ before_install:
   - sudo apt-get install -qq python-numpy
 install:
   - python setup.py install
+  - pip install -U pip
+  - pip install -U pytest pytest-cov
   # - python -c "import nltk; nltk.download('punkt')"
 script:
-  - nosetests tests
+  - py.test tests

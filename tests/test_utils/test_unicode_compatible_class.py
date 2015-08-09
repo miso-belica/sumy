@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
+import pytest
 
-from nose import SkipTest
 from sumy import _compat as compat
 
 
@@ -30,14 +30,14 @@ class TestObject(unittest.TestCase):
 
     def test_native_bytes(self):
         if not compat.PY3:
-            raise SkipTest("Python 2 doesn't support method `__bytes__`")
+            pytest.skip("Python 2 doesn't support method `__bytes__`")
 
         returned = bytes(self.o)
         self.assertStringsEqual(BYTES_STRING, returned)
 
     def test_native_unicode(self):
         if compat.PY3:
-            raise SkipTest("Python 3 doesn't support method `__unicode__`")
+            pytest.skip("Python 3 doesn't support method `__unicode__`")
 
         returned = unicode(self.o)
         self.assertStringsEqual(UNICODE_STRING, returned)

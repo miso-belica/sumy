@@ -43,10 +43,10 @@ setup(
         "nltk>=3.0.2",
     ],
     tests_require=[
-        "nose",
-        "coverage",
+        "pytest",
+        "pytest-cov",
+        "pytest-watch",
     ],
-    test_suite="nose.collector",
     extras_require={
         "LSA": ["numpy"],
         "LexRank": ["numpy"],

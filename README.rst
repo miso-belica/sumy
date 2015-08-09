@@ -130,4 +130,4 @@ Run tests via
 
 .. code-block:: bash
 
-    $ nosetests-2.6 && nosetests-3.2 && nosetests-2.7 && nosetests-3.3
+    $ py.test-2.6 && py.test-3.2 && py.test-2.7 && py.test-3.3 && py.test-3.4
