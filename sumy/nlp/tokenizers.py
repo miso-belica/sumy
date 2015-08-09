@@ -17,6 +17,13 @@ class Tokenizer(object):
     LANGUAGE_ALIASES = {
         "slovak": "czech",
     }
+    
+    # improve tokenizer by adding specific abbreviations it has issues with
+    # note the final point in these items must not be included
+    LANGUAGE_EXTRA_ABREVS = {
+        "english": ['e.g', 'al', 'i.e'],
+        "german": ['al', 'z.B', 'Inc','engl','z. B', 'vgl', 'lat', 'bzw', 'S'],
+    }
 
     def __init__(self, language):
         self._language = language
@@ -33,6 +40,8 @@ class Tokenizer(object):
         return nltk.data.load(path)
 
     def to_sentences(self, paragraph):
+        extra_abbreviations = self.LANGUAGE_EXTRA_ABREVS.get(self._language, [])
+        self._sentence_tokenizer._params.abbrev_types.update(extra_abbreviations)
         sentences = self._sentence_tokenizer.tokenize(to_unicode(paragraph))
         return tuple(map(unicode.strip, sentences))
 
