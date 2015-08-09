@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import unittest
+import pytest
 
-from nose import SkipTest
 from sumy import _compat as py3k
 
 
@@ -35,7 +35,7 @@ class TestPy3k(unittest.TestCase):
 
     def test_unicode_object_to_bytes(self):
         if not py3k.PY3:
-            raise SkipTest("Py2 object has `__str__` method called 1st")
+            pytest.skip("Py2 object has `__str__` method called 1st")
 
         instance = self.__build_test_instance("__str__", UNICODE_STRING)
 
