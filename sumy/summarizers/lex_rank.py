@@ -32,7 +32,7 @@ class LexRankSummarizer(AbstractSummarizer):
         self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, document, sentences_count):
-        self._ensure_dependecies_installed()
+        self._ensure_dependencies_installed()
 
         sentences_words = [self._to_words_set(s) for s in document.sentences]
         tf_metrics = self._compute_tf(sentences_words)
@@ -44,7 +44,8 @@ class LexRankSummarizer(AbstractSummarizer):
 
         return self._get_best_sentences(document.sentences, sentences_count, ratings)
 
-    def _ensure_dependecies_installed(self):
+    @staticmethod
+    def _ensure_dependencies_installed():
         if numpy is None:
             raise ValueError("LexRank summarizer requires NumPy. Please, install it by command 'pip install numpy'.")
 
@@ -67,10 +68,12 @@ class LexRankSummarizer(AbstractSummarizer):
 
         return tf_metrics
 
-    def _find_tf_max(self, terms):
+    @staticmethod
+    def _find_tf_max(terms):
         return max(terms.values()) if terms else 1
 
-    def _compute_idf(self, sentences):
+    @staticmethod
+    def _compute_idf(sentences):
         idf_metrics = {}
         sentences_count = len(sentences)
 
@@ -78,7 +81,7 @@ class LexRankSummarizer(AbstractSummarizer):
             for term in sentence:
                 if term not in idf_metrics:
                     n_j = sum(1 for s in sentences if term in s)
-                    idf_metrics[term] = sentences_count / n_j
+                    idf_metrics[term] = math.log(sentences_count / (1 + n_j))
 
         return idf_metrics
 
@@ -110,7 +113,8 @@ class LexRankSummarizer(AbstractSummarizer):
 
         return matrix
 
-    def _compute_cosine(self, sentence1, sentence2, tf1, tf2, idf_metrics):
+    @staticmethod
+    def _compute_cosine(sentence1, sentence2, tf1, tf2, idf_metrics):
         common_words = frozenset(sentence1) & frozenset(sentence2)
 
         numerator = 0.0
@@ -125,19 +129,16 @@ class LexRankSummarizer(AbstractSummarizer):
         else:
             return 0.0
 
-    def power_method(self, matrix, epsilon):
+    @staticmethod
+    def power_method(matrix, epsilon):
         transposed_matrix = matrix.T
         sentences_count = len(matrix)
-        p_vector = [1.0 / sentences_count] * sentences_count
+        p_vector = numpy.array([1.0 / sentences_count] * sentences_count)
         lambda_val = 1.0
 
         while lambda_val > epsilon:
-            next_p = [0] * sentences_count
-            for i in range(sentences_count):
-                for j in range(sentences_count):
-                    next_p[i] += transposed_matrix[j, i] * p_vector[j]
-
-            lambda_val = sum((next_p[i] - p_vector[i])**2 for i in range(sentences_count))
+            next_p = numpy.dot(transposed_matrix, p_vector)
+            lambda_val = numpy.linalg.norm(numpy.subtract(next_p, p_vector))
             p_vector = next_p
 
         return p_vector
