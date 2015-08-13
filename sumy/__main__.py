@@ -7,6 +7,9 @@ Usage:
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>]
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --url=<url>
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --file=<file_path>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>]
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --url=<url>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --file=<file_path>
     sumy --version
     sumy --help
 
@@ -42,6 +45,7 @@ from .summarizers.lsa import LsaSummarizer
 from .summarizers.text_rank import TextRankSummarizer
 from .summarizers.lex_rank import LexRankSummarizer
 from .summarizers.sum_basic import SumBasicSummarizer
+from .summarizers.kl import KLSummarizer
 from .nlp.stemmers import Stemmer
 
 HEADERS = {
@@ -59,6 +63,7 @@ AVAILABLE_METHODS = {
     "text-rank": TextRankSummarizer,
     "lex-rank": LexRankSummarizer,
     "sum-basic": SumBasicSummarizer,
+    "kl": KLSummarizer,
 }
 
 
