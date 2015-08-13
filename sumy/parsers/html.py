@@ -32,7 +32,7 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_url(cls, url, tokenizer):
-        response = urllib.urlopen(url)
+        response = urllib.build_opener(urllib.HTTPCookieProcessor).open(url)
         data = response.read()
         response.close()
 
