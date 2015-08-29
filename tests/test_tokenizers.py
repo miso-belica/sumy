@@ -42,6 +42,13 @@ class TestTokenizer(unittest.TestCase):
         )
         self.assertEqual(expected, words)
 
+    def test_tokenize_sentences_with_abbreviations(self):
+        tokenizer = Tokenizer("english")
+        sentences = tokenizer.to_sentences("There are people who are weird, e.g. normal people. These people know you.")
+
+        expected = ("There are people who are weird, e.g. normal people.", "These people know you.",)
+        assert expected == sentences
+
     def test_tokenize_paragraph(self):
         tokenizer = Tokenizer("english")
         sentences = tokenizer.to_sentences("""
