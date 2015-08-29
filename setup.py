@@ -41,6 +41,7 @@ setup(
         "docopt>=0.6.1,<0.7",
         "breadability>=0.1.20",
         "nltk>=3.0.2",
+        "requests>=2.7.0",
     ],
     tests_require=[
         "pytest",

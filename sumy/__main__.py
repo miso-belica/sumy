@@ -31,8 +31,8 @@ import sys
 
 from docopt import docopt
 from . import __version__
-from .utils import ItemsCount, get_stop_words, read_stop_words
-from ._compat import urllib, to_string, to_unicode, to_bytes, PY3
+from .utils import ItemsCount, get_stop_words, read_stop_words, fetch_url
+from ._compat import to_string, to_unicode, to_bytes, PY3
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
@@ -45,9 +45,6 @@ from .summarizers.sum_basic import SumBasicSummarizer
 from .summarizers.kl import KLSummarizer
 from .nlp.stemmers import Stemmer
 
-HEADERS = {
-    "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
-}
 PARSERS = {
     "html": HtmlParser,
     "plaintext": PlaintextParser,
@@ -87,14 +84,14 @@ def handle_arguments(args, default_input_stream=sys.stdin):
 
     if args["--url"] is not None:
         parser = PARSERS[document_format or "html"]
-        request = urllib.Request(args["--url"], headers=HEADERS)
-        input_stream = urllib.urlopen(request)
+        document_content = fetch_url(args["--url"])
     elif args["--file"] is not None:
         parser = PARSERS[document_format or "plaintext"]
-        input_stream = open(args["--file"], "rb")
+        with open(args["--file"], "rb") as file:
+            document_content = file.read()
     else:
         parser = PARSERS[document_format or "plaintext"]
-        input_stream = default_input_stream
+        document_content = default_input_stream.read()
 
     items_count = ItemsCount(args["--length"])
 
@@ -104,10 +101,7 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     else:
         stop_words = get_stop_words(language)
 
-    parser = parser(input_stream.read(), Tokenizer(language))
-    if input_stream is not sys.stdin:
-        input_stream.close()
-
+    parser = parser(document_content, Tokenizer(language))
     stemmer = Stemmer(language)
 
     summarizer_class = next(cls for name, cls in AVAILABLE_METHODS.items() if args[name])

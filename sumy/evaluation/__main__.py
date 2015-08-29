@@ -31,9 +31,9 @@ import sys
 from itertools import chain
 from docopt import docopt
 from .. import __version__
-from ..utils import ItemsCount, get_stop_words
+from ..utils import ItemsCount, get_stop_words, fetch_url
 from ..models import TfDocumentModel
-from .._compat import urllib, to_string
+from .._compat import to_string
 from ..nlp.tokenizers import Tokenizer
 from ..parsers.html import HtmlParser
 from ..parsers.plaintext import PlaintextParser
@@ -50,9 +50,6 @@ from . import precision, recall, f_score, cosine_similarity, unit_overlap
 from . import rouge_1, rouge_2, rouge_l_sentence_level, rouge_l_summary_level 
 
 
-HEADERS = {
-    "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
-}
 PARSERS = {
     "html": HtmlParser,
     "plaintext": PlaintextParser,
@@ -174,6 +171,8 @@ def main(args=None):
             result = evaluate(evaluated_sentences, reference_sentences)
         print("%s: %f" % (name, result))
 
+    return 0
+
 
 def handle_arguments(args):
     document_format = args["--format"]
@@ -183,16 +182,16 @@ def handle_arguments(args):
             document_format,
         ))
 
-    parser = PARSERS["plaintext"]
-    input_stream = sys.stdin
-
     if args["--url"] is not None:
         parser = PARSERS["html"]
-        request = urllib.Request(args["--url"], headers=HEADERS)
-        input_stream = urllib.urlopen(request)
+        document_content = fetch_url(args["--url"])
     elif args["--file"] is not None:
         parser = PARSERS.get(document_format, PlaintextParser)
-        input_stream = open(args["--file"], "rb")
+        with open(args["--file"], "rb") as file:
+            document_content = file.read()
+    else:
+        parser = PARSERS["plaintext"]
+        document_content = sys.stdin.read()
 
     summarizer_builder = AVAILABLE_METHODS["luhn"]
     for method, builder in AVAILABLE_METHODS.items():
@@ -202,9 +201,7 @@ def handle_arguments(args):
 
     items_count = ItemsCount(args["--length"])
 
-    parser = parser(input_stream.read(), Tokenizer(args["--language"]))
-    if input_stream is not sys.stdin:
-        input_stream.close()
+    parser = parser(document_content, Tokenizer(args["--language"]))
 
     with open(args["<reference_summary>"], "rb") as file:
         reference_summmary = file.read().decode("utf8")

@@ -4,8 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 from breadability.readable import Article
-from .._compat import urllib
-from ..utils import cached_property
+from ..utils import cached_property, fetch_url
 from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
 from .parser import DocumentParser
 
@@ -32,10 +31,7 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_url(cls, url, tokenizer):
-        response = urllib.urlopen(url)
-        data = response.read()
-        response.close()
-
+        data = fetch_url(url)
         return cls(data, tokenizer, url)
 
     def __init__(self, html_content, tokenizer, url=None):
