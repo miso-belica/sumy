@@ -105,3 +105,20 @@ class TestLexRank(unittest.TestCase):
 
         sentences = summarizer(parser.document, 20)
         self.assertEqual(len(sentences), 20)
+
+    def test_document_is_all_in_upper_case(self):
+        """
+        When all words is in upper case Plaintext parser first line as heading and
+        LexRank algorithm raises exception "ZeroDivisionError: float division by zero"
+        because there is no sentence to summarize.
+        See https://github.com/miso-belica/sumy/issues/25
+        """
+        parser = PlaintextParser.from_string(
+            "JUST WRITING SOME TEXT. TO TEST CASE. WITH ZERO SENTENCES RETURNED. FROM TOKENIZER.",
+            Tokenizer("english")
+        )
+        summarizer = LexRankSummarizer(stem_word)
+        summarizer.stop_words = get_stop_words("english")
+
+        sentences = summarizer(parser.document, 20)
+        assert len(sentences) == 0

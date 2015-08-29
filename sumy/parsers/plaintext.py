@@ -10,6 +10,21 @@ from .parser import DocumentParser
 
 
 class PlaintextParser(DocumentParser):
+    """
+    Parses simple plain text in following format:
+
+    HEADING
+    This is text of 1st paragraph. Some another sentence.
+
+    This is next paragraph.
+
+    HEADING IS LINE ALL IN UPPER CASE
+    This is 3rd paragraph with heading. Sentence in 3rd paragraph.
+    Another sentence in 3rd paragraph.
+
+    Paragraphs are separated by empty lines. And that's all :)
+    """
+
     @classmethod
     def from_string(cls, string, tokenizer):
         return cls(string, tokenizer)
