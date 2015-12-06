@@ -53,14 +53,16 @@ class KLSummarizer(AbstractSummarizer):
         normalized_content_words = self._normalize_words(content_words)
         return normalized_content_words
         
-    def _compute_tf(self, sentences):
+    def compute_tf(self, sentences):
         """
         Computes the normalized term frequency as explained in http://www.tfidf.com/
+
+        :type sentences: [sumy.models.dom.Sentence]
         """
         content_words = self._get_all_content_words_in_doc(sentences)
         content_words_count = len(content_words)
         content_words_freq = self._compute_word_freq(content_words)
-        content_word_tf = dict((k, v / content_words_count) for k, v in content_words_freq.items())
+        content_word_tf = dict((w, f / content_words_count) for w, f in content_words_freq.items())
         return content_word_tf
 
     def _joint_freq(self, word_list_1, word_list_2):
@@ -107,7 +109,7 @@ class KLSummarizer(AbstractSummarizer):
         return kls.index(min(kls))
 
     def _compute_ratings(self, sentences):
-        word_freq = self._compute_tf(sentences)
+        word_freq = self.compute_tf(sentences)
         ratings = {}
         summary = []
 

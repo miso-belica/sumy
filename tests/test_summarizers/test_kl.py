@@ -116,3 +116,17 @@ def test_missing_word_in_document_during_kl_divergence_computation(summarizer):
     # Note: the order of params is different
     kl_correct = 0.11475080798005841
     assert abs(summarizer._kl_divergence(summary_frequences, document_frequencies) - kl_correct) < EPS
+
+
+def test_tf_idf_metric_should_be_real_number():
+    """https://github.com/miso-belica/sumy/issues/41"""
+    summarizer = KLSummarizer()
+    frequencies = summarizer.compute_tf([Sentence("There are five words, jop.", Tokenizer("english"))])
+
+    assert frequencies == {
+        "there": 0.2,
+        "are": 0.2,
+        "five": 0.2,
+        "words": 0.2,
+        "jop": 0.2,
+    }
