@@ -94,7 +94,10 @@ class KLSummarizer(AbstractSummarizer):
         """
         sum_val = 0
         for w in summary_freq:
-            sum_val += doc_freq[w] * math.log(doc_freq[w] / summary_freq[w])
+            frequency = doc_freq.get(w)
+            if frequency:  # missing or zero = no frequency
+                sum_val += frequency * math.log(frequency / summary_freq[w])
+
         return sum_val
 
     def _find_index_of_best_sentence(self, kls):

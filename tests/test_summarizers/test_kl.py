@@ -93,10 +93,26 @@ def test_kl_divergence(summarizer):
     kl_correct = 0.11475080798005841
     assert abs(summarizer._kl_divergence(w1, w2) - kl_correct) < EPS
 
-    w1 = {"one":.1, "two":.2, "three":.7}
-    w2 = {"one":.2, "two":.4, "three":.4}
+    w1 = {"one": 0.1, "two": 0.2, "three": 0.7}
+    w2 = {"one": 0.2, "two": 0.4, "three": 0.4}
 
     # This value comes from scipy.stats.entropy(w2_, w1_)
     # Note: the order of params is different
     kl_correct = 0.1920419931617981
     assert abs(summarizer._kl_divergence(w1, w2) - kl_correct) < EPS
+
+
+def test_missing_word_in_document_during_kl_divergence_computation(summarizer):
+    """
+    Missing word should not affect the result.
+    See https://github.com/miso-belica/sumy/issues/41
+    """
+    EPS = 0.00001
+
+    summary_frequences = {"one": 0.35, "two": 0.5, "three": 0.15, "four": 0.9}
+    document_frequencies = {"one": 1.0/3.0, "two": 1.0/3.0, "three": 1.0/3.0}
+
+    # This value comes from scipy.stats.entropy(w2_, w1_)
+    # Note: the order of params is different
+    kl_correct = 0.11475080798005841
+    assert abs(summarizer._kl_divergence(summary_frequences, document_frequencies) - kl_correct) < EPS
