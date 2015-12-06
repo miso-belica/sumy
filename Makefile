@@ -8,6 +8,7 @@ test:
 	py.test
 
 publish: test
+	pandoc --from=markdown --to=rst README.md -o README.rst
 	${PYTHON} setup.py register sdist bdist_wheel
 	twine upload dist/*
 

@@ -12,8 +12,7 @@ VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
 
 
 with open("README.rst") as readme:
-    with open("CHANGELOG.rst") as changelog:
-        long_description = readme.read() + "\n\n" + changelog.read()
+    long_description = readme.read()
 
 
 setup(
@@ -74,7 +73,7 @@ setup(
         ]
     },
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 3 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
         "License :: OSI Approved :: Apache Software License",
