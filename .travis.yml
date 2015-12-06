@@ -14,7 +14,9 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq gfortran libatlas-base-dev
   - sudo apt-get install -qq python-numpy
+  - sudo apt-get install -qq pandoc
 install:
+  - pandoc --from=markdown --to=rst README.md -o README.rst
   - python setup.py install
   - pip install -U pip wheel
   - pip install -U --use-wheel pytest pytest-cov
