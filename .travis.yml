@@ -2,13 +2,10 @@ language:
   - python
 python:
   # https://github.com/travis-ci/travis-ci/issues/2219#issuecomment-41804942
-  - "2.6"
   - "2.7"
-  - "2.7_with_system_site_packages"
-  - "3.2"
-  - "3.2_with_system_site_packages"
   - "3.3"
   - "3.4"
+  - "3.5"
 before_install:
   # download NLTK corpora manually - https://github.com/nltk/nltk/issues/565
   - wget https://s3.amazonaws.com/textblob/nltk_data.tar.gz
@@ -19,8 +16,8 @@ before_install:
   - sudo apt-get install -qq python-numpy
 install:
   - python setup.py install
-  - pip install -U pip
-  - pip install -U pytest pytest-cov
+  - pip install -U pip wheel
+  - pip install -U --use-wheel pytest pytest-cov
   # - python -c "import nltk; nltk.download('punkt')"
 script:
   - py.test tests

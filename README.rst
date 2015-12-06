@@ -39,7 +39,7 @@ Here are some other summarizers:
 
 Installation
 ------------
-Make sure you have Python_ 2.6+/3.2+ and `pip <https://crate.io/packages/pip/>`_
+Make sure you have Python_ 2.7/3.3+ and `pip <https://crate.io/packages/pip/>`_
 (`Windows <http://docs.python-guide.org/en/latest/starting/install/win/>`_,
 `Linux <http://docs.python-guide.org/en/latest/starting/install/linux/>`_) installed.
 Run simply (preferred way):
@@ -54,16 +54,6 @@ Or for the fresh version:
 .. code-block:: bash
 
     $ [sudo] pip install git+git://github.com/miso-belica/sumy.git
-
-
-Or if you have to:
-
-.. code-block:: bash
-
-    $ wget https://github.com/miso-belica/sumy/archive/master.zip # download the sources
-    $ unzip master.zip # extract the downloaded file
-    $ cd sumy-master/
-    $ [sudo] python setup.py install # install the package
 
 
 Usage
@@ -131,4 +121,4 @@ Run tests via
 
 .. code-block:: bash
 
-    $ py.test-2.6 && py.test-3.2 && py.test-2.7 && py.test-3.3 && py.test-3.4
+    $ py.test-2.7 && py.test-3.3 && py.test-3.4 && py.test-3.5

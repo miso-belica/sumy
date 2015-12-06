@@ -2,10 +2,10 @@
 
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
+
 import math
 
 from ._summarizer import AbstractSummarizer
-from ..utils import get_stop_words
 
 
 class KLSummarizer(AbstractSummarizer):
@@ -14,6 +14,8 @@ class KLSummarizer(AbstractSummarizer):
     KL Divergence.
     Source: http://www.aclweb.org/anthology/N09-1041
     """
+
+    stop_words = frozenset()
 
     def __call__(self, document, sentences_count):
         ratings = self._get_ratings(document)
@@ -51,14 +53,16 @@ class KLSummarizer(AbstractSummarizer):
         normalized_content_words = self._normalize_words(content_words)
         return normalized_content_words
         
-    def _compute_tf(self, sentences):
-        '''
+    def compute_tf(self, sentences):
+        """
         Computes the normalized term frequency as explained in http://www.tfidf.com/
-        '''
+
+        :type sentences: [sumy.models.dom.Sentence]
+        """
         content_words = self._get_all_content_words_in_doc(sentences)
         content_words_count = len(content_words)
         content_words_freq = self._compute_word_freq(content_words)
-        content_word_tf = dict((k, v / content_words_count) for (k, v) in content_words_freq.items())
+        content_word_tf = dict((w, f / content_words_count) for w, f in content_words_freq.items())
         return content_word_tf
 
     def _joint_freq(self, word_list_1, word_list_2):
@@ -76,7 +80,8 @@ class KLSummarizer(AbstractSummarizer):
         for k in wc2:
             if k in joint: 
                 joint[k] += wc2[k]
-            else: joint[k] = wc2[k]
+            else:
+                joint[k] = wc2[k]
 
         # divides total counts by the combined length
         for k in joint:
@@ -85,24 +90,26 @@ class KLSummarizer(AbstractSummarizer):
         return joint
 
     def _kl_divergence(self, summary_freq, doc_freq):
-        '''
+        """
         Note: Could import scipy.stats and use scipy.stats.entropy(doc_freq, summary_freq)
         but this gives equivalent value without the import
-        '''
+        """
         sum_val = 0
         for w in summary_freq:
-            sum_val += doc_freq[w] * math.log(doc_freq[w] / summary_freq[w])
+            frequency = doc_freq.get(w)
+            if frequency:  # missing or zero = no frequency
+                sum_val += frequency * math.log(frequency / summary_freq[w])
+
         return sum_val
 
     def _find_index_of_best_sentence(self, kls):
-        '''
+        """
         the best sentence is the one with the smallest kl_divergence
-        '''
-        indexToRemove = kls.index(min(kls))
-        return indexToRemove
+        """
+        return kls.index(min(kls))
 
     def _compute_ratings(self, sentences):
-        word_freq = self._compute_tf(sentences)
+        word_freq = self.compute_tf(sentences)
         ratings = {}
         summary = []
 
