@@ -3,6 +3,17 @@
 Changelog
 =========
 
+0.4.0 (2015-12-04)
+------------------
+- Dropped support for Python 2.6 and 3.2. Only 2.7/3.3+ are officially supported now. Time to move :)
+- CLI: Better message for unknown format.
+- LexRank: fixed power method computation.
+- Added some extra abbreviations (english, german) into tokenizer for better output.
+- SumBasic: Added new summarization method - SumBasic. Thanks to `Julian Griggs <https://github.com/JulianGriggs>`_.
+- KL: Added new summarization method - KL. Thanks to `Julian Griggs <https://github.com/JulianGriggs>`_.
+- Added dependency `requests <http://docs.python-requests.org/en/latest/>`_ to fix issues with downloading pages.
+- Better documentation of expected Plaintext document format.
+
 0.3.0 (2014-06-07)
 ------------------
 - Added possibility to specify format of input document for URL & stdin. Thanks to `@Lucas-C <https://github.com/Lucas-C>`_.

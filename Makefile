@@ -5,7 +5,7 @@ VERSION=patch
 
 
 test:
-	py.test-2.6 && py.test-3.2 && py.test-2.7 && py.test-3.3 && py.test-3.4
+	py.test
 
 publish: test
 	${PYTHON} setup.py register sdist bdist_wheel
