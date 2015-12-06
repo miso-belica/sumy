@@ -2,6 +2,9 @@
 __pycache__/
 *.py[co]
 *.egg-info
+/build
+/dist
+/.cache
 
 # tests
 .coverage
