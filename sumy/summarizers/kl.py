@@ -6,16 +6,15 @@ from __future__ import division, print_function, unicode_literals
 import math
 
 from ._summarizer import AbstractSummarizer
+from ._mixins import StopWordsMixin
 
 
-class KLSummarizer(AbstractSummarizer):
+class KLSummarizer(AbstractSummarizer, StopWordsMixin):
     """
     Method that greedily adds sentences to a summary so long as it decreases the 
     KL Divergence.
     Source: http://www.aclweb.org/anthology/N09-1041
     """
-
-    stop_words = frozenset()
 
     def __call__(self, document, sentences_count):
         ratings = self._get_ratings(document)
@@ -39,7 +38,7 @@ class KLSummarizer(AbstractSummarizer):
         return [self.normalize_word(w) for w in words]
 
     def _filter_out_stop_words(self, words):
-        return [w for w in words if w not in self.stop_words]
+        return [w for w in words if w not in self._stop_words]
 
     def _compute_word_freq(self, list_of_words):
         word_freq = {}
