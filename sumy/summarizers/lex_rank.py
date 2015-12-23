@@ -11,25 +11,17 @@ except ImportError:
     numpy = None
 
 from ._summarizer import AbstractSummarizer
+from ._mixins import StopWordsMixin
 from .._compat import Counter
 
 
-class LexRankSummarizer(AbstractSummarizer):
+class LexRankSummarizer(AbstractSummarizer, StopWordsMixin):
     """
     LexRank: Graph-based Centrality as Salience in Text Summarization
     Source: http://tangra.si.umich.edu/~radev/lexrank/lexrank.pdf
     """
     threshold = 0.1
     epsilon = 0.1
-    _stop_words = frozenset()
-
-    @property
-    def stop_words(self):
-        return self._stop_words
-
-    @stop_words.setter
-    def stop_words(self, words):
-        self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, document, sentences_count):
         self._ensure_dependencies_installed()

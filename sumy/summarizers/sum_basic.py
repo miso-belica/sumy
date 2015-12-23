@@ -5,10 +5,11 @@ from __future__ import division, print_function, unicode_literals
 import math
 
 from ._summarizer import AbstractSummarizer
+from ._mixins import StopWordsMixin
 from ..utils import get_stop_words
 
 
-class SumBasicSummarizer(AbstractSummarizer):
+class SumBasicSummarizer(AbstractSummarizer, StopWordsMixin):
     """
     SumBasic: a frequency-based summarization system that adjusts word frequencies as 
     sentences are extracted.
@@ -33,7 +34,7 @@ class SumBasicSummarizer(AbstractSummarizer):
         return [self.normalize_word(w) for w in words]
 
     def _filter_out_stop_words(self, words):
-        return [w for w in words if w not in self.stop_words]
+        return [w for w in words if w not in self._stop_words]
 
     def _compute_word_freq(self, list_of_words):
         word_freq = {}

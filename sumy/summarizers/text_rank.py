@@ -8,20 +8,11 @@ import math
 from itertools import combinations
 from collections import defaultdict
 from ._summarizer import AbstractSummarizer
+from ._mixins import StopWordsMixin
 
 
-class TextRankSummarizer(AbstractSummarizer):
+class TextRankSummarizer(AbstractSummarizer, StopWordsMixin):
     """Source: https://github.com/adamfabish/Reduction"""
-
-    _stop_words = frozenset()
-
-    @property
-    def stop_words(self):
-        return self._stop_words
-
-    @stop_words.setter
-    def stop_words(self, words):
-        self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, document, sentences_count):
         ratings = self.rate_sentences(document)
