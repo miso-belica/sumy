@@ -152,3 +152,21 @@ Run tests via
 ```sh
 $ py.test-2.7 && py.test-3.3 && py.test-3.4 && py.test-3.5
 ```
+
+## Troubleshooting
+
+Sumy relies on 'nltk' package. So if you meet this error message:
+
+```
+zipfile.BadZipfile: File is not a zip file
+```
+
+Type 'python' in the command line.
+
+And then type
+
+```
+import nltk
+nltk.download()
+```
+to download all the data needed.
