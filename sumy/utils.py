@@ -5,6 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import sys
 import requests
+import pkgutil
 
 from functools import wraps
 from contextlib import closing
@@ -49,15 +50,20 @@ def expand_resource_path(path):
 
 
 def get_stop_words(language):
-    path = expand_resource_path("stopwords/%s.txt" % language)
-    if not exists(path):
+    try:
+        stopwords_data = pkgutil.get_data("sumy", "data/stopwords/%s.txt" % language)
+    except IOError as e:
         raise LookupError("Stop-words are not available for language %s." % language)
-    return read_stop_words(path)
+    return parse_stop_words(stopwords_data)
 
 
 def read_stop_words(filename):
     with open(filename, "rb") as open_file:
-        return frozenset(to_unicode(w.rstrip()) for w in open_file.readlines())
+        return parse_stop_words(open_file.read())
+
+
+def parse_stop_words(data):
+    return frozenset(w.rstrip() for w in to_unicode(data).split("\n") if w)
 
 
 class ItemsCount(object):
