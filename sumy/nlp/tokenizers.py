@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import re
+import zipfile
 import nltk
 
 from .._compat import to_string, to_unicode, unicode
@@ -17,7 +18,7 @@ class Tokenizer(object):
     LANGUAGE_ALIASES = {
         "slovak": "czech",
     }
-    
+
     # improve tokenizer by adding specific abbreviations it has issues with
     # note the final point in these items must not be included
     LANGUAGE_EXTRA_ABREVS = {
@@ -36,8 +37,14 @@ class Tokenizer(object):
         return self._language
 
     def _sentence_tokenizer(self, language):
-        path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
-        return nltk.data.load(path)
+        try:
+            path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
+            return nltk.data.load(path)
+        except (LookupError, zipfile.BadZipfile):
+            raise LookupError(
+                "NLTK tokenizers are missing. Download them by following command: "
+                '''python -c "import nltk; nltk.download('punkt')"'''
+            )
 
     def to_sentences(self, paragraph):
         extra_abbreviations = self.LANGUAGE_EXTRA_ABREVS.get(self._language, [])
