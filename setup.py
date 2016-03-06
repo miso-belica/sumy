@@ -79,10 +79,12 @@ setup(
         "License :: OSI Approved :: Apache Software License",
 
         "Natural Language :: Czech",
-        "Natural Language :: Slovak",
         "Natural Language :: English",
-        "Natural Language :: German",
         "Natural Language :: French",
+        "Natural Language :: German",
+        "Natural Language :: Portuguese",
+        "Natural Language :: Slovak",
+        "Natural Language :: Spanish",
 
         "Topic :: Education",
         "Topic :: Internet",

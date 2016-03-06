@@ -142,6 +142,11 @@ if __name__ == "__main__":
 
 ## Tests
 
+Setup:
+```sh
+$ pip install pytest pytest-cov
+```
+
 Run tests via
 
 ```sh
