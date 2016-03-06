@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (2016-03-06)
+- Added support for Portuguese and Spanish.
+- Better error mesage when NLTK tokenizers are missing.
+
 ## 0.4.0 (2015-12-04)
 -   Dropped support for Python 2.6 and 3.2. Only 2.7/3.3+ are officially supported now. Time to move :)
 -   CLI: Better message for unknown format.
@@ -18,11 +22,11 @@
 -   Exception `LookupError` is raised for unknown language of stemmer instead of falling silently to `null_stemmer`.
 
 ## 0.2.1 (2014-01-23)
--   Fixed installation of my own readability fork. Added `breadability` to the dependencies instead of it [#8](https://github.com/miso-belica/sumy/issues/8). 
+-   Fixed installation of my own readability fork. Added `breadability` to the dependencies instead of it [#8](https://github.com/miso-belica/sumy/issues/8).
     Thanks to [@pratikpoddar](https://github.com/pratikpoddar).
 
 ## 0.2.0 (2014-01-18)
--   Removed dependency on SciPy [#7](https://github.com/miso-belica/sumy/pull/7). Use `numpy.linalg.svd` implementation. 
+-   Removed dependency on SciPy [#7](https://github.com/miso-belica/sumy/pull/7). Use `numpy.linalg.svd` implementation.
     Thanks to [Shantanu](https://github.com/baali).
 
 ## 0.1.0 (2013-10-20)

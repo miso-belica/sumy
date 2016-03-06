@@ -17,7 +17,7 @@ with open("README.rst") as readme:
 
 setup(
     name="sumy",
-    version="0.4.0",
+    version="0.4.1",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     author="Michal Belica",

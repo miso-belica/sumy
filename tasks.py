@@ -5,7 +5,7 @@ from invoke import task, run
 
 @task
 def clean():
-    run("rm -rf .bumpversion.cfg .coverage dist build")
+    run("rm -rf .coverage dist build")
 
 
 @task(clean, default=True)
@@ -28,6 +28,5 @@ def release():
 
 @task(test)
 def bump(version="patch"):
-    run("bumpversion %s --config-file setup.cfg" % version)
-    run("git rm .bumpversion.cfg")
+    run("bumpversion %s" % version)
     run("git commit --amend")
