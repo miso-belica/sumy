@@ -63,7 +63,7 @@ def read_stop_words(filename):
 
 
 def parse_stop_words(data):
-    return frozenset(w.rstrip() for w in to_unicode(data).split("\n") if w)
+    return frozenset(w.rstrip() for w in to_unicode(data).splitlines() if w)
 
 
 class ItemsCount(object):
