@@ -4,14 +4,15 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import math
+
 import numpy
 import pytest
-import sumy.summarizers.lex_rank as lex_rank_module
 
-from sumy.summarizers.lex_rank import LexRankSummarizer
-from sumy.parsers.plaintext import PlaintextParser
+import sumy.summarizers.lex_rank as lex_rank_module
 from sumy.nlp.stemmers.czech import stem_word
 from sumy.nlp.tokenizers import Tokenizer
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.summarizers.lex_rank import LexRankSummarizer
 from sumy.utils import get_stop_words
 from ..utils import build_document, load_resource
 
@@ -74,29 +75,55 @@ def test_idf_metrics():
     assert expected == metrics
 
 
-def test_modified_cosine_computation():
-    summarizer = LexRankSummarizer()
-
+def test_cosine_similarity_for_the_same_sentence_with_duplicate_words_should_be_one():
+    """
+    We compute similarity of the same sentences. These should be exactly the same and
+    therefor have similarity close to 1.0.
+    see https://github.com/miso-belica/sumy/issues/58
+    """
     sentence1 = ["this", "sentence", "is", "simple", "sentence"]
     tf1 = {"this": 1/2, "sentence": 1.0, "is": 1/2, "simple": 1/2}
-    sentence2 = ["this", "is", "simple", "sentence", "yes", "is", "too", "too"]
-    tf2 = {"this": 1/2, "is": 1.0, "simple": 1/2, "sentence": 1/2, "yes": 1/2, "too": 1.0}
+    sentence2 = ["this", "sentence", "is", "simple", "sentence"]
+    tf2 = {"this": 1/2, "sentence": 1.0, "is": 1/2, "simple": 1/2}
     idf = {
         "this": 2/2,
         "sentence": 2/2,
         "is": 2/2,
         "simple": 2/2,
-        "yes": 2/1,
-        "too": 2/1,
     }
 
-    numerator = sum(tf1[t]*tf2[t]*idf[t]**2 for t in ["this", "sentence", "is", "simple"])
-    denominator1 = math.sqrt(sum((tf1[t]*idf[t])**2 for t in sentence1))
-    denominator2 = math.sqrt(sum((tf2[t]*idf[t])**2 for t in sentence2))
+    summarizer = LexRankSummarizer()
+    cosine = summarizer.cosine_similarity(sentence1, sentence2, tf1, tf2, idf)
 
-    expected = numerator / (denominator1 * denominator2)
-    cosine = summarizer._compute_cosine(sentence1, sentence2, tf1, tf2, idf)
-    assert expected == cosine
+    assert abs(1.0 - cosine) < 0.00001
+
+
+def test_cosine_similarity_sentences_with_no_common_word_should_be_zero():
+    """
+    We compute similarity of the sentences without single common word.
+    These are considered dissimilar so have similarity close to 0.0.
+    see https://github.com/miso-belica/sumy/issues/58
+    """
+    sentence1 = ["this", "sentence", "is", "simple", "sentence"]
+    tf1 = {"this": 1/2, "sentence": 1.0, "is": 1/2, "simple": 1/2}
+    sentence2 = ["that", "paragraph", "has", "some", "words"]
+    tf2 = {"that": 1.0, "paragraph": 1.0, "has": 1.0, "some": 1.0, "words": 1.0}
+    idf = {
+        "this": 2/1,
+        "sentence": 2/1,
+        "is": 2/1,
+        "simple": 2/1,
+        "that": 2/1,
+        "paragraph": 2/1,
+        "has": 2/1,
+        "some": 2/1,
+        "words": 2/1,
+    }
+
+    summarizer = LexRankSummarizer()
+    cosine = summarizer.cosine_similarity(sentence1, sentence2, tf1, tf2, idf)
+
+    assert abs(0.0 - cosine) < 0.00001
 
 
 def test_article_example():
