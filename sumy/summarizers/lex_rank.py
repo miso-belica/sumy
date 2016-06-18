@@ -99,7 +99,7 @@ class LexRankSummarizer(AbstractSummarizer):
 
         for row, (sentence1, tf1) in enumerate(zip(sentences, tf_metrics)):
             for col, (sentence2, tf2) in enumerate(zip(sentences, tf_metrics)):
-                matrix[row, col] = self._compute_cosine(sentence1, sentence2, tf1, tf2, idf_metrics)
+                matrix[row, col] = self.cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics)
 
                 if matrix[row, col] > threshold:
                     matrix[row, col] = 1.0
@@ -117,15 +117,39 @@ class LexRankSummarizer(AbstractSummarizer):
         return matrix
 
     @staticmethod
-    def _compute_cosine(sentence1, sentence2, tf1, tf2, idf_metrics):
-        common_words = frozenset(sentence1) & frozenset(sentence2)
+    def cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics):
+        """
+        We compute idf-modified-cosine(sentence1, sentence2) here.
+        It's cosine similarity of these two sentences (vectors) A, B computed as cos(x, y) = A . B / (|A| . |B|)
+        Sentences are represented as vector TF*IDF metrics.
+
+        :param sentence1:
+            Iterable object where every item represents word of 1st sentence.
+        :param sentence2:
+            Iterable object where every item represents word of 2nd sentence.
+        :type tf1: dict
+        :param tf1:
+            Term frequencies of words from 1st sentence.
+        :type tf2: dict
+        :param tf2:
+            Term frequencies of words from 2nd sentence
+        :type idf_metrics: dict
+        :param idf_metrics:
+            Inverted document metrics of the sentences. Every sentence is treated as document for this algorithm.
+        :rtype: float
+        :return:
+            Returns -1.0 for opposite similarity, 1.0 for the same sentence and zero for no similarity between sentences.
+        """
+        unique_words1 = frozenset(sentence1)
+        unique_words2 = frozenset(sentence2)
+        common_words = unique_words1 & unique_words2
 
         numerator = 0.0
         for term in common_words:
             numerator += tf1[term]*tf2[term] * idf_metrics[term]**2
 
-        denominator1 = sum((tf1[t]*idf_metrics[t])**2 for t in sentence1)
-        denominator2 = sum((tf2[t]*idf_metrics[t])**2 for t in sentence2)
+        denominator1 = sum((tf1[t]*idf_metrics[t])**2 for t in unique_words1)
+        denominator2 = sum((tf2[t]*idf_metrics[t])**2 for t in unique_words2)
 
         if denominator1 > 0 and denominator2 > 0:
             return numerator / (math.sqrt(denominator1) * math.sqrt(denominator2))
