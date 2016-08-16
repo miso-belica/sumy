@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 """
 Sumy - automatic text summarizer.
@@ -7,6 +7,7 @@ Usage:
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>]
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --url=<url>
     sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --file=<file_path>
+    sumy (luhn | edmundson | lsa | text-rank | lex-rank | sum-basic | kl) [--length=<length>] [--language=<lang>] [--stopwords=<file_path>] [--format=<format>] --text=<text>
     sumy --version
     sumy --help
 
@@ -19,6 +20,7 @@ Options:
     --format=<format>        Format of input document. Possible values: html, plaintext
     --url=<url>              URL address of the web page to summarize.
     --file=<file_path>       Path to the text file to summarize.
+    --text=<text>            Raw text to summarize
     --version                Displays current application version.
     --help                   Displays this text.
 
@@ -89,6 +91,9 @@ def handle_arguments(args, default_input_stream=sys.stdin):
         parser = PARSERS[document_format or "plaintext"]
         with open(args["--file"], "rb") as file:
             document_content = file.read()
+    elif args["--text"] is not None:
+        parser = PARSERS[document_format or "plaintext"]
+        document_content = args["--text"]
     else:
         parser = PARSERS[document_format or "plaintext"]
         document_content = default_input_stream.read()
@@ -104,8 +109,10 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     parser = parser(document_content, Tokenizer(language))
     stemmer = Stemmer(language)
 
-    summarizer_class = next(cls for name, cls in AVAILABLE_METHODS.items() if args[name])
-    summarizer = build_summarizer(summarizer_class, stop_words, stemmer, parser)
+    summarizer_class = next(
+        cls for name, cls in AVAILABLE_METHODS.items() if args[name])
+    summarizer = build_summarizer(
+        summarizer_class, stop_words, stemmer, parser)
 
     return summarizer, parser, items_count
 
