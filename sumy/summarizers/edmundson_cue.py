@@ -50,9 +50,5 @@ class EdmundsonCueMethod(AbstractSummarizer):
         return bonus_words_count, stigma_words_count
 
     def rate_sentences(self, document, bunus_word_weight=1, stigma_word_weight=1):
-        rated_sentences = {}
-        for sentence in document.sentences:
-            rated_sentences[sentence] = self._rate_sentence(sentence,
-                bunus_word_weight, stigma_word_weight)
-
-        return rated_sentences
+        return {sentence: self._rate_sentence(sentence, bunus_word_weight,
+                stigma_word_weight) for sentence in document.sentences}

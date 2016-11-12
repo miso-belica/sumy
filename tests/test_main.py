@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
@@ -20,6 +20,7 @@ class TestMain(unittest.TestCase):
         '--length': '20%',
         '--stopwords': None,
         '--url': None,
+        '--text': None,
         '--version': False,
         'edmundson': False,
         'lex-rank': False,
@@ -45,6 +46,9 @@ class TestMain(unittest.TestCase):
 
     def test_args_url_and_file(self):
         self.assertRaises(DocoptExit, docopt, to_string(main_doc), 'lsa --url=URL --file=FILE'.split(), version=__version__)
+
+    def test_args_url_and_text(self):
+        self.assertRaises(DocoptExit, docopt, to_string(main_doc), 'lsa --url=URL --text=TEXT'.split(), version=__version__)
 
     def test_handle_default_arguments(self):
         handle_arguments(self.DEFAULT_ARGS, default_input_stream=StringIO("Whatever."))
