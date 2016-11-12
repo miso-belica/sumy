@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0 (2016-11-12)
+- Added "--text" CLI parameter to summarize text in Emacs and other tools. Thanks to [@FrancisMurillo](https://github.com/FrancisMurillo).
+- Fixed computation of cosine similarity in LexRank summarizator.
+- Fixed resource searching in .egg packages. Thanks to [@heni](https://github.com/heni).
+
 ## 0.4.1 (2016-03-06)
 - Added support for Portuguese and Spanish.
 - Better error mesage when NLTK tokenizers are missing.
