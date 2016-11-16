@@ -11,8 +11,19 @@ import sys
 VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
 
 
-with open("README.rst") as readme:
-    long_description = readme.read()
+from setuptools import setup
+try:
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError:
+    print("warning: pypandoc module not found, could not convert Markdown to RST")
+    read_md = lambda f: open(f, 'r').read()
+
+setup(
+    # name, version, ...
+    long_description=read_md('README.md'),
+    install_requires=[]
+)
 
 
 setup(
