@@ -18,19 +18,13 @@ try:
 except ImportError:
     print("warning: pypandoc module not found, could not convert Markdown to RST")
     read_md = lambda f: open(f, 'r').read()
-
-setup(
-    # name, version, ...
-    long_description=read_md('README.md'),
-    install_requires=[]
-)
-
+    
 
 setup(
     name="sumy",
     version="0.5.0",
     description="Module for automatic summarization of text documents and HTML pages.",
-    long_description=long_description,
+    long_description=read_md('README.md'),
     author="Michal Belica",
     author_email="miso.belica@gmail.com",
     url="https://github.com/miso-belica/sumy",
