@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1 (2016-11-17)
+- Fixed missing stopwords in SumBasic summarizer.
+
 ## 0.5.0 (2016-11-12)
 - Added "--text" CLI parameter to summarize text in Emacs and other tools. Thanks to [@FrancisMurillo](https://github.com/FrancisMurillo).
 - Fixed computation of cosine similarity in LexRank summarizator.
