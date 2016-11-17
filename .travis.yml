@@ -6,6 +6,8 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
+  - "3.6-dev"
+  - "nightly"
 before_install:
   # install dependencies for NumPy
   - sudo apt-get update -qq
@@ -13,7 +15,6 @@ before_install:
   - sudo apt-get install -qq python-numpy
   - sudo apt-get install -qq pandoc
 install:
-  - pandoc --from=markdown --to=rst README.md -o README.rst
   - python setup.py install
   - pip install -U pip wheel
   - pip install -U --use-wheel pytest pytest-cov
