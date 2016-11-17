@@ -2,10 +2,8 @@
 
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
-import math
 
 from ._summarizer import AbstractSummarizer
-from ..utils import get_stop_words
 
 
 class SumBasicSummarizer(AbstractSummarizer):
@@ -15,6 +13,15 @@ class SumBasicSummarizer(AbstractSummarizer):
     Source: http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf
 
     """
+    _stop_words = frozenset()
+
+    @property
+    def stop_words(self):
+        return self._stop_words
+
+    @stop_words.setter
+    def stop_words(self, words):
+        self._stop_words = frozenset(map(self.normalize_word, words))
 
     def __call__(self, document, sentences_count):
         sentences = document.sentences
