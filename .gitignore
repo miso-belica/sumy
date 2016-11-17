@@ -5,7 +5,6 @@ __pycache__/
 /build
 /dist
 /.cache
-README.rst
 
 # tests
 .coverage
