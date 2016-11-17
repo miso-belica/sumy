@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 """
 Czech stemmer
@@ -26,7 +26,7 @@ WORD_PATTERN = re.compile(r"^\w+$", re.UNICODE)
 
 def stem_word(word, aggressive=False):
     if not isinstance(word, unicode):
-        word = word.decode("utf8")
+        word = word.decode("utf-8")
 
     if not WORD_PATTERN.match(word):
         return word
@@ -196,9 +196,9 @@ def _palatalize(word):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2 or sys.argv[1] not in ("light", "aggressive"):
-        sys.exit(__doc__.encode("utf8"))
+        sys.exit(__doc__.encode("utf-8"))
 
     aggressive_stemming = bool(sys.argv[1] == "aggressive")
     for line in sys.stdin:
-        words = tuple(w.decode("utf8") + " " + stem_word(w, aggressive_stemming) for w in line.split())
-        print(*map(lambda s: s.encode("utf8"), words))
+        words = tuple(w.decode("utf-8") + " " + stem_word(w, aggressive_stemming) for w in line.split())
+        print(*map(lambda s: s.encode("utf-8"), words))

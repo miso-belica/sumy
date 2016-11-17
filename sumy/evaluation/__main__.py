@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 """
 Sumy - evaluation of automatic text summary.
@@ -204,7 +204,7 @@ def handle_arguments(args):
     parser = parser(document_content, Tokenizer(args["--language"]))
 
     with open(args["<reference_summary>"], "rb") as file:
-        reference_summmary = file.read().decode("utf8")
+        reference_summmary = file.read().decode("utf-8")
 
     return summarizer_builder(parser, args["--language"]), parser.document, items_count, reference_summmary
 

@@ -109,7 +109,7 @@ $ sumy_eval --help # for more info
 Or you can use sumy like a library in your project.
 
 ```python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
