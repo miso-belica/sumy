@@ -16,10 +16,16 @@ def null_stemmer(object):
 
 
 class Stemmer(object):
+    SPECIAL_STEMMERS = {
+        'czech': czech_stemmer,
+        'slovak': czech_stemmer,
+        'japanese': null_stemmer
+    }
+
     def __init__(self, language):
         self._stemmer = null_stemmer
-        if language.lower() in ('czech', 'slovak'):
-            self._stemmer = czech_stemmer
+        if language.lower() in self.SPECIAL_STEMMERS:
+            self._stemmer = self.SPECIAL_STEMMERS[language.lower()]
             return
         stemmer_classname = language.capitalize() + 'Stemmer'
         try:

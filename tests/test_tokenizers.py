@@ -82,3 +82,21 @@ class TestTokenizer(unittest.TestCase):
             "To nechám na čitateľa.",
         )
         self.assertEqual(expected, sentences)
+
+    def test_tokenize_japanese_sentence(self):
+        tokenizer = Tokenizer('japanese')
+        self.assertEqual(tokenizer.language, 'japanese')
+
+        sentence = 'この文章を、正しくトークン化したい。'
+        expected = ('この', '文章', 'を', '正しく', 'トークン', '化', 'し', 'たい')
+        self.assertEqual(expected, tokenizer.to_words(sentence))
+
+    def test_tokenize_japanese_paragraph(self):
+        tokenizer = Tokenizer('japanese')
+        expected = (
+            '１つ目の文章です。',
+            'その次は何が来ますか？',
+            '「２つ目の文章」です。'
+        )
+        paragraph = '１つ目の文章です。その次は何が来ますか？　「２つ目の文章」です。'
+        self.assertEqual(expected, tokenizer.to_sentences(paragraph))

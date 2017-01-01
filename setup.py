@@ -48,6 +48,7 @@ setup(
     extras_require={
         "LSA": ["numpy"],
         "LexRank": ["numpy"],
+        "Japanese": ["tinysegmenter"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -71,6 +72,7 @@ setup(
         "Natural Language :: English",
         "Natural Language :: French",
         "Natural Language :: German",
+        "Natural Language :: Japanese",
         "Natural Language :: Portuguese",
         "Natural Language :: Slovak",
         "Natural Language :: Spanish",
