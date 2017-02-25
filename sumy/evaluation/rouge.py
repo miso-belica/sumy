@@ -28,8 +28,12 @@ def _get_word_ngrams(n, sentences):
 	assert (len(sentences) > 0)
 	assert (n > 0)
 
-	words = _split_into_words(sentences)
-	return _get_ngrams(n, words)
+	words = set()
+	for sentence in sentences:
+		words.update(_get_ngrams(n,_split_into_words([sentence])))
+		
+	return words
+
 
 
 def _get_index_of_lcs(x, y):

@@ -216,19 +216,26 @@ class TestRougeEvaluation(unittest.TestCase):
             Tokenizer("english")).document.sentences
         self.assertEqual(["One", "two", "two", "Two", "Three"], 
             _split_into_words(sentences1))
-        
         sentences2 = PlaintextParser.from_string("two two. Two. Three.", 
             Tokenizer("english")).document.sentences
         self.assertEqual(["two", "two", "Two", "Three"], 
             _split_into_words(sentences2))
 
+
     def test_get_word_ngrams(self):
-        sentences = PlaintextParser.from_string("This is a test.", 
-            Tokenizer("english")).document.sentences
-        correct_ngrams = [("This", "is"), ("is", "a"), ("a", "test")]
+        sentences = PlaintextParser.from_string("This is a test.", Tokenizer("english")).document.sentences
+        expected_ngrams = [("This", "is"), ("is", "a"), ("a", "test")]
         found_ngrams = _get_word_ngrams(2, sentences)
-        for ngram in correct_ngrams:
-            self.assertTrue(ngram in found_ngrams)      
+
+        self.assertTrue(expected_ngrams, found_ngrams)
+
+    def test_ngrams_for_more_sentences_should_not_return_words_at_boundaries(self):
+        sentences = PlaintextParser.from_string("This is a pencil.\nThis is a eraser.\nThis is a book.", Tokenizer("english")).document.sentences
+        expected_ngrams = [("This", "is"), ("is", "a"), ("a", "pencil"), ("a", "eraser"), ("a", "book")]
+        found_ngrams = _get_word_ngrams(2, sentences)
+
+        self.assertTrue(expected_ngrams, found_ngrams)
+
 
     def test_len_lcs(self):
         self.assertEqual(_len_lcs("1234", "1224533324"), 4)
