@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
 import sys
+
+from setuptools import setup, find_packages
 
 
 VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
@@ -15,6 +12,7 @@ with open("README.rst") as readme:
     long_description = readme.read()
 
 
+# https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
     version="0.5.1",
@@ -39,8 +37,8 @@ setup(
     install_requires=[
         "docopt>=0.6.1,<0.7",
         "breadability>=0.1.20",
-        "nltk>=3.0.2",
         "requests>=2.7.0",
+        "nltk>=3.0.2,<3.2.0" if VERSION_SUFFIX == "3.3" else "nltk>=3.0.2",  # NLTK 3.2 dropped support for Python 3.3
     ],
     tests_require=[
         "pytest",
@@ -51,16 +49,7 @@ setup(
         "LSA": ["numpy"],
         "LexRank": ["numpy"],
     },
-    packages=[
-        "sumy",
-        "sumy.evaluation",
-        "sumy.models",
-        "sumy.models.dom",
-        "sumy.nlp",
-        "sumy.nlp.stemmers",
-        "sumy.parsers",
-        "sumy.summarizers",
-    ],
+    packages=find_packages(),
     package_data={"sumy": [
         "data/stopwords/*.txt",
     ]},
@@ -101,6 +90,7 @@ setup(
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: Implementation :: CPython",
     ],
 )

@@ -2,11 +2,15 @@ language:
   - python
 python:
   # https://github.com/travis-ci/travis-ci/issues/2219#issuecomment-41804942
+  # https://snarky.ca/how-to-use-your-project-travis-to-help-test-python-itself/
   - "2.7"
   - "3.3"
   - "3.4"
   - "3.5"
+  - "3.5-dev"
+  - "3.6"
   - "3.6-dev"
+  - "3.7-dev"
   - "nightly"
 before_install:
   # install dependencies for NumPy
