@@ -22,6 +22,7 @@ install:
   - python setup.py install
   - pip install -U pip wheel
   - pip install -U --use-wheel pytest pytest-cov
+  - pip install -U tinysegmenter
   - python -c "import nltk; nltk.download('punkt')"
 script:
   - py.test tests
