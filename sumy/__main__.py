@@ -109,8 +109,10 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     parser = parser(document_content, Tokenizer(language))
     stemmer = Stemmer(language)
 
-    summarizer_class = next(cls for name, cls in AVAILABLE_METHODS.items() if args[name])
-    summarizer = build_summarizer(summarizer_class, stop_words, stemmer, parser)
+    summarizer_class = next(
+        cls for name, cls in AVAILABLE_METHODS.items() if args[name])
+    summarizer = build_summarizer(
+        summarizer_class, stop_words, stemmer, parser)
 
     return summarizer, parser, items_count
 
