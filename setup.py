@@ -8,16 +8,21 @@ from setuptools import setup, find_packages
 VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
 
 
-with open("README.rst") as readme:
-    long_description = readme.read()
-
+from setuptools import setup
+try:
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError:
+    print("warning: pypandoc module not found, could not convert Markdown to RST")
+    read_md = lambda f: open(f, 'r').read()
+    
 
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
     version="0.5.1",
     description="Module for automatic summarization of text documents and HTML pages.",
-    long_description=long_description,
+    long_description=read_md('README.md'),
     author="Michal Belica",
     author_email="miso.belica@gmail.com",
     url="https://github.com/miso-belica/sumy",
