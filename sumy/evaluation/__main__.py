@@ -157,9 +157,15 @@ AVAILABLE_EVALUATIONS = (
 
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
-    summarizer, document, items_count, reference_summary = handle_arguments(args)
+    # summarizer, document, items_count, reference_summary = handle_arguments(args)
 
-    evaluated_sentences = summarizer(document, items_count)
+    # evaluated_sentences = summarizer(document, items_count)
+
+    summarizer, document, items_count, reference_summary, document_content = handle_arguments(args)
+
+    evaluated_sentences = PlaintextParser.from_string(document_content,
+        Tokenizer(args["--language"])).document.sentences
+
     reference_document = PlaintextParser.from_string(reference_summary,
         Tokenizer(args["--language"]))
     reference_sentences = reference_document.document.sentences
@@ -206,7 +212,8 @@ def handle_arguments(args):
     with open(args["<reference_summary>"], "rb") as file:
         reference_summmary = file.read().decode("utf-8")
 
-    return summarizer_builder(parser, args["--language"]), parser.document, items_count, reference_summmary
+    # return summarizer_builder(parser, args["--language"]), parser.document, items_count, reference_summmary
+    return summarizer_builder(parser, args["--language"]), parser.document, items_count, reference_summmary, document_content
 
 
 if __name__ == "__main__":
