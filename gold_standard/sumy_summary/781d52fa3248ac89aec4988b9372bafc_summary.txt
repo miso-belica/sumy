@@ -1,14 +1,13 @@
-Gameplay Donkey Kong is one of the earliest examples of the platform game genre; it is sometimes said to be the first platform game, although it was preceded by Space Panic.
-With its four unique levels, Donkey Kong was the most complex arcade game at the time of its release, and only the second game to feature multiple levels (the first was Gorf by Midway Games).
-Although its origin as a comic strip license played a major part, Donkey Kong marked the first time that the storyline for a video game preceded the game's programming rather than simply being appended as an afterthought.
-By October, Donkey Kong was selling 4,000 units a month, and by late June 1982, Nintendo had sold 60,000 Donkey Kong machines overall and earned $180 million.
-Both Donkey Kong and its sequel, Donkey Kong, Jr., are included in the 1988 NES compilation Donkey Kong Classics.
-The original arcade version of the game appears in the Nintendo 64 game Donkey Kong 64.
-Bootleg copies of Donkey Kong also appeared in both North America and France under the Crazy Kong, Konkey Kong or Donkey King names.
-In preparation for the court battle ahead, Universal agreed to allow Tiger to continue producing its King Kong game as long as they distinguished it from Donkey Kong.
-Over seven days, Universal's counsel, the New York firm Townley & Updike, argued that the names King Kong and Donkey Kong were easily confused and that the plot of the game was an infringement on that of the films.
-Legacy Donkey Kong spawned the sequels Donkey Kong Jr. and Donkey Kong 3, as well as the spin-off Mario Bros. A complete re-make of the original arcade game on the Game Boy, named Donkey Kong or Donkey Kong '94 contained levels from both the original Donkey Kong and Donkey Kong Jr arcades.
-Nintendo revived the Donkey Kong license in the 1990s for a series of platform games and spin-offs developed by Rare, beginning with Donkey Kong Country in 1994.
-In 2004, Nintendo released Mario vs. Donkey Kong, a sequel to the Game Boy title.
-Donkey Kong was said to be an inspiration for the platform game, Jumpman according to the game's creator.
-In 1982, Buckner and Garcia and R. Cade and the Video Victims both recorded songs ("Do the Donkey Kong" and "Donkey Kong") based on the game.
+Main ring Appearance and structure The narrow and relatively thin main ring is the brightest part of Jupiter's ring system.
+The fine structure of the main ring was discovered in data from the Galileo orbiter and is clearly visible in back-scattered images obtained from New Horizons in February–March 2007.
+No spectral features have been found so far which can be attributed to particular chemical compounds, although the Cassini observations yielded evidence for absorption bands near 0.8 μm and 2.2 μm.
+The properties of the main ring can be explained by the hypothesis that it contains significant amounts of dust with 0.1–10 μm particle sizes.
+The total mass of the dust is estimated to be 107−109 kg.
+The dust probably originates in the main ring, a claim supported by the fact that the halo’s optical depth is comparable with that of the dust in the main ring.
+The detection of the Amalthea gossamer ring from the ground, in Galileo images and the direct dust measurements have allowed the determination of the particle size distribution, which appears to follow the same power law as the dust in the main ring with q=2 ± 0.5.
+The optical depth of this ring is about 10−7, which is an order of magnitude lower than that of the main ring, but the total mass of the dust (107–109 kg) is comparable.
+The optical depth of the Thebe gossamer ring is about 3 × 10−8, which is three times lower than the Amalthea gossamer ring, but the total mass of the dust is the same—about 107–109 kg.
+It follows a power law with q < 2.
+One theory is that it has crashed into the much larger moon Himalia, 170 kilometres in diameter, creating a faint ring.
+This possible ring appears as a faint streak near Himalia in images from NASA's New Horizons mission to Pluto.
+However, the recovery of S/2000 J 11 in 2010 and 2011 disproves the link between S/2000 J 11 and the Himalia ring, although it is still possible that a different moon may have been involved.
