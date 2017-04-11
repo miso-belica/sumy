@@ -7,6 +7,7 @@ import sys
 
 files =  glob.glob("gold_standard/text_en/*.txt")
 #print sys.argv[1]
+files.sort()
 text_counts=[]
 for fil in files:
 	with open(fil,  'r') as f:
@@ -15,6 +16,7 @@ for fil in files:
 
 files =  glob.glob("gold_standard/summary_en/*.txt")
 summary_counts=[]
+files.sort()
 for fil in files:
 	with open(fil,  'r') as f:
 	    read_data = f.read()
@@ -26,7 +28,8 @@ ratio=[round(1.0*summary_count/text_count, 2) for text_count, summary_count in z
 
 files =  glob.glob("gold_standard/text_en/*.txt")
 summaryfiles = glob.glob("gold_standard/summary_en/*.txt")
-
+files.sort()
+summaryfiles.sort()
 
 if not os.path.exists("gold_standard/sumy_summary/"):
     os.makedirs("gold_standard/sumy_summary/")
