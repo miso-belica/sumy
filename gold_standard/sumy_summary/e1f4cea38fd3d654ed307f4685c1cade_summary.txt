@@ -1,0 +1,15 @@
+Main ring Appearance and structure The narrow and relatively thin main ring is the brightest part of Jupiter's ring system.
+The fine structure of the main ring was discovered in data from the Galileo orbiter and is clearly visible in back-scattered images obtained from New Horizons in February–March 2007.
+No spectral features have been found so far which can be attributed to particular chemical compounds, although the Cassini observations yielded evidence for absorption bands near 0.8 μm and 2.2 μm.
+The properties of the main ring can be explained by the hypothesis that it contains significant amounts of dust with 0.1–10 μm particle sizes.
+The total mass of the dust is estimated to be 107−109 kg.
+The upper limit on their size was obtained by New Horizons spacecraft.
+Its shape resembles a thick torus without clear internal structure.
+The dust probably originates in the main ring, a claim supported by the fact that the halo’s optical depth is comparable with that of the dust in the main ring.
+The detection of the Amalthea gossamer ring from the ground, in Galileo images and the direct dust measurements have allowed the determination of the particle size distribution, which appears to follow the same power law as the dust in the main ring with q=2 ± 0.5.
+The optical depth of this ring is about 10−7, which is an order of magnitude lower than that of the main ring, but the total mass of the dust (107–109 kg) is comparable.
+The optical depth of the Thebe gossamer ring is about 3 × 10−8, which is three times lower than the Amalthea gossamer ring, but the total mass of the dust is the same—about 107–109 kg.
+It follows a power law with q < 2.
+One theory is that it has crashed into the much larger moon Himalia, 170 kilometres in diameter, creating a faint ring.
+This possible ring appears as a faint streak near Himalia in images from NASA's New Horizons mission to Pluto.
+However, the recovery of S/2000 J 11 in 2010 and 2011 disproves the link between S/2000 J 11 and the Himalia ring, although it is still possible that a different moon may have been involved.

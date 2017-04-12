@@ -1,0 +1,13 @@
+It comprises four main components: a thick inner torus of particles known as the "halo ring"; a relatively bright, exceptionally thin "main ring"; and two wide, thick and faint outer "gossamer rings", named after the moons of whose material they are composed: Amalthea and Thebe.
+In forward-scattered light[a] the brightness of the main ring begins to decrease steeply at 128 600 km (just inward of Adrastea's orbit) and reaches the background level at 129 300 kmjust outward of Adrastean orbit.
+The fine structure of the main ring was discovered in data from the Galileo orbiter and is clearly visible in back-scattered images obtained from New Horizons in FebruaryMarch 2007.
+Observed in back-scattered light the main ring appears to be razor thin, extending in the vertical direction no more than 30 km.
+The properties of the main ring can be explained by the hypothesis that it contains significant amounts of dust with 0.110 m particle sizes.
+However, larger bodies are required to explain the strong back-scattering and fine structure in the bright outer part of the main ring.
+The dust scatters light preferably in the forward direction and forms a relatively thick homogenous ring bounded by the orbit of Adrastea.
+The dust produced in collisions retains approximately the same orbital elements as the parent bodies and slowly spirals in the direction of Jupiter forming the faint (in back-scattered light) innermost part of the main ring and halo ring.
+The halo ring appears brightest in forward-scattered light, in which it was extensively imaged by Galileo.
+The outer boundary of the halo ring coincides with location of a strong 3:2 Lorentz resonance.[e] As PoyntingRobertson drag causes particles to slowly drift towards Jupiter, their orbital inclinations are excited while passing through it.
+In forward-scattered light the ring appears to be about 30 times fainter than the main ring.
+The detection of the Amalthea gossamer ring from the ground, in Galileo images and the direct dust measurements have allowed the determination of the particle size distribution, which appears to follow the same power law as the dust in the main ring with q=2  0.5.
+The peak in the brightness just inside of the Amalthea's orbit and, therefore, the vertical asymmetry the Amalthea gossamer ring may be due to the dust particles trapped at the leading (L4) and trailing (L5) Lagrange points of this moon.

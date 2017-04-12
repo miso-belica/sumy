@@ -1,0 +1,14 @@
+The original arcade version includes: The player loses a life if: These screens combine to form levels, which become progressively tougher.
+The 22nd level is unofficially known as the kill screen, due to an error in the game's programming that kills Mario after a few seconds, effectively ending the game.
+Graphical limitations forced his design: Drawing a mouth was too difficult, so the character was given a mustache; the programmers could not animate hair, so he got a cap; and to make his arm movements visible, he needed colored overalls.
+When he specified that the game would have multiple stages, the four-man programming team complained that he was essentially asking them to make the game repeatedly.
+In January 1983, the 1982 Arcade Awards gave it the Best Solitaire Videogame award and the Certificate of Merit as runner-up for Coin-Op Game of the Year.
+The game was ported to Nintendo's Family Computer (Famicom) console in 1983 as one of the system's three launch titles; the same version was a launch title for the Famicom's North American version, the Nintendo Entertainment System (NES).
+The original arcade version of the game appears in the Nintendo 64 game Donkey Kong 64.
+This version is based on the NES version and reinstates the cement factory level, as well as some intermission animations that were not included in its original port.
+Landon Dyer, the programmer assigned to create the port added a secret where his initials would appear if the player died under certain conditions then waited for the game to cycle to the title screen.
+After this announcement, the steps required to trigger the Easter egg were discovered by Don Hodges who used an emulator and a debugger to trace through the 25,000 lines of the game's code.
+Legacy Donkey Kong spawned the sequels Donkey Kong Jr. and Donkey Kong 3, as well as the spin-off Mario Bros. A complete re-make of the original arcade game on the Game Boy, named Donkey Kong or Donkey Kong '94 contained levels from both the original Donkey Kong and Donkey Kong Jr arcades.
+It starts with the same damsel-in-distress premise and four basic locations as the arcade game and then progresses to 97 additional puzzle-based levels.
+It was the first game to have built-in enhancement for the Super Game Boy accessory.
+It was originally developed as a GameCube game and would have used the bongo controller, but it was delayed and released exclusively as a Wii title with no support for the bongo accessory.
