@@ -25,6 +25,15 @@ class JapaneseWordTokenizer:
         return segmenter.tokenize(text)
 
 
+class ChineseWordTokenizer:
+    def tokenize(self, text):
+        try:
+            import jieba
+        except ImportError as e:
+            raise ValueError("Chinese tokenizer requires jieba. Please, install it by command 'pip install jieba'.")
+        return jieba.cut(text)
+
+
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
@@ -42,11 +51,13 @@ class Tokenizer(object):
     }
 
     SPECIAL_SENTENCE_TOKENIZERS = {
-        'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]')
+        'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
+        'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]')
     }
 
     SPECIAL_WORD_TOKENIZERS = {
         'japanese': JapaneseWordTokenizer(),
+        'chinese': ChineseWordTokenizer(),
     }
 
     def __init__(self, language):

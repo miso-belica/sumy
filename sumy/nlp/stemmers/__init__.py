@@ -19,6 +19,7 @@ class Stemmer(object):
     SPECIAL_STEMMERS = {
         'czech': czech_stemmer,
         'slovak': czech_stemmer,
+        'chinese': null_stemmer,
         'japanese': null_stemmer
     }
 
