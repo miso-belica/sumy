@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0 (2017-07-22)
+- Added support for Chinese. Thanks to [@astropeak](https://github.com/astropeak).
+
+## 0.6.0 (2017-03-05)
+- Dropped support for distutils when installing sumy.
+- Added support for Japanese. Thanks to [@tuvistavie](https://github.com/tuvistavie).
+- Fixed incorrect n-grams computation for more sentences. Thanks to [@odek53r](https://github.com/odek53r).
+- Fixed NLTK dependency for Python 3.3. NLTK 3.2 dropped support for Python 3.3 so sumy needs 3.1.
+
 ## 0.5.1 (2016-11-17)
 - Fixed missing stopwords in SumBasic summarizer.
 

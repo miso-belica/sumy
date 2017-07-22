@@ -15,7 +15,7 @@ with open("README.rst") as readme:
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
-    version="0.5.1",
+    version="0.7.0",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     author="Michal Belica",
@@ -69,7 +69,7 @@ setup(
         "Intended Audience :: Education",
         "License :: OSI Approved :: Apache Software License",
 
-        "Natural Language :: Chinese",
+        "Natural Language :: Chinese (Simplified)",
         "Natural Language :: Czech",
         "Natural Language :: English",
         "Natural Language :: French",
