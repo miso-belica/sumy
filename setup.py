@@ -49,6 +49,7 @@ setup(
         "LSA": ["numpy"],
         "LexRank": ["numpy"],
         "Japanese": ["tinysegmenter"],
+        "Chinese": ["jieba"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -68,6 +69,7 @@ setup(
         "Intended Audience :: Education",
         "License :: OSI Approved :: Apache Software License",
 
+        "Natural Language :: Chinese",
         "Natural Language :: Czech",
         "Natural Language :: English",
         "Natural Language :: French",

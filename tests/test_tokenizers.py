@@ -100,3 +100,22 @@ class TestTokenizer(unittest.TestCase):
         )
         paragraph = '１つ目の文章です。その次は何が来ますか？　「２つ目の文章」です。'
         self.assertEqual(expected, tokenizer.to_sentences(paragraph))
+
+    def test_tokenize_chinese_sentence(self):
+        tokenizer = Tokenizer('chinese')
+        self.assertEqual(tokenizer.language, 'chinese')
+
+        sentence = '好用的文档自动化摘要程序。'
+        expected = ('好用', '的', '文档', '自动化', '摘要', '程序')
+        self.assertEqual(expected, tokenizer.to_words(sentence))
+
+    def test_tokenize_chinese_paragraph(self):
+        tokenizer = Tokenizer('chinese')
+        expected = (
+            '我正在为这个软件添加中文支持。',
+            '这个软件是用于文档摘要！',
+            '这个软件支持网页和文本两种输入格式？'
+        )
+
+        paragraph = '我正在为这个软件添加中文支持。这个软件是用于文档摘要！这个软件支持网页和文本两种输入格式？'
+        self.assertEqual(expected, tokenizer.to_sentences(paragraph))
