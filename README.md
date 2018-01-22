@@ -19,16 +19,15 @@ framework for text summaries. Implemented summarization methods:
 -   **LexRank** - Unsupervised approach inspired by algorithms PageRank
     and HITS,
     [reference](http://tangra.si.umich.edu/~radev/lexrank/lexrank.pdf)
--   **TextRank** - some sort of combination of a few resources that I
-    found on the internet. I really don't remember the sources. Probably
-    [Wikipedia](https://en.wikipedia.org/wiki/Automatic_summarization#Unsupervised_approaches:_TextRank_and_LexRank)
-    and some papers in 1st page of Google :)
+-   **TextRank** - Unsupervised approach, also using PageRank algorithm,
+    [reference](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf)
 -   **SumBasic** - Method that is often used as a baseline in
     the literature. Source: [Read about
     SumBasic](http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf)
 -   **KL-Sum** - Method that greedily adds sentences to a summary so
     long as it decreases the KL Divergence. Source: [Read about
     KL-Sum](http://www.aclweb.org/anthology/N09-1041)
+-   **Reduction** - Graph-based summarization, taken from https://github.com/adamfabish/Reduction
 
 Here are some other summarizers:
 
@@ -140,15 +139,16 @@ if __name__ == "__main__":
         print(sentence)
 ```
 
-## Tests
+## Contributing
 
-Setup:
+Make sure you have Python 2.7 or 3.3+ installed. Then, install all the required dependencies:
+
 ```sh
-$ pip install pytest pytest-cov
+$ pip install -r requirements.txt
 ```
 
-Run tests via
+You can run the tests via
 
 ```sh
-$ py.test-2.7 && py.test-3.3 && py.test-3.4 && py.test-3.5
+$ pytest
 ```
