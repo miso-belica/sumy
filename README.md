@@ -27,7 +27,10 @@ framework for text summaries. Implemented summarization methods:
 -   **KL-Sum** - Method that greedily adds sentences to a summary so
     long as it decreases the KL Divergence. Source: [Read about
     KL-Sum](http://www.aclweb.org/anthology/N09-1041)
--   **Reduction** - Graph-based summarization, taken from https://github.com/adamfabish/Reduction
+-   **Reduction** - Graph-based summarization, where a sentence salience is
+    computed as the sum of the weights of its edges to other sentences. The
+    weight of an edge between two sentences is computed in the same manner
+    as TextRank.
 
 Here are some other summarizers:
 
@@ -144,7 +147,7 @@ if __name__ == "__main__":
 Make sure you have Python 2.7 or 3.3+ installed. Then, install all the required dependencies:
 
 ```sh
-$ pip install -r requirements.txt
+$ pip install -U pytest pytest-cov -e .
 ```
 
 You can run the tests via
