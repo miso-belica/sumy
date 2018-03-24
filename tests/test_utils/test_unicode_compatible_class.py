@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import division, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
 
-import unittest
 import pytest
 
 from sumy import _compat as compat
@@ -20,36 +18,33 @@ class O(object):
         return UNICODE_STRING
 
 
-class TestObject(unittest.TestCase):
-    def setUp(self):
-        self.o = O()
+def _assert_strings_equal(str1, str2):
+    assert type(str1) is type(str2)
+    assert str1 == str2
 
-    def assertStringsEqual(self, str1, str2, *args):
-        self.assertEqual(type(str1), type(str2), *args)
-        self.assertEqual(str1, str2, *args)
 
-    def test_native_bytes(self):
-        if not compat.PY3:
-            pytest.skip("Python 2 doesn't support method `__bytes__`")
+@pytest.mark.skipif(not compat.PY3, reason="Python 2 doesn't support method `__bytes__`")
+def test_native_bytes():
+    returned = bytes(O())
+    _assert_strings_equal(BYTES_STRING, returned)
 
-        returned = bytes(self.o)
-        self.assertStringsEqual(BYTES_STRING, returned)
 
-    def test_native_unicode(self):
-        if compat.PY3:
-            pytest.skip("Python 3 doesn't support method `__unicode__`")
+@pytest.mark.skipif(compat.PY3, reason="Python 3 doesn't support method `__unicode__`")
+def test_native_unicode():
+    returned = unicode(O())
+    _assert_strings_equal(UNICODE_STRING, returned)
 
-        returned = unicode(self.o)
-        self.assertStringsEqual(UNICODE_STRING, returned)
 
-    def test_to_bytes(self):
-        returned = compat.to_bytes(self.o)
-        self.assertStringsEqual(BYTES_STRING, returned)
+def test_to_bytes():
+    returned = compat.to_bytes(O())
+    _assert_strings_equal(BYTES_STRING, returned)
 
-    def test_to_string(self):
-        returned = compat.to_string(self.o)
-        self.assertStringsEqual(NATIVE_STRING, returned)
 
-    def test_to_unicode(self):
-        returned = compat.to_unicode(self.o)
-        self.assertStringsEqual(UNICODE_STRING, returned)
+def test_to_string():
+    returned = compat.to_string(O())
+    _assert_strings_equal(NATIVE_STRING, returned)
+
+
+def test_to_unicode():
+    returned = compat.to_unicode(O())
+    _assert_strings_equal(UNICODE_STRING, returned)

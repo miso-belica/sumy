@@ -41,7 +41,7 @@ setup(
         "nltk>=3.0.2,<3.2.0" if VERSION_SUFFIX == "3.3" else "nltk>=3.0.2",  # NLTK 3.2 dropped support for Python 3.3
     ],
     tests_require=[
-        "pytest",
+        "pytest>=3.0.0",
         "pytest-cov",
         "pytest-watch",
     ],

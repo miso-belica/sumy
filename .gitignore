@@ -4,13 +4,9 @@ __pycache__/
 *.egg-info
 /build
 /dist
-/.cache
-
-# tests
-.coverage
 
 # working folders
 /experiments/
 
-# IDE files
-.idea
+# IDE files, .coverage, .pytest_cache, ...
+.*
