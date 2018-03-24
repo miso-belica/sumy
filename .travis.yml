@@ -19,11 +19,10 @@ before_install:
   - sudo apt-get install -qq python-numpy
   - sudo apt-get install -qq pandoc
 install:
-  - python setup.py install
-  - pip install -U pip wheel
+  - pip install -U pip wheel setuptools
   - pip install -U --use-wheel pytest pytest-cov
-  - pip install -U tinysegmenter
-  - pip install -U jieba
+  - python setup.py install
+  - pip install -U tinysegmenter jieba
   - python -c "import nltk; nltk.download('punkt')"
 script:
-  - py.test tests
+  - pytest tests
