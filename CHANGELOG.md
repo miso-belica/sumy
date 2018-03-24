@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.0 (unreleased yet)
+- `TextRankSummarizer` uses iterative algorithm. Previous algorithm is called `ReductionSummarizer` [#100](https://github.com/miso-belica/sumy/pull/100). Thanks to [@kmkurn](https://github.com/kmkurn).
+
 ## 0.7.0 (2017-07-22)
 - Added support for Chinese. Thanks to [@astropeak](https://github.com/astropeak).
 
