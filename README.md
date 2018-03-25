@@ -108,7 +108,7 @@ $ sumy_eval --help # for more info
 
 ## Python API
 
-Or you can use sumy like a library in your project.
+Or you can use sumy like a library in your project. Create file `sumy_example.py` ([don't name it `sumy.py`](https://stackoverflow.com/questions/41334622/python-sumy-no-module-named-sumy-parsers-html)) with the code below to test it.
 
 ```python
 # -*- coding: utf-8 -*-
