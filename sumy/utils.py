@@ -13,10 +13,25 @@ from os.path import dirname, abspath, join, exists
 from . import __version__
 from ._compat import to_string, to_unicode, string_types
 
+from pycountry import languages
+
 _HTTP_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36 OPR/31.0.1889.174",
     # "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
 }
+
+
+def normalize_language(language):
+    for lookup_key in ('alpha_2', 'alpha_3'):
+        try:
+            language = languages.get(**{lookup_key: language})
+        except KeyError:
+            continue
+        else:
+            language = language.name.lower()
+            break
+
+    return language
 
 
 def fetch_url(url):
