@@ -22,7 +22,7 @@ _HTTP_HEADERS = {
 
 
 def normalize_language(language):
-    for lookup_key in ('alpha_2', 'alpha_3'):
+    for lookup_key in ("alpha_2", "alpha_3"):
         try:
             language = languages.get(**{lookup_key: language})
         except KeyError:
