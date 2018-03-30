@@ -63,6 +63,7 @@ def expand_resource_path(path):
 
 
 def get_stop_words(language):
+    language = normalize_language(language)
     try:
         stopwords_data = pkgutil.get_data("sumy", "data/stopwords/%s.txt" % language)
     except IOError as e:

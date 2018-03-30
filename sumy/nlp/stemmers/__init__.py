@@ -8,6 +8,7 @@ import nltk.stem.snowball as nltk_stemmers_module
 from .czech import stem_word as czech_stemmer
 
 from ..._compat import to_unicode
+from ...utils import normalize_language
 
 
 def null_stemmer(object):
@@ -24,6 +25,7 @@ class Stemmer(object):
     }
 
     def __init__(self, language):
+        language = normalize_language(language)
         self._stemmer = null_stemmer
         if language.lower() in self.SPECIAL_STEMMERS:
             self._stemmer = self.SPECIAL_STEMMERS[language.lower()]

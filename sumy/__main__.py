@@ -33,8 +33,7 @@ import sys
 
 from docopt import docopt
 from . import __version__
-from .utils import ItemsCount, get_stop_words, read_stop_words, fetch_url, \
-    normalize_language
+from .utils import ItemsCount, get_stop_words, read_stop_words, fetch_url
 from ._compat import to_string, to_unicode, to_bytes, PY3
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
@@ -102,7 +101,6 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     items_count = ItemsCount(args["--length"])
 
     language = args["--language"]
-    language = normalize_language(language)
     if args['--stopwords']:
         stop_words = read_stop_words(args['--stopwords'])
     else:
