@@ -1,28 +1,29 @@
 # Changelog
 
 ## 0.8.0 (unreleased yet)
-- `TextRankSummarizer` uses iterative algorithm. Previous algorithm is called `ReductionSummarizer` [#100](https://github.com/miso-belica/sumy/pull/100). Thanks to [@kmkurn](https://github.com/kmkurn).
+- Added support for ISO-639 language codes (`en`, `de`, `sk`, ...). [#106](https://github.com/miso-belica/sumy/pull/106)
+- `TextRankSummarizer` uses iterative algorithm. Previous algorithm is called `ReductionSummarizer`. [#100](https://github.com/miso-belica/sumy/pull/100)
 
 ## 0.7.0 (2017-07-22)
-- Added support for Chinese. Thanks to [@astropeak](https://github.com/astropeak).
+- Added support for Chinese. [#93](https://github.com/miso-belica/sumy/pull/93)
 
 ## 0.6.0 (2017-03-05)
 - Dropped support for distutils when installing sumy.
-- Added support for Japanese. Thanks to [@tuvistavie](https://github.com/tuvistavie).
-- Fixed incorrect n-grams computation for more sentences. Thanks to [@odek53r](https://github.com/odek53r).
+- Added support for Japanese. [#79](https://github.com/miso-belica/sumy/pull/79)
+- Fixed incorrect n-grams computation for more sentences. [#84](https://github.com/miso-belica/sumy/pull/84)
 - Fixed NLTK dependency for Python 3.3. NLTK 3.2 dropped support for Python 3.3 so sumy needs 3.1.
 
 ## 0.5.1 (2016-11-17)
-- Fixed missing stopwords in SumBasic summarizer.
+- Fixed missing stopwords in SumBasic summarizer. [#74](https://github.com/miso-belica/sumy/pull/74)
 
 ## 0.5.0 (2016-11-12)
-- Added "--text" CLI parameter to summarize text in Emacs and other tools. Thanks to [@FrancisMurillo](https://github.com/FrancisMurillo).
-- Fixed computation of cosine similarity in LexRank summarizator.
-- Fixed resource searching in .egg packages. Thanks to [@heni](https://github.com/heni).
+- Added "--text" CLI parameter to summarize text in Emacs and other tools. [#67](https://github.com/miso-belica/sumy/pull/67)
+- Fixed computation of cosine similarity in LexRank summarizator. [#63](https://github.com/miso-belica/sumy/pull/63)
+- Fixed resource searching in .egg packages. [#53](https://github.com/miso-belica/sumy/pull/53)
 
 ## 0.4.1 (2016-03-06)
-- Added support for Portuguese and Spanish.
-- Better error mesage when NLTK tokenizers are missing.
+- Added support for Portuguese and Spanish. [#49](https://github.com/miso-belica/sumy/pull/49) [#51](https://github.com/miso-belica/sumy/pull/51)
+- Better error message when NLTK tokenizers are missing.
 
 ## 0.4.0 (2015-12-04)
 -   Dropped support for Python 2.6 and 3.2. Only 2.7/3.3+ are officially supported now. Time to move :)
