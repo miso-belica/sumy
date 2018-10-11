@@ -15,7 +15,7 @@ with open("README.rst") as readme:
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
-    version="0.7.0",
+    version="0.8.0",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     author="Michal Belica",
@@ -96,6 +96,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: Implementation :: CPython",
     ],
 )
