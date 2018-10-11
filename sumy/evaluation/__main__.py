@@ -12,12 +12,12 @@ Usage:
 
 Options:
     <reference_summary>  Path to the file with reference summary.
-    --url=<url>          URL address of summarizied message.
-    --file=<file>        Path to file with summarizied text.
+    --url=<url>          URL address of summarized message.
+    --file=<file>        Path to file with summarized text.
     --format=<format>    Format of input file. [default: plaintext]
-    --length=<length>    Length of summarizied text. It may be count of sentences
+    --length=<length>    Length of summarized text. It may be count of sentences
                          or percentage of input text. [default: 20%]
-    --language=<lang>    Natural language of summarizied text. [default: english]
+    --language=<lang>    Natural language of summarized text. [default: english]
     --version            Displays version of application.
     --help               Displays this text.
 
@@ -47,7 +47,7 @@ from ..summarizers.sum_basic import SumBasicSummarizer
 from ..summarizers.kl import KLSummarizer
 from ..nlp.stemmers import Stemmer
 from . import precision, recall, f_score, cosine_similarity, unit_overlap
-from . import rouge_1, rouge_2, rouge_l_sentence_level, rouge_l_summary_level 
+from . import rouge_1, rouge_2, rouge_l_sentence_level, rouge_l_summary_level
 
 
 PARSERS = {

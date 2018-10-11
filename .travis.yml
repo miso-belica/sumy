@@ -20,7 +20,8 @@ before_install:
   - sudo apt-get install -qq pandoc
 install:
   - pip install -U pip wheel setuptools
-  - pip install -U --use-wheel pytest pytest-cov
+  # pytes-cov 2.6.0 dropped support for python 3.3
+  - pip install -U pytest pytest-cov==2.5.1
   - python setup.py install
   - pip install -U tinysegmenter jieba
   - python -c "import nltk; nltk.download('punkt')"
