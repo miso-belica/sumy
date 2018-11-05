@@ -21,6 +21,6 @@ install:
   - pip install -U pip wheel setuptools
   - pip install -U pytest pytest-cov
   - python setup.py install
-  - pip install -U tinysegmenter jieba
+  - pip install -U tinysegmenter jieba konlpy
   - python -c "import nltk; nltk.download('punkt')"
 script: pytest tests

@@ -21,7 +21,8 @@ class Stemmer(object):
         'czech': czech_stemmer,
         'slovak': czech_stemmer,
         'chinese': null_stemmer,
-        'japanese': null_stemmer
+        'japanese': null_stemmer,
+        'korean': null_stemmer
     }
 
     def __init__(self, language):

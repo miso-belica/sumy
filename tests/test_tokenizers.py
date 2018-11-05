@@ -128,3 +128,25 @@ def test_tokenize_chinese_paragraph():
 
     paragraph = '我正在为这个软件添加中文支持。这个软件是用于文档摘要！这个软件支持网页和文本两种输入格式？'
     assert expected == tokenizer.to_sentences(paragraph)
+
+
+def test_tokenize_korean_sentence():
+    tokenizer = Tokenizer('korean')
+    assert tokenizer.language == 'korean'
+
+    sentence = '대학에서 DB, 통계학, 이산수학 등을 배웠지만...'
+    expected = ('대학', '통계학', '이산', '이산수학', '수학', '등')
+    assert expected == tokenizer.to_words(sentence)
+
+
+def test_tokenize_korean_paragraph():
+    tokenizer = Tokenizer('korean')
+    expected = (
+        '회사 동료 분들과 다녀왔는데 분위기도 좋고 음식도 맛있었어요',
+        '다만, 강남 토끼 정이 강남 쉑쉑 버거 골목길로 쭉 올라가야 하는데 다들 쉑쉑버거의 유혹에 넘어갈 뻔 했답니다',
+        '강남 역 맛 집 토끼정의 외부 모습.'
+    )
+
+
+    paragraph = '회사 동료 분들과 다녀왔는데 분위기도 좋고 음식도 맛있었어요 다만, 강남 토끼정이 강남 쉑쉑버거 골목길로 쭉 올라가야 하는데 다들 쉑쉑버거의 유혹에 넘어갈 뻔 했답니다 강남역 맛집 토끼정의 외부 모습.'
+    assert expected == tokenizer.to_sentences(paragraph)
