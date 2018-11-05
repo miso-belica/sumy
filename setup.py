@@ -51,6 +51,7 @@ setup(
         "LexRank": ["numpy"],
         "Japanese": ["tinysegmenter"],
         "Chinese": ["jieba"],
+        "Korean": ["konlpy"],
     },
     packages=find_packages(),
     package_data={"sumy": [

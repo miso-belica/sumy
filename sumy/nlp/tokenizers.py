@@ -34,6 +34,25 @@ class ChineseWordTokenizer:
             raise ValueError("Chinese tokenizer requires jieba. Please, install it by command 'pip install jieba'.")
         return jieba.cut(text)
 
+class KoreanSentencesTokenizer:
+    def tokenize(self, text):
+        try:
+            from konlpy.tag import Kkma
+        except ImportError as e:
+            raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
+        kkma = Kkma()
+        return kkma.sentences(text)
+    
+    
+class KoreanWordTokenizer:
+    def tokenize(self, text):
+        try:
+            from konlpy.tag import Kkma
+        except ImportError as e:
+            raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
+        kkma = Kkma()
+        return kkma.nouns(text)
+                
 
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
@@ -53,12 +72,14 @@ class Tokenizer(object):
 
     SPECIAL_SENTENCE_TOKENIZERS = {
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
-        'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]')
+        'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
+        'korean': KoreanSentencesTokenizer()
     }
 
     SPECIAL_WORD_TOKENIZERS = {
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
+        'korean': KoreanWordTokenizer()
     }
 
     def __init__(self, language):
