@@ -20,6 +20,7 @@ class TextRankSummarizer(AbstractSummarizer):
     """
     epsilon = 1e-4
     damping = 0.85
+    delta = 1e-7
     _stop_words = frozenset()
 
     @property
@@ -65,7 +66,8 @@ class TextRankSummarizer(AbstractSummarizer):
         for i, words_i in enumerate(sentences_as_words):
             for j, words_j in enumerate(sentences_as_words):
                 weights[i, j] = self._rate_sentences_edge(words_i, words_j)
-        weights /= (weights.sum(axis=1)[:, numpy.newaxis]+1e-7)
+        weights /= (weights.sum(axis=1)[:, numpy.newaxis]+delta) # delta added to prevent zero-division error 
+        #(see issue https://github.com/miso-belica/sumy/issues/112 )
 
         # In the original paper, the probability of randomly moving to any of the vertices
         # is NOT divided by the number of vertices. Here we do divide it so that the power
