@@ -20,7 +20,6 @@ before_install:
   - sudo apt-get install -qq pandoc
 install:
   - pip install -U pip wheel setuptools
-  - pip install -U --use-wheel pytest pytest-cov
   - python setup.py install
   - pip install -U tinysegmenter jieba
   - python -c "import nltk; nltk.download('punkt')"
