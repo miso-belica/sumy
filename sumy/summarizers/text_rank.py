@@ -66,7 +66,7 @@ class TextRankSummarizer(AbstractSummarizer):
         for i, words_i in enumerate(sentences_as_words):
             for j, words_j in enumerate(sentences_as_words):
                 weights[i, j] = self._rate_sentences_edge(words_i, words_j)
-        weights /= (weights.sum(axis=1)[:, numpy.newaxis]+delta) # delta added to prevent zero-division error 
+        weights /= (weights.sum(axis=1)[:, numpy.newaxis]+self.delta) # delta added to prevent zero-division error 
         #(see issue https://github.com/miso-belica/sumy/issues/112 )
 
         # In the original paper, the probability of randomly moving to any of the vertices
