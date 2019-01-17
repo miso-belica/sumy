@@ -24,8 +24,9 @@ _HTTP_HEADERS = {
 def normalize_language(language):
     for lookup_key in ("alpha_2", "alpha_3"):
         try:
-            language = languages.get(**{lookup_key: language})
-            return language.name.lower()
+            lang = languages.get(**{lookup_key: language})
+            if lang:
+                language = lang.name.lower()
         except KeyError:
             pass
 
