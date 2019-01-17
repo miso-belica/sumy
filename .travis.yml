@@ -9,9 +9,9 @@ python:
   - "3.5-dev"
   - "3.6"
   - "3.6-dev"
-  - "3.7"
+  #- "3.7" https://github.com/travis-ci/travis-ci/issues/9069#issuecomment-425720905
   - "3.7-dev"
-  - "3.8-dev"
+  #- "3.8-dev" https://github.com/travis-ci/travis-ci/issues/9069#issuecomment-425720905
   - "nightly"
 before_install:
   # install dependencies for NumPy
