@@ -10,7 +10,7 @@ def clean(context):
 
 @task(clean, default=True)
 def test(context):
-    context.run("py.test")
+    context.run("pytest")
 
 
 @task(test)
@@ -26,6 +26,5 @@ def release(context):
 
 @task(test)
 def bump(context, version="patch"):
-    context.run("pandoc --from=markdown --to=rst README.md -o README.rst")
     context.run("bumpversion %s" % version)
     context.run("git commit --amend")
