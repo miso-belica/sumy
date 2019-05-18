@@ -106,9 +106,6 @@ $ sumy_eval edmundson reference_summary.txt --language=czech --url=http://cs.wik
 $ sumy_eval --help # for more info
 ```
 
-## Test
-To run tests locally, possibly in a virtual environment, install Sumy from the folder with `python3 -m pip install  .`, the required dependencies with `python3 -m pip install pytest pytest-cov numpy jieba tinysegmenter`, and then run `python3 -m pytest`.
-
 ## Python API
 
 Or you can use sumy like a library in your project. Create file `sumy_example.py` ([don't name it `sumy.py`](https://stackoverflow.com/questions/41334622/python-sumy-no-module-named-sumy-parsers-html)) with the code below to test it.
@@ -143,18 +140,4 @@ if __name__ == "__main__":
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         print(sentence)
-```
-
-## Contributing
-
-Make sure you have Python 2.7 or 3.3+ installed. Then, install all the required dependencies:
-
-```sh
-$ pip install -U pytest pytest-cov -e .
-```
-
-You can run the tests via
-
-```sh
-$ pytest
 ```
