@@ -14,5 +14,13 @@ with your code. Nothing is written in stone but please try to respect them.
 4. Please **respect the code style**. I don't want to set specific strict rules here because I think it's 
    possible to respect style from all the code around. For example you will not use `'` for strings 
    when you see that the code uses `"` ...
+5. Make sure you have Python 2.7 or 3.4+ installed. Then, install all the required dependencies 
+   and run the tests:
+
+```sh
+$ pip install .
+$ pip install pytest pytest-cov numpy jieba tinysegmenter
+$ pytest
+```
 
 And that's all. I am looking forward for your PR :)
