@@ -18,6 +18,7 @@ setup(
     version="0.8.0",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Mišo Belica",
     author_email="miso.belica@gmail.com",
     url="https://github.com/miso-belica/sumy",
