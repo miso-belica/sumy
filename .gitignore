@@ -5,9 +5,6 @@ __pycache__/
 /build
 /dist
 
-# working folders
-/experiments/
-
 # IDE files, .coverage, .pytest_cache, ...
 .*
 !.travis.yml
