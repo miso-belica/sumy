@@ -1,6 +1,7 @@
 # Changelog
 
-## 0.8.0 (unreleased yet)
+## 0.8.0 (2019-05-18)
+- Added support for Italian language [#114](https://github.com/miso-belica/sumy/pull/114)
 - Added support for ISO-639 language codes (`en`, `de`, `sk`, ...). [#106](https://github.com/miso-belica/sumy/pull/106)
 - `TextRankSummarizer` uses iterative algorithm. Previous algorithm is called `ReductionSummarizer`. [#100](https://github.com/miso-belica/sumy/pull/100)
 
