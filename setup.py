@@ -15,10 +15,10 @@ with open("README.md") as readme:
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
-    version="0.7.0",
+    version="0.8.0",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
-    author="Michal Belica",
+    author="Mišo Belica",
     author_email="miso.belica@gmail.com",
     url="https://github.com/miso-belica/sumy",
     license="Apache License, Version 2.0",
