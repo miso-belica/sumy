@@ -124,12 +124,12 @@ from sumy.nlp.stemmers import Stemmer
 from sumy.utils import get_stop_words
 
 
-LANGUAGE = "czech"
+LANGUAGE = "english"
 SENTENCES_COUNT = 10
 
 
 if __name__ == "__main__":
-    url = "http://www.zsstritezuct.estranky.cz/clanky/predmety/cteni/jak-naucit-dite-spravne-cist.html"
+    url = "https://en.wikipedia.org/wiki/Automatic_summarization"
     parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
     # or for plain text files
     # parser = PlaintextParser.from_file("document.txt", Tokenizer(LANGUAGE))
