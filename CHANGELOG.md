@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.1 (2019-05-19)
+- Open files for `PlaintextParser` in UTF-8 encoding [#123](https://github.com/miso-belica/sumy/pull/123)
+
 ## 0.8.0 (2019-05-18)
 - Added support for Italian language [#114](https://github.com/miso-belica/sumy/pull/114)
 - Added support for ISO-639 language codes (`en`, `de`, `sk`, ...). [#106](https://github.com/miso-belica/sumy/pull/106)

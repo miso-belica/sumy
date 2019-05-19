@@ -15,7 +15,7 @@ with open("README.md") as readme:
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
-    version="0.8.0",
+    version="0.8.1",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     long_description_content_type="text/markdown",
