@@ -3,10 +3,12 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-from .._compat import to_unicode
-from ..utils import cached_property
-from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
+from io import open
+
 from .parser import DocumentParser
+from .._compat import to_unicode
+from ..models.dom import ObjectDocumentModel, Paragraph, Sentence
+from ..utils import cached_property
 
 
 class PlaintextParser(DocumentParser):
@@ -31,7 +33,7 @@ class PlaintextParser(DocumentParser):
 
     @classmethod
     def from_file(cls, file_path, tokenizer):
-        with open(file_path) as file:
+        with open(file_path, encoding="utf-8") as file:
             return cls(file.read(), tokenizer)
 
     def __init__(self, text, tokenizer):
