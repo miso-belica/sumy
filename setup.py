@@ -12,6 +12,17 @@ with open("README.md") as readme:
     long_description = readme.read()
 
 
+dependencies = [
+    "docopt>=0.6.1,<0.7",
+    "breadability>=0.1.20",
+    "requests>=2.7.0",
+    "pycountry>=18.2.23",
+    "nltk>=3.0.2,<3.2.0" if VERSION_SUFFIX == "3.3" else "nltk>=3.0.2",  # NLTK 3.2 dropped support for Python 3.3
+]
+if VERSION_SUFFIX == "3.4":  # lxml 4.4.0 dropped support for Python 3.4
+    dependencies.append("lxml<4.4.0")
+
+
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
@@ -35,13 +46,7 @@ setup(
         "TextRank",
         "LexRank",
     ],
-    install_requires=[
-        "docopt>=0.6.1,<0.7",
-        "breadability>=0.1.20",
-        "requests>=2.7.0",
-        "pycountry>=18.2.23",
-        "nltk>=3.0.2,<3.2.0" if VERSION_SUFFIX == "3.3" else "nltk>=3.0.2",  # NLTK 3.2 dropped support for Python 3.3
-    ],
+    install_requires=dependencies,
     tests_require=[
         "pytest>=3.0.0",
         "pytest-cov",
