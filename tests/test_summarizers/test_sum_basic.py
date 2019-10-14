@@ -7,6 +7,7 @@ import pytest
 from sumy.models.dom._sentence import Sentence
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.sum_basic import SumBasicSummarizer
+from sumy.nlp.stemmers import Stemmer
 from ..utils import build_document
 
 
@@ -14,8 +15,8 @@ EMPTY_STOP_WORDS = []
 COMMON_STOP_WORDS = ["the", "and", "i"]
 
 
-def _build_summarizer(stop_words):
-    summarizer = SumBasicSummarizer()
+def _build_summarizer(stop_words, stemmer=None):
+    summarizer = SumBasicSummarizer() if stemmer is None else SumBasicSummarizer(stemmer)
     summarizer.stop_words = stop_words
     return summarizer
 
@@ -46,6 +47,14 @@ def test_normalize_words():
 
     words_correctly_normalized = "this is a test 2 check normalization.".split()
     assert words_normalized == words_correctly_normalized
+
+
+def test_stemmer():
+    summarizer_w_stemmer = _build_summarizer(EMPTY_STOP_WORDS, Stemmer('english'))
+    summarizer_wo_stemmer = _build_summarizer(EMPTY_STOP_WORDS)
+    word = Sentence('testing', Tokenizer('english'))
+    assert summarizer_w_stemmer._get_content_words_in_sentence(word) == ['test']
+    assert summarizer_wo_stemmer._get_content_words_in_sentence(word) == ['testing']
 
 
 def test_filter_out_stop_words():
