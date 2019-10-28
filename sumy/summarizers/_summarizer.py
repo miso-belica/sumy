@@ -27,10 +27,12 @@ class AbstractSummarizer(object):
     def stem_word(self, word):
         return self._stemmer(self.normalize_word(word))
 
-    def normalize_word(self, word):
+    @staticmethod
+    def normalize_word(word):
         return to_unicode(word).lower()
 
-    def _get_best_sentences(self, sentences, count, rating, *args, **kwargs):
+    @staticmethod
+    def _get_best_sentences(sentences, count, rating, *args, **kwargs):
         rate = rating
         if isinstance(rating, dict):
             assert not args and not kwargs
