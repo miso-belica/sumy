@@ -141,3 +141,11 @@ if __name__ == "__main__":
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         print(sentence)
 ```
+
+## Interesting projects using sumy
+
+I found some interesting projects while browsing the interner or sometimes people wrote me an e-mail with questions and I was curious how they use the sumy :)
+
+* [Learning to generate questions from text](https://software.intel.com/en-us/articles/using-natural-language-processing-for-smart-question-generation) - https://github.com/adityasarvaiya/Automatic_Question_Generation
+* Summarize your video to any duration - https://github.com/aswanthkoleri/VideoMash and similar https://github.com/OpenGenus/vidsum
+* Tool for collectively summarizing large discussions - https://github.com/amyxzhang/wikum
