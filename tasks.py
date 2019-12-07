@@ -5,7 +5,7 @@ from invoke import task
 
 @task
 def clean(context):
-    context.run("rm -rf .coverage dist build")
+    context.run("rm -rf dist build .coverage .pytest_cache .mypy_cache")
 
 
 @task(clean, default=True)
