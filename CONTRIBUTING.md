@@ -14,8 +14,9 @@ with your code. Nothing is written in stone but please try to respect them.
 4. Please **respect the code style**. I don't want to set specific strict rules here because I think it's 
    possible to respect style from all the code around. For example you will not use `'` for strings 
    when you see that the code uses `"` ...
-5. Make sure you have Python 2.7 or 3.4+ installed. Then, install all the required dependencies 
-   and run the tests:
+5. Make sure you have Python 2.7 or 3.5+ installed. Also Python 3.4 and maybe older versions work but since it reached
+   end-of-life you could have difficulties with the transitive dependencies that dropped the support already.
+   Then, install all the required dependencies and run the tests:
 
 ```sh
 $ pip install .
