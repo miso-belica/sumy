@@ -6,9 +6,9 @@ Simple library and command line utility for extracting summary from HTML
 pages or plain texts. The package also contains simple evaluation
 framework for text summaries. Implemented summarization methods:
 
--   **Luhn** - heurestic method,
+-   **Luhn** - heuristic method,
     [reference](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5392672)
--   **Edmundson** heurestic method with previous statistic research,
+-   **Edmundson** heuristic method with previous statistic research,
     [reference](http://dl.acm.org/citation.cfm?doid=321510.321519)
 -   **Latent Semantic Analysis, LSA** - one of the algorithm from
     <http://scholar.google.com/citations?user=0fTuW_YAAAAJ&hl=en> I
