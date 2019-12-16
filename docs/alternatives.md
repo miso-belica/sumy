@@ -32,3 +32,4 @@
 -   <http://mff.bajecni.cz/index.php> - C++
 -   [MEAD](http://www.summarization.com/mead/) - Perl, various methods +
     evaluation framework
+-   [Library with learning capability](https://github.com/vighneshbirodkar/summarize/blob/a02eb01f37286f95eea40d959b301a9d1cd78a85/summarize/Base/DocumentClass.py#L373) - Python, I got the info from Alex https://github.com/miso-belica/sumy/issues/62
