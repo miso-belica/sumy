@@ -8,7 +8,7 @@ framework for text summaries. Implemented summarization methods are described in
 
 ## Installation
 
-Make sure you have [Python](http://www.python.org/) 2.7/3.3+ and
+Make sure you have [Python](http://www.python.org/) 2.7/3.5+ and
 [pip](https://crate.io/packages/pip/)
 ([Windows](http://docs.python-guide.org/en/latest/starting/install/win/),
 [Linux](http://docs.python-guide.org/en/latest/starting/install/linux/))
@@ -16,12 +16,7 @@ installed. Run simply (preferred way):
 
 ```sh
 $ [sudo] pip install sumy
-```
-
-Or for the fresh version:
-
-```sh
-$ [sudo] pip install git+git://github.com/miso-belica/sumy.git
+$ [sudo] pip install git+git://github.com/miso-belica/sumy.git  # for the fresh version
 ```
 
 ## Usage
