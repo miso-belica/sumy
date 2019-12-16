@@ -4,33 +4,7 @@
 
 Simple library and command line utility for extracting summary from HTML
 pages or plain texts. The package also contains simple evaluation
-framework for text summaries. Implemented summarization methods:
-
--   **Luhn** - heuristic method,
-    [reference](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5392672)
--   **Edmundson** heuristic method with previous statistic research,
-    [reference](http://dl.acm.org/citation.cfm?doid=321510.321519)
--   **Latent Semantic Analysis, LSA** - one of the algorithm from
-    <http://scholar.google.com/citations?user=0fTuW_YAAAAJ&hl=en> I
-    think the author is using more advanced algorithms now.
-    [Steinberger, J. a Ježek, K. Using latent semantic an and
-    summary evaluation. In In Proceedings ISIM '04. 2004. S.
-    93-100.](http://www.kiv.zcu.cz/~jstein/publikace/isim2004.pdf)
--   **LexRank** - Unsupervised approach inspired by algorithms PageRank
-    and HITS,
-    [reference](http://tangra.si.umich.edu/~radev/lexrank/lexrank.pdf)
--   **TextRank** - Unsupervised approach, also using PageRank algorithm,
-    [reference](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf)
--   **SumBasic** - Method that is often used as a baseline in
-    the literature. Source: [Read about
-    SumBasic](http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf)
--   **KL-Sum** - Method that greedily adds sentences to a summary so
-    long as it decreases the KL Divergence. Source: [Read about
-    KL-Sum](http://www.aclweb.org/anthology/N09-1041)
--   **Reduction** - Graph-based summarization, where a sentence salience is
-    computed as the sum of the weights of its edges to other sentences. The
-    weight of an edge between two sentences is computed in the same manner
-    as TextRank.
+framework for text summaries. Implemented summarization methods are described in the [documentation](docs/summarizators.md).
 
 Here are some other summarizers:
 
