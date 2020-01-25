@@ -12,15 +12,21 @@ python:
   - "3.8"
   - "3.8-dev"
   - "nightly"
+
 before_install:
   # install dependencies for NumPy
   - sudo apt-get update -qq
   - sudo apt-get install -qq gfortran libatlas-base-dev
   - sudo apt-get install -qq python-numpy
+
 install:
   - pip install -U pip wheel setuptools
-  - pip install -U pytest pytest-cov
+  - pip install -U pytest codecov pytest-cov
   - python setup.py install
   - pip install -U tinysegmenter jieba konlpy
   - python -c "import nltk; nltk.download('punkt')"
+
 script: pytest tests
+
+after_success:
+  - codecov
