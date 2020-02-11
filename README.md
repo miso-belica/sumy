@@ -1,6 +1,7 @@
 # Automatic text summarizer
 
 [![image](https://api.travis-ci.org/miso-belica/sumy.png?branch=master)](https://travis-ci.org/miso-belica/sumy)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/miso-belica/sumy) 
 
 Simple library and command line utility for extracting summary from HTML
 pages or plain texts. The package also contains simple evaluation
