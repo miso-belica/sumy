@@ -64,9 +64,11 @@ class TextRankSummarizer(AbstractSummarizer):
         sentences_count = len(sentences_as_words)
         weights = numpy.zeros((sentences_count, sentences_count))
 
-        for i, words_i in enumerate(sentences_as_words):
-            for j, words_j in enumerate(sentences_as_words):
-                weights[i, j] = self._rate_sentences_edge(words_i, words_j)
+        for i in range(0, len(document)-1):
+            for j in range(i+1, len(document)):
+                weights[i, j] = self._rate_sentences_edge(sentences_as_words[i], sentences_as_words[j])
+                weights[j, i] = weights[i, j]
+            
         weights /= (weights.sum(axis=1)[:, numpy.newaxis]+self._delta) # delta added to prevent zero-division error 
         #(see issue https://github.com/miso-belica/sumy/issues/112 )
 
@@ -84,10 +86,8 @@ class TextRankSummarizer(AbstractSummarizer):
 
     @staticmethod
     def _rate_sentences_edge(words1, words2):
-        rank = 0
-        for w1 in words1:
-            for w2 in words2:
-                rank += int(w1 == w2)
+        
+        rank=sum([words2.count(el) for el in words1])   
 
         if rank == 0:
             return 0.0
