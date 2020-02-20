@@ -64,8 +64,8 @@ class TextRankSummarizer(AbstractSummarizer):
         sentences_count = len(sentences_as_words)
         weights = numpy.zeros((sentences_count, sentences_count))
 
-        for i in range(0, len(document)-1):
-            for j in range(i+1, len(document)):
+        for i in range(0, sentences_count-1):
+            for j in range(i+1, sentences_count):
                 weights[i, j] = self._rate_sentences_edge(sentences_as_words[i], sentences_as_words[j])
                 weights[j, i] = weights[i, j]
             
