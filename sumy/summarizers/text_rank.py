@@ -84,11 +84,7 @@ class TextRankSummarizer(AbstractSummarizer):
 
     @staticmethod
     def _rate_sentences_edge(words1, words2):
-        rank = 0
-        for w1 in words1:
-            for w2 in words2:
-                rank += int(w1 == w2)
-
+        rank = sum(words2.count(w) for w in words1)
         if rank == 0:
             return 0.0
 
