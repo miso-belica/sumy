@@ -93,3 +93,27 @@ def test_sentences_rating():
     ratings = summarizer.rate_sentences(document)
     assert len(ratings) == 3
     assert pytest.approx(sum(ratings.values())) == 1
+
+
+@pytest.mark.parametrize("sentences, expected_ratings", [
+    (["", ""], [5.6953125e-06, 5.6953125e-06]),
+    (["a", ""], [0.0013040590093013854, 0.00011418189740613421]),
+    (["", "a"], [0.00011418189740613433, 0.0013040590093013854]),
+    (["a", "a"], [0.49999995750000414, 0.49999995750000414]),
+    (["a", "b"], [0.49999995750000414, 0.49999995750000414]),
+    (["b", "a"], [0.49999995750000414, 0.49999995750000414]),
+])
+def test_rating_with_zero_or_single_words_in_sentences(sentences, expected_ratings):
+    """
+    This is an edge-case test when the sentence(s) have only one word or even zero words.
+    This test makes me sure the logic will not break when such a case is encountered.
+    """
+    document = build_document(sentences)
+    summarizer = TextRankSummarizer()
+
+    ratings = summarizer.rate_sentences(document)
+
+    assert ratings == {
+        document.sentences[0]: pytest.approx(expected_ratings[0]),
+        document.sentences[1]: pytest.approx(expected_ratings[1]),
+    }
