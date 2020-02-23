@@ -65,8 +65,11 @@ class TextRankSummarizer(AbstractSummarizer):
         weights = numpy.zeros((sentences_count, sentences_count))
 
         for i, words_i in enumerate(sentences_as_words):
-            for j, words_j in enumerate(sentences_as_words):
-                weights[i, j] = self._rate_sentences_edge(words_i, words_j)
+            for j in range(i, sentences_count):
+                rating = self._rate_sentences_edge(words_i, sentences_as_words[j])
+                weights[i, j] = rating
+                weights[j, i] = rating
+
         weights /= (weights.sum(axis=1)[:, numpy.newaxis] + self._ZERO_DIVISION_PREVENTION)
 
         # In the original paper, the probability of randomly moving to any of the vertices
