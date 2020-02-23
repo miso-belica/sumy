@@ -88,10 +88,14 @@ def test_sentences_rating():
         "b d f",
     ])
     summarizer = TextRankSummarizer()
-    summarizer.stop_words = ["I", "am", "and", "that"]
 
     ratings = summarizer.rate_sentences(document)
-    assert len(ratings) == 3
+
+    assert ratings == {
+        document.sentences[0]: pytest.approx(0.29714368215098025),
+        document.sentences[1]: pytest.approx(0.42683373199392705),
+        document.sentences[2]: pytest.approx(0.2760223553913001),
+    }
     assert pytest.approx(sum(ratings.values())) == 1
 
 
