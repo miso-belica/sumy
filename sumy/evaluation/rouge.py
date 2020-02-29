@@ -113,7 +113,7 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentences:
-        The sentences from the referene set
+        The sentences from the reference set
     :param n: Size of ngram.  Defaults to 2.
     :returns:
         float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
@@ -141,7 +141,7 @@ def rouge_1(evaluated_sentences, reference_sentences):
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentences:
-        The sentences from the referene set
+        The sentences from the reference set
     :returns:
         float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
         exactly the same.
@@ -156,7 +156,7 @@ def rouge_2(evaluated_sentences, reference_sentences):
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentences:
-        The sentences from the referene set
+        The sentences from the reference set
     :returns:
         float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
         exactly the same.
@@ -203,7 +203,7 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentences:
-        The sentences from the referene set
+        The sentences from the reference set
     :returns float: F_lcs
     :raises ValueError: raises exception if a param has len <= 0
     """
@@ -272,7 +272,7 @@ def rouge_l_summary_level(evaluated_sentences, reference_sentences):
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentences:
-        The sentences from the referene set
+        The sentences from the reference set
     :returns float: F_lcs
     :raises ValueError: raises exception if a param has len <= 0
     """
