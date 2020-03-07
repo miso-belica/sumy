@@ -41,6 +41,11 @@ def test_language_getter():
         ("I", "am", "a", "very", "nice", "sentence", "with", "comma"),
     ),
     (
+        "english",
+        "I am doing sugar-free data-mining for Peter's study - vega punk.",
+        ("I", "am", "doing", "sugar-free", "data-mining", "for", "Peter", "study", "vega", "punk"),
+    ),
+    (
         "japanese",
         "この文章を、正しくトークン化したい。",
         ("この", "文章", "を", "正しく", "トークン", "化", "し", "たい"),

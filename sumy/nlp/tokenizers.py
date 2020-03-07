@@ -59,7 +59,7 @@ class KoreanWordTokenizer:
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
-    _WORD_PATTERN = re.compile(r"^[^\W\d_]+$", re.UNICODE)
+    _WORD_PATTERN = re.compile(r"^[^\W\d_](?:[^\W\d_]|['-])*$", re.UNICODE)
     # feel free to contribute if you have better tokenizer for any of these languages :)
     LANGUAGE_ALIASES = {
         "slovak": "czech",
@@ -127,4 +127,4 @@ class Tokenizer(object):
 
     @staticmethod
     def _is_word(word):
-        return bool(Tokenizer._WORD_PATTERN.search(word))
+        return bool(Tokenizer._WORD_PATTERN.match(word))
