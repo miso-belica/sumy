@@ -6,6 +6,13 @@ matrix:
   include:
     - name: "Python 2.7 on Linux"
       python: 2.7
+      install:
+        - pip install -U pip wheel setuptools
+        - python setup.py install
+        # use "JPype1==0.7.1" (for kolnpy) because of Python 2 support
+        - pip install numpy tinysegmenter jieba "JPype1==0.7.1" konlpy
+        - python -c "import nltk; nltk.download('punkt')"
+        - pip install -U pytest codecov pytest-cov
     - name: "Python 3.5 on Linux"
       python: 3.5
     - name: "Python 3.6 on Linux"
@@ -51,7 +58,7 @@ before_install:
 install:
   - pip install -U pip wheel setuptools
   - python setup.py install
-  - pip install -U numpy tinysegmenter jieba konlpy
+  - pip install numpy tinysegmenter jieba konlpy
   - python -c "import nltk; nltk.download('punkt')"
   - pip install -U pytest codecov pytest-cov
 

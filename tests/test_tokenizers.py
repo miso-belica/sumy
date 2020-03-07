@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import sys
+
 import pytest
 
 from sumy.nlp.tokenizers import Tokenizer
@@ -55,10 +57,11 @@ def test_language_getter():
         "好用的文档自动化摘要程序",
         ("好用", "的", "文档", "自动化", "摘要", "程序"),
     ),
-    (
+    pytest.param(
         "korean",
         "대학에서 DB, 통계학, 이산수학 등을 배웠지만...",
         ("대학", "통계학", "이산", "이산수학", "수학", "등"),
+        marks=pytest.mark.skipif(sys.version_info < (3,), reason="JPype1 from konlpy does not support Python 2 anymore")
     ),
 ])
 def test_tokenize_sentence_to_words(language, sentence, expected_words):
@@ -137,6 +140,7 @@ def test_tokenize_chinese_paragraph():
     assert expected == tokenizer.to_sentences(paragraph)
 
 
+@pytest.mark.skipif(sys.version_info < (3,), reason="JPype1 from konlpy does not support Python 2 anymore")
 def test_tokenize_korean_paragraph():
     tokenizer = Tokenizer('korean')
     expected = (
