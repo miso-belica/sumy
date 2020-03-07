@@ -34,15 +34,35 @@ def test_language_getter():
     assert "english" == tokenizer.language
 
 
-def test_tokenize_sentence():
-    tokenizer = Tokenizer("english")
-    words = tokenizer.to_words("I am a very nice sentence with comma, but..")
+@pytest.mark.parametrize("language, sentence, expected_words", [
+    (
+        "english",
+        "I am a very nice sentence with comma, but..",
+        ("I", "am", "a", "very", "nice", "sentence", "with", "comma"),
+    ),
+    (
+        "japanese",
+        "この文章を、正しくトークン化したい。",
+        ("この", "文章", "を", "正しく", "トークン", "化", "し", "たい"),
+    ),
+    (
+        "chinese",
+        "好用的文档自动化摘要程序",
+        ("好用", "的", "文档", "自动化", "摘要", "程序"),
+    ),
+    (
+        "korean",
+        "대학에서 DB, 통계학, 이산수학 등을 배웠지만...",
+        ("대학", "통계학", "이산", "이산수학", "수학", "등"),
+    ),
+])
+def test_tokenize_sentence_to_words(language, sentence, expected_words):
+    tokenizer = Tokenizer(language)
 
-    expected = (
-        "I", "am", "a", "very", "nice", "sentence",
-        "with", "comma",
-    )
-    assert expected == words
+    words = tokenizer.to_words(sentence)
+
+    assert words == expected_words
+    assert tokenizer.language == language
 
 
 def test_tokenize_sentences_with_abbreviations():
@@ -89,15 +109,6 @@ def test_slovak_alias_into_czech_tokenizer():
     assert expected == sentences
 
 
-def test_tokenize_japanese_sentence():
-    tokenizer = Tokenizer('japanese')
-    assert tokenizer.language == 'japanese'
-
-    sentence = 'この文章を、正しくトークン化したい。'
-    expected = ('この', '文章', 'を', '正しく', 'トークン', '化', 'し', 'たい')
-    assert expected == tokenizer.to_words(sentence)
-
-
 def test_tokenize_japanese_paragraph():
     tokenizer = Tokenizer('japanese')
     expected = (
@@ -107,15 +118,6 @@ def test_tokenize_japanese_paragraph():
     )
     paragraph = '１つ目の文章です。その次は何が来ますか？　「２つ目の文章」です。'
     assert expected == tokenizer.to_sentences(paragraph)
-
-
-def test_tokenize_chinese_sentence():
-    tokenizer = Tokenizer('chinese')
-    assert tokenizer.language == 'chinese'
-
-    sentence = '好用的文档自动化摘要程序。'
-    expected = ('好用', '的', '文档', '自动化', '摘要', '程序')
-    assert expected == tokenizer.to_words(sentence)
 
 
 def test_tokenize_chinese_paragraph():
@@ -128,15 +130,6 @@ def test_tokenize_chinese_paragraph():
 
     paragraph = '我正在为这个软件添加中文支持。这个软件是用于文档摘要！这个软件支持网页和文本两种输入格式？'
     assert expected == tokenizer.to_sentences(paragraph)
-
-
-def test_tokenize_korean_sentence():
-    tokenizer = Tokenizer('korean')
-    assert tokenizer.language == 'korean'
-
-    sentence = '대학에서 DB, 통계학, 이산수학 등을 배웠지만...'
-    expected = ('대학', '통계학', '이산', '이산수학', '수학', '등')
-    assert expected == tokenizer.to_words(sentence)
 
 
 def test_tokenize_korean_paragraph():
