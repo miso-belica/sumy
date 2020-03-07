@@ -5,6 +5,7 @@ from __future__ import division, print_function, unicode_literals
 
 import re
 import zipfile
+
 import nltk
 
 from .._compat import to_string, to_unicode, unicode
@@ -34,6 +35,7 @@ class ChineseWordTokenizer:
             raise ValueError("Chinese tokenizer requires jieba. Please, install it by command 'pip install jieba'.")
         return jieba.cut(text)
 
+
 class KoreanSentencesTokenizer:
     def tokenize(self, text):
         try:
@@ -42,8 +44,8 @@ class KoreanSentencesTokenizer:
             raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
         kkma = Kkma()
         return kkma.sentences(text)
-    
-    
+
+
 class KoreanWordTokenizer:
     def tokenize(self, text):
         try:
@@ -52,7 +54,7 @@ class KoreanWordTokenizer:
             raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
         kkma = Kkma()
         return kkma.nouns(text)
-                
+
 
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
@@ -123,5 +125,6 @@ class Tokenizer(object):
         words = self._word_tokenizer.tokenize(to_unicode(sentence))
         return tuple(filter(self._is_word, words))
 
-    def _is_word(self, word):
+    @staticmethod
+    def _is_word(word):
         return bool(Tokenizer._WORD_PATTERN.search(word))
