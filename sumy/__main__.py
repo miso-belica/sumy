@@ -101,8 +101,8 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     items_count = ItemsCount(args["--length"])
 
     language = args["--language"]
-    if args['--stopwords']:
-        stop_words = read_stop_words(args['--stopwords'])
+    if args["--stopwords"]:
+        stop_words = read_stop_words(args["--stopwords"])
     else:
         stop_words = get_stop_words(language)
 

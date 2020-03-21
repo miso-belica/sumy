@@ -2,8 +2,7 @@
 
 import sys
 
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 VERSION_SUFFIX = "%d.%d" % sys.version_info[:2]
 
@@ -69,7 +68,7 @@ setup(
             "sumy-%s = sumy.__main__:main" % VERSION_SUFFIX,
             "sumy_eval = sumy.evaluation.__main__:main",
             "sumy_eval-%s = sumy.evaluation.__main__:main" % VERSION_SUFFIX,
-        ]
+        ],
     },
     classifiers=[
         "Development Status :: 4 - Beta",
