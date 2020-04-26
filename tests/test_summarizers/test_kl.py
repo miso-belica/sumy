@@ -130,3 +130,19 @@ def test_tf_idf_metric_should_be_real_number():
         "words": 0.2,
         "jop": 0.2,
     }
+
+
+def test_the_sentences_should_be_in_different_order(summarizer):
+    """https://github.com/miso-belica/sumy/issues/146"""
+    paragraphs = [
+        ["This is 1st sentence.", "This is 2nd sentence."],
+        ["This is 3rd sentence.", "This is 4th sentence."],
+        ["This is 5th sentence."],
+    ]
+    document = build_document(*paragraphs)
+    reversed_document = build_document(*(reversed(p) for p in reversed(paragraphs)))
+
+    sentences = summarizer(document, "100%")
+    reversed_sentences = summarizer(reversed_document, "100%")
+
+    assert tuple(reversed(sentences)) == reversed_sentences
