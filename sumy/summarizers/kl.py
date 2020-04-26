@@ -18,14 +18,10 @@ class KLSummarizer(AbstractSummarizer):
     stop_words = frozenset()
 
     def __call__(self, document, sentences_count):
-        ratings = self._get_ratings(document)
-        return self._get_best_sentences(document.sentences, sentences_count, ratings)
-
-    def _get_ratings(self, document):
         sentences = document.sentences
-
         ratings = self._compute_ratings(sentences)
-        return ratings
+
+        return self._get_best_sentences(sentences, sentences_count, ratings)
 
     @staticmethod
     def _get_all_words_in_doc(sentences):
