@@ -10,7 +10,7 @@ from ._summarizer import AbstractSummarizer
 
 class KLSummarizer(AbstractSummarizer):
     """
-    Method that greedily adds sentences to a summary so long as it decreases the 
+    Method that greedily adds sentences to a summary so long as it decreases the
     KL Divergence.
     Source: http://www.aclweb.org/anthology/N09-1041
     """
@@ -27,11 +27,12 @@ class KLSummarizer(AbstractSummarizer):
         ratings = self._compute_ratings(sentences)
         return ratings
 
-    def _get_all_words_in_doc(self, sentences):
+    @staticmethod
+    def _get_all_words_in_doc(sentences):
         return [w for s in sentences for w in s.words]
 
     def _get_content_words_in_sentence(self, sentence):
-        normalized_words = self._normalize_words(sentence.words)   
+        normalized_words = self._normalize_words(sentence.words)
         normalized_content_words = self._filter_out_stop_words(normalized_words)
         return normalized_content_words
 
@@ -41,7 +42,8 @@ class KLSummarizer(AbstractSummarizer):
     def _filter_out_stop_words(self, words):
         return [w for w in words if w not in self.stop_words]
 
-    def _compute_word_freq(self, list_of_words):
+    @staticmethod
+    def _compute_word_freq(list_of_words):
         word_freq = {}
         for w in list_of_words:
             word_freq[w] = word_freq.get(w, 0) + 1
@@ -52,7 +54,7 @@ class KLSummarizer(AbstractSummarizer):
         content_words = self._filter_out_stop_words(all_words)
         normalized_content_words = self._normalize_words(content_words)
         return normalized_content_words
-        
+
     def compute_tf(self, sentences):
         """
         Computes the normalized term frequency as explained in http://www.tfidf.com/
@@ -78,7 +80,7 @@ class KLSummarizer(AbstractSummarizer):
 
         # adds in the counts of the second list
         for k in wc2:
-            if k in joint: 
+            if k in joint:
                 joint[k] += wc2[k]
             else:
                 joint[k] = wc2[k]
@@ -89,7 +91,8 @@ class KLSummarizer(AbstractSummarizer):
 
         return joint
 
-    def _kl_divergence(self, summary_freq, doc_freq):
+    @staticmethod
+    def _kl_divergence(summary_freq, doc_freq):
         """
         Note: Could import scipy.stats and use scipy.stats.entropy(doc_freq, summary_freq)
         but this gives equivalent value without the import
@@ -102,7 +105,8 @@ class KLSummarizer(AbstractSummarizer):
 
         return sum_val
 
-    def _find_index_of_best_sentence(self, kls):
+    @staticmethod
+    def _find_index_of_best_sentence(kls):
         """
         the best sentence is the one with the smallest kl_divergence
         """
@@ -118,15 +122,15 @@ class KLSummarizer(AbstractSummarizer):
 
         # get all content words once for efficiency
         sentences_as_words = [self._get_content_words_in_sentence(s) for s in sentences]
-        
+
         # Removes one sentence per iteration by adding to summary
         while len(sentences_list) > 0:
             # will store all the kls values for this pass
             kls = []
-            
+
             # converts summary to word list
             summary_as_word_list = self._get_all_words_in_doc(summary)
-            
+
             for s in sentences_as_words:
                 # calculates the joint frequency through combining the word lists
                 joint_freq = self._joint_freq(s, summary_as_word_list)
@@ -135,13 +139,13 @@ class KLSummarizer(AbstractSummarizer):
                 kls.append(self._kl_divergence(joint_freq, word_freq))
 
             # to consider and then add it into the summary
-            indexToRemove = self._find_index_of_best_sentence(kls)
-            best_sentence = sentences_list.pop(indexToRemove)
-            del sentences_as_words[indexToRemove]
+            index_to_remove = self._find_index_of_best_sentence(kls)
+            best_sentence = sentences_list.pop(index_to_remove)
+            del sentences_as_words[index_to_remove]
             summary.append(best_sentence)
 
-            # value is the iteration in which it was removed multiplied by -1 so that the first sentences removed (the most important) have highest values
-            ratings[best_sentence] =  -1 * len(ratings)
+            # value is the iteration in which it was removed multiplied by -1 so that
+            # the first sentences removed (the most important) have highest values
+            ratings[best_sentence] = -1 * len(ratings)
 
         return ratings
-
