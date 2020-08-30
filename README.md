@@ -10,6 +10,13 @@ framework for text summaries. Implemented summarization methods are described in
 ## Is my natural language supported?
 There is a [good chance](docs/index.md#Tokenizer) it is. But if not it is [not too hard to add](docs/how-to-add-new-language.md) it.
 
+
+## Running from Dockerhub
+
+```sh
+docker run --rm rodvlopes/sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization
+```
+
 ## Installation
 
 Make sure you have [Python](http://www.python.org/) 2.7/3.5+ and
