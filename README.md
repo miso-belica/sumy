@@ -44,6 +44,12 @@ $ sumy_eval edmundson reference_summary.txt --language=czech --url=http://cs.wik
 $ sumy_eval --help # for more info
 ```
 
+If you don't want to bother by the installation, you can try it as a container.
+
+```sh
+$ docker run --rm misobelica/sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization
+```
+
 ## Python API
 
 Or you can use sumy like a library in your project. Create file `sumy_example.py` ([don't name it `sumy.py`](https://stackoverflow.com/questions/41334622/python-sumy-no-module-named-sumy-parsers-html)) with the code below to test it.
