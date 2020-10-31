@@ -48,8 +48,6 @@ setup(
     install_requires=dependencies,
     tests_require=[
         "pytest>=3.0.0",
-        "pytest-cov",
-        "pytest-watch",
     ],
     extras_require={
         "LSA": ["numpy"],
