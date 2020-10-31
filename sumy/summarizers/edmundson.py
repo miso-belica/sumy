@@ -87,9 +87,9 @@ class EdmundsonSummarizer(AbstractSummarizer):
 
         return ratings
 
-    def cue_method(self, document, sentences_count, bunus_word_value=1, stigma_word_value=1):
+    def cue_method(self, document, sentences_count, bonus_word_value=1, stigma_word_value=1):
         summarization_method = self._build_cue_method_instance()
-        return summarization_method(document, sentences_count, bunus_word_value,
+        return summarization_method(document, sentences_count, bonus_word_value,
             stigma_word_value)
 
     def _build_cue_method_instance(self):
