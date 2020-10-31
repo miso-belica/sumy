@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import re
+import string
 import zipfile
 
 import nltk
@@ -13,8 +14,28 @@ from ..utils import normalize_language
 
 
 class DefaultWordTokenizer(object):
+    """NLTK tokenizer"""
     def tokenize(self, text):
         return nltk.word_tokenize(text)
+
+
+class HebrewWordTokenizer:
+    """https://github.com/iddoberger/awesome-hebrew-nlp"""
+    _TRANSLATOR = str.maketrans("", "", string.punctuation)
+
+    @classmethod
+    def tokenize(cls, text):
+        try:
+            from hebrew_tokenizer import tokenize
+            from hebrew_tokenizer.groups import Groups
+        except ImportError:
+            raise ValueError("Hebrew tokenizer requires hebrew_tokenizer. Please, install it by command 'pip install hebrew_tokenizer'.")
+
+        text = text.translate(cls._TRANSLATOR)
+        return [
+            word for token, word, _, _ in tokenize(text)
+            if token in (Groups.HEBREW, Groups.HEBREW_1, Groups.HEBREW_2)
+        ]
 
 
 class JapaneseWordTokenizer:
@@ -73,15 +94,17 @@ class Tokenizer(object):
     }
 
     SPECIAL_SENTENCE_TOKENIZERS = {
+        'hebrew': nltk.RegexpTokenizer(r'\.\s+', gaps=True),
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
-        'korean': KoreanSentencesTokenizer()
+        'korean': KoreanSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
+        'hebrew': HebrewWordTokenizer(),
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
-        'korean': KoreanWordTokenizer()
+        'korean': KoreanWordTokenizer(),
     }
 
     def __init__(self, language):
@@ -102,10 +125,11 @@ class Tokenizer(object):
         try:
             path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
             return nltk.data.load(path)
-        except (LookupError, zipfile.BadZipfile):
+        except (LookupError, zipfile.BadZipfile) as e:
             raise LookupError(
-                "NLTK tokenizers are missing. Download them by following command: "
-                '''python -c "import nltk; nltk.download('punkt')"'''
+                "NLTK tokenizers are missing or the language is not supported.\n"
+                """Download them by following command: python -c "import nltk; nltk.download('punkt')"\n"""
+                "Original error was:\n" + str(e)
             )
 
     def _get_word_tokenizer(self, language):
