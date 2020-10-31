@@ -35,7 +35,7 @@ class EdmundsonSummarizer(AbstractSummarizer):
     def _ensure_correct_weights(self, *weights):
         for w in weights:
             if w < 0.0:
-                raise ValueError("Negative wights are not allowed.")
+                raise ValueError("Negative weights are not allowed.")
 
     @property
     def bonus_words(self):
