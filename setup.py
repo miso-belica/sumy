@@ -55,6 +55,7 @@ setup(
         "Japanese": ["tinysegmenter"],
         "Chinese": ["jieba"],
         "Korean": ["konlpy"],
+        "Hebrew": ["hebrew_tokenizer"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -84,6 +85,7 @@ setup(
         "Natural Language :: Portuguese",
         "Natural Language :: Slovak",
         "Natural Language :: Spanish",
+        "Natural Language :: Hebrew",
 
         "Topic :: Education",
         "Topic :: Internet",

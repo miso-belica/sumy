@@ -20,9 +20,10 @@ class Stemmer(object):
     SPECIAL_STEMMERS = {
         'czech': czech_stemmer,
         'slovak': czech_stemmer,
+        'hebrew': null_stemmer,
         'chinese': null_stemmer,
         'japanese': null_stemmer,
-        'korean': null_stemmer
+        'korean': null_stemmer,
     }
 
     def __init__(self, language):
