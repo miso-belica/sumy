@@ -9,9 +9,8 @@ try:
     import numpy
 except ImportError:
     numpy = None
-
+from collections import Counter
 from ._summarizer import AbstractSummarizer
-from .._compat import Counter
 
 
 class LexRankSummarizer(AbstractSummarizer):

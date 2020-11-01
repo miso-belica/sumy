@@ -12,7 +12,7 @@ There is a [good chance](docs/index.md#Tokenizer) it is. But if not it is [not t
 
 ## Installation
 
-Make sure you have [Python](http://www.python.org/) 2.7/3.5+ and
+Make sure you have [Python](http://www.python.org/) 3.5+ and
 [pip](https://crate.io/packages/pip/)
 ([Windows](http://docs.python-guide.org/en/latest/starting/install/win/),
 [Linux](http://docs.python-guide.org/en/latest/starting/install/linux/))

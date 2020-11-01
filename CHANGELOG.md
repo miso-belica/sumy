@@ -2,6 +2,7 @@
 
 ## 0.9.0 (???)
 - Added support for Hebrew language [#150](https://github.com/miso-belica/sumy/issues/150).
+- Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
 
 ## 0.8.1 (2019-05-19)
 - Open files for `PlaintextParser` in UTF-8 encoding [#123](https://github.com/miso-belica/sumy/pull/123)
