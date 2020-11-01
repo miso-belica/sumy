@@ -40,7 +40,7 @@ def test_language_getter():
     (
         "english",
         "I am a very nice sentence with comma, but..",
-        ("I", "am", "a", "very", "nice", "sentence", "with", "comma"),
+        ("I", "am", "a", "very", "nice", "sentence", "with", "comma", "but"),
     ),
     (
         "english",
