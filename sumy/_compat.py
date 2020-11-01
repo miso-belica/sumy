@@ -24,17 +24,6 @@ except ImportError:
     from itertools import filterfalse as ffilter
 
 
-try:
-    from collections import Counter
-except ImportError:
-    # Python < 2.7
-    from itertools import groupby
-
-    def Counter(iterable):
-        iterable = sorted(iterable)
-        return dict((key, len(tuple(group))) for key, group in groupby(iterable))
-
-
 def unicode_compatible(cls):
     """
     Decorator for unicode compatible classes. Method ``__unicode__``
