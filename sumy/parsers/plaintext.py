@@ -84,8 +84,7 @@ class PlaintextParser(DocumentParser):
         for line in lines:
             if isinstance(line, Sentence):
                 if text:
-                    sentences = self.tokenize_sentences(text)
-                    sentence_objects += map(self._to_sentence, sentences)
+                    sentence_objects.extend(self._to_sentence_objects(text))
 
                 sentence_objects.append(line)
                 text = ""
@@ -94,11 +93,9 @@ class PlaintextParser(DocumentParser):
 
         text = text.strip()
         if text:
-            sentences = self.tokenize_sentences(text)
-            sentence_objects += map(self._to_sentence, sentences)
+            sentence_objects.extend(self._to_sentence_objects(text))
 
         return sentence_objects
 
-    def _to_sentence(self, text):
-        assert text.strip()
-        return Sentence(text, self._tokenizer)
+    def _to_sentence_objects(self, text):
+        return (Sentence(s, self._tokenizer) for s in self.tokenize_sentences(text))
