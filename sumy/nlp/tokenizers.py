@@ -107,13 +107,19 @@ class Tokenizer(object):
         'korean': KoreanWordTokenizer(),
     }
 
-    def __init__(self, language):
+    def __init__(self, language, custom_sentence_tokenizer=None, custom_word_tokenizer=None):
         language = normalize_language(language)
         self._language = language
 
         tokenizer_language = self.LANGUAGE_ALIASES.get(language, language)
-        self._sentence_tokenizer = self._get_sentence_tokenizer(tokenizer_language)
-        self._word_tokenizer = self._get_word_tokenizer(tokenizer_language)
+
+        self._sentence_tokenizer = custom_sentence_tokenizer
+        if self._sentence_tokenizer == None:
+            self._sentence_tokenizer = self._get_sentence_tokenizer(tokenizer_language)
+
+        self._word_tokenizer = custom_word_tokenizer
+        if self._word_tokenizer == None:
+            self._word_tokenizer = self._get_word_tokenizer(tokenizer_language)
 
     @property
     def language(self):

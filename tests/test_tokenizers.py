@@ -7,6 +7,7 @@ import sys
 import pytest
 
 from sumy.nlp.tokenizers import Tokenizer
+from nltk.tokenize import BlanklineTokenizer, WhitespaceTokenizer
 
 
 def test_missing_language():
@@ -151,3 +152,21 @@ def test_tokenize_korean_paragraph():
 
     paragraph = '회사 동료 분들과 다녀왔는데 분위기도 좋고 음식도 맛있었어요 다만, 강남 토끼정이 강남 쉑쉑버거 골목길로 쭉 올라가야 하는데 다들 쉑쉑버거의 유혹에 넘어갈 뻔 했답니다 강남역 맛집 토끼정의 외부 모습.'
     assert expected == tokenizer.to_sentences(paragraph)
+
+
+def test_custom_sent_tokenizer():
+    tokenizer = Tokenizer('english', custom_sentence_tokenizer=BlanklineTokenizer())
+    sentences = tokenizer.to_sentences("There are people who are weird,\n\ne.g. normal people.\n\nThese people know you.")
+    expected = (
+        "There are people who are weird,",
+        "e.g. normal people.",
+        "These people know you."
+    )
+    assert sentences == expected
+
+
+def test_custom_word_tokenizer():
+    tokenizer = Tokenizer('english', custom_word_tokenizer=WhitespaceTokenizer())
+    words = tokenizer.to_words("I am doing sugar-free data-mining for Peter's study - vega punk."),
+    expected = ("I", "am", "doing", "sugar-free", "data-mining", "for", "Peter's", "study", "vega")
+    assert words[0] == expected
