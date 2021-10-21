@@ -1,8 +1,20 @@
 # Changelog
 
-## 0.9.0 (???)
-- Added support for Hebrew language [#150](https://github.com/miso-belica/sumy/issues/150).
-- Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
+## 0.9.0 (2021-10-21)
+- **INCOMPATIBILITY** Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
+- **FEATURE:** Add basic Korean support by @kimbyungnam in https://github.com/miso-belica/sumy/pull/129
+- **FEATURE:** Add support for the Hebrew language by @miso-belica in https://github.com/miso-belica/sumy/pull/151
+- **FIX:** Allow words with dashes/apostrophe returned from tokenizer by @miso-belica in https://github.com/miso-belica/sumy/pull/144
+- **FIX:** Ignore empty sentences from tokenizer by @miso-belica in https://github.com/miso-belica/sumy/pull/153
+- Basic documentation by @miso-belica in https://github.com/miso-belica/sumy/pull/133
+- Speedup of the TextRank algorithm by @miso-belica in https://github.com/miso-belica/sumy/pull/140
+- Fix missing license in sdist by @dopplershift in https://github.com/miso-belica/sumy/pull/157
+- added test and call for stemmer by @bdalal in https://github.com/miso-belica/sumy/pull/131
+- Fix simple typo: referene -> reference by @timgates42 in https://github.com/miso-belica/sumy/pull/143
+- Add codecov service to tests by @miso-belica in https://github.com/miso-belica/sumy/pull/136
+- Add gitpod config by @miso-belica in https://github.com/miso-belica/sumy/pull/138
+- Try to run Python 3.7 and 3.8 on TravisCI by @miso-belica in https://github.com/miso-belica/sumy/pull/130
+- Fix TravisCI for Python 3.4 by @miso-belica in https://github.com/miso-belica/sumy/pull/134
 
 ## 0.8.1 (2019-05-19)
 - Open files for `PlaintextParser` in UTF-8 encoding [#123](https://github.com/miso-belica/sumy/pull/123)
