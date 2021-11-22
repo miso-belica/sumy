@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.1 (unpublished)
+**FEATURE:** Return the summary size by custom callable object 
+
 ## 0.9.0 (2021-10-21)
 - **INCOMPATIBILITY** Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
 - **FEATURE:** Add basic Korean support by @kimbyungnam in https://github.com/miso-belica/sumy/pull/129

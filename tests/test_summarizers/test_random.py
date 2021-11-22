@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from functools import partial
+
 from sumy._compat import to_unicode
 from sumy.summarizers.random import RandomSummarizer
 from ..utils import build_document, build_document_from_string
@@ -60,3 +62,36 @@ def test_more_sentences_than_requested():
 
     sentences = summarizer(document, 4)
     assert len(sentences) == 4
+
+
+def test_less_than_10_words_should_be_returned():
+    """https://github.com/miso-belica/sumy/issues/159"""
+    document = build_document_from_string("""
+        # Heading one
+        First sentence.
+        Second sentence.
+        Third sentence.
+
+        # Heading two
+        I like sentences but this one is really long.
+        They are so wordy
+        And have many many letters
+        And are green in my editor
+        But someone doesn't like them :(
+    """)
+    summarizer = RandomSummarizer()
+
+    def count(max_words, sentence_infos):
+        results = []
+        words_count = 0
+        for info in sentence_infos:
+            words_count += len(info.sentence.words)
+            if words_count > max_words:
+                return results
+            else:
+                results.append(info)
+
+        return results
+
+    sentences = summarizer(document, partial(count, 10))
+    assert 0 < sum(len(s.words) for s in sentences) <= 10
