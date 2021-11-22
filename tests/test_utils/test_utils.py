@@ -29,40 +29,24 @@ def test_custom_stop_words_file_not_found():
         read_stop_words(expand_resource_path("stopwords/klingon.txt"))
 
 
-def test_percentage_items_count():
-    count = ItemsCount("20%")
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1]
+@pytest.mark.parametrize("amount, expected_result", [
+    ("0%", [0]),
+    ("20%", [0, 1]),
+    ("30%", [0, 1, 2]),
+    ("35%", [0, 1, 2]),
+    ("50%", [0, 1, 2, 3, 4]),
+    ("100%", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
 
-    count = ItemsCount("100%")
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    (False, []),
+    (True, [0]),
+    (3.5, [0, 1, 2]),
+])
+def test_supported_items_count(amount, expected_result):
+    count = ItemsCount(amount)
 
-    count = ItemsCount("50%")
     returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1, 2, 3, 4]
 
-    count = ItemsCount("30%")
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1, 2]
-
-    count = ItemsCount("35%")
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1, 2]
-
-
-def test_float_items_count():
-    count = ItemsCount(3.5)
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0, 1, 2]
-
-    count = ItemsCount(True)
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == [0]
-
-    count = ItemsCount(False)
-    returned = count([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    assert returned == []
+    assert returned == expected_result
 
 
 def test_unsupported_items_count():
