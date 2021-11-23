@@ -7,5 +7,5 @@ __pycache__/
 
 # IDE files, .coverage, .pytest_cache, ...
 .*
-!.travis.yml
+!/.github/
 !.gitignore
