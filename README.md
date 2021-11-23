@@ -1,6 +1,7 @@
 # Automatic text summarizer
 
-[![image](https://api.travis-ci.org/miso-belica/sumy.png?branch=master)](https://travis-ci.org/miso-belica/sumy)
+
+[![image](https://github.com/miso-belica/sumy/actions/workflows/run-tests.yml/badge.svg)](https://github.com/miso-belica/sumy/actions/workflows/run-tests.yml)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/miso-belica/sumy) 
 
 Simple library and command line utility for extracting summary from HTML
