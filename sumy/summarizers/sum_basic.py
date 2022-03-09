@@ -8,10 +8,9 @@ from ._summarizer import AbstractSummarizer
 
 class SumBasicSummarizer(AbstractSummarizer):
     """
-    SumBasic: a frequency-based summarization system that adjusts word frequencies as 
+    SumBasic: a frequency-based summarization system that adjusts word frequencies as
     sentences are extracted.
     Source: http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf
-
     """
     _stop_words = frozenset()
 
@@ -28,12 +27,11 @@ class SumBasicSummarizer(AbstractSummarizer):
         ratings = self._compute_ratings(sentences)
         return self._get_best_sentences(document.sentences, sentences_count, ratings)
 
-    @staticmethod
-    def _get_all_words_in_doc(sentences):
-        return [w for s in sentences for w in s.words]
+    def _get_all_words_in_doc(self, sentences):
+        return self._stem_words([w for s in sentences for w in s.words])
 
     def _get_content_words_in_sentence(self, sentence):
-        normalized_words = self._normalize_words(sentence.words)   
+        normalized_words = self._normalize_words(sentence.words)
         normalized_content_words = self._filter_out_stop_words(normalized_words)
         stemmed_normalized_content_words = self._stem_words(normalized_content_words)
         return stemmed_normalized_content_words
@@ -77,7 +75,7 @@ class SumBasicSummarizer(AbstractSummarizer):
             word_freq_sum = sum([word_freq_in_doc[w] for w in content_words_in_sentence])
             word_freq_avg = word_freq_sum / content_words_count
             return word_freq_avg
-        else: 
+        else:
             return 0
 
     @staticmethod
@@ -100,13 +98,13 @@ class SumBasicSummarizer(AbstractSummarizer):
     def _compute_ratings(self, sentences):
         word_freq = self._compute_tf(sentences)
         ratings = {}
-        
+
         # make it a list so that it can be modified
         sentences_list = list(sentences)
 
         # get all content words once for efficiency
         sentences_as_words = [self._get_content_words_in_sentence(s) for s in sentences]
-        
+
         # Removes one sentence per iteration by adding to summary
         while len(sentences_list) > 0:
             best_sentence_index = self._find_index_of_best_sentence(word_freq, sentences_as_words)
