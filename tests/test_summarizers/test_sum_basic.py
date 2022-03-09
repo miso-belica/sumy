@@ -30,10 +30,18 @@ def test_empty_document():
 
 
 def test_single_sentence():
-
     s = Sentence("I am one slightly longer sentence.", Tokenizer("english"))
     document = build_document([s])
     summarizer = _build_summarizer(EMPTY_STOP_WORDS)
+
+    returned = summarizer(document, 10)
+    assert len(returned) == 1
+
+
+def test_stemmer_does_not_cause_crash():
+    """https://github.com/miso-belica/sumy/issues/165"""
+    document = build_document([Sentence("Was ist das längste deutsche Wort?", Tokenizer("german"))])
+    summarizer = _build_summarizer(EMPTY_STOP_WORDS, Stemmer("german"))
 
     returned = summarizer(document, 10)
     assert len(returned) == 1
