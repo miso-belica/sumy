@@ -6,13 +6,14 @@ from __future__ import division, print_function, unicode_literals
 import nltk.stem.snowball as nltk_stemmers_module
 
 from .czech import stem_word as czech_stemmer
+from .ukrainian import stem_word as ukrainian_stemmer
 
 from ..._compat import to_unicode
 from ...utils import normalize_language
 
 
 def null_stemmer(object):
-    "Converts given object to unicode with lower letters."
+    """Converts given object to unicode with lower letters."""
     return to_unicode(object).lower()
 
 
@@ -24,6 +25,7 @@ class Stemmer(object):
         'chinese': null_stemmer,
         'japanese': null_stemmer,
         'korean': null_stemmer,
+        'ukrainian': ukrainian_stemmer,
     }
 
     def __init__(self, language):
