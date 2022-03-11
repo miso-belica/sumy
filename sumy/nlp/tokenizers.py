@@ -91,9 +91,11 @@ class Tokenizer(object):
     LANGUAGE_EXTRA_ABREVS = {
         "english": ["e.g", "al", "i.e"],
         "german": ["al", "z.B", "Inc", "engl", "z. B", "vgl", "lat", "bzw", "S"],
+        "ukrainian": ["ім.", "о.", "вул.", "просп.", "бул.", "пров.", "пл.", "г.", "р.", "див.", "п.", "с.", "м."],
     }
 
     SPECIAL_SENTENCE_TOKENIZERS = {
+        'ukrainian': nltk.RegexpTokenizer(r'[.!?…»]', gaps=True),
         'hebrew': nltk.RegexpTokenizer(r'\.\s+', gaps=True),
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
