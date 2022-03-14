@@ -77,6 +77,23 @@ class KoreanWordTokenizer:
         return kkma.nouns(text)
 
 
+class GreekSentencesTokenizer:
+    """Calls sent_tokenize for greek, which doesn't split sentences on semicolon ';' 
+    or the greek question mark ';'. The regex below splits on both.
+    """
+    @classmethod
+    def tokenize(self, text):
+        sentences = nltk.sent_tokenize(text, language = 'greek')
+        sentences = [list(filter(None, re.split(r'(?<=[;;])\s+', sentence))) for sentence in sentences]
+        return [sentence.strip() for sent_list in sentences for sentence in sent_list]
+
+
+class GreekWordTokenizer:
+    @classmethod
+    def tokenize(self, text):
+        return list(filter(None, re.split("[ ,;;.\-!?:]+", text)))
+
+
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
@@ -92,6 +109,8 @@ class Tokenizer(object):
         "english": ["e.g", "al", "i.e"],
         "german": ["al", "z.B", "Inc", "engl", "z. B", "vgl", "lat", "bzw", "S"],
         "ukrainian": ["ім.", "о.", "вул.", "просп.", "бул.", "пров.", "пл.", "г.", "р.", "див.", "п.", "с.", "м."],
+        "greek": ["π.χ", "κ.α", "Α.Ε", "Ο.Ε", "κ.λπ", "κ.τ.λ", "λ.χ", "χμ", "χλμ", "Υ.Γ", "τηλ", "π.Χ", 
+                  "μ.Χ", "π.μ", "μ.μ", "δηλ", "βλ", "κ.ο.κ", "σελ", "κεφ", "χιλ", "αρ"],
     }
 
     SPECIAL_SENTENCE_TOKENIZERS = {
@@ -100,6 +119,7 @@ class Tokenizer(object):
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'korean': KoreanSentencesTokenizer(),
+        'greek': GreekSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
@@ -107,6 +127,7 @@ class Tokenizer(object):
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
         'korean': KoreanWordTokenizer(),
+        'greek': GreekWordTokenizer(),
     }
 
     def __init__(self, language):

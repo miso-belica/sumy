@@ -56,6 +56,7 @@ setup(
         "Chinese": ["jieba"],
         "Korean": ["konlpy"],
         "Hebrew": ["hebrew_tokenizer"],
+        "Greek": ["greek-stemmer-pos"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -87,6 +88,7 @@ setup(
         "Natural Language :: Slovak",
         "Natural Language :: Spanish",
         "Natural Language :: Ukrainian",
+        "Natural Language :: Greek",
 
         "Topic :: Education",
         "Topic :: Internet",
