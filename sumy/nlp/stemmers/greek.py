@@ -1,10 +1,14 @@
 """The code of the stem_word function relies on the greek stemmer found in this python module
-greek-stemmer-pos (https://pypi.org/project/greek-stemmer-pos/),
-(https://github.com/kpech21/Greek-Stemmer).
-greek-stemmer_pos is licensed under GNU Lesser General Public License v3.0.
-Greek-stemmer Copyright (C) 2021 Konstantinos Pechlivanis.
-The license notice is included in the same directory.
+greek-stemmer-pos (https://pypi.org/project/greek-stemmer-pos/).
 """
+_TOTAL_TAGS = frozenset({
+    'DDT', 'IDT', 'NNM', 'NNF', 'NNN', 'NNSM', 'NNSF', 'NNSN', 'NNPM', 'NNPF', 
+    'NNPN', 'NNPSM', 'NNPSF', 'NNPSN', 'VB', 'VBD', 'VBF', 'MD', 'VBS', 'VBDS', 
+    'VBFS', 'JJM', 'JJF', 'JJN', 'JJSM', 'JJSF', 'JJSN', 'CD', 'VBG', 'VBP', 
+    'VBPD', 'PRP', 'PP', 'REP', 'DP', 'IP', 'WP', 'QP', 'INP', 'RB', 'IN', 
+    'CC', 'RP', 'UH', 'FW', 'DATE', 'TIME', 'AB', 'SYM',
+})
+_CONSONANTS = frozenset('ΒΓΔΖΘΚΛΜΝΞΠΡΣΤΦΧΨ')
 
 
 def stem_word(word):
@@ -19,25 +23,17 @@ def stem_word(word):
     except ImportError:
         raise ValueError("Greek stemmer requires greek_stemmer. Please, install it by command 'pip install greek-stemmer-pos'.")
 
-    total_tags = {
-        'DDT', 'IDT', 'NNM', 'NNF', 'NNN', 'NNSM', 'NNSF', 'NNSN', 'NNPM', 'NNPF', 
-        'NNPN', 'NNPSM', 'NNPSF', 'NNPSN', 'VB', 'VBD', 'VBF', 'MD', 'VBS', 'VBDS', 
-        'VBFS', 'JJM', 'JJF', 'JJN', 'JJSM', 'JJSF', 'JJSN', 'CD', 'VBG', 'VBP', 
-        'VBPD', 'PRP', 'PP', 'REP', 'DP', 'IP', 'WP', 'QP', 'INP', 'RB', 'IN', 
-        'CC', 'RP', 'UH', 'FW', 'DATE', 'TIME', 'AB', 'SYM'
-    }
-    consonants = set('ΒΓΔΖΘΚΛΜΝΞΠΡΣΤΦΧΨ')
-    all_stemmed = set()
+    stem_candidates = set()
     
     if len(word) < 4:
         return word.lower()
 
-    for tag in total_tags:
+    for tag in _TOTAL_TAGS:
         try:
             stemmed = gr_stemmer.stem_word(word.lower(), tag)
-            if stemmed[-1].upper() in consonants:
-                all_stemmed.add(stemmed)
-        except:
+            if stemmed[-1].upper() in _CONSONANTS:
+                stem_candidates.add(stemmed)
+        except (TypeError, ValueError):
             pass
 
-    return min(all_stemmed or [word], key = len).lower()
+    return min(stem_candidates or [word], key=len).lower()

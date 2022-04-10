@@ -78,20 +78,22 @@ class KoreanWordTokenizer:
 
 
 class GreekSentencesTokenizer:
-    """Calls sent_tokenize for greek, which doesn't split sentences on semicolon ';' 
-    or the greek question mark ';'. The regex below splits on both.
+    """Calls sent_tokenize for greek text, which doesn't split sentences
+    on the english semicolon ';' (U+003B - https://unicode-table.com/en/003B/)
+    or the greek question mark ';' (U+037E - https://unicode-table.com/en/037E/). 
+    The regex below splits on both characters while retaining them in the sentence.
+    This follows the logic of sent_tokenize().
+    Regexpr Explanation: 
+        (?<= -> look behind to see if there is, 
+        [;;] -> any of these characters in the set, 
+        ) end of look-behind
+        {escape}s+ -> match and remove a single whitespace character one or more times.
     """
     @classmethod
     def tokenize(self, text):
-        sentences = nltk.sent_tokenize(text, language = 'greek')
-        sentences = [list(filter(None, re.split(r'(?<=[;;])\s+', sentence))) for sentence in sentences]
-        return [sentence.strip() for sent_list in sentences for sentence in sent_list]
-
-
-class GreekWordTokenizer:
-    @classmethod
-    def tokenize(self, text):
-        return list(filter(None, re.split("[ ,;;.\-!?:]+", text)))
+        sentences = nltk.sent_tokenize(text, language='greek')
+        sentences = (filter(None, re.split(r'(?<=[;;])\s+', sentence)) for sentence in sentences)
+        return [sentence.strip() for sent_gen in sentences for sentence in sent_gen]
 
 
 class Tokenizer(object):
@@ -127,7 +129,7 @@ class Tokenizer(object):
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
         'korean': KoreanWordTokenizer(),
-        'greek': GreekWordTokenizer(),
+        'greek': nltk.RegexpTokenizer(r"[ ,;;.!?:-]+", gaps=True),
     }
 
     def __init__(self, language):
