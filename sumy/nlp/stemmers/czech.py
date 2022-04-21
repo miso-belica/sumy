@@ -3,7 +3,7 @@
 """
 Czech stemmer
 Copyright © 2010 Luís Gomes <luismsgomes@gmail.com>.
-http://research.variancia.com/czech_stemmer/
+https://research.variancia.com/czech_stemmer/
 
 Ported from the Java implementation available at:
     http://members.unine.ch/jacques.savoy/clef/index.html
@@ -16,7 +16,6 @@ from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
 import re
-import sys
 
 from warnings import warn
 from ..._compat import unicode
@@ -193,13 +192,3 @@ def _palatalize(word):
         return word[:-3] + "sk"
 
     return word[:-1]
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 2 or sys.argv[1] not in ("light", "aggressive"):
-        sys.exit(__doc__.encode("utf-8"))
-
-    aggressive_stemming = bool(sys.argv[1] == "aggressive")
-    for line in sys.stdin:
-        words = tuple(w.decode("utf-8") + " " + stem_word(w, aggressive_stemming) for w in line.split())
-        print(*map(lambda s: s.encode("utf-8"), words))
