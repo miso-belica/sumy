@@ -77,6 +77,25 @@ class KoreanWordTokenizer:
         return kkma.nouns(text)
 
 
+class GreekSentencesTokenizer:
+    """Calls sent_tokenize for greek text, which doesn't split sentences
+    on the english semicolon ';' (U+003B - https://unicode-table.com/en/003B/)
+    or the greek question mark ';' (U+037E - https://unicode-table.com/en/037E/). 
+    The regex below splits on both characters while retaining them in the sentence.
+    This follows the logic of sent_tokenize().
+    Regexpr Explanation: 
+        (?<= -> look behind to see if there is, 
+        [;;] -> any of these characters in the set, 
+        ) end of look-behind
+        {escape}s+ -> match and remove a single whitespace character one or more times.
+    """
+    @classmethod
+    def tokenize(self, text):
+        sentences = nltk.sent_tokenize(text, language='greek')
+        sentences = (filter(None, re.split(r'(?<=[;;])\s+', sentence)) for sentence in sentences)
+        return [sentence.strip() for sent_gen in sentences for sentence in sent_gen]
+
+
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
@@ -92,6 +111,8 @@ class Tokenizer(object):
         "english": ["e.g", "al", "i.e"],
         "german": ["al", "z.B", "Inc", "engl", "z. B", "vgl", "lat", "bzw", "S"],
         "ukrainian": ["ім.", "о.", "вул.", "просп.", "бул.", "пров.", "пл.", "г.", "р.", "див.", "п.", "с.", "м."],
+        "greek": ["π.χ", "κ.α", "Α.Ε", "Ο.Ε", "κ.λπ", "κ.τ.λ", "λ.χ", "χμ", "χλμ", "Υ.Γ", "τηλ", "π.Χ", 
+                  "μ.Χ", "π.μ", "μ.μ", "δηλ", "βλ", "κ.ο.κ", "σελ", "κεφ", "χιλ", "αρ"],
     }
 
     SPECIAL_SENTENCE_TOKENIZERS = {
@@ -100,6 +121,7 @@ class Tokenizer(object):
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'korean': KoreanSentencesTokenizer(),
+        'greek': GreekSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
@@ -107,6 +129,7 @@ class Tokenizer(object):
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
         'korean': KoreanWordTokenizer(),
+        'greek': nltk.RegexpTokenizer(r"[ ,;;.!?:-]+", gaps=True),
     }
 
     def __init__(self, language):
