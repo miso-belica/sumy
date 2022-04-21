@@ -25,7 +25,7 @@ if VERSION_SUFFIX == "3.4":  # lxml 4.4.0 dropped support for Python 3.4
 # https://blog.ionelmc.ro/presentations/packaging/
 setup(
     name="sumy",
-    version="0.9.0",
+    version="0.10.0",
     description="Module for automatic summarization of text documents and HTML pages.",
     long_description=long_description,
     long_description_content_type="text/markdown",

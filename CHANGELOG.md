@@ -1,7 +1,11 @@
 # Changelog
 
-## 0.9.1 (unpublished)
-**FEATURE:** Return the summary size by custom callable object 
+## 0.10.0 (2022-04-21)
+- **FEATURE:** Add support for Ukrainian language in https://github.com/miso-belica/sumy/pull/168
+- **FEATURE:** Add support for the Greek Language by @NC0DER in https://github.com/miso-belica/sumy/pull/169
+- **FEATURE:** Return the summary size by custom callable object in https://github.com/miso-belica/sumy/pull/161
+- **FIX:** Compatibility for `from collections import Sequence` for Python 3.10
+- **FIX:** Fix SumBasicSummarizer with stemmer in https://github.com/miso-belica/sumy/pull/166
 
 ## 0.9.0 (2021-10-21)
 - **INCOMPATIBILITY** Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
