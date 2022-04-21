@@ -28,3 +28,8 @@ def release(context):
 def bump(context, version="patch"):
     context.run("bumpversion %s" % version)
     context.run("git commit --amend")
+
+@task
+def docker(context):
+    context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.10.0 .")
+    context.run("docker push misobelica/sumy --all-tags")
