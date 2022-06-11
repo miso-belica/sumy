@@ -44,3 +44,10 @@ def test_slovak_stemmer():
 
     assert type(actual) is type(expected)
     assert expected.__dict__ == actual.__dict__
+
+
+def test_greek_stemmer():
+    greek_stemmer = Stemmer("greek")
+    # The first assert covers the empty stem case.
+    assert "οτ" == greek_stemmer("όταν")
+    assert "εργαζ" == greek_stemmer("εργαζόμενος")
