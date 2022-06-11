@@ -31,7 +31,7 @@ def stem_word(word):
     for tag in _TOTAL_TAGS:
         try:
             stemmed = gr_stemmer.stem_word(word.lower(), tag)
-            if stemmed[-1].upper() in _CONSONANTS:
+            if stemmed and stemmed[-1].upper() in _CONSONANTS:
                 stem_candidates.add(stemmed)
         except (TypeError, ValueError):
             pass
