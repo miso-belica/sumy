@@ -8,6 +8,8 @@ from ..utils import cached_property, fetch_url
 from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
 from .parser import DocumentParser
 
+from string import punctuation
+
 
 class HtmlParser(DocumentParser):
     """Parser of text from HTML format into DOM."""
@@ -93,7 +95,8 @@ class HtmlParser(DocumentParser):
                     sentences.append(Sentence(text, self._tokenizer, is_heading=True))
                 # skip <pre> nodes
                 elif not (annotations and "pre" in annotations):
-                    current_text += " " + text
+                    # be sure to not add empty space between word and punctations
+                    current_text += "" + text if text[0] in punctuation else " " + text
 
             new_sentences = self.tokenize_sentences(current_text)
             sentences.extend(Sentence(s, self._tokenizer) for s in new_sentences)
