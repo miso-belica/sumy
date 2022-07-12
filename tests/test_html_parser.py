@@ -28,3 +28,14 @@ def test_annotated_text():
 
     assert to_unicode(document.paragraphs[1].sentences[0]) == "Tento text je tu aby vyplnil prázdne miesto v srdci súboru."
     assert to_unicode(document.paragraphs[1].sentences[1]) == "Aj súbory majú predsa city."
+
+def test_from_url():
+    url = "https://it.wikipedia.org/wiki/Parsing"
+    LANG = "italian"
+    parser = HtmlParser.from_url(url, Tokenizer(LANG))
+    document = parser.document
+    test_str = "In informatica, il parsing, analisi sintattica o parsificazione è un processo che analizza un flusso continuo di dati in ingresso ( input, letti per esempio da un file o una tastiera) \
+        in modo da determinare la correttezza della sua struttura grazie ad una data grammatica formale."
+
+    assert document.paragraphs[0].sentences[0]._text == test_str, "There should not be empty space between words and punctations."
+
