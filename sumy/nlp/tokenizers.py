@@ -97,11 +97,10 @@ class GreekSentencesTokenizer:
 
 
 class ArabicWordTokenizer:
-
     def tokenize(self, text):
         try:
             from pyarabic.araby import tokenize
-        except ImportError as e:
+        except ImportError:
             raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
         return tokenize(text)
 
@@ -110,9 +109,10 @@ class ArabicSentenceTokenizer:
     def tokenize(self, text):
         try:
             from pyarabic.araby import sentence_tokenize
-        except ImportError as e:
+        except ImportError:
             raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
         return sentence_tokenize(text)
+
 
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
