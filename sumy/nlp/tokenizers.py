@@ -105,7 +105,7 @@ class ArabicWordTokenizer:
         return tokenize(text)
 
 
-class ArabicSentenceTokenizer:
+class ArabicSentencesTokenizer:
     def tokenize(self, text):
         try:
             from pyarabic.araby import sentence_tokenize
@@ -140,7 +140,7 @@ class Tokenizer(object):
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'korean': KoreanSentencesTokenizer(),
         'greek': GreekSentencesTokenizer(),
-        'arabic': ArabicSentenceTokenizer(),
+        'arabic': ArabicSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
