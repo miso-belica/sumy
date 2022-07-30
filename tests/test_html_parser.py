@@ -29,13 +29,16 @@ def test_annotated_text():
     assert to_unicode(document.paragraphs[1].sentences[0]) == "Tento text je tu aby vyplnil prázdne miesto v srdci súboru."
     assert to_unicode(document.paragraphs[1].sentences[1]) == "Aj súbory majú predsa city."
 
-def test_from_url():
+
+def test_no_whitespace_before_punctuation_characters():
     text = """
     <p>In <a href="/wiki/Informatica" title="Informatica">informatica</a>, il <b>parsing</b>, 
     <b>analisi sintattica</b> o <b>parsificazione</b> è un processo che analizza un flusso 
     continuo di dati in ingresso ..."""
     parser = HtmlParser.from_string(text, "https://it.wikipedia.org/wiki/Parsing", Tokenizer("italian"))
-    document = parser.document
-    test_str = "In informatica, il parsing, analisi sintattica o parsificazione è un processo che analizza un flusso continuo di dati in ingresso ..." 
-    assert document.paragraphs[0].sentences[0]._text == test_str, "There should not be empty space between words and punctations."
+
+    assert str(parser.document.paragraphs[0].sentences[0]) == (
+        "In informatica, il parsing, analisi sintattica o parsificazione è un processo che analizza un flusso\n"
+        "continuo di dati in ingresso ..."
+    )
 
