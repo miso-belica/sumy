@@ -18,7 +18,7 @@ class EdmundsonCueMethod(AbstractSummarizer):
             stigma_word_weight)
 
     def _rate_sentence(self, sentence, bonus_word_weight, stigma_word_weight):
-        # count number of bonus/stigma words in sentece
+        # count number of bonus/stigma words in sentence
         words = map(self.stem_word, sentence.words)
         bonus_words_count, stigma_words_count = self._count_words(words)
 

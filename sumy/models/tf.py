@@ -78,7 +78,7 @@ class TfDocumentModel(object):
             It may be viewed as a scaling down of TF by the largest TF
             value in document.
         :returns float:
-            0.0 <= frequency <= 1.0, where 0 means no occurence in document
+            0.0 <= frequency <= 1.0, where 0 means no occurrence in document
             and 1 the most frequent term in document.
         """
         frequency = self.term_frequency(term) / self._max_frequency

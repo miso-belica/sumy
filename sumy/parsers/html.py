@@ -95,7 +95,7 @@ class HtmlParser(DocumentParser):
                     sentences.append(Sentence(text, self._tokenizer, is_heading=True))
                 # skip <pre> nodes
                 elif not (annotations and "pre" in annotations):
-                    # be sure to not add empty space between word and punctations
+                    # be sure to not add empty space between word and punctuations
                     current_text += "" + text if text[0] in punctuation else " " + text
 
             new_sentences = self.tokenize_sentences(current_text)
