@@ -9,3 +9,6 @@ __pycache__/
 .*
 !/.github/
 !.gitignore
+
+# do not import jupyter notebooks for exploration
+notebooks/
