@@ -62,7 +62,7 @@ class LsaSummarizer(AbstractSummarizer):
     def _create_matrix(self, document, dictionary):
         """
         Creates matrix of shape |unique words|×|sentences| where cells
-        contains number of occurences of words (rows) in senteces (cols).
+        contains number of occurrences of words (rows) in sentences (cols).
         """
         sentences = document.sentences
 

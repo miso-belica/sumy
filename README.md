@@ -26,6 +26,8 @@ $ [sudo] pip install git+git://github.com/miso-belica/sumy.git  # for the fresh 
 
 ## Usage
 
+Thanks to some good soul out there, the easiest way to try sumy is in your browser at https://huggingface.co/spaces/issam9/sumy_space
+
 Sumy contains command line utility for quick summarization of documents.
 
 ```sh
