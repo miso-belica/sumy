@@ -31,5 +31,5 @@ def bump(context, version="patch"):
 
 @task
 def docker(context):
-    context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.10.0 .")
+    context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.11.0 .")
     context.run("docker push misobelica/sumy --all-tags")
