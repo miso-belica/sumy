@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0 (2022-10-23)
+- **FIX:** Greek stemmer bug fix by @NC0DER in https://github.com/miso-belica/sumy/pull/175
+* **FIX:** Avoid to add empty space between words and punctations. by @gianpd in https://github.com/miso-belica/sumy/pull/178
+* **DOC:** Fix a few typos by @timgates42 in https://github.com/miso-belica/sumy/pull/182
+* **FEATURE:** Add Arabic language support by @issam9 in https://github.com/miso-belica/sumy/pull/181
+
 ## 0.10.0 (2022-04-21)
 - **FEATURE:** Add support for Ukrainian language in https://github.com/miso-belica/sumy/pull/168
 - **FEATURE:** Add support for the Greek Language by @NC0DER in https://github.com/miso-belica/sumy/pull/169
