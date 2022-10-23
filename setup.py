@@ -57,6 +57,7 @@ setup(
         "Korean": ["konlpy"],
         "Hebrew": ["hebrew_tokenizer"],
         "Greek": ["greek-stemmer-pos"],
+        "Arabic": ["pyarabic"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -89,6 +90,7 @@ setup(
         "Natural Language :: Spanish",
         "Natural Language :: Ukrainian",
         "Natural Language :: Greek",
+        "Natural Language :: Arabic",
 
         "Topic :: Education",
         "Topic :: Internet",

@@ -36,7 +36,7 @@ class HebrewWordTokenizer:
             word for token, word, _, _ in tokenize(text)
             if token in (Groups.HEBREW, Groups.HEBREW_1, Groups.HEBREW_2)
         ]
-
+    
 
 class JapaneseWordTokenizer:
     def tokenize(self, text):
@@ -96,6 +96,24 @@ class GreekSentencesTokenizer:
         return [sentence.strip() for sent_gen in sentences for sentence in sent_gen]
 
 
+class ArabicWordTokenizer:
+    def tokenize(self, text):
+        try:
+            from pyarabic.araby import tokenize
+        except ImportError:
+            raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
+        return tokenize(text)
+
+
+class ArabicSentencesTokenizer:
+    def tokenize(self, text):
+        try:
+            from pyarabic.araby import sentence_tokenize
+        except ImportError:
+            raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
+        return sentence_tokenize(text)
+
+
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
@@ -122,6 +140,7 @@ class Tokenizer(object):
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'korean': KoreanSentencesTokenizer(),
         'greek': GreekSentencesTokenizer(),
+        'arabic': ArabicSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
@@ -130,6 +149,7 @@ class Tokenizer(object):
         'chinese': ChineseWordTokenizer(),
         'korean': KoreanWordTokenizer(),
         'greek': nltk.RegexpTokenizer(r"[ ,;;.!?:-]+", gaps=True),
+        'arabic': ArabicWordTokenizer(),
     }
 
     def __init__(self, language):
