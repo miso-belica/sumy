@@ -32,8 +32,8 @@ class HtmlParser(DocumentParser):
             return cls(file.read(), tokenizer, url)
 
     @classmethod
-    def from_url(cls, url, tokenizer):
-        data = fetch_url(url)
+    def from_url(cls, url, tokenizer, timeout=None):
+        data = fetch_url(url, timeout)
         return cls(data, tokenizer, url)
 
     def __init__(self, html_content, tokenizer, url=None):

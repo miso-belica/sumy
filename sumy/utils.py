@@ -33,8 +33,8 @@ def normalize_language(language):
     return language
 
 
-def fetch_url(url):
-    with closing(requests.get(url, headers=_HTTP_HEADERS)) as response:
+def fetch_url(url, timeout=None):
+    with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
         response.raise_for_status()
         return response.content
 
