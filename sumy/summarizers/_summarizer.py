@@ -36,7 +36,7 @@ class AbstractSummarizer(object):
         rate = rating
         if isinstance(rating, dict):
             assert not args and not kwargs
-            rate = lambda s: rating[s]
+            def rate(s): return rating[s]
 
         infos = (SentenceInfo(s, o, rate(s, *args, **kwargs))
             for o, s in enumerate(sentences))

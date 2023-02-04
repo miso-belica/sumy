@@ -15,7 +15,8 @@ from ..utils import normalize_language
 
 class DefaultWordTokenizer(object):
     """NLTK tokenizer"""
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         return nltk.word_tokenize(text)
 
 
@@ -29,88 +30,96 @@ class HebrewWordTokenizer:
             from hebrew_tokenizer import tokenize
             from hebrew_tokenizer.groups import Groups
         except ImportError:
-            raise ValueError("Hebrew tokenizer requires hebrew_tokenizer. Please, install it by command 'pip install hebrew_tokenizer'.")
+            raise ValueError(
+                "Hebrew tokenizer requires hebrew_tokenizer. "
+                "Please, install it by command 'pip install hebrew_tokenizer'."
+            )
 
         text = text.translate(cls._TRANSLATOR)
         return [
             word for token, word, _, _ in tokenize(text)
             if token in (Groups.HEBREW, Groups.HEBREW_1, Groups.HEBREW_2)
         ]
-    
+
 
 class JapaneseWordTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             import tinysegmenter
-        except ImportError as e:
-            raise ValueError("Japanese tokenizer requires tinysegmenter. Please, install it by command 'pip install tinysegmenter'.")
-        segmenter = tinysegmenter.TinySegmenter()
-        return segmenter.tokenize(text)
+        except ImportError:
+            raise ValueError(
+                "Japanese tokenizer requires tinysegmenter. Please, install it by command 'pip install tinysegmenter'."
+            )
+        return tinysegmenter.TinySegmenter().tokenize(text)
 
 
 class ChineseWordTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             import jieba
-        except ImportError as e:
+        except ImportError:
             raise ValueError("Chinese tokenizer requires jieba. Please, install it by command 'pip install jieba'.")
         return jieba.cut(text)
 
 
 class KoreanSentencesTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             from konlpy.tag import Kkma
-        except ImportError as e:
+        except ImportError:
             raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
-        kkma = Kkma()
-        return kkma.sentences(text)
+        return Kkma().sentences(text)
 
 
 class KoreanWordTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             from konlpy.tag import Kkma
-        except ImportError as e:
+        except ImportError:
             raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
-        kkma = Kkma()
-        return kkma.nouns(text)
+        return Kkma().nouns(text)
 
 
 class GreekSentencesTokenizer:
     """Calls sent_tokenize for greek text, which doesn't split sentences
     on the english semicolon ';' (U+003B - https://unicode-table.com/en/003B/)
-    or the greek question mark ';' (U+037E - https://unicode-table.com/en/037E/). 
+    or the greek question mark ';' (U+037E - https://unicode-table.com/en/037E/).
     The regex below splits on both characters while retaining them in the sentence.
     This follows the logic of sent_tokenize().
-    Regexpr Explanation: 
-        (?<= -> look behind to see if there is, 
-        [;;] -> any of these characters in the set, 
+    Regexpr Explanation:
+        (?<= -> look behind to see if there is,
+        [;;] -> any of these characters in the set,
         ) end of look-behind
         {escape}s+ -> match and remove a single whitespace character one or more times.
     """
     @classmethod
-    def tokenize(self, text):
+    def tokenize(cls, text):
         sentences = nltk.sent_tokenize(text, language='greek')
         sentences = (filter(None, re.split(r'(?<=[;;])\s+', sentence)) for sentence in sentences)
         return [sentence.strip() for sent_gen in sentences for sentence in sent_gen]
 
 
 class ArabicWordTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             from pyarabic.araby import tokenize
         except ImportError:
-            raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
+            raise ValueError("Arabic tokenizer requires pyarabic. Please, install it with 'pip install pyarabic'.")
         return tokenize(text)
 
 
 class ArabicSentencesTokenizer:
-    def tokenize(self, text):
+    @staticmethod
+    def tokenize(text):
         try:
             from pyarabic.araby import sentence_tokenize
         except ImportError:
-            raise ValueError("arabic tokenizer requires pyarabic. Please, install it by command 'pip install pyarabic'.")
+            raise ValueError("Arabic tokenizer requires pyarabic. Please, install it with 'pip install pyarabic'.")
         return sentence_tokenize(text)
 
 
@@ -129,7 +138,7 @@ class Tokenizer(object):
         "english": ["e.g", "al", "i.e"],
         "german": ["al", "z.B", "Inc", "engl", "z. B", "vgl", "lat", "bzw", "S"],
         "ukrainian": ["ім.", "о.", "вул.", "просп.", "бул.", "пров.", "пл.", "г.", "р.", "див.", "п.", "с.", "м."],
-        "greek": ["π.χ", "κ.α", "Α.Ε", "Ο.Ε", "κ.λπ", "κ.τ.λ", "λ.χ", "χμ", "χλμ", "Υ.Γ", "τηλ", "π.Χ", 
+        "greek": ["π.χ", "κ.α", "Α.Ε", "Ο.Ε", "κ.λπ", "κ.τ.λ", "λ.χ", "χμ", "χλμ", "Υ.Γ", "τηλ", "π.Χ",
                   "μ.Χ", "π.μ", "μ.μ", "δηλ", "βλ", "κ.ο.κ", "σελ", "κεφ", "χιλ", "αρ"],
     }
 

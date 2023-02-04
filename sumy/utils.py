@@ -9,14 +9,13 @@ import pkgutil
 
 from functools import wraps
 from contextlib import closing
-from os.path import dirname, abspath, join, exists
-from . import __version__
+from os.path import dirname, abspath, join
 from ._compat import to_string, to_unicode, string_types
 
 from pycountry import languages
 
 _HTTP_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36 OPR/31.0.1889.174",
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0",
     # "User-Agent": "Sumy (Automatic text summarizer) Version/%s" % __version__,
 }
 
@@ -67,7 +66,7 @@ def get_stop_words(language):
     language = normalize_language(language)
     try:
         stopwords_data = pkgutil.get_data("sumy", "data/stopwords/%s.txt" % language)
-    except IOError as e:
+    except IOError:
         raise LookupError("Stop-words are not available for language %s." % language)
     return parse_stop_words(stopwords_data)
 
