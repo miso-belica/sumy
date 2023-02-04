@@ -33,7 +33,7 @@ def normalize_language(language):
     return language
 
 
-def fetch_url(url, timeout=None):
+def fetch_url(url, timeout=(3.05, 30)):
     with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
         response.raise_for_status()
         return response.content
