@@ -1,0 +1,34 @@
+[tool.ruff]
+# Assume Python v3.7
+target-version = "py37"
+line-length = 120
+# Never enforce `E501` (line length violations).
+ignore = ["E501"]
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Ignore `E402` (import violations) in all `__init__.py` files, and in `_compat.py`.
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"_compat.py" = ["F401"]
