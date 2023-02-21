@@ -12,7 +12,7 @@ with open("README.md") as readme:
 
 
 dependencies = [
-    "docopt>=0.6.1,<0.7",
+    "docopt-ng>=0.6.1",
     "breadability>=0.1.20",
     "requests>=2.7.0",
     "pycountry>=18.2.23",
