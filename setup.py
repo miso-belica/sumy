@@ -88,6 +88,7 @@ setup(
         "Natural Language :: Portuguese",
         "Natural Language :: Slovak",
         "Natural Language :: Spanish",
+        "Natural Language :: Swedish",
         "Natural Language :: Ukrainian",
         "Natural Language :: Greek",
         "Natural Language :: Arabic",
