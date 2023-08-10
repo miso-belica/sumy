@@ -169,3 +169,16 @@ def test_power_method_should_return_different_scores_for_sentences():
     scores = LexRankSummarizer.power_method(matrix, LexRankSummarizer.epsilon)
 
     assert len(frozenset(scores.tolist())) > 1
+
+def test_power_method_should_return_finite():
+    """See https://github.com/miso-belica/sumy/issues/187"""
+    matrix = numpy.array([
+        [0.1, 0.2, 0.3, 0.6, 0.9],
+        [0.45, 0, 0.3, 0.6, 0],
+        [0.5, 0.6, 0.3, 1, 0.9],
+        [0.7, 0, 0, 0.6, 0],
+        [0.5, 0.123, 0, 0.111, 0.9],
+    ])
+    scores = LexRankSummarizer.power_method(matrix, LexRankSummarizer.epsilon)
+
+    assert all(numpy.isfinite(scores))
