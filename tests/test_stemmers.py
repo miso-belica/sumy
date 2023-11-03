@@ -51,3 +51,8 @@ def test_greek_stemmer():
     # The first assert covers the empty stem case.
     assert "οτ" == greek_stemmer("όταν")
     assert "εργαζ" == greek_stemmer("εργαζόμενος")
+
+
+def test_swedish_stemmer():
+    swedish_stemmer = Stemmer("swedish")
+    assert "sov" == swedish_stemmer("sover")
