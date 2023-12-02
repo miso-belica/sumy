@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals
 import pytest
 import numpy as np
 
+import sumy.summarizers.fast_kl as fast_kl_module
 from sumy.models.dom._sentence import Sentence
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.fast_kl import KLSummarizer
@@ -27,6 +28,18 @@ def summarizer(stop_words):
     summarizer = KLSummarizer()
     summarizer.stop_words = stop_words
     return summarizer
+
+
+def test_numpy_not_installed():
+    summarizer = KLSummarizer()
+
+    numpy = fast_kl_module.np
+    fast_kl_module.np = None
+
+    with pytest.raises(ValueError):
+        summarizer(build_document(), 10)
+
+    fast_kl_module.np = numpy
 
 
 def test_empty_document(summarizer):
