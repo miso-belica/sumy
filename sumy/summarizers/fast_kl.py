@@ -17,7 +17,7 @@ class KLSummarizer(AbstractSummarizer):
     KL Divergence.
     Source: http://www.aclweb.org/anthology/N09-1041
     """
-    MISSING_WORD_VAL = 42.  # placeholder value used for missing words in document
+    MISSING_WORD_VAL = 42.0  # placeholder value used for missing words in document
     stop_words = frozenset()
 
     def __call__(self, document, sentences_count):
@@ -89,7 +89,7 @@ class KLSummarizer(AbstractSummarizer):
 
     @staticmethod
     def _kl_divergence(summary_freq, doc_freq, doc_missing_word_mask):
-        summary_freq = np.where((summary_freq != 0.) & doc_missing_word_mask, summary_freq, doc_freq)
+        summary_freq = np.where((summary_freq != 0.0) & doc_missing_word_mask, summary_freq, doc_freq)
         return (doc_freq * np.log(doc_freq / summary_freq)).sum()
 
     @staticmethod
@@ -114,7 +114,7 @@ class KLSummarizer(AbstractSummarizer):
 
         # Keep track of number of words in summary and word frequency
         summary_word_list_len = 0
-        summary_word_freq = np.repeat(0., len(vocabulary))
+        summary_word_freq = np.repeat(0.0, len(vocabulary))
 
         # make it a list so that it can be modified
         sentences_list = list(sentences)
@@ -159,5 +159,4 @@ class KLSummarizer(AbstractSummarizer):
             # value is the iteration in which it was removed multiplied by -1 so that
             # the first sentences removed (the most important) have highest values
             ratings[best_sentence] = -1 * len(ratings)
-        print(f"Num interations: {iterations}")
         return ratings
