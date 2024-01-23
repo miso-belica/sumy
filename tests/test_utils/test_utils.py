@@ -55,6 +55,11 @@ def test_unsupported_items_count():
     with pytest.raises(ValueError):
         count([])
 
+def test_items_count_with_unsupported_init_type():
+    count = ItemsCount([])
+
+    with pytest.raises(ValueError):
+        count([])
 
 def test_normalize_language_with_alpha_2_code():
     assert normalize_language("fr") == "french"
