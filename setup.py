@@ -58,6 +58,7 @@ setup(
         "Hebrew": ["hebrew_tokenizer"],
         "Greek": ["greek-stemmer-pos"],
         "Arabic": ["pyarabic"],
+        "Thai": ["pythainlp"],
     },
     packages=find_packages(),
     package_data={"sumy": [
@@ -88,9 +89,11 @@ setup(
         "Natural Language :: Portuguese",
         "Natural Language :: Slovak",
         "Natural Language :: Spanish",
+        "Natural Language :: Swedish",
         "Natural Language :: Ukrainian",
         "Natural Language :: Greek",
         "Natural Language :: Arabic",
+        "Natural Language :: Thai",
 
         "Topic :: Education",
         "Topic :: Internet",

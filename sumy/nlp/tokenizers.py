@@ -123,6 +123,26 @@ class ArabicSentencesTokenizer:
         return sentence_tokenize(text)
 
 
+class ThaiWordTokenizer:
+    @staticmethod
+    def tokenize(text):
+        try:
+            from pythainlp.tokenize import word_tokenize
+        except ImportError:
+            raise ValueError("Thai tokenizer requires pythainlp. Please, install it with 'pip install pythainlp'.")
+        return word_tokenize(text)
+
+
+class ThaiSentencesTokenizer:
+    @staticmethod
+    def tokenize(text):
+        try:
+            from pythainlp.tokenize import sent_tokenize
+        except ImportError:
+            raise ValueError("Thai tokenizer requires pythainlp. Please, install it with 'pip install pythainlp'.")
+        return sent_tokenize(text)
+
+
 class Tokenizer(object):
     """Language dependent tokenizer of text document."""
 
@@ -150,6 +170,7 @@ class Tokenizer(object):
         'korean': KoreanSentencesTokenizer(),
         'greek': GreekSentencesTokenizer(),
         'arabic': ArabicSentencesTokenizer(),
+        'thai': ThaiSentencesTokenizer(),
     }
 
     SPECIAL_WORD_TOKENIZERS = {
@@ -159,6 +180,7 @@ class Tokenizer(object):
         'korean': KoreanWordTokenizer(),
         'greek': nltk.RegexpTokenizer(r"[ ,;;.!?:-]+", gaps=True),
         'arabic': ArabicWordTokenizer(),
+        'thai': ThaiWordTokenizer(),
     }
 
     def __init__(self, language):
