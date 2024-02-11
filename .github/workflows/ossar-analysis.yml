@@ -14,7 +14,7 @@ jobs:
     steps:
       # Checkout your code repository to scan
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         # We must fetch at least the immediate parents so that if this is
         # a pull request then we can checkout the head.
@@ -27,9 +27,9 @@ jobs:
 
       # Install dotnet, used by OSSAR
     - name: Install .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '6.x'
 
       # Run open source static analysis tools
     - name: Run OSSAR
