@@ -29,7 +29,7 @@ def normalize_language(language):
         except KeyError:
             pass
 
-    return language
+    return language.lower()
 
 
 def fetch_url(url, timeout=(3.05, 30)):
