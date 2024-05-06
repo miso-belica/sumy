@@ -2,7 +2,7 @@
 
 ## The story
 
-Sumy was created as my [diploma thesis](https://hdl.handle.net/11012/53529) and the need for articles length reduction in Czech/Slovak language. Although it's source code was always available publicly on Github I didn't expect to adopt it by so many people. Don't get me wrong. I am happy for it, but that's also why the lack of documentation and sometimes hardcoded features for Slovak/Czech languages may be found in the codebase. Because the thesis is written in the Slovak language I will try to write some practical parts here for people using it.
+Sumy was created as my [diploma thesis](https://hdl.handle.net/11012/53529) and the need for articles length reduction in Czech/Slovak language. Although its source code was always available publicly on Github I didn't expect to adopt it by so many people. Don't get me wrong. I am happy for it, but that's also why the lack of documentation and sometimes hardcoded features for Slovak/Czech languages may be found in the codebase. Because the thesis is written in the Slovak language I will try to write some practical parts here for people using it.
 
 Sumy is able to create **extractive summary**. That means that it tries to find the most significant sentences in the document(s) and compose it into the shortened text. There is another approach called **abstractive summary** but to create it one needs to understand the topic and create new shortened text from it. This is out of the scope of Sumy's current capabilities.
 
