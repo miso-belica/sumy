@@ -24,4 +24,10 @@ $ pip install pytest pytest-cov numpy jieba tinysegmenter
 $ pytest
 ```
 
+There's a dockerfile to build test environment
+```sh
+$ docker build -t samy:test -f tests/Dockerfile .
+$ docker run --rm -itv .:/app samy:test
+```
+
 And that's all. I am looking forward for your PR :)
