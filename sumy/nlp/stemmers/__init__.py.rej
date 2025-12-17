@@ -1,0 +1,10 @@
+--- sumy/nlp/stemmers/__init__.py
++++ sumy/nlp/stemmers/__init__.py
+@@ -29,6 +30,7 @@
+         korean: null_stemmer,
+         ukrainian: ukrainian_stemmer,
+         greek: greek_stemmer,
++        polish: polish_stemmer,
+     }
+ 
+     def __init__(self, language):
