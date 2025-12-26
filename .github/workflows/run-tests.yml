@@ -64,9 +64,7 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          uv sync --all-extras
-          # Install additional test dependencies
-          uv pip install "tweepy<4.0.0" pytest codecov pytest-cov
+          uv sync --frozen --extra dev --all-extras
           uv run python -c "import nltk; nltk.download('punkt')"
 
       - run: uv run pytest tests
