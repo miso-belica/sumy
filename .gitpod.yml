@@ -1,3 +1,7 @@
 tasks:
-  - init: pip install . && python -c "import nltk; nltk.download('punkt')" && pip install -U numpy
-  - command: sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization
+  - init: |
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+      source $HOME/.local/bin/env
+      uv sync --extra LSA
+      uv run python -c "import nltk; nltk.download('punkt')"
+  - command: uv run sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization
