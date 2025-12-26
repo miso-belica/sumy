@@ -33,7 +33,7 @@ jobs:
           - os: "ubuntu-latest"
             python-version: "pypy3.10"
           - os: "ubuntu-latest"
-            python-version: "graalpy-24.1"
+            python-version: "graalpy"
           - os: "macos-latest"
             python-version: "3.12"
           - os: "windows-latest"
