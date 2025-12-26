@@ -28,8 +28,12 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest"]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         include:
+          - os: "ubuntu-latest"
+            python-version: "pypy3.10"
+          - os: "ubuntu-latest"
+            python-version: "graalpy-24.1"
           - os: "macos-latest"
             python-version: "3.12"
           - os: "windows-latest"
