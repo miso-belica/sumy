@@ -11,16 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install ruff
+        run: uv tool install ruff
 
-      - run: ruff check --output-format=github .
+      - run: uvx ruff check --output-format=github .
 
   tests:
     timeout-minutes: 20
@@ -45,6 +48,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -56,14 +64,12 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          python -m pip install --upgrade pip wheel setuptools
-          pip install .
-          # https://stackoverflow.com/a/69439779/2988107
-          pip install --upgrade numpy tinysegmenter jieba konlpy hebrew_tokenizer "tweepy<4.0.0" greek-stemmer-pos "lxml[html_clean]"
-          python -c "import nltk; nltk.download('punkt')"
-          pip install --upgrade pytest codecov pytest-cov
+          uv sync --all-extras
+          # Install additional test dependencies
+          uv pip install "tweepy<4.0.0" pytest codecov pytest-cov
+          uv run python -c "import nltk; nltk.download('punkt')"
 
-      - run: pytest tests
+      - run: uv run pytest tests
         env:
           CI: 1
           PYTHONDONTWRITEBYTECODE: 1
