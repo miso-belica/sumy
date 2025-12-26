@@ -15,7 +15,7 @@ def test(context):
 
 @task(test)
 def install(context):
-    context.run("uv sync --all-extras")
+    context.run("uv sync --extra dev --all-extras")
 
 
 @task(test)
