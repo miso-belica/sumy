@@ -86,6 +86,9 @@ Thai = ["pythainlp"]
 # Development dependencies
 dev = [
     "pytest>=3.0.0",
+    "pytest-cov",
+    "codecov",
+    "tweepy<4.0.0",
 ]
 
 [project.scripts]
