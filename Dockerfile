@@ -1,9 +1,12 @@
 FROM python:3-alpine
 
-RUN apk update && apk add --no-cache libxml2-dev libxslt-dev build-base
+RUN apk update && apk add --no-cache libxml2-dev libxslt-dev build-base curl
 
-RUN pip install "sumy[LSA]" && \
-    python -c "import nltk; nltk.download('punkt')" && \
-    pip cache purge
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Install sumy with LSA extra
+RUN uv pip install --system "sumy[LSA]" && \
+    python -c "import nltk; nltk.download('punkt')"
 
 ENTRYPOINT ["sumy"]
