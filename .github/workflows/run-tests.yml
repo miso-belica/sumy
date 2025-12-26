@@ -62,9 +62,13 @@ jobs:
           uv sync --frozen --extra dev --all-extras
           uv run python -c "import nltk; nltk.download('punkt')"
 
-      - run: uv run pytest tests
+      - run: uv run pytest tests --cov=sumy --cov-report=xml
         env:
           CI: 1
           PYTHONDONTWRITEBYTECODE: 1
 
-      - run: codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
