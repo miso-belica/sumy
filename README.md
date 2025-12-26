@@ -13,15 +13,33 @@ There is a [good chance](docs/index.md#Tokenizer) it is. But if not it is [not t
 
 ## Installation
 
-Make sure you have [Python](http://www.python.org/) 3.6+ and
-[pip](https://crate.io/packages/pip/)
-([Windows](http://docs.python-guide.org/en/latest/starting/install/win/),
-[Linux](http://docs.python-guide.org/en/latest/starting/install/linux/))
-installed. Run simply (preferred way):
+Make sure you have [Python](http://www.python.org/) 3.7+ installed.
+
+### Using pip (traditional method)
 
 ```sh
-$ [sudo] pip install sumy
-$ [sudo] pip install git+git://github.com/miso-belica/sumy.git  # for the fresh version
+$ pip install sumy
+$ pip install git+git://github.com/miso-belica/sumy.git  # for the fresh version
+```
+
+### Using uv (recommended, faster)
+
+[uv](https://docs.astral.sh/uv/) is a modern, fast Python package installer and resolver.
+
+```sh
+$ uv pip install sumy
+$ uv pip install git+https://github.com/miso-belica/sumy.git  # for the fresh version
+```
+
+### For development
+
+If you want to contribute or modify the code:
+
+```sh
+$ git clone https://github.com/miso-belica/sumy.git
+$ cd sumy
+$ uv sync --all-extras  # Install all dependencies including optional ones
+$ uv run sumy --help    # Run sumy using uv
 ```
 
 ## Usage
