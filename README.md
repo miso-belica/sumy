@@ -15,20 +15,20 @@ There is a [good chance](docs/index.md#Tokenizer) it is. But if not it is [not t
 
 Make sure you have [Python](http://www.python.org/) 3.7+ installed.
 
-### Using pip (traditional method)
-
-```sh
-$ pip install sumy
-$ pip install git+git://github.com/miso-belica/sumy.git  # for the fresh version
-```
-
-### Using uv (recommended, faster)
+### Using uv (recommended)
 
 [uv](https://docs.astral.sh/uv/) is a modern, fast Python package installer and resolver.
 
 ```sh
 $ uv pip install sumy
 $ uv pip install git+https://github.com/miso-belica/sumy.git  # for the fresh version
+```
+
+### Using pip
+
+```sh
+$ pip install sumy
+$ pip install git+git://github.com/miso-belica/sumy.git  # for the fresh version
 ```
 
 ### For development
