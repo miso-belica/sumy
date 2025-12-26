@@ -21,7 +21,7 @@ with your code. Nothing is written in stone but please try to respect them.
 $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install all dependencies including dev/test dependencies
-$ uv sync --extra dev --all-extras
+$ uv sync --all-extras
 
 # Run tests
 $ uv run pytest
