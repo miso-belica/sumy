@@ -1,6 +1,0 @@
-include README.md
-include LICENSE.md
-include CHANGELOG.md
-recursive-include sumy/data *
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
