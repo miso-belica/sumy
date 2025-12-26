@@ -16,9 +16,8 @@ jobs:
         with:
           enable-cache: true
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: Set up Python
+        run: uv python install 3.11
 
       - name: Lint with ruff
         run: uvx ruff check --output-format=github .
@@ -52,9 +51,7 @@ jobs:
           enable-cache: true
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
 
       - name: "Install lxml dev dependencies"
         if: ${{ startsWith(matrix.python-version, 'graalpy') }}
