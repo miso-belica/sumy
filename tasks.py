@@ -10,18 +10,18 @@ def clean(context):
 
 @task(clean, default=True)
 def test(context):
-    context.run("pytest")
+    context.run("uv run pytest")
 
 
 @task(test)
 def install(context):
-    context.run("python setup.py develop")
+    context.run("uv sync --all-extras")
 
 
 @task(test)
 def release(context):
-    context.run("python setup.py register sdist bdist_wheel")
-    context.run("twine upload dist/*")
+    context.run("uv build")
+    context.run("uvx twine upload dist/*")
 
 
 @task(test)
