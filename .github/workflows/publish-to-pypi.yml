@@ -7,6 +7,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # Required for OIDC trusted publishing
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,9 +25,5 @@ jobs:
       - name: Build package
         run: uv build
 
-      - name: Publish to PyPI
-        env:
-          UV_PUBLISH_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          UV_PUBLISH_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: |
-          uv publish
+      - name: Publish to PyPI using OIDC
+        run: uv publish --trusted-publishing automatic
