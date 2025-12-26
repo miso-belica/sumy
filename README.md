@@ -13,7 +13,7 @@ There is a [good chance](docs/index.md#Tokenizer) it is. But if not it is [not t
 
 ## Installation
 
-Make sure you have [Python](http://www.python.org/) 3.7+ installed.
+Make sure you have [Python](http://www.python.org/) 3.8+ installed.
 
 ### Using uv (recommended)
 

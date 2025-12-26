@@ -14,7 +14,7 @@ with your code. Nothing is written in stone but please try to respect them.
 4. Please **respect the code style**. I don't want to set specific strict rules here because I think it's 
    possible to respect style from all the code around. For example you will not use `'` for strings 
    when you see that the code uses `"` ...
-5. Make sure you have Python 3.7+ installed. Then, install [uv](https://docs.astral.sh/uv/) and set up the development environment:
+5. Make sure you have Python 3.8+ installed. Then, install [uv](https://docs.astral.sh/uv/) and set up the development environment:
 
 ```sh
 # Install uv (if not already installed)

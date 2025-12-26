@@ -11,7 +11,7 @@ license = { text = "Apache License, Version 2.0" }
 authors = [
     { name = "Mišo Belica", email = "miso.belica@gmail.com" }
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 keywords = [
     "data mining",
     "automatic summarization",
@@ -54,7 +54,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -132,7 +131,7 @@ multi_line_output = 5
 
 [tool.ruff]
 # Assume Python v3.7
-target-version = "py37"
+target-version = "py38"
 line-length = 120
 # Never enforce `E501` (line length violations).
 ignore = ["E501"]
