@@ -20,10 +20,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: uv tool install ruff
-
-      - run: uvx ruff check --output-format=github .
+      - name: Lint with ruff
+        run: uvx ruff check --output-format=github .
 
   tests:
     timeout-minutes: 20
