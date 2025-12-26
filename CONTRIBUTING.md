@@ -20,11 +20,8 @@ with your code. Nothing is written in stone but please try to respect them.
 # Install uv (if not already installed)
 $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Install all dependencies including extras for development and testing
-$ uv sync --all-extras
-
-# Install test dependencies
-$ uv pip install pytest pytest-cov
+# Install all dependencies including dev/test dependencies
+$ uv sync --extra dev --all-extras
 
 # Run tests
 $ uv run pytest
