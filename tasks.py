@@ -21,7 +21,7 @@ def install(context):
 @task(test)
 def release(context):
     context.run("uv build")
-    context.run("uvx twine upload dist/*")
+    context.run("uv publish")
 
 
 @task(test)
