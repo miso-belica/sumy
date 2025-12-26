@@ -1,3 +1,110 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sumy"
+version = "0.11.0"
+description = "Module for automatic summarization of text documents and HTML pages."
+readme = "README.md"
+license = { text = "Apache License, Version 2.0" }
+authors = [
+    { name = "Mišo Belica", email = "miso.belica@gmail.com" }
+]
+requires-python = ">=3.7"
+keywords = [
+    "data mining",
+    "automatic summarization",
+    "data reduction",
+    "web-data extraction",
+    "NLP",
+    "natural language processing",
+    "latent semantic analysis",
+    "LSA",
+    "TextRank",
+    "LexRank",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: Chinese (Simplified)",
+    "Natural Language :: Czech",
+    "Natural Language :: English",
+    "Natural Language :: French",
+    "Natural Language :: German",
+    "Natural Language :: Hebrew",
+    "Natural Language :: Italian",
+    "Natural Language :: Japanese",
+    "Natural Language :: Portuguese",
+    "Natural Language :: Slovak",
+    "Natural Language :: Spanish",
+    "Natural Language :: Swedish",
+    "Natural Language :: Ukrainian",
+    "Natural Language :: Greek",
+    "Natural Language :: Arabic",
+    "Natural Language :: Thai",
+    "Topic :: Education",
+    "Topic :: Internet",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing :: Filters",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+    "docopt-ng>=0.6.1",
+    "breadability>=0.1.20",
+    "requests>=2.7.0",
+    "pycountry>=18.2.23",
+    "nltk>=3.0.2",
+]
+
+[project.optional-dependencies]
+LSA = ["numpy"]
+LexRank = ["numpy"]
+Japanese = ["tinysegmenter"]
+Chinese = ["jieba"]
+Korean = ["konlpy"]
+Hebrew = ["hebrew_tokenizer"]
+Greek = ["greek-stemmer-pos"]
+Arabic = ["pyarabic"]
+Thai = ["pythainlp"]
+# Development dependencies
+dev = [
+    "pytest>=3.0.0",
+]
+
+[project.scripts]
+sumy = "sumy.__main__:main"
+sumy_eval = "sumy.evaluation.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/miso-belica/sumy"
+Repository = "https://github.com/miso-belica/sumy"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sumy"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "sumy/",
+    "README.md",
+    "LICENSE.md",
+    "CHANGELOG.md",
+]
+
 [tool.ruff]
 # Assume Python v3.7
 target-version = "py37"
