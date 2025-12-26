@@ -5,6 +5,10 @@ __pycache__/
 /build
 /dist
 
+# uv
+.venv/
+uv.lock
+
 # IDE files, .coverage, .pytest_cache, ...
 .*
 !/.github/
