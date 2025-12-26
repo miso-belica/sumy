@@ -38,7 +38,8 @@ If you want to contribute or modify the code:
 ```sh
 $ git clone https://github.com/miso-belica/sumy.git
 $ cd sumy
-$ uv sync --all-extras  # Install all dependencies including optional ones
+$ uv sync               # Install dependencies (dev group included automatically)
+$ uv run pytest         # Run tests
 $ uv run sumy --help    # Run sumy using uv
 ```
 

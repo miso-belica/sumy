@@ -20,7 +20,10 @@ with your code. Nothing is written in stone but please try to respect them.
 # Install uv (if not already installed)
 $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Install all dependencies including dev/test dependencies
+# Install dev dependencies (automatically included)
+$ uv sync
+
+# Or install with all optional language extras for comprehensive testing
 $ uv sync --all-extras
 
 # Run tests

@@ -83,7 +83,8 @@ Hebrew = ["hebrew_tokenizer"]
 Greek = ["greek-stemmer-pos"]
 Arabic = ["pyarabic"]
 Thai = ["pythainlp"]
-# Development dependencies
+
+[dependency-groups]
 dev = [
     "pytest>=3.0.0",
     "pytest-cov",

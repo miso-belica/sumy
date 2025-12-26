@@ -2531,17 +2531,6 @@ arabic = [
 chinese = [
     { name = "jieba" },
 ]
-dev = [
-    { name = "codecov" },
-    { name = "invoke" },
-    { name = "pytest", version = "7.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.8'" },
-    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
-    { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "pytest-cov", version = "4.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.8'" },
-    { name = "pytest-cov", version = "5.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "pytest-cov", version = "7.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
-]
 greek = [
     { name = "greek-stemmer-pos" },
 ]
@@ -2573,14 +2562,25 @@ thai = [
     { name = "pythainlp", version = "5.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.8'" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "codecov" },
+    { name = "invoke" },
+    { name = "pytest", version = "7.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.8'" },
+    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "pytest-cov", version = "4.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.8'" },
+    { name = "pytest-cov", version = "5.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "pytest-cov", version = "7.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "breadability", specifier = ">=0.1.20" },
-    { name = "codecov", marker = "extra == 'dev'" },
     { name = "docopt-ng", specifier = ">=0.6.1" },
     { name = "greek-stemmer-pos", marker = "extra == 'greek'" },
     { name = "hebrew-tokenizer", marker = "extra == 'hebrew'" },
-    { name = "invoke", marker = "extra == 'dev'" },
     { name = "jieba", marker = "extra == 'chinese'" },
     { name = "konlpy", marker = "extra == 'korean'" },
     { name = "lxml-html-clean" },
@@ -2589,14 +2589,20 @@ requires-dist = [
     { name = "numpy", marker = "extra == 'lsa'" },
     { name = "pyarabic", marker = "extra == 'arabic'" },
     { name = "pycountry", specifier = ">=18.2.23" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=3.0.0" },
-    { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "pythainlp", marker = "extra == 'thai'" },
     { name = "requests", specifier = ">=2.7.0" },
     { name = "setuptools", specifier = ">=65.0.0" },
     { name = "tinysegmenter", marker = "extra == 'japanese'" },
 ]
-provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "dev"]
+provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "codecov" },
+    { name = "invoke" },
+    { name = "pytest", specifier = ">=3.0.0" },
+    { name = "pytest-cov" },
+]
 
 [[package]]
 name = "tinysegmenter"
