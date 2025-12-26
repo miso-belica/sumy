@@ -7,7 +7,6 @@ __pycache__/
 
 # uv
 .venv/
-uv.lock
 
 # IDE files, .coverage, .pytest_cache, ...
 .*
