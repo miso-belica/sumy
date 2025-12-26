@@ -59,7 +59,7 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          uv sync --frozen --extra dev --all-extras
+          uv sync --frozen --all-extras
           uv run python -c "import nltk; nltk.download('punkt')"
 
       - run: uv run pytest tests --cov=sumy --cov-report=xml
