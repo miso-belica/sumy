@@ -105,6 +105,25 @@ include = [
     "CHANGELOG.md",
 ]
 
+[tool.bumpversion]
+current_version = "0.11.0"
+commit = false
+tag = false
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "sumy/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "tasks.py"
+
+[tool.isort]
+multi_line_output = 5
+
 [tool.ruff]
 # Assume Python v3.7
 target-version = "py37"
@@ -139,3 +158,10 @@ exclude = [
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["F401"]
 "_compat.py" = ["F401"]
+
+[tool.flake8]
+ignore = ["S001", "D100"]
+max-line-length = 160
+inline-quotes = "double"
+multiline-quotes = "double"
+docstring-quotes = "double"
