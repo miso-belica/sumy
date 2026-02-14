@@ -3,5 +3,5 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-__author__ = "Michal Belica"
-__version__ = "0.11.0"
+__author__ = "Mišo Belica"
+__version__ = "0.12.0"
