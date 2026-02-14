@@ -1,36 +1,45 @@
 # Changelog
 
-## Unreleased
-- **FEATURE:** Add Polish language support with pystempel stemmer
+## 0.12.0 (2026-02-14)
+- **FEATURE:** Replace docopt with docopt-ng in https://github.com/miso-belica/sumy/pull/191
+- **FEATURE:** Add Swedish stopwords in https://github.com/miso-belica/sumy/pull/195
+- **FEATURE:** Add Thai language support in https://github.com/miso-belica/sumy/pull/192
+- **FEATURE:** Add new Python versions in https://github.com/miso-belica/sumy/pull/212
+- **FEATURE:** Migrate package metadata to pyproject.toml in https://github.com/miso-belica/sumy/pull/227
+- **FEATURE:** Add Polish language support in https://github.com/miso-belica/sumy/pull/226
+- **FIX** Fixed `ItemsCount` to raise `ValueError` in https://github.com/miso-belica/sumy/pull/203
+- **FIX** Allow to pass language with any-case letters in https://github.com/miso-belica/sumy/pull/207
+- **FIX** Add timeout to 'from_url' in https://github.com/miso-belica/sumy/pull/186
+- **FIX** Fixed bug with LexRank's power iteration in https://github.com/miso-belica/sumy/pull/194
 
 ## 0.11.0 (2022-10-23)
-- **FIX:** Greek stemmer bug fix by @NC0DER in https://github.com/miso-belica/sumy/pull/175
-* **FIX:** Avoid to add empty space between words and punctations. by @gianpd in https://github.com/miso-belica/sumy/pull/178
-* **DOC:** Fix a few typos by @timgates42 in https://github.com/miso-belica/sumy/pull/182
-* **FEATURE:** Add Arabic language support by @issam9 in https://github.com/miso-belica/sumy/pull/181
+- **FIX:** Greek stemmer bug fix in https://github.com/miso-belica/sumy/pull/175
+* **FIX:** Avoid to add empty space between words and punctations. in https://github.com/miso-belica/sumy/pull/178
+* **DOC:** Fix a few typos in https://github.com/miso-belica/sumy/pull/182
+* **FEATURE:** Add Arabic language support in https://github.com/miso-belica/sumy/pull/181
 
 ## 0.10.0 (2022-04-21)
 - **FEATURE:** Add support for Ukrainian language in https://github.com/miso-belica/sumy/pull/168
-- **FEATURE:** Add support for the Greek Language by @NC0DER in https://github.com/miso-belica/sumy/pull/169
+- **FEATURE:** Add support for the Greek Language in https://github.com/miso-belica/sumy/pull/169
 - **FEATURE:** Return the summary size by custom callable object in https://github.com/miso-belica/sumy/pull/161
 - **FIX:** Compatibility for `from collections import Sequence` for Python 3.10
 - **FIX:** Fix SumBasicSummarizer with stemmer in https://github.com/miso-belica/sumy/pull/166
 
 ## 0.9.0 (2021-10-21)
 - **INCOMPATIBILITY** Dropped official support for Python 2.7. It should still work if you install Python 2 compatible dependencies.
-- **FEATURE:** Add basic Korean support by @kimbyungnam in https://github.com/miso-belica/sumy/pull/129
-- **FEATURE:** Add support for the Hebrew language by @miso-belica in https://github.com/miso-belica/sumy/pull/151
-- **FIX:** Allow words with dashes/apostrophe returned from tokenizer by @miso-belica in https://github.com/miso-belica/sumy/pull/144
-- **FIX:** Ignore empty sentences from tokenizer by @miso-belica in https://github.com/miso-belica/sumy/pull/153
-- Basic documentation by @miso-belica in https://github.com/miso-belica/sumy/pull/133
-- Speedup of the TextRank algorithm by @miso-belica in https://github.com/miso-belica/sumy/pull/140
-- Fix missing license in sdist by @dopplershift in https://github.com/miso-belica/sumy/pull/157
-- added test and call for stemmer by @bdalal in https://github.com/miso-belica/sumy/pull/131
-- Fix simple typo: referene -> reference by @timgates42 in https://github.com/miso-belica/sumy/pull/143
-- Add codecov service to tests by @miso-belica in https://github.com/miso-belica/sumy/pull/136
-- Add gitpod config by @miso-belica in https://github.com/miso-belica/sumy/pull/138
-- Try to run Python 3.7 and 3.8 on TravisCI by @miso-belica in https://github.com/miso-belica/sumy/pull/130
-- Fix TravisCI for Python 3.4 by @miso-belica in https://github.com/miso-belica/sumy/pull/134
+- **FEATURE:** Add basic Korean support in https://github.com/miso-belica/sumy/pull/129
+- **FEATURE:** Add support for the Hebrew language in https://github.com/miso-belica/sumy/pull/151
+- **FIX:** Allow words with dashes/apostrophe returned from tokenizer in https://github.com/miso-belica/sumy/pull/144
+- **FIX:** Ignore empty sentences from tokenizer in https://github.com/miso-belica/sumy/pull/153
+- Basic documentation in https://github.com/miso-belica/sumy/pull/133
+- Speedup of the TextRank algorithm in https://github.com/miso-belica/sumy/pull/140
+- Fix missing license in sdist in https://github.com/miso-belica/sumy/pull/157
+- added test and call for stemmer in https://github.com/miso-belica/sumy/pull/131
+- Fix simple typo: referene -> reference in https://github.com/miso-belica/sumy/pull/143
+- Add codecov service to tests in https://github.com/miso-belica/sumy/pull/136
+- Add gitpod config in https://github.com/miso-belica/sumy/pull/138
+- Try to run Python 3.7 and 3.8 on TravisCI in https://github.com/miso-belica/sumy/pull/130
+- Fix TravisCI for Python 3.4 in https://github.com/miso-belica/sumy/pull/134
 
 ## 0.8.1 (2019-05-19)
 - Open files for `PlaintextParser` in UTF-8 encoding [#123](https://github.com/miso-belica/sumy/pull/123)
