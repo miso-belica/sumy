@@ -37,6 +37,7 @@ classifiers = [
     "Natural Language :: Hebrew",
     "Natural Language :: Italian",
     "Natural Language :: Japanese",
+    "Natural Language :: Polish",
     "Natural Language :: Portuguese",
     "Natural Language :: Slovak",
     "Natural Language :: Spanish",
@@ -84,6 +85,7 @@ Hebrew = ["hebrew_tokenizer"]
 Greek = ["greek-stemmer-pos"]
 Arabic = ["pyarabic"]
 Thai = ["pythainlp"]
+Polish = ["pystempel"]
 
 [dependency-groups]
 dev = [

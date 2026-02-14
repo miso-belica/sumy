@@ -8,6 +8,7 @@ import nltk.stem.snowball as nltk_stemmers_module
 from .czech import stem_word as czech_stemmer
 from .ukrainian import stem_word as ukrainian_stemmer
 from .greek import stem_word as greek_stemmer
+from .polish import stem_word as polish_stemmer
 
 from ..._compat import to_unicode
 from ...utils import normalize_language
@@ -28,6 +29,7 @@ class Stemmer(object):
         'korean': null_stemmer,
         'ukrainian': ukrainian_stemmer,
         'greek': greek_stemmer,
+        'polish': polish_stemmer,
     }
 
     def __init__(self, language):

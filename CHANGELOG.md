@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- **FEATURE:** Add Polish language support with pystempel stemmer
+
 ## 0.11.0 (2022-10-23)
 - **FIX:** Greek stemmer bug fix by @NC0DER in https://github.com/miso-belica/sumy/pull/175
 * **FIX:** Avoid to add empty space between words and punctations. by @gianpd in https://github.com/miso-belica/sumy/pull/178

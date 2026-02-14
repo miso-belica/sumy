@@ -4,6 +4,8 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import sys
+
 import pytest
 
 from sumy.nlp.stemmers import null_stemmer, Stemmer
@@ -56,3 +58,12 @@ def test_greek_stemmer():
 def test_swedish_stemmer():
     swedish_stemmer = Stemmer("swedish")
     assert "sov" == swedish_stemmer("sover")
+
+
+@pytest.mark.skipif(
+    sys.version_info >= (3, 13),
+    reason="pystempel has compatibility issues with Python 3.13+ (importlib.resources.Resource was removed)"
+)
+def test_polish_stemmer():
+    polish_stemmer = Stemmer("polish")
+    assert "praca" == polish_stemmer("pracy")
