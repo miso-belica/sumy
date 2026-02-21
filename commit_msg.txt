@@ -1,0 +1,17 @@
+Fix KeyError in SumBasic summarizer
+
+The _get_all_content_words_in_doc method was processing words in a
+different order (stem -> filter -> normalize) compared to
+_get_content_words_in_sentence (normalize -> filter -> stem). This
+mismatch meant some words would appear in the per-sentence word
+lists but not in the document frequency table, causing a KeyError
+during summarization.
+
+Aligned both methods to use the same processing order:
+normalize -> filter stop words -> stem.
+
+Also fixed _get_all_words_in_doc to return raw words instead of
+pre-stemmed words, since stemming is now handled consistently
+in _get_all_content_words_in_doc.
+
+Fixes #176
