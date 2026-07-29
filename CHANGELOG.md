@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- **FIX:** Fixed `KeyError` in `SumBasicSummarizer` caused by inconsistent word processing order in https://github.com/miso-belica/sumy/pull/240
+
 ## 0.12.0 (2026-02-14)
 - **FEATURE:** Replace docopt with docopt-ng in https://github.com/miso-belica/sumy/pull/191
 - **FEATURE:** Add Swedish stopwords in https://github.com/miso-belica/sumy/pull/195

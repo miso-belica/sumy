@@ -47,6 +47,29 @@ def test_stemmer_does_not_cause_crash():
     assert len(returned) == 1
 
 
+@pytest.mark.parametrize("stop_word, sentence_with_colliding_word", [
+    ("own", "He is owning a car."),
+    ("look", "She looked at the map."),
+])
+def test_key_error_when_stemmed_word_matches_stop_word(stop_word, sentence_with_colliding_word):
+    """https://github.com/miso-belica/sumy/issues/176
+
+    `_get_all_content_words_in_doc` stemmed words before filtering out stop
+    words, while `_get_content_words_in_sentence` filters before stemming.
+    A word whose stem collides with a stop word (e.g. "owning" -> "own",
+    "looked" -> "look") was therefore dropped from the document frequency
+    table but kept in a sentence's word list, causing a KeyError lookup.
+    """
+    summarizer = _build_summarizer([stop_word], Stemmer("english"))
+    document = build_document([
+        Sentence(sentence_with_colliding_word, Tokenizer("english")),
+        Sentence("He drives to the store.", Tokenizer("english")),
+    ])
+
+    returned = summarizer(document, 2)
+    assert len(returned) == 2
+
+
 def test_normalize_words():
     summarizer = _build_summarizer(EMPTY_STOP_WORDS)
     sentence = "This iS A test 2 CHECk normalization."

@@ -28,10 +28,13 @@ class SumBasicSummarizer(AbstractSummarizer):
         return self._get_best_sentences(document.sentences, sentences_count, ratings)
 
     def _get_all_words_in_doc(self, sentences):
-        return self._stem_words([w for s in sentences for w in s.words])
+        return [w for s in sentences for w in s.words]
 
     def _get_content_words_in_sentence(self, sentence):
-        normalized_words = self._normalize_words(sentence.words)
+        return self._get_content_words(sentence.words)
+
+    def _get_content_words(self, words):
+        normalized_words = self._normalize_words(words)
         normalized_content_words = self._filter_out_stop_words(normalized_words)
         stemmed_normalized_content_words = self._stem_words(normalized_content_words)
         return stemmed_normalized_content_words
@@ -54,9 +57,7 @@ class SumBasicSummarizer(AbstractSummarizer):
 
     def _get_all_content_words_in_doc(self, sentences):
         all_words = self._get_all_words_in_doc(sentences)
-        content_words = self._filter_out_stop_words(all_words)
-        normalized_content_words = self._normalize_words(content_words)
-        return normalized_content_words
+        return self._get_content_words(all_words)
 
     def _compute_tf(self, sentences):
         """
