@@ -168,6 +168,23 @@ def test_rouge_l_summary_level():
     rouge_l_summary_level(candidates, reference)
 
 
+def test_rouge_l_summary_level_scores_identical_summary_as_one():
+    """
+    A summary identical to the reference must score 1, even with repeated words.
+
+    The union of longest common subsequences was collected as a set of *words*,
+    so a reference word occurring twice ("the" below) could only ever be counted
+    once. That caps even a perfect summary below 1 -- here at 9 covered words out
+    of 11. Collecting positions in the reference sentence instead keeps the two
+    occurrences distinct.
+    """
+    text = "the cat sat on the mat. the dog ate the bone."
+    reference = PlaintextParser(text, Tokenizer("english")).document.sentences
+    candidates = PlaintextParser(text, Tokenizer("english")).document.sentences
+
+    assert rouge_l_summary_level(candidates, reference) == approx(1)
+
+
 def test_rouge_l_summary_level_for_reference_sentence_without_any_common_word():
     """
     A reference sentence sharing no word with the summary used to crash with
