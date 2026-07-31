@@ -122,13 +122,41 @@ def test_rouge_l_sentence_level_without_any_common_word():
 
 
 def test_union_lcs():
+    """
+    `_union_lcs` returns how many reference words the union of the LCSes covers.
+
+    This used to assert 4/5, because the implementation divided the union size
+    by `combined_lcs_length` (2 + 3 for the two candidate sentences below).
+    That the old assertion held was a coincidence of this fixture: the sum of
+    the per-sentence LCS lengths happened to equal the reference length, so a
+    wrong denominator produced the right-looking number. The count of covered
+    reference words is 4 -- "one two three five" out of "one two three four five".
+    """
     reference_text = "one two three four five"
     reference = PlaintextParser(reference_text, Tokenizer("english")).document.sentences
 
     candidate_text = "one two six seven eight. one three eight nine five."
     candidates = PlaintextParser(candidate_text, Tokenizer("english")).document.sentences
 
-    assert _union_lcs(candidates, reference[0]) == approx(4/5)
+    assert _union_lcs(candidates, reference[0]) == 4
+
+
+def test_union_lcs_is_not_deflated_by_repeating_the_same_candidate_sentence():
+    """
+    Adding a candidate sentence that covers nothing new must not change the score.
+
+    Dividing by `combined_lcs_length` made the result depend on how the same
+    coverage was spread over candidate sentences: repeating a sentence doubled
+    the denominator while leaving the union untouched, halving the score. Here
+    the covered reference words are "one two" either way.
+    """
+    reference = PlaintextParser("one two three four five", Tokenizer("english")).document.sentences
+
+    single = PlaintextParser("one two.", Tokenizer("english")).document.sentences
+    repeated = PlaintextParser("one two. one two.", Tokenizer("english")).document.sentences
+
+    assert _union_lcs(single, reference[0]) == 2
+    assert _union_lcs(repeated, reference[0]) == _union_lcs(single, reference[0])
 
 
 def test_rouge_l_summary_level():
@@ -138,3 +166,22 @@ def test_rouge_l_summary_level():
     candidate_text = "one two six seven eight. one three eight nine five."
     candidates = PlaintextParser(candidate_text, Tokenizer("english")).document.sentences
     rouge_l_summary_level(candidates, reference)
+
+
+def test_rouge_l_summary_level_for_reference_sentence_without_any_common_word():
+    """
+    A reference sentence sharing no word with the summary used to crash with
+    `ZeroDivisionError: division by zero`.
+
+    `_union_lcs` normalized the union LCS by `combined_lcs_length` (the sum of
+    the per-sentence LCS lengths), which is 0 exactly when nothing overlaps.
+    Such a reference sentence is an ordinary input, not a degenerate one, so
+    the metric has to score it 0 instead of raising.
+
+    Reported in https://github.com/miso-belica/sumy/issues/128, where it was
+    hit both directly and through `sumy_eval`.
+    """
+    reference = PlaintextParser("one two three four five.", Tokenizer("english")).document.sentences
+    candidates = PlaintextParser("alpha beta gamma delta.", Tokenizer("english")).document.sentences
+
+    assert rouge_l_summary_level(candidates, reference) == approx(0)
