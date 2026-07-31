@@ -223,19 +223,25 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
 
 def _union_lcs(evaluated_sentences, reference_sentence):
     """
-    Returns LCS_u(r_i, C) which is the LCS score of the union longest common subsequence
-    between reference sentence ri and candidate summary C. For example, if
+    Returns LCS_u(r_i, C), the number of words of the reference sentence r_i
+    covered by the union of the longest common subsequences it shares with the
+    sentences of the candidate summary C. For example, if
     r_i= w1 w2 w3 w4 w5, and C contains two sentences: c1 = w1 w2 w6 w7 w8 and
     c2 = w1 w3 w8 w9 w5, then the longest common subsequence of r_i and c1 is
     “w1 w2” and the longest common subsequence of r_i and c2 is “w1 w3 w5”. The
-    union longest common subsequence of r_i, c1, and c2 is “w1 w2 w3 w5” and
-    LCS_u(r_i, C) = 4/5.
+    union longest common subsequence of r_i, c1, and c2 is “w1 w2 w3 w5”, so
+    LCS_u(r_i, C) = 4 out of the 5 words of r_i.
+
+    The count is deliberately *not* normalized here. The summary level score
+    normalizes the sum over all reference sentences by the total number of
+    reference words (see `rouge_l_summary_level`), so normalizing per sentence
+    as well would count the reference length twice.
 
     :param evaluated_sentences:
         The sentences that have been picked by the summarizer
     :param reference_sentence:
         One of the sentences in the reference summaries
-    :returns float: LCS_u(r_i, C)
+    :returns int: LCS_u(r_i, C)
     :raises ValueError: raises exception if a param has len <= 0
     """
     if len(evaluated_sentences) <= 0:
@@ -243,16 +249,11 @@ def _union_lcs(evaluated_sentences, reference_sentence):
 
     lcs_union = set()
     reference_words = _split_into_words([reference_sentence])
-    combined_lcs_length = 0
     for eval_s in evaluated_sentences:
         evaluated_words = _split_into_words([eval_s])
-        lcs = set(_recon_lcs(reference_words, evaluated_words))
-        combined_lcs_length += len(lcs)
-        lcs_union = lcs_union.union(lcs)
+        lcs_union |= set(_recon_lcs(reference_words, evaluated_words))
 
-    union_lcs_count = len(lcs_union)
-    union_lcs_value = union_lcs_count / combined_lcs_length
-    return union_lcs_value
+    return len(lcs_union)
 
 
 def rouge_l_summary_level(evaluated_sentences, reference_sentences):
