@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Fixed `ZeroDivisionError` in `rouge_l_sentence_level` for a summary that shares no word with the reference. `_f_lcs` derived `beta` as `P_lcs/R_lcs`, which divides by zero on an empty LCS; it now uses the algebraically equivalent closed form `llcs * (m^2 + n^2) / (m^3 + n^3)`, which is 0 there. Reported in https://github.com/miso-belica/sumy/issues/128
 - **FIX:** Fixed `KeyError` in `SumBasicSummarizer` caused by inconsistent word processing order in https://github.com/miso-belica/sumy/pull/240
 - **BREAKING:** `cosine_similarity`, `unit_overlap`, `AbstractSummarizer.__init__`, `ItemsCount` and the ROUGE evaluation functions (`rouge_n`, `rouge_1`, `rouge_2`, `rouge_l_sentence_level`, `rouge_l_summary_level`) now raise `TypeError` instead of `ValueError` for invalid argument types.
 - **CHORE:** Removed leftover Python 2 compatibility code (`sumy._compat.PY3` and the dead branches it guarded), now that the package only supports Python 3.8+.

@@ -101,6 +101,26 @@ def test_rouge_l_sentence_level():
     assert rouge_l_sentence_level(candidate3, reference) == approx(2/4)
 
 
+def test_rouge_l_sentence_level_without_any_common_word():
+    """
+    A summary sharing no word with the reference used to crash with
+    `ZeroDivisionError: float division by zero`.
+
+    `_f_lcs` derived `beta` as `p_lcs / r_lcs`, and an empty LCS makes `r_lcs`
+    zero. Note this is a *second*, independent division by zero from the one in
+    `_union_lcs`: it is reached through `rouge_l_sentence_level`, which never
+    calls `_union_lcs` at all. The `denom == 0` guard proposed in
+    https://github.com/miso-belica/sumy/issues/128 would not have helped,
+    because `beta` is evaluated before `denom` and raises first.
+
+    With no overlap there is neither precision nor recall, so F is 0.
+    """
+    reference = PlaintextParser("the museum opened last spring", Tokenizer("english")).document.sentences
+    candidate = PlaintextParser("penguins waddle across frozen beaches", Tokenizer("english")).document.sentences
+
+    assert rouge_l_sentence_level(candidate, reference) == approx(0)
+
+
 def test_union_lcs():
     reference_text = "one two three four five"
     reference = PlaintextParser(reference_text, Tokenizer("english")).document.sentences
