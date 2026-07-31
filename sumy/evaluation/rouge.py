@@ -1,5 +1,7 @@
 
 
+from collections import Counter
+
 from ..models.dom import Sentence
 
 
@@ -235,6 +237,31 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
     return _f_lcs(lcs, m, n)
 
 
+def _union_lcs_positions(evaluated_sentences, reference_sentence):
+    """
+    Returns the union of the longest common subsequences between the reference
+    sentence r_i and every sentence of the candidate summary C, as
+    (word, position in r_i) pairs.
+
+    :param evaluated_sentences:
+        The sentences that have been picked by the summarizer
+    :param reference_sentence:
+        One of the sentences in the reference summaries
+    :returns set: the covered (word, position in r_i) pairs
+    :raises ValueError: raises exception if a param has len <= 0
+    """
+    if len(evaluated_sentences) <= 0:
+        raise (ValueError("Collections must contain at least 1 sentence."))
+
+    lcs_union = set()
+    reference_words = _split_into_words([reference_sentence])
+    for eval_s in evaluated_sentences:
+        evaluated_words = _split_into_words([eval_s])
+        lcs_union |= set(_recon_lcs_with_positions(reference_words, evaluated_words))
+
+    return lcs_union
+
+
 def _union_lcs(evaluated_sentences, reference_sentence):
     """
     Returns LCS_u(r_i, C), the number of words of the reference sentence r_i
@@ -258,16 +285,7 @@ def _union_lcs(evaluated_sentences, reference_sentence):
     :returns int: LCS_u(r_i, C)
     :raises ValueError: raises exception if a param has len <= 0
     """
-    if len(evaluated_sentences) <= 0:
-        raise (ValueError("Collections must contain at least 1 sentence."))
-
-    lcs_union = set()
-    reference_words = _split_into_words([reference_sentence])
-    for eval_s in evaluated_sentences:
-        evaluated_words = _split_into_words([eval_s])
-        lcs_union |= set(_recon_lcs_with_positions(reference_words, evaluated_words))
-
-    return len(lcs_union)
+    return len(_union_lcs_positions(evaluated_sentences, reference_sentence))
 
 
 def rouge_l_summary_level(evaluated_sentences, reference_sentences):
@@ -304,7 +322,18 @@ def rouge_l_summary_level(evaluated_sentences, reference_sentences):
     # total number of words in evaluated sentences
     n = len(_split_into_words(evaluated_sentences))
 
-    union_lcs_sum_across_all_references = 0
+    # LCS_u is counted in positions of the reference sentence, so the same
+    # candidate word may be covered once per reference sentence. Clip each word
+    # to the number of times the candidate summary actually contains it, as
+    # ROUGE-1.5.5 does, otherwise a repetitive reference inflates the sum above
+    # the length of the candidate and F_lcs can exceed 1.
+    covered_words = Counter()
     for ref_s in reference_sentences:
-        union_lcs_sum_across_all_references += _union_lcs(evaluated_sentences, ref_s)
+        for word, _position in _union_lcs_positions(evaluated_sentences, ref_s):
+            covered_words[word] += 1
+
+    available_words = Counter(_split_into_words(evaluated_sentences))
+    union_lcs_sum_across_all_references = sum(
+        min(count, available_words[word]) for word, count in covered_words.items()
+    )
     return _f_lcs(union_lcs_sum_across_all_references, m, n)
