@@ -185,6 +185,32 @@ def test_rouge_l_summary_level_scores_identical_summary_as_one():
     assert rouge_l_summary_level(candidates, reference) == approx(1)
 
 
+def test_rouge_l_summary_level_does_not_count_a_candidate_word_more_than_once():
+    """
+    A word may be credited only as many times as the summary actually contains it.
+
+    `LCS_u` is counted in positions of the *reference* sentence, so one candidate
+    sentence matched against several reference sentences could be credited once
+    per reference sentence. Here the single "the cat sat" would cover 6 reference
+    words out of 6 while having only 3 of its own, making P_lcs 2.0 and F 1.11 --
+    an F-measure above 1.
+
+    ROUGE-1.5.5 clips each hit against the remaining unigram counts, which Lin
+    added in v1.4.1: "if a unigram count already involve in one LCS match then it
+    will not be counted if it match another token in the model unit. This will
+    make sure LCS score is always lower than unigram score." The candidate here
+    supplies "the", "cat" and "sat" once each, so there are 3 hits out of m = 6
+    and n = 3, giving F = 3*(6^2 + 3^2) / (6^3 + 3^3) = 5/9.
+    """
+    reference = PlaintextParser("the cat sat. the cat sat.", Tokenizer("english")).document.sentences
+    candidates = PlaintextParser("the cat sat.", Tokenizer("english")).document.sentences
+
+    score = rouge_l_summary_level(candidates, reference)
+
+    assert score <= 1
+    assert score == approx(5/9)
+
+
 def test_rouge_l_summary_level_for_reference_sentence_without_any_common_word():
     """
     A reference sentence sharing no word with the summary used to crash with
