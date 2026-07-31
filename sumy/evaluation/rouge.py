@@ -167,17 +167,24 @@ def _f_lcs(llcs, m, n):
     Source: http://research.microsoft.com/en-us/um/people/cyl/download/papers/
     rouge-working-note-v1.3.1.pdf
 
+    The score is computed from R_lcs = llcs/m, P_lcs = llcs/n and
+    beta = P_lcs/R_lcs as F_lcs = ((1 + beta^2)*R_lcs*P_lcs) / (R_lcs + (beta^2)*P_lcs).
+    Substituting R_lcs, P_lcs and beta into that expression and cancelling
+    reduces it to the closed form used below:
+
+        F_lcs = llcs * (m^2 + n^2) / (m^3 + n^3)
+
+    Both forms are equal for a non-empty LCS, but the closed form has no
+    removable singularity at llcs == 0. Computing beta as P_lcs/R_lcs divides
+    by zero whenever the LCS is empty, even though F is plainly 0 there, since
+    a summary with no common subsequence has neither precision nor recall.
+
     :param llcs: Length of LCS
     :param m: number of words in reference summary
     :param n: number of words in candidate summary
     :returns float: LCS-based F-measure score
     """
-    r_lcs = llcs / m
-    p_lcs = llcs / n
-    beta = p_lcs / r_lcs
-    num = (1 + (beta ** 2)) * r_lcs * p_lcs
-    denom = r_lcs + ((beta ** 2) * p_lcs)
-    return num / denom
+    return llcs * (m ** 2 + n ** 2) / (m ** 3 + n ** 3)
 
 
 def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
