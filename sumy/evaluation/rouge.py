@@ -75,14 +75,18 @@ def _lcs(x, y):
     return table
 
 
-def _recon_lcs(x, y):
+def _recon_lcs_with_positions(x, y):
     """
-    Returns the Longest Subsequence between x and y.
+    Returns the Longest Subsequence between x and y as (item, position) pairs.
     Source: http://www.algorithmist.com/index.php/Longest_Common_Subsequence
+
+    The position is the 1-based index of the item in `x`, which is what makes
+    subsequences of different `y` comparable: two occurrences of the same word
+    in `x` are distinct pairs, so they survive being collected into a set.
 
     :param x: sequence of words
     :param y: sequence of words
-    :returns sequence: LCS of x and y
+    :returns sequence: LCS of x and y as (word, position in x) pairs
     """
     table = _lcs(x, y)
 
@@ -97,8 +101,18 @@ def _recon_lcs(x, y):
             return _recon(i, j - 1)
 
     i, j = _get_index_of_lcs(x, y)
-    recon_tuple = tuple(r[0] for r in _recon(i, j))
-    return recon_tuple
+    return tuple(_recon(i, j))
+
+
+def _recon_lcs(x, y):
+    """
+    Returns the Longest Subsequence between x and y.
+
+    :param x: sequence of words
+    :param y: sequence of words
+    :returns sequence: LCS of x and y
+    """
+    return tuple(word for word, _position in _recon_lcs_with_positions(x, y))
 
 
 def rouge_n(evaluated_sentences, reference_sentences, n=2):
@@ -251,7 +265,7 @@ def _union_lcs(evaluated_sentences, reference_sentence):
     reference_words = _split_into_words([reference_sentence])
     for eval_s in evaluated_sentences:
         evaluated_words = _split_into_words([eval_s])
-        lcs_union |= set(_recon_lcs(reference_words, evaluated_words))
+        lcs_union |= set(_recon_lcs_with_positions(reference_words, evaluated_words))
 
     return len(lcs_union)
 
