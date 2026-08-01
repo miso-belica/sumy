@@ -1,5 +1,7 @@
 
 
+from typing import ClassVar
+
 import nltk.stem.snowball as nltk_stemmers_module
 
 from ..._compat import to_unicode
@@ -16,7 +18,7 @@ def null_stemmer(object):
 
 
 class Stemmer:
-    SPECIAL_STEMMERS = {
+    SPECIAL_STEMMERS: ClassVar[dict] = {
         'czech': czech_stemmer,
         'slovak': czech_stemmer,
         'hebrew': null_stemmer,

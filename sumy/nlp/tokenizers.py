@@ -3,6 +3,7 @@
 import re
 import string
 import zipfile
+from typing import ClassVar
 
 import nltk
 
@@ -145,13 +146,13 @@ class Tokenizer:
 
     _WORD_PATTERN = re.compile(r"^[^\W\d_](?:[^\W\d_]|['-])*$", re.UNICODE)
     # feel free to contribute if you have better tokenizer for any of these languages :)
-    LANGUAGE_ALIASES = {
+    LANGUAGE_ALIASES: ClassVar[dict] = {
         "slovak": "czech",
     }
 
     # improve tokenizer by adding specific abbreviations it has issues with
     # note the final point in these items must not be included
-    LANGUAGE_EXTRA_ABREVS = {
+    LANGUAGE_EXTRA_ABREVS: ClassVar[dict] = {
         "english": ["e.g", "al", "i.e"],
         "german": ["al", "z.B", "Inc", "engl", "z. B", "vgl", "lat", "bzw", "S"],
         "ukrainian": ["ім.", "о.", "вул.", "просп.", "бул.", "пров.", "пл.", "г.", "р.", "див.", "п.", "с.", "м."],
@@ -159,7 +160,7 @@ class Tokenizer:
                   "μ.Χ", "π.μ", "μ.μ", "δηλ", "βλ", "κ.ο.κ", "σελ", "κεφ", "χιλ", "αρ"],
     }
 
-    SPECIAL_SENTENCE_TOKENIZERS = {
+    SPECIAL_SENTENCE_TOKENIZERS: ClassVar[dict] = {
         'ukrainian': nltk.RegexpTokenizer(r'[.!?…»]', gaps=True),
         'hebrew': nltk.RegexpTokenizer(r'\.\s+', gaps=True),
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
@@ -170,7 +171,7 @@ class Tokenizer:
         'thai': ThaiSentencesTokenizer(),
     }
 
-    SPECIAL_WORD_TOKENIZERS = {
+    SPECIAL_WORD_TOKENIZERS: ClassVar[dict] = {
         'hebrew': HebrewWordTokenizer(),
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
