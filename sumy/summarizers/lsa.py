@@ -38,7 +38,7 @@ class LsaSummarizer(AbstractSummarizer):
 
         matrix = self._create_matrix(document, dictionary)
         matrix = self._compute_term_frequency(matrix)
-        u, sigma, v = singular_value_decomposition(matrix, full_matrices=False)
+        _u, sigma, v = singular_value_decomposition(matrix, full_matrices=False)
 
         ranks = iter(self._compute_ranks(sigma, v))
         return self._get_best_sentences(document.sentences, sentences_count,
