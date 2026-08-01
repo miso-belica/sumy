@@ -35,7 +35,7 @@ class HtmlParser(DocumentParser):
         return cls(data, tokenizer, url)
 
     def __init__(self, html_content, tokenizer, url=None):
-        super(HtmlParser, self).__init__(tokenizer)
+        super().__init__(tokenizer)
         self._article = Article(html_content, url)
 
     @cached_property

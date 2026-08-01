@@ -34,7 +34,7 @@ class PlaintextParser(DocumentParser):
             return cls(file.read(), tokenizer)
 
     def __init__(self, text, tokenizer):
-        super(PlaintextParser, self).__init__(tokenizer)
+        super().__init__(tokenizer)
         self._text = to_unicode(text).strip()
 
     @cached_property
