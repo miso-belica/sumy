@@ -2,6 +2,7 @@
 
 ## Unreleased
 - **FIX:** Fixed `KeyError` in `SumBasicSummarizer` caused by inconsistent word processing order in https://github.com/miso-belica/sumy/pull/240
+- **BREAKING:** `cosine_similarity`, `unit_overlap`, `AbstractSummarizer.__init__`, `ItemsCount` and the ROUGE evaluation functions (`rouge_n`, `rouge_1`, `rouge_2`, `rouge_l_sentence_level`, `rouge_l_summary_level`) now raise `TypeError` instead of `ValueError` for invalid argument types.
 
 ## 0.12.0 (2026-02-14)
 - **FEATURE:** Replace docopt with docopt-ng in https://github.com/miso-belica/sumy/pull/191

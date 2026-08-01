@@ -94,7 +94,7 @@ class ItemsCount:
         elif isinstance(self._value, (int, float)):
             return sequence[:int(self._value)]
         else:
-            raise ValueError(f"Unsuported value of items count '{self._value}'.")
+            raise TypeError(f"Unsuported value of items count '{self._value}'.")
 
     def __repr__(self):
         return to_string(f"<ItemsCount: {self._value!r}>")

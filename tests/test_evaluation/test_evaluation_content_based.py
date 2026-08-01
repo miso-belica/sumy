@@ -12,11 +12,11 @@ def test_wrong_arguments():
     text = "Toto je moja veta, to sa nedá poprieť."
     model = TfDocumentModel(text, Tokenizer("czech"))
 
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         cosine_similarity(text, text)
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         cosine_similarity(text, model)
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         cosine_similarity(model, text)
 
 
@@ -68,11 +68,11 @@ def test_unit_overlap_wrong_arguments():
     tokenizer = Tokenizer("english")
     model = TfDocumentModel("", tokenizer)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         unit_overlap("model", "model")
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         unit_overlap("model", model)
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         unit_overlap(model, "model")
 
 
