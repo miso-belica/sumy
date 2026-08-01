@@ -2,7 +2,6 @@
 
 """Simple tests to make sure all stemmers share the same API."""
 
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import sys
 
