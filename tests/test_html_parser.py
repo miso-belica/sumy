@@ -3,6 +3,7 @@
 from sumy._compat import to_unicode
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.html import HtmlParser
+
 from .utils import expand_resource_path
 
 

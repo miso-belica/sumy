@@ -1,7 +1,7 @@
 
 
+from ..._compat import to_string, to_unicode, unicode_compatible
 from ...utils import cached_property
-from ..._compat import to_unicode, to_string, unicode_compatible
 
 
 @unicode_compatible

@@ -1,6 +1,7 @@
 
 
 from collections import Counter
+
 from ._summarizer import AbstractSummarizer
 
 

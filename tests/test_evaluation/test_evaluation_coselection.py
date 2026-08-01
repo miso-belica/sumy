@@ -3,7 +3,7 @@
 import pytest
 from pytest import approx
 
-from sumy.evaluation import precision, recall, f_score
+from sumy.evaluation import f_score, precision, recall
 
 
 def test_precision_empty_evaluated():

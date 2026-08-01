@@ -1,11 +1,12 @@
 
 
-from breadability.readable import Article
-from ..utils import cached_property, fetch_url
-from ..models.dom import Sentence, Paragraph, ObjectDocumentModel
-from .parser import DocumentParser
-
 from string import punctuation
+
+from breadability.readable import Article
+
+from ..models.dom import ObjectDocumentModel, Paragraph, Sentence
+from ..utils import cached_property, fetch_url
+from .parser import DocumentParser
 
 
 class HtmlParser(DocumentParser):

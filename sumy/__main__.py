@@ -29,20 +29,21 @@ Options:
 import sys
 
 from docopt import docopt
+
 from . import __version__
-from .utils import ItemsCount, get_stop_words, read_stop_words, fetch_url
-from ._compat import to_string, to_unicode, to_bytes, PY3
+from ._compat import PY3, to_bytes, to_string, to_unicode
+from .nlp.stemmers import Stemmer
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
 from .parsers.plaintext import PlaintextParser
-from .summarizers.luhn import LuhnSummarizer
 from .summarizers.edmundson import EdmundsonSummarizer
-from .summarizers.lsa import LsaSummarizer
-from .summarizers.text_rank import TextRankSummarizer
-from .summarizers.lex_rank import LexRankSummarizer
-from .summarizers.sum_basic import SumBasicSummarizer
 from .summarizers.kl import KLSummarizer
-from .nlp.stemmers import Stemmer
+from .summarizers.lex_rank import LexRankSummarizer
+from .summarizers.lsa import LsaSummarizer
+from .summarizers.luhn import LuhnSummarizer
+from .summarizers.sum_basic import SumBasicSummarizer
+from .summarizers.text_rank import TextRankSummarizer
+from .utils import ItemsCount, fetch_url, get_stop_words, read_stop_words
 
 PARSERS = {
     "html": HtmlParser,

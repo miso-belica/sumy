@@ -2,8 +2,8 @@
 
 from pytest import approx
 
-from sumy.evaluation import rouge_n, rouge_l_sentence_level, rouge_l_summary_level
-from sumy.evaluation.rouge import _get_ngrams, _split_into_words, _get_word_ngrams, _len_lcs, _recon_lcs, _union_lcs
+from sumy.evaluation import rouge_l_sentence_level, rouge_l_summary_level, rouge_n
+from sumy.evaluation.rouge import _get_ngrams, _get_word_ngrams, _len_lcs, _recon_lcs, _split_into_words, _union_lcs
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 

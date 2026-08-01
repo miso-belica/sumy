@@ -3,9 +3,10 @@
 from io import StringIO
 
 import pytest
-from docopt import docopt, DocoptExit
+from docopt import DocoptExit, docopt
 
-from sumy.__main__ import __doc__ as main_doc, handle_arguments, to_string, __version__
+from sumy.__main__ import __doc__ as main_doc
+from sumy.__main__ import __version__, handle_arguments, to_string
 
 DEFAULT_ARGS = {
     '--file': None,

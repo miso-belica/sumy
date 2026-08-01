@@ -24,28 +24,37 @@ Options:
 
 
 import sys
-
 from itertools import chain
+
 from docopt import docopt
+
 from .. import __version__
-from ..utils import ItemsCount, get_stop_words, fetch_url
-from ..models import TfDocumentModel
 from .._compat import to_string
+from ..models import TfDocumentModel
+from ..nlp.stemmers import Stemmer
 from ..nlp.tokenizers import Tokenizer
 from ..parsers.html import HtmlParser
 from ..parsers.plaintext import PlaintextParser
-from ..summarizers.random import RandomSummarizer
-from ..summarizers.luhn import LuhnSummarizer
 from ..summarizers.edmundson import EdmundsonSummarizer
-from ..summarizers.lsa import LsaSummarizer
-from ..summarizers.text_rank import TextRankSummarizer
-from ..summarizers.lex_rank import LexRankSummarizer
-from ..summarizers.sum_basic import SumBasicSummarizer
 from ..summarizers.kl import KLSummarizer
-from ..nlp.stemmers import Stemmer
-from . import precision, recall, f_score, cosine_similarity, unit_overlap
-from . import rouge_1, rouge_2, rouge_l_sentence_level, rouge_l_summary_level
-
+from ..summarizers.lex_rank import LexRankSummarizer
+from ..summarizers.lsa import LsaSummarizer
+from ..summarizers.luhn import LuhnSummarizer
+from ..summarizers.random import RandomSummarizer
+from ..summarizers.sum_basic import SumBasicSummarizer
+from ..summarizers.text_rank import TextRankSummarizer
+from ..utils import ItemsCount, fetch_url, get_stop_words
+from . import (
+    cosine_similarity,
+    f_score,
+    precision,
+    recall,
+    rouge_1,
+    rouge_2,
+    rouge_l_sentence_level,
+    rouge_l_summary_level,
+    unit_overlap,
+)
 
 PARSERS = {
     "html": HtmlParser,

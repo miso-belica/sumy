@@ -4,6 +4,7 @@ import pytest
 
 from sumy._compat import to_unicode
 from sumy.summarizers.edmundson import EdmundsonSummarizer
+
 from ..utils import build_document, build_document_from_string
 
 

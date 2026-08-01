@@ -6,7 +6,7 @@ import sys
 
 import pytest
 
-from sumy.nlp.stemmers import null_stemmer, Stemmer
+from sumy.nlp.stemmers import Stemmer, null_stemmer
 
 
 def test_missing_stemmer_language():

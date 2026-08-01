@@ -1,6 +1,7 @@
 
 
 from itertools import chain
+
 from ..._compat import unicode_compatible
 from ...utils import cached_property
 from ._sentence import Sentence

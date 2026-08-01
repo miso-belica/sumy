@@ -1,8 +1,9 @@
 
 
-from sumy.summarizers.reduction import ReductionSummarizer
-from sumy.nlp.stemmers import Stemmer
 from sumy._compat import to_unicode
+from sumy.nlp.stemmers import Stemmer
+from sumy.summarizers.reduction import ReductionSummarizer
+
 from ..utils import build_document
 
 

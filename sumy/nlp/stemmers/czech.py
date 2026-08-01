@@ -13,10 +13,9 @@ Usage:
 
 
 import re
-
 from warnings import warn
-from ..._compat import unicode
 
+from ..._compat import unicode
 
 WORD_PATTERN = re.compile(r"^\w+$", re.UNICODE)
 

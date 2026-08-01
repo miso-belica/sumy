@@ -3,10 +3,10 @@
 
 from collections import namedtuple
 from operator import attrgetter
-from ..utils import ItemsCount
+
 from .._compat import to_unicode
 from ..nlp.stemmers import null_stemmer
-
+from ..utils import ItemsCount
 
 SentenceInfo = namedtuple("SentenceInfo", ("sentence", "order", "rating",))
 
