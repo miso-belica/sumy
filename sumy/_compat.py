@@ -19,10 +19,7 @@ try:
 except ImportError:
     from itertools import filterfalse as ffilter
 
-try:
-    from collections.abc import Sequence
-except ImportError:
-    from collections import Sequence
+from collections.abc import Sequence
 
 
 def unicode_compatible(cls):
