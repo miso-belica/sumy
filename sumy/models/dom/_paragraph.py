@@ -10,10 +10,10 @@ from ._sentence import Sentence
 @unicode_compatible
 class Paragraph:
     __slots__ = (
-        "_sentences",
-        "_cached_property_sentences",
         "_cached_property_headings",
+        "_cached_property_sentences",
         "_cached_property_words",
+        "_sentences",
     )
 
     def __init__(self, sentences):
