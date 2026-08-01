@@ -4,7 +4,6 @@ import pytest
 
 from sumy import _compat as compat
 
-
 BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode("utf-8")
 UNICODE_STRING = "ľščťžáýíééäúňô €đ€Ł¤"
 NATIVE_STRING = compat.to_string(UNICODE_STRING)

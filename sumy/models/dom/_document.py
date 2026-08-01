@@ -1,8 +1,9 @@
 
 
 from itertools import chain
-from ...utils import cached_property
+
 from ..._compat import unicode_compatible
+from ...utils import cached_property
 
 
 @unicode_compatible

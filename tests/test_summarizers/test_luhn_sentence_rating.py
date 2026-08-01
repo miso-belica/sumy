@@ -3,6 +3,7 @@
 import pytest
 
 from sumy.summarizers.luhn import LuhnSummarizer
+
 from ..utils import build_sentence
 
 

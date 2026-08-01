@@ -4,6 +4,7 @@ from functools import partial
 
 from sumy._compat import to_unicode
 from sumy.summarizers.random import RandomSummarizer
+
 from ..utils import build_document, build_document_from_string
 
 

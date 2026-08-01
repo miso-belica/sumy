@@ -1,13 +1,13 @@
 
 
 from collections import defaultdict
+
 from ..nlp.stemmers import null_stemmer
 from ._summarizer import AbstractSummarizer
 from .edmundson_cue import EdmundsonCueMethod
 from .edmundson_key import EdmundsonKeyMethod
-from .edmundson_title import EdmundsonTitleMethod
 from .edmundson_location import EdmundsonLocationMethod
-
+from .edmundson_title import EdmundsonTitleMethod
 
 _EMPTY_SET = frozenset()
 

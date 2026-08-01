@@ -2,8 +2,8 @@
 
 import pytest
 
-from sumy.utils import get_stop_words, read_stop_words, ItemsCount, \
-    normalize_language
+from sumy.utils import ItemsCount, get_stop_words, normalize_language, read_stop_words
+
 from ..utils import expand_resource_path
 
 

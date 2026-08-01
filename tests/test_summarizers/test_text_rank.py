@@ -3,9 +3,10 @@
 import pytest
 
 import sumy.summarizers.text_rank as text_rank_module
-from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.nlp.stemmers import Stemmer
 from sumy._compat import to_unicode
+from sumy.nlp.stemmers import Stemmer
+from sumy.summarizers.text_rank import TextRankSummarizer
+
 from ..utils import build_document
 
 

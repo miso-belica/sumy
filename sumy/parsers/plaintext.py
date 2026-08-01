@@ -2,10 +2,10 @@
 
 from io import open
 
-from .parser import DocumentParser
 from .._compat import to_unicode
 from ..models.dom import ObjectDocumentModel, Paragraph, Sentence
 from ..utils import cached_property
+from .parser import DocumentParser
 
 
 class PlaintextParser(DocumentParser):

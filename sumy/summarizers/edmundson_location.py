@@ -2,6 +2,7 @@
 
 from itertools import chain
 from operator import attrgetter
+
 from .._compat import ffilter
 from ._summarizer import AbstractSummarizer
 

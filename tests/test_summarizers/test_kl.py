@@ -5,6 +5,7 @@ import pytest
 from sumy.models.dom._sentence import Sentence
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.kl import KLSummarizer
+
 from ..utils import build_document
 
 

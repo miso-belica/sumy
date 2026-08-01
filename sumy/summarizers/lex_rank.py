@@ -7,6 +7,7 @@ try:
 except ImportError:
     numpy = None
 from collections import Counter
+
 from ._summarizer import AbstractSummarizer
 
 

@@ -1,6 +1,7 @@
 
 
-from os.path import dirname, join, abspath
+from os.path import abspath, dirname, join
+
 from sumy._compat import to_string, to_unicode
 from sumy.models.dom import ObjectDocumentModel, Paragraph, Sentence
 from sumy.nlp.tokenizers import Tokenizer

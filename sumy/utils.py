@@ -1,15 +1,15 @@
 
 
-import sys
-import requests
 import pkgutil
-
-from functools import wraps
+import sys
 from contextlib import closing
-from os.path import dirname, abspath, join
-from ._compat import to_string, to_unicode, string_types
+from functools import wraps
+from os.path import abspath, dirname, join
 
+import requests
 from pycountry import languages
+
+from ._compat import string_types, to_string, to_unicode
 
 _HTTP_HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0",

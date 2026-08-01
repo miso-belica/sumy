@@ -3,11 +3,11 @@
 import pytest
 
 from sumy.models.dom._sentence import Sentence
+from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.sum_basic import SumBasicSummarizer
-from sumy.nlp.stemmers import Stemmer
-from ..utils import build_document
 
+from ..utils import build_document
 
 EMPTY_STOP_WORDS = []
 COMMON_STOP_WORDS = ["the", "and", "i"]
