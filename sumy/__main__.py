@@ -31,7 +31,7 @@ import sys
 from docopt import docopt
 
 from . import __version__
-from ._compat import PY3, to_bytes, to_string, to_unicode
+from ._compat import to_string, to_unicode
 from .nlp.stemmers import Stemmer
 from .nlp.tokenizers import Tokenizer
 from .parsers.html import HtmlParser
@@ -66,10 +66,7 @@ def main(args=None):
     summarizer, parser, items_count = handle_arguments(args)
 
     for sentence in summarizer(parser.document, items_count):
-        if PY3:
-            print(to_unicode(sentence))
-        else:
-            print(to_bytes(sentence))
+        print(to_unicode(sentence))
 
     return 0
 

@@ -1,7 +1,5 @@
 
 
-import pytest
-
 from sumy import _compat as compat
 
 BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode()
@@ -20,7 +18,6 @@ def _assert_strings_equal(str1, str2):
     assert str1 == str2
 
 
-@pytest.mark.skipif(not compat.PY3, reason="Python 2 doesn't support method `__bytes__`")
 def test_native_bytes():
     returned = bytes(Clazz())
     _assert_strings_equal(BYTES_STRING, returned)
