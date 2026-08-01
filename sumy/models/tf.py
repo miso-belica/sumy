@@ -82,4 +82,4 @@ class TfDocumentModel(object):
         return smooth + (1.0 - smooth)*frequency
 
     def __repr__(self):
-        return "<TfDocumentModel %s>" % pformat(self._terms)
+        return f"<TfDocumentModel {pformat(self._terms)}>"

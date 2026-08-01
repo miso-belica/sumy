@@ -62,9 +62,9 @@ def expand_resource_path(path):
 def get_stop_words(language):
     language = normalize_language(language)
     try:
-        stopwords_data = pkgutil.get_data("sumy", "data/stopwords/%s.txt" % language)
+        stopwords_data = pkgutil.get_data("sumy", f"data/stopwords/{language}.txt")
     except IOError:
-        raise LookupError("Stop-words are not available for language %s." % language)
+        raise LookupError(f"Stop-words are not available for language {language}.")
     return parse_stop_words(stopwords_data)
 
 
@@ -94,7 +94,7 @@ class ItemsCount(object):
         elif isinstance(self._value, (int, float)):
             return sequence[:int(self._value)]
         else:
-            raise ValueError("Unsuported value of items count '%s'." % self._value)
+            raise ValueError(f"Unsuported value of items count '{self._value}'.")
 
     def __repr__(self):
-        return to_string("<ItemsCount: %r>" % self._value)
+        return to_string(f"<ItemsCount: {self._value!r}>")

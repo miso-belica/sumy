@@ -175,7 +175,7 @@ def main(args=None):
             result = evaluate(evaluated_sentences, document.sentences)
         else:
             result = evaluate(evaluated_sentences, reference_sentences)
-        print("%s: %f" % (name, result))
+        print(f"{name}: {result:f}")
 
     return 0
 
@@ -183,7 +183,7 @@ def main(args=None):
 def handle_arguments(args):
     document_format = args["--format"]
     if document_format is not None and document_format not in PARSERS:
-        raise ValueError("Unsupported format of input document. Possible values are: %s. Given: %s." % (
+        raise ValueError("Unsupported format of input document. Possible values are: {}. Given: {}.".format(
             ", ".join(PARSERS.keys()),
             document_format,
         ))

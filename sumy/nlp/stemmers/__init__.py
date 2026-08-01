@@ -38,7 +38,7 @@ class Stemmer(object):
         try:
             stemmer_class = getattr(nltk_stemmers_module, stemmer_classname)
         except AttributeError:
-            raise LookupError("Stemmer is not available for language %s." % language)
+            raise LookupError(f"Stemmer is not available for language {language}.")
         self._stemmer = stemmer_class().stem
 
     def __call__(self, word):
