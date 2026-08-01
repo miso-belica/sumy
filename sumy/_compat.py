@@ -2,7 +2,7 @@
 
 from sys import version_info
 
-PY3 = version_info[0] == 3
+PY3 = version_info[0] >= 3
 
 
 if PY3:
