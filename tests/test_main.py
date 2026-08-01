@@ -29,7 +29,7 @@ DEFAULT_ARGS = {
 
 
 def test_ok_args():
-    docopt(to_string(main_doc), 'luhn --url=URL --format=FORMAT'.split(), version=__version__)
+    docopt(to_string(main_doc), ['luhn', '--url=URL', '--format=FORMAT'], version=__version__)
 
 
 def test_args_none():
@@ -45,17 +45,17 @@ def test_args_just_command():
 
 def test_args_two_commands():
     with pytest.raises(DocoptExit):
-        docopt(to_string(main_doc), 'lsa luhn'.split(), version=__version__)
+        docopt(to_string(main_doc), ['lsa', 'luhn'], version=__version__)
 
 
 def test_args_url_and_file():
     with pytest.raises(DocoptExit):
-        docopt(to_string(main_doc), 'lsa --url=URL --file=FILE'.split(), version=__version__)
+        docopt(to_string(main_doc), ['lsa', '--url=URL', '--file=FILE'], version=__version__)
 
 
 def test_args_url_and_text():
     with pytest.raises(DocoptExit):
-        docopt(to_string(main_doc), 'lsa --url=URL --text=TEXT'.split(), version=__version__)
+        docopt(to_string(main_doc), ['lsa', '--url=URL', '--text=TEXT'], version=__version__)
 
 
 def test_handle_default_arguments():
