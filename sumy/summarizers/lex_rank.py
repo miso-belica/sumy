@@ -33,7 +33,7 @@ class LexRankSummarizer(AbstractSummarizer):
 
         sentences_words = [self._to_words_set(s) for s in document.sentences]
         if not sentences_words:
-            return tuple()
+            return ()
 
         tf_metrics = self._compute_tf(sentences_words)
         idf_metrics = self._compute_idf(sentences_words)
