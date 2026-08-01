@@ -97,7 +97,7 @@ def _recon_lcs(x, y):
             return _recon(i, j - 1)
 
     i, j = _get_index_of_lcs(x, y)
-    recon_tuple = tuple(map(lambda r: r[0], _recon(i, j)))
+    recon_tuple = tuple(r[0] for r in _recon(i, j))
     return recon_tuple
 
 
