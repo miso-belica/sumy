@@ -221,6 +221,6 @@ if __name__ == "__main__":
         sys.exit(exit_code)
     except KeyboardInterrupt:
         sys.exit(1)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 -- top-level CLI handler must catch everything
         print(e)
         sys.exit(1)
