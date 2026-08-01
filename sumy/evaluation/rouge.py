@@ -63,7 +63,7 @@ def _lcs(x, y):
     :returns table: dictionary of coord and len lcs
     """
     n, m = _get_index_of_lcs(x, y)
-    table = dict()
+    table = {}
     for i in range(n + 1):
         for j in range(m + 1):
             if i == 0 or j == 0:
