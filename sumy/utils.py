@@ -77,7 +77,7 @@ def parse_stop_words(data):
     return frozenset(w.rstrip() for w in to_unicode(data).splitlines() if w)
 
 
-class ItemsCount(object):
+class ItemsCount:
     def __init__(self, value):
         self._value = value
 

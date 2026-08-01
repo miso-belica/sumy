@@ -1,7 +1,7 @@
 
 
 
-class DocumentParser(object):
+class DocumentParser:
     """Abstract parser of input format into DOM."""
 
     SIGNIFICANT_WORDS = (

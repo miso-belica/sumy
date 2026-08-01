@@ -10,7 +10,7 @@ from .._compat import to_string, to_unicode, unicode
 from ..utils import normalize_language
 
 
-class DefaultWordTokenizer(object):
+class DefaultWordTokenizer:
     """NLTK tokenizer"""
     @staticmethod
     def tokenize(text):
@@ -140,7 +140,7 @@ class ThaiSentencesTokenizer:
         return sent_tokenize(text)
 
 
-class Tokenizer(object):
+class Tokenizer:
     """Language dependent tokenizer of text document."""
 
     _WORD_PATTERN = re.compile(r"^[^\W\d_](?:[^\W\d_]|['-])*$", re.UNICODE)

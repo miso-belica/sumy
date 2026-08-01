@@ -8,7 +8,7 @@ from ._sentence import Sentence
 
 
 @unicode_compatible
-class Paragraph(object):
+class Paragraph:
     __slots__ = (
         "_sentences",
         "_cached_property_sentences",

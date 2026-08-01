@@ -7,7 +7,7 @@ from ...utils import cached_property
 
 
 @unicode_compatible
-class ObjectDocumentModel(object):
+class ObjectDocumentModel:
     def __init__(self, paragraphs):
         self._paragraphs = tuple(paragraphs)
 
