@@ -53,7 +53,7 @@ class LsaSummarizer(AbstractSummarizer):
         words = map(self.normalize_word, document.words)
         unique_words = frozenset(self.stem_word(w) for w in words if w not in self._stop_words)
 
-        return dict((w, i) for i, w in enumerate(unique_words))
+        return {w: i for i, w in enumerate(unique_words)}
 
     def _create_matrix(self, document, dictionary):
         """
