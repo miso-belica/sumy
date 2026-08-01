@@ -63,7 +63,7 @@ def get_stop_words(language):
     language = normalize_language(language)
     try:
         stopwords_data = pkgutil.get_data("sumy", f"data/stopwords/{language}.txt")
-    except IOError:
+    except OSError:
         raise LookupError(f"Stop-words are not available for language {language}.")
     return parse_stop_words(stopwords_data)
 
