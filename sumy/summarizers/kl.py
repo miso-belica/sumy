@@ -57,7 +57,7 @@ class KLSummarizer(AbstractSummarizer):
         content_words = self._get_all_content_words_in_doc(sentences)
         content_words_count = len(content_words)
         content_words_freq = self._compute_word_freq(content_words)
-        content_word_tf = dict((w, f / content_words_count) for w, f in content_words_freq.items())
+        content_word_tf = {w: f / content_words_count for w, f in content_words_freq.items()}
         return content_word_tf
 
     def _joint_freq(self, word_list_1, word_list_2):

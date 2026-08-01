@@ -63,7 +63,7 @@ class SumBasicSummarizer(AbstractSummarizer):
         content_words = self._get_all_content_words_in_doc(sentences)
         content_words_count = len(content_words)
         content_words_freq = self._compute_word_freq(content_words)
-        content_word_tf = dict((k, v / content_words_count) for (k, v) in content_words_freq.items())
+        content_word_tf = {k: v / content_words_count for (k, v) in content_words_freq.items()}
         return content_word_tf
 
     @staticmethod
