@@ -74,7 +74,7 @@ def test_normalize_words():
     words_original = sentence.split()
     words_normalized = summarizer._normalize_words(words_original)
 
-    words_correctly_normalized = "this is a test 2 check normalization.".split()
+    words_correctly_normalized = ["this", "is", "a", "test", "2", "check", "normalization."]
     assert words_normalized == words_correctly_normalized
 
 

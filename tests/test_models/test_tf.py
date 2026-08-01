@@ -90,7 +90,7 @@ def test_most_frequent_terms_negative_count():
 
 
 def test_normalized_words_frequencies():
-    words = "a b c d e c b d c e e d e d e".split()
+    words = ["a", "b", "c", "d", "e", "c", "b", "d", "c", "e", "e", "d", "e", "d", "e"]
     model = TfDocumentModel(tuple(words))
 
     assert model.normalized_term_frequency("a") == pytest.approx(1/5)
@@ -104,7 +104,7 @@ def test_normalized_words_frequencies():
 
 
 def test_normalized_words_frequencies_with_smoothing_term():
-    words = "a b c d e c b d c e e d e d e".split()
+    words = ["a", "b", "c", "d", "e", "c", "b", "d", "c", "e", "e", "d", "e", "d", "e"]
     model = TfDocumentModel(tuple(words))
 
     assert model.normalized_term_frequency("a", 0.5) == pytest.approx(0.5 + 1/10)
