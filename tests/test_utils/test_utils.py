@@ -57,7 +57,7 @@ def test_unsupported_items_count():
 def test_items_count_with_unsupported_init_type():
     count = ItemsCount([])
 
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         count([])
 
 

@@ -16,7 +16,7 @@ def _split_into_words(sentences):
     full_text_words = []
     for s in sentences:
         if not isinstance(s, Sentence):
-            raise (ValueError("Object in collection must be of type Sentence"))
+            raise (TypeError("Object in collection must be of type Sentence"))
         full_text_words.extend(s.words)
     return full_text_words
 
