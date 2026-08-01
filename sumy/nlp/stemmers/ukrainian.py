@@ -49,7 +49,7 @@ def stem_word(word):
     updated, suffix = _update_suffix(suffix, 'ь$', '')
     if updated:
         _, suffix = _update_suffix(suffix, 'ейше?$', '')
-        _, suffix = _update_suffix(suffix, 'нн$', u'н')
+        _, suffix = _update_suffix(suffix, 'нн$', 'н')
 
     return start + suffix
 
