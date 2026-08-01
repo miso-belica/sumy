@@ -9,7 +9,7 @@ UNICODE_STRING = "ľščťžáýíééäúňô €đ€Ł¤"
 
 
 def _build_test_instance(tested_method, value):
-    class Object(object):
+    class Object:
         def __init__(self, value):
             self.value = value
 

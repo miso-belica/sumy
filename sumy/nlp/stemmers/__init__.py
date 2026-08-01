@@ -15,7 +15,7 @@ def null_stemmer(object):
     return to_unicode(object).lower()
 
 
-class Stemmer(object):
+class Stemmer:
     SPECIAL_STEMMERS = {
         'czech': czech_stemmer,
         'slovak': czech_stemmer,

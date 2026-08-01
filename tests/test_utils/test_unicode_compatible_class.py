@@ -10,7 +10,7 @@ NATIVE_STRING = compat.to_string(UNICODE_STRING)
 
 
 @compat.unicode_compatible
-class Clazz(object):
+class Clazz:
     def __unicode__(self):
         return UNICODE_STRING
 

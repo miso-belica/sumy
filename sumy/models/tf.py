@@ -7,7 +7,7 @@ from pprint import pformat
 from .._compat import Sequence, string_types, to_unicode, unicode
 
 
-class TfDocumentModel(object):
+class TfDocumentModel:
     """Term-Frequency document model (term = word)."""
     def __init__(self, words, tokenizer=None):
         if isinstance(words, string_types) and tokenizer is None:
