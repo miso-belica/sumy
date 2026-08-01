@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 """
 Sumy - evaluation of automatic text summary.

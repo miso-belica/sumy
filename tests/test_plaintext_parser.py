@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 
 from sumy.nlp.tokenizers import Tokenizer

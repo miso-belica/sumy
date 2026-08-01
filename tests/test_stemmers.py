@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 """Simple tests to make sure all stemmers share the same API."""
 
