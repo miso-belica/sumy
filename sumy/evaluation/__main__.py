@@ -218,9 +218,9 @@ def handle_arguments(args):
 if __name__ == "__main__":
     try:
         exit_code = main()
-        exit(exit_code)
+        sys.exit(exit_code)
     except KeyboardInterrupt:
-        exit(1)
+        sys.exit(1)
     except Exception as e:
         print(e)
-        exit(1)
+        sys.exit(1)
