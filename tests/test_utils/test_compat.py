@@ -4,7 +4,7 @@ import pytest
 
 from sumy import _compat as py3k
 
-BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode("utf-8")
+BYTES_STRING = "ľščťžáýíééäúňô €đ€Ł¤".encode()
 UNICODE_STRING = "ľščťžáýíééäúňô €đ€Ł¤"
 
 
