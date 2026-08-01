@@ -31,7 +31,7 @@ class ObjectDocumentModel(object):
         return tuple(chain(*words))
 
     def __unicode__(self):
-        return "<DOM with %d paragraphs>" % len(self.paragraphs)
+        return f"<DOM with {len(self.paragraphs):d} paragraphs>"
 
     def __repr__(self):
         return self.__str__()

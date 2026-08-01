@@ -37,10 +37,7 @@ class Paragraph(object):
         return tuple(chain(*(s.words for s in self._sentences)))
 
     def __unicode__(self):
-        return "<Paragraph with %d headings & %d sentences>" % (
-            len(self.headings),
-            len(self.sentences),
-        )
+        return f"<Paragraph with {len(self.headings):d} headings & {len(self.sentences):d} sentences>"
 
     def __repr__(self):
         return self.__str__()

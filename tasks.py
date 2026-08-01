@@ -25,7 +25,7 @@ def release(context):
 
 @task(test)
 def bump(context, version="patch"):
-    context.run("bumpversion %s" % version)
+    context.run(f"bumpversion {version}")
     context.run("git commit --amend")
 
 @task
