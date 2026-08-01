@@ -94,9 +94,8 @@ def _remove_possessives(word):
 
 
 def _remove_comparative(word):
-    if len(word) > 5:
-        if word[-3:] in ("ejš", "ějš"):
-            return _palatalize(word[:-2])
+    if len(word) > 5 and word[-3:] in ("ejš", "ějš"):
+        return _palatalize(word[:-2])
     return word
 
 
