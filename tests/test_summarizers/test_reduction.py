@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 
 from sumy.summarizers.reduction import ReductionSummarizer

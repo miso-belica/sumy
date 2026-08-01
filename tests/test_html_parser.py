@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 
 from sumy._compat import to_unicode
