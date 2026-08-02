@@ -1,9 +1,11 @@
 
 
+import pytest
 from pytest import approx
 
 from sumy.evaluation import rouge_l_sentence_level, rouge_l_summary_level, rouge_n
 from sumy.evaluation.rouge import _get_ngrams, _get_word_ngrams, _len_lcs, _recon_lcs, _split_into_words, _union_lcs
+from sumy.models.dom import Sentence
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 
@@ -81,6 +83,37 @@ def test_rouge_n():
     # assert rouge_n(candidate, [reference1, reference2], 2) == approx(3/18)
     # assert rouge_n(candidate, [reference1, reference2], 3) == approx(2/16)
     # assert rouge_n(candidate, [reference1, reference2], 4) == approx(1/14)
+
+
+def test_rouge_n_rejects_reference_too_short_for_the_ngram_size():
+    """
+    ROUGE-N divides by the number of reference n-grams, which can be 0.
+
+    A reference of fewer than n words yields no n-gram at all, so the recall
+    denominator is 0 and `rouge_n` used to raise `ZeroDivisionError`. This needs
+    no word-less sentence: a one word reference is enough to break `rouge_2`.
+    Nothing can be measured against a reference holding no n-gram of that size,
+    so the input is refused rather than scored.
+    """
+    reference = PlaintextParser("hello", Tokenizer("english")).document.sentences
+    candidate = PlaintextParser("hello there", Tokenizer("english")).document.sentences
+
+    assert rouge_n(candidate, reference, 1) == approx(1)
+    with pytest.raises(ValueError):
+        rouge_n(candidate, reference, 2)
+
+
+def test_rouge_n_scores_candidate_without_any_ngram_as_zero():
+    """
+    Only the *reference* count is a denominator, so an empty candidate is fine.
+
+    Recall is well defined when the reference has n-grams and the candidate has
+    none: nothing of the reference was covered, which is 0 rather than an error.
+    """
+    reference = PlaintextParser("police killed the gunman", Tokenizer("english")).document.sentences
+    candidate = [Sentence("", Tokenizer("english"))]
+
+    assert rouge_n(candidate, reference, 1) == approx(0)
 
 
 def test_rouge_l_sentence_level():
@@ -228,3 +261,48 @@ def test_rouge_l_summary_level_for_reference_sentence_without_any_common_word():
     candidates = PlaintextParser("alpha beta gamma delta.", Tokenizer("english")).document.sentences
 
     assert rouge_l_summary_level(candidates, reference) == approx(0)
+
+
+@pytest.mark.parametrize("rouge_l", [rouge_l_sentence_level, rouge_l_summary_level])
+@pytest.mark.parametrize("candidate_text, reference_text", [
+    ("", ""),
+    ("", "police killed the gunman"),
+    ("police killed the gunman", ""),
+])
+def test_rouge_l_rejects_sentences_without_any_word(rouge_l, candidate_text, reference_text):
+    """
+    A summary made only of word-less sentences cannot be scored, so it is rejected.
+
+    `Sentence("", tokenizer)` has no words but is a perfectly valid sentence, and
+    a collection holding one satisfies the "at least 1 sentence" check while
+    containing nothing to measure. Both `m` and `n` are then 0 and `F_lcs` used
+    to raise `ZeroDivisionError`.
+
+    Returning 0 would be wrong: 0 means "not a single word in common", which is
+    the score for two completely disjoint summaries. Two word-less summaries are
+    not disjoint, they are identical. Since `R_lcs = llcs/m` and `P_lcs = llcs/n`
+    are both undefined here, there is no score to report and the input itself is
+    the problem, so it is refused the same way an empty collection is.
+    """
+    reference = [Sentence(reference_text, Tokenizer("english"))]
+    candidate = [Sentence(candidate_text, Tokenizer("english"))]
+
+    with pytest.raises(ValueError):
+        rouge_l(candidate, reference)
+
+
+@pytest.mark.parametrize("rouge_l", [rouge_l_sentence_level, rouge_l_summary_level])
+def test_rouge_l_rejects_word_less_sentences_from_the_parser(rouge_l):
+    """
+    The parser produces word-less sentences too, so this needs no hand-built `Sentence`.
+
+    A document of nothing but punctuation is split into sentences that all
+    tokenize to no words, which reaches the same undefined score through the
+    ordinary public API.
+    """
+    reference = PlaintextParser("... !!! ???", Tokenizer("english")).document.sentences
+    candidate = PlaintextParser("--- ;;; ...", Tokenizer("english")).document.sentences
+    assert len(reference) > 0 and len(candidate) > 0, "the parser should return sentences"
+
+    with pytest.raises(ValueError):
+        rouge_l(candidate, reference)
