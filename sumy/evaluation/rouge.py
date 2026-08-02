@@ -131,7 +131,9 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
     :returns:
         float 0 <= ROUGE-N <= 1, where 0 means no overlap and 1 means
         exactly the same.
-    :raises ValueError: raises exception if a param has len <= 0
+    :raises ValueError:
+        raises exception if a param has len <= 0 or if the reference sentences
+        are too short to hold a single n-gram of that size
     """
     if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0:
         raise (ValueError("Collections must contain at least 1 sentence."))
@@ -139,6 +141,12 @@ def rouge_n(evaluated_sentences, reference_sentences, n=2):
     evaluated_ngrams = _get_word_ngrams(n, evaluated_sentences)
     reference_ngrams = _get_word_ngrams(n, reference_sentences)
     reference_count = len(reference_ngrams)
+
+    # ROUGE-N is a recall metric, so only the reference is a denominator. A
+    # reference shorter than n words holds no n-gram at all and there is nothing
+    # to recall from it. An evaluated summary without n-grams is fine and scores 0.
+    if reference_count <= 0:
+        raise (ValueError(f"Reference sentences must contain at least 1 n-gram of size {n}."))
 
     # Gets the overlapping ngrams between evaluated and reference
     overlapping_ngrams = evaluated_ngrams.intersection(reference_ngrams)
@@ -225,7 +233,7 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
     :param reference_sentences:
         The sentences from the reference set
     :returns float: F_lcs
-    :raises ValueError: raises exception if a param has len <= 0
+    :raises ValueError: raises exception if a param has len <= 0 or holds no word
     """
     if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0:
         raise (ValueError("Collections must contain at least 1 sentence."))
@@ -233,6 +241,8 @@ def rouge_l_sentence_level(evaluated_sentences, reference_sentences):
     evaluated_words = _split_into_words(evaluated_sentences)
     m = len(reference_words)
     n = len(evaluated_words)
+    if m <= 0 or n <= 0:
+        raise (ValueError("Collections must contain at least 1 word."))
     lcs = _len_lcs(evaluated_words, reference_words)
     return _f_lcs(lcs, m, n)
 
@@ -311,7 +321,7 @@ def rouge_l_summary_level(evaluated_sentences, reference_sentences):
     :param reference_sentences:
         The sentences from the reference set
     :returns float: F_lcs
-    :raises ValueError: raises exception if a param has len <= 0
+    :raises ValueError: raises exception if a param has len <= 0 or holds no word
     """
     if len(evaluated_sentences) <= 0 or len(reference_sentences) <= 0:
         raise (ValueError("Collections must contain at least 1 sentence."))
@@ -321,6 +331,9 @@ def rouge_l_summary_level(evaluated_sentences, reference_sentences):
 
     # total number of words in evaluated sentences
     n = len(_split_into_words(evaluated_sentences))
+
+    if m <= 0 or n <= 0:
+        raise (ValueError("Collections must contain at least 1 word."))
 
     # LCS_u is counted in positions of the reference sentence, so the same
     # candidate word may be covered once per reference sentence. Clip each word
