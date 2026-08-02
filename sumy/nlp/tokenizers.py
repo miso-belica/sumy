@@ -7,7 +7,7 @@ from typing import ClassVar
 
 import nltk
 
-from .._compat import to_string, to_unicode, unicode
+from .._compat import to_unicode, unicode
 from ..utils import normalize_language
 
 
@@ -197,12 +197,11 @@ class Tokenizer:
         if language in self.SPECIAL_SENTENCE_TOKENIZERS:
             return self.SPECIAL_SENTENCE_TOKENIZERS[language]
         try:
-            path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
-            return nltk.data.load(path)
+            return nltk.tokenize.PunktTokenizer(language)
         except (LookupError, zipfile.BadZipfile) as e:
             raise LookupError(
                 "NLTK tokenizers are missing or the language is not supported.\n"
-                """Download them by following command: python -c "import nltk; nltk.download('punkt')"\n"""
+                """Download them by following command: python -c "import nltk; nltk.download('punkt_tab')"\n"""
                 "Original error was:\n" + str(e)
             )
 

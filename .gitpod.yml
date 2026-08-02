@@ -3,5 +3,5 @@ tasks:
       curl -LsSf https://astral.sh/uv/install.sh | sh
       source $HOME/.local/bin/env
       uv sync --all-extras
-      uv run python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
+      uv run python -c "import nltk; nltk.download('punkt_tab')"
   - command: uv run sumy lex-rank --length=10 --url=http://en.wikipedia.org/wiki/Automatic_summarization
