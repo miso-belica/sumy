@@ -57,7 +57,7 @@ class PlaintextParser(DocumentParser):
         paragraphs = []
         for line in self._text.splitlines():
             line = line.strip()
-            if line.isupper():
+            if self._is_heading(line):
                 heading = Sentence(line, self._tokenizer, is_heading=True)
                 current_paragraph.append(heading)
             elif not line and current_paragraph:
@@ -71,6 +71,17 @@ class PlaintextParser(DocumentParser):
         paragraphs.append(Paragraph(sentences))
 
         return ObjectDocumentModel(paragraphs)
+
+    @staticmethod
+    def _is_heading(line):
+        """
+        Tells whether the line is a heading, which is a line all in upper case.
+
+        Characters of caseless scripts, such as Chinese, are neither upper nor lower case,
+        so `str.isupper()` alone is true for an ordinary sentence as soon as it contains
+        a single upper case letter from a cased script.
+        """
+        return line.isupper() and all(not c.isalpha() or c.isupper() for c in line)
 
     def _to_sentences(self, lines):
         text = ""
