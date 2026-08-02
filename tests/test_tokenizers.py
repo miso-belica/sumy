@@ -12,6 +12,19 @@ def test_missing_language():
         Tokenizer("klingon")
 
 
+def test_missing_language_recommends_downloading_punkt_tab():
+    """
+    NLTK 3.8.2 stopped shipping the `punkt` pickle over CVE-2024-39705 and replaced it
+    with `punkt_tab`, so downloading `punkt` no longer makes the tokenizer work.
+    See https://github.com/miso-belica/sumy/issues/216
+    """
+    with pytest.raises(LookupError) as exc_info:
+        Tokenizer("klingon")
+
+    advice = str(exc_info.value).split("Original error was:")[0]
+    assert "nltk.download('punkt_tab')" in advice
+
+
 def test_ensure_czech_tokenizer_available():
     tokenizer = Tokenizer("czech")
     assert "czech" == tokenizer.language

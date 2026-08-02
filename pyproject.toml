@@ -71,7 +71,7 @@ dependencies = [
     "lxml-html-clean",  # Required by breadability (lxml.html.clean was moved to separate package)
     "requests>=2.7.0",
     "pycountry>=18.2.23",
-    "nltk>=3.0.2",
+    "nltk>=3.9",
     "setuptools>=65.0.0",  # Required by breadability for pkg_resources
 ]
 
