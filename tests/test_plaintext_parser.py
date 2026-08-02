@@ -26,6 +26,21 @@ def test_parse_plaintext():
     assert len(document.paragraphs[1].sentences) == 2
 
 
+def test_chinese_line_with_uppercase_letter_is_not_heading():
+    """
+    `str.isupper()` is true as soon as a line's only cased character is an upper case letter.
+    A Chinese sentence containing something like `N` became a heading.
+    And since summarizers only rank non-heading sentences the whole document could summarize to nothing.
+    See https://github.com/miso-belica/sumy/issues/110
+    """
+    parser = PlaintextParser.from_string("你好啊，这儿有N盘蛋糕可以吃。", Tokenizer("chinese"))
+
+    document = parser.document
+
+    assert len(document.headings) == 0
+    assert len(document.sentences) == 1
+
+
 def test_parse_plaintext_long():
     parser = PlaintextParser.from_string("""
         Ako sa máš? Ja dobre! A ty? No
