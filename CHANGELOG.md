@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Capped `setuptools<82` because breadability imports `pkg_resources` and setuptools v82 deleted it, reported in https://github.com/miso-belica/sumy/issues/235
 - **INCOMPATIBILITY** `Rouge-L (Summary Level)` scores change. `_union_lcs` normalized every reference sentence by the sum of its per-sentence LCS lengths, so `rouge_l_summary_level` summed ratios and divided them by a word count again. It now sums the number of covered reference words, matching the official `ROUGE-1.5.5.pl` ("the length of the union LCS is the hit of that model sentence"). The papers are self-contradictory here: they print `LCS_u(r_i, C) = 4/5` but never substitute that value into the formula, and their example cannot distinguish the two denominators because both give 5. A summary identical to the reference scores 1.0 instead of 0.2. Scores from previous versions are not comparable.
 - **FIX:** Fixed `ZeroDivisionError` in `rouge_l_summary_level` for a reference sentence that shares no word with the summary, reported in https://github.com/miso-belica/sumy/issues/128
 - **FIX:** Fixed `ZeroDivisionError` in `rouge_l_sentence_level` for a summary that shares no word with the reference. `_f_lcs` derived `beta` as `P_lcs/R_lcs`, which divides by zero on an empty LCS; it now uses the algebraically equivalent closed form `llcs * (m^2 + n^2) / (m^3 + n^3)`, which is 0 there. Reported in https://github.com/miso-belica/sumy/issues/128
