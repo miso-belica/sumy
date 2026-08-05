@@ -1280,6 +1280,7 @@ requires-dist = [
     { name = "pythainlp", marker = "extra == 'thai'", specifier = ">=5.0.0" },
     { name = "requests", specifier = ">=2.32.4" },
     { name = "setuptools", specifier = ">=70.0.0,<82" },
+    { name = "setuptools", marker = "python_full_version >= '3.9'", specifier = ">=78.1.1,<82" },
     { name = "tinysegmenter", marker = "extra == 'japanese'", specifier = ">=0.3" },
 ]
 provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
