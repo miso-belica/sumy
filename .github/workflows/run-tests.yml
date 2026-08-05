@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - "main"
+  schedule:
+    # Weekly, so tests-newest notices a dependency release that breaks sumy.
+    - cron: "0 6 * * 1"
 
 # Every job here only reads the checkout. Declared at the top level so a job added later
 # starts read-only rather than silently inheriting the repository default.
@@ -122,6 +125,39 @@ jobs:
           uv run --no-project python -c "import nltk; nltk.download('punkt_tab')"
 
       - run: uv run --no-project pytest tests
+        env:
+          CI: 1
+          PYTHONDONTWRITEBYTECODE: 1
+
+  # `tests` installs from uv.lock, so it only ever sees one known-good set of versions and
+  # never what `pip install sumy` actually resolves to for a new user. This job ignores the
+  # lockfile and takes the newest release of everything. It is the check that would have
+  # caught setuptools 82 deleting pkg_resources, which broke every fresh install while CI
+  # stayed green on the pinned setuptools 68 in the lockfile.
+  #
+  # Skipped on pull requests: a breaking upstream release is not the fault of the PR that
+  # happens to run next, and blocking unrelated work on it teaches people to ignore CI.
+  tests-newest:
+    if: github.event_name != 'pull_request'
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.14
+
+      - name: "Install newest available dependencies"
+        run: |
+          uv sync --upgrade --all-extras --python 3.14
+          uv run --no-sync python -c "import nltk; nltk.download('punkt_tab')"
+
+      - run: uv run --no-sync pytest tests
         env:
           CI: 1
           PYTHONDONTWRITEBYTECODE: 1
