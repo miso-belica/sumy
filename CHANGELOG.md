@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Raised the `setuptools` lower bound to 70.0.0, the release that fixes GHSA-cx63-2mw6-8hw5, a ReDoS in `package_index`. The old 65.0.0 floor meant a fresh install could resolve to a version carrying it. The next advisory, GHSA-5rjg-fvgr-3xxf, is only fixed in 78.1.1 and so cannot be required while sumy supports Python 3.8, because 75.3.4 is the last setuptools that installs on it.
 - **FIX:** Capped `setuptools<82` because breadability imports `pkg_resources` and setuptools v82 deleted it, reported in https://github.com/miso-belica/sumy/issues/235
 - **INCOMPATIBILITY** `Rouge-L (Summary Level)` scores change. `_union_lcs` normalized every reference sentence by the sum of its per-sentence LCS lengths, so `rouge_l_summary_level` summed ratios and divided them by a word count again. It now sums the number of covered reference words, matching the official `ROUGE-1.5.5.pl` ("the length of the union LCS is the hit of that model sentence"). The papers are self-contradictory here: they print `LCS_u(r_i, C) = 4/5` but never substitute that value into the formula, and their example cannot distinguish the two denominators because both give 5. A summary identical to the reference scores 1.0 instead of 0.2. Scores from previous versions are not comparable.
 - **FIX:** Fixed `ZeroDivisionError` in `rouge_l_summary_level` for a reference sentence that shares no word with the summary, reported in https://github.com/miso-belica/sumy/issues/128
