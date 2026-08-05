@@ -1266,30 +1266,30 @@ dev = [
 requires-dist = [
     { name = "breadability", specifier = ">=0.1.20" },
     { name = "docopt-ng", specifier = ">=0.6.3" },
-    { name = "greek-stemmer-pos", marker = "extra == 'greek'" },
-    { name = "hebrew-tokenizer", marker = "extra == 'hebrew'" },
-    { name = "jieba", marker = "extra == 'chinese'" },
-    { name = "konlpy", marker = "extra == 'korean'" },
-    { name = "lxml-html-clean" },
+    { name = "greek-stemmer-pos", marker = "extra == 'greek'", specifier = ">=1.1.2" },
+    { name = "hebrew-tokenizer", marker = "extra == 'hebrew'", specifier = ">=2.3.0" },
+    { name = "jieba", marker = "extra == 'chinese'", specifier = ">=0.39" },
+    { name = "konlpy", marker = "extra == 'korean'", specifier = ">=0.6.0" },
+    { name = "lxml-html-clean", specifier = ">=0.1.0" },
     { name = "nltk", specifier = ">=3.9.1,!=3.10.1" },
-    { name = "numpy", marker = "extra == 'lexrank'" },
-    { name = "numpy", marker = "extra == 'lsa'" },
-    { name = "pyarabic", marker = "extra == 'arabic'" },
+    { name = "numpy", marker = "extra == 'lexrank'", specifier = ">=1.17.3" },
+    { name = "numpy", marker = "extra == 'lsa'", specifier = ">=1.17.3" },
+    { name = "pyarabic", marker = "extra == 'arabic'", specifier = ">=0.6.14" },
     { name = "pycountry", specifier = ">=18.2.23" },
-    { name = "pystempel", marker = "extra == 'polish'" },
-    { name = "pythainlp", marker = "extra == 'thai'" },
+    { name = "pystempel", marker = "extra == 'polish'", specifier = ">=2.0.0" },
+    { name = "pythainlp", marker = "extra == 'thai'", specifier = ">=5.0.0" },
     { name = "requests", specifier = ">=2.32.4" },
     { name = "setuptools", specifier = ">=65.0.0,<82" },
-    { name = "tinysegmenter", marker = "extra == 'japanese'" },
+    { name = "tinysegmenter", marker = "extra == 'japanese'", specifier = ">=0.3" },
 ]
 provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "codecov" },
-    { name = "invoke" },
-    { name = "pytest", specifier = ">=3.0.0" },
-    { name = "pytest-cov" },
+    { name = "codecov", specifier = ">=2.1.13" },
+    { name = "invoke", specifier = ">=2.0.0" },
+    { name = "pytest", specifier = ">=4.6.11" },
+    { name = "pytest-cov", specifier = ">=2.6.1" },
 ]
 
 [[package]]
