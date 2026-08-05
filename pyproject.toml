@@ -71,7 +71,7 @@ dependencies = [
     "lxml-html-clean",  # Required by breadability (lxml.html.clean was moved to separate package)
     "requests>=2.7.0",
     "pycountry>=18.2.23",
-    "nltk>=3.9",
+    "nltk>=3.9,!=3.10.1",  # 3.10.1 blocks its own imports when the venv sits under the CWD
     # Required by breadability for pkg_resources, which setuptools v82 deleted. Without the
     # cap, sumy.parsers.html fails outright when doing `import breadability`.
     "setuptools>=65.0.0,<82",
@@ -88,6 +88,13 @@ Greek = ["greek-stemmer-pos"]
 Arabic = ["pyarabic"]
 Thai = ["pythainlp"]
 Polish = ["pystempel"]
+
+[tool.uv]
+# Lock only for Python 3.10+. sumy still supports 3.8 and 3.9 (see requires-python above), but
+# NLTK dropped them at 3.9.3, so a universal lock has to pin nltk 3.9.1/3.9.2 on those two
+# interpreters and every NLTK advisory is unfixable there. Restricting the resolution keeps
+# uv.lock -- the development environment -- on a patched nltk.
+environments = ["python_version >= '3.10'"]
 
 [dependency-groups]
 dev = [
