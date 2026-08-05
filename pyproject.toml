@@ -68,8 +68,11 @@ classifiers = [
 dependencies = [
     "docopt-ng>=0.6.3",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
     "breadability>=0.1.20",
-    "lxml-html-clean",  # Required by breadability (lxml.html.clean was moved to separate package)
-    "requests>=2.32.4",  # 2.33.0 would drop Python 3.8, older releases fail to import on 3.10+
+    "lxml-html-clean>=0.1.0",  # Required by breadability (lxml.html.clean was moved to separate package)
+    # 2.32.4 is the release that fixes GHSA-9hjg-9r4m-mvj7, where a malicious redirect leaks
+    # .netrc credentials. It is also the newest requests that still supports Python 3.8, as
+    # 2.33.0 requires 3.10.
+    "requests>=2.32.4",
     "pycountry>=18.2.23",
     # 3.9 evaluates wn.morphy at import time, so it cannot be imported without the wordnet
     # corpus. 3.10.1 blocks its own imports when the venv sits under the CWD.
@@ -80,16 +83,16 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-LSA = ["numpy"]
-LexRank = ["numpy"]
-Japanese = ["tinysegmenter"]
-Chinese = ["jieba"]
-Korean = ["konlpy"]
-Hebrew = ["hebrew_tokenizer"]
-Greek = ["greek-stemmer-pos"]
-Arabic = ["pyarabic"]
-Thai = ["pythainlp"]
-Polish = ["pystempel"]
+LSA = ["numpy>=1.17.3"]
+LexRank = ["numpy>=1.17.3"]
+Japanese = ["tinysegmenter>=0.3"]
+Chinese = ["jieba>=0.39"]
+Korean = ["konlpy>=0.6.0"]  # earlier releases do not declare their JPype1 dependency
+Hebrew = ["hebrew_tokenizer>=2.3.0"]
+Greek = ["greek-stemmer-pos>=1.1.2"]  # 1.0.0 is missing the greek_stemmer.closets subpackage
+Arabic = ["pyarabic>=0.6.14"]
+Thai = ["pythainlp>=5.0.0"]
+Polish = ["pystempel>=2.0.0"]
 
 [tool.uv]
 # Lock only for Python 3.10+. sumy still supports 3.8 and 3.9 (see requires-python above), but
@@ -100,10 +103,13 @@ environments = ["python_version >= '3.10'"]
 
 [dependency-groups]
 dev = [
-    "pytest>=3.0.0",
-    "pytest-cov",
-    "codecov",
-    "invoke",
+    # Earliest pair verified against this suite on Python 3.8, both plain and under --cov. Not
+    # lower because pytest-cov 2.6.0 calls Function.get_marker, which pytest 4.0 removed, and
+    # pytest 4.0.x cannot be installed at all alongside a current attrs.
+    "pytest>=4.6.11",
+    "pytest-cov>=2.6.1",
+    "codecov>=2.1.13",
+    "invoke>=2.0.0",
 ]
 
 [project.scripts]
