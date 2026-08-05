@@ -2017,7 +2017,7 @@ requires-dist = [
     { name = "pystempel", marker = "extra == 'polish'" },
     { name = "pythainlp", marker = "extra == 'thai'" },
     { name = "requests", specifier = ">=2.7.0" },
-    { name = "setuptools", specifier = ">=65.0.0" },
+    { name = "setuptools", specifier = ">=65.0.0,<82" },
     { name = "tinysegmenter", marker = "extra == 'japanese'" },
 ]
 provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
