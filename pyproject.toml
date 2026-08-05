@@ -66,12 +66,14 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    "docopt-ng>=0.6.1",
+    "docopt-ng>=0.6.3",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
     "breadability>=0.1.20",
     "lxml-html-clean",  # Required by breadability (lxml.html.clean was moved to separate package)
-    "requests>=2.7.0",
+    "requests>=2.32.4",  # 2.33.0 would drop Python 3.8, older releases fail to import on 3.10+
     "pycountry>=18.2.23",
-    "nltk>=3.9,!=3.10.1",  # 3.10.1 blocks its own imports when the venv sits under the CWD
+    # 3.9 evaluates wn.morphy at import time, so it cannot be imported without the wordnet
+    # corpus. 3.10.1 blocks its own imports when the venv sits under the CWD.
+    "nltk>=3.9.1,!=3.10.1",
     # Required by breadability for pkg_resources, which setuptools v82 deleted. Without the
     # cap, sumy.parsers.html fails outright when doing `import breadability`.
     "setuptools>=65.0.0,<82",
