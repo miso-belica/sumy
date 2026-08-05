@@ -5,6 +5,11 @@ on:
     branches:
       - "main"
 
+# Every job here only reads the checkout. Declared at the top level so a job added later
+# starts read-only rather than silently inheriting the repository default.
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -79,3 +84,44 @@ jobs:
         with:
           file: ./coverage.xml
           fail_ci_if_error: false
+
+  # The `tests` job above pins everything through uv.lock, so it only ever proves that one
+  # point in the supported range works. This job resolves every direct dependency to the
+  # oldest version pyproject.toml claims to accept, which is what a user gets when an older
+  # release is already in their environment.
+  #
+  # Only on the oldest supported Python. A lower bound is a claim about the oldest dependency
+  # version sumy works with, and that claim can only be exercised on an interpreter those
+  # versions still install on: numpy alone needs 1.17.3 on 3.8 but 2.3.2 on 3.14, so pinning
+  # to the floor on a newer interpreter measures wheel availability rather than sumy.
+  #
+  # Installs with `uv pip install` rather than `uv sync` on purpose. uv.lock is restricted to
+  # Python 3.10+ (see [tool.uv] environments in pyproject.toml), so anything routed through the
+  # lockfile cannot be synced onto 3.8 at all. Bypassing it is also the honest thing here: the
+  # point of this job is to test what pyproject.toml declares, not what uv.lock pins.
+  # https://docs.astral.sh/uv/concepts/resolution/#lowest-resolution
+  tests-lowest-direct:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.8
+
+      - name: "Install oldest declared dependencies"
+        run: |
+          uv venv --python 3.8
+          uv pip install --resolution lowest-direct --all-extras -r pyproject.toml --group dev
+          uv pip install --no-deps .
+          uv run --no-project python -c "import nltk; nltk.download('punkt_tab')"
+
+      - run: uv run --no-project pytest tests
+        env:
+          CI: 1
+          PYTHONDONTWRITEBYTECODE: 1
