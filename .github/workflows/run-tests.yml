@@ -55,12 +55,21 @@ jobs:
         if: ${{ startsWith(matrix.python-version, 'graalpy') && runner.os == 'Linux' }}
         run: sudo apt-get install libxml2-dev libxslt-dev python3-dev
 
+      # uv.lock only covers Python 3.10+, see [tool.uv] environments in pyproject.toml. Python
+      # 3.8 and 3.9 are still supported, so they install straight from pyproject.toml instead;
+      # `uv pip install` cannot take --all-extras alongside a path, hence the explicit list.
       - name: "Install dependencies"
+        shell: bash  # the windows runner defaults to PowerShell
         run: |
-          uv sync --frozen --all-extras
-          uv run python -c "import nltk; nltk.download('punkt_tab')"
+          if [ "${{ matrix.python-version }}" = "3.8" ] || [ "${{ matrix.python-version }}" = "3.9" ]; then
+            uv venv --python "${{ matrix.python-version }}"
+            uv pip install --group dev -e ".[LSA,LexRank,Japanese,Chinese,Korean,Hebrew,Greek,Arabic,Thai,Polish]"
+          else
+            uv sync --frozen --all-extras
+          fi
+          uv run --no-sync python -c "import nltk; nltk.download('punkt_tab')"
 
-      - run: uv run pytest tests --cov=sumy --cov-report=xml
+      - run: uv run --no-sync pytest tests --cov=sumy --cov-report=xml
         env:
           CI: 1
           PYTHONDONTWRITEBYTECODE: 1
