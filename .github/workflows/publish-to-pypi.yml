@@ -1,18 +1,30 @@
 name: Upload Python Package
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version part to increase"
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write  # pushes the bump commit + tag to main
       id-token: write  # Required for OIDC trusted publishing
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: main  # workflow_dispatch can target any branch/tag; only main may be released
+          fetch-depth: 0  # need full tag history for `git describe` below
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -20,8 +32,73 @@ jobs:
       - name: Set up Python
         run: uv python install
 
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Download NLTK data
+        run: uv run --no-sync python -c "import nltk; nltk.download('punkt_tab')"
+
+      - name: Run tests
+        run: uv run --no-sync pytest
+        env:
+          CI: 1
+
+      - name: Determine previous release tag
+        id: prev_tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+
+      - name: Configure git identity for the bump commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version, commit, and tag
+        run: uv run --no-sync bump-my-version bump "${{ inputs.bump }}"
+
+      - name: Determine new release tag
+        id: new_tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+
       - name: Build package
         run: uv build
 
+      # Push before publishing: if this fails, nothing has reached PyPI yet, so there is
+      # nothing to reconcile -- fix and re-run. If the publish step below fails instead, main
+      # and the tag already correctly describe the release, so re-running just that step later
+      # is enough. The reverse order risks a PyPI release with no matching tag in git.
+      #
+      # `--atomic`, not two separate pushes or `--follow-tags`: both of those send the branch
+      # and the tag as independent ref updates, so one can be accepted while the other is
+      # rejected or the job is interrupted between them -- leaving main bumped with no matching
+      # tag (and a re-run bumping again) or a tag with no bump on main. `--atomic` updates both
+      # refs in one transaction: either both land or neither does.
+      - name: Push commit and tag to main
+        run: git push --atomic origin HEAD:main "${{ steps.new_tag.outputs.tag }}"
+
       - name: Publish to PyPI using OIDC
         run: uv publish --trusted-publishing automatic
+
+      # Release-page polish, run last: the tag is pushed and PyPI has the artifact either way,
+      # so a failure here just means creating the release by hand afterwards -- nothing to
+      # reconcile. Notes are the same "## {version} (date)" section bump-my-version just wrote
+      # into CHANGELOG.md, so the release page always matches the changelog verbatim.
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          NEW_TAG: ${{ steps.new_tag.outputs.tag }}
+          PREV_TAG: ${{ steps.prev_tag.outputs.tag }}
+        run: |
+          VERSION="${NEW_TAG#v}"
+          awk -v heading="## ${VERSION} " '
+            index($0, heading) == 1 { flag=1; next }
+            /^## / { if (flag) exit }
+            flag { print }
+          ' CHANGELOG.md > release-notes.md
+          {
+            echo
+            echo "**Full Changelog**: https://github.com/miso-belica/sumy/compare/${PREV_TAG}...${NEW_TAG}"
+          } >> release-notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ steps.new_tag.outputs.tag }}" --title "${{ steps.new_tag.outputs.tag }}" --notes-file release-notes.md

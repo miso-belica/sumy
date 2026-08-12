@@ -17,17 +17,6 @@ def install(context):
     context.run("uv sync --all-extras")
 
 
-@task(test)
-def release(context):
-    context.run("uv build")
-    context.run("uv publish")
-
-
-@task(test)
-def bump(context, version="patch"):
-    context.run(f"bumpversion {version}")
-    context.run("git commit --amend")
-
 @task
 def docker(context):
     context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.12.0 .")
