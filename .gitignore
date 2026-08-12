@@ -11,6 +11,7 @@ __pycache__/
 # IDE files, .coverage, .pytest_cache, ...
 .*
 !/.github/
+!.dockerignore
 !.gitignore
 
 # do not import jupyter notebooks for exploration
