@@ -116,6 +116,9 @@ dev = [
     "pytest-cov>=2.6.1",
     "codecov>=2.1.13",
     "invoke>=2.0.0",
+    # Requires Python>=3.9; only used interactively/in CI on a current interpreter (see
+    # publish-to-pypi.yml), so it stays out of the resolution for the Python 3.8 environment.
+    "bump-my-version>=1.5.1; python_version >= '3.9'",
 ]
 
 [project.scripts]
@@ -139,8 +142,8 @@ include = [
 
 [tool.bumpversion]
 current_version = "0.12.0"
-commit = false
-tag = false
+commit = true
+tag = true
 
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
@@ -152,6 +155,22 @@ filename = "sumy/__init__.py"
 
 [[tool.bumpversion.files]]
 filename = "tasks.py"
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "## Unreleased"
+replace = """## Unreleased
+
+## {new_version} ({now:%Y-%m-%d})"""
+
+[[tool.bumpversion.files]]
+filename = "uv.lock"
+search = """name = "sumy"
+version = "{current_version}"
+source = {{ editable = "." }}"""
+replace = """name = "sumy"
+version = "{new_version}"
+source = {{ editable = "." }}"""
 
 [tool.isort]
 multi_line_output = 5
