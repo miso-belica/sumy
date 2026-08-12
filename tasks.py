@@ -19,5 +19,5 @@ def install(context):
 
 @task
 def docker(context):
-    context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.12.0 .")
+    context.run("docker build --no-cache --rm=true --tag misobelica/sumy:latest -t misobelica/sumy:0.13.0 .")
     context.run("docker push misobelica/sumy --all-tags")

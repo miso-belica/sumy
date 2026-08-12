@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+
+## 0.13.0 (2026-08-12)
 - **INCOMPATIBILITY:** `cosine_similarity`, `unit_overlap`, `AbstractSummarizer.__init__`, `ItemsCount` and the ROUGE evaluation functions raise `TypeError` instead of `ValueError` for invalid argument types.
 - **INCOMPATIBILITY:** `Rouge-L (Summary Level)` scores change to match the official `ROUGE-1.5.5.pl`.
 - **INCOMPATIBILITY:** ROUGE-L functions raise `ValueError`, not `ZeroDivisionError`, when either input has no words.
