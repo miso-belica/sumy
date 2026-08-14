@@ -61,23 +61,24 @@ class KLSummarizer(AbstractSummarizer):
         content_word_tf = {w: f / content_words_count for w, f in content_words_freq.items()}
         return content_word_tf
 
-    def _joint_freq(self, word_list_1, word_list_2):
-        # combined length of the word lists
-        total_len = len(word_list_1) + len(word_list_2)
+    @staticmethod
+    def _joint_freq(word_freq_1, word_freq_2, total_len):
+        """
+        Frequency of the words of two word lists merged together.
 
-        # word frequencies within each list
-        wc1 = self._compute_word_freq(word_list_1)
-        wc2 = self._compute_word_freq(word_list_2)
-
+        :param word_freq_1: word counts of the first word list
+        :param word_freq_2: word counts of the second word list
+        :param total_len: combined length of both word lists
+        """
         # inputs the counts from the first list
-        joint = wc1.copy()
+        joint = word_freq_1.copy()
 
         # adds in the counts of the second list
-        for k in wc2:
+        for k in word_freq_2:
             if k in joint:
-                joint[k] += wc2[k]
+                joint[k] += word_freq_2[k]
             else:
-                joint[k] = wc2[k]
+                joint[k] = word_freq_2[k]
 
         # divides total counts by the combined length
         for k in joint:
@@ -117,14 +118,21 @@ class KLSummarizer(AbstractSummarizer):
         # get all content words once for efficiency
         sentences_as_words = [self._get_content_words_in_sentence(s) for s in sentences]
 
+        # the words of a sentence never change, so count them just once as well
+        sentences_as_freq = [self._compute_word_freq(words) for words in sentences_as_words]
+
         # Removes one sentence per iteration by adding to summary
         while len(sentences_list) > 0:
             # will store all the kls values for this pass
             kls = []
 
-            for s in sentences_as_words:
-                # calculates the joint frequency through combining the word lists
-                joint_freq = self._joint_freq(s, summary_as_word_list)
+            # the summary is the same for every sentence of this pass
+            summary_freq = self._compute_word_freq(summary_as_word_list)
+            summary_len = len(summary_as_word_list)
+
+            for words, sentence_freq in zip(sentences_as_words, sentences_as_freq):
+                # calculates the joint frequency through combining the word counts
+                joint_freq = self._joint_freq(sentence_freq, summary_freq, len(words) + summary_len)
 
                 # adds the calculated kl divergence to the list in index = sentence used
                 kls.append(self._kl_divergence(joint_freq, word_freq))
@@ -132,6 +140,7 @@ class KLSummarizer(AbstractSummarizer):
             # to consider and then add it into the summary
             index_to_remove = self._find_index_of_best_sentence(kls)
             best_sentence = sentences_list.pop(index_to_remove)
+            del sentences_as_freq[index_to_remove]
             summary_as_word_list.extend(sentences_as_words.pop(index_to_remove))
 
             # value is the iteration in which it was removed multiplied by -1 so that
