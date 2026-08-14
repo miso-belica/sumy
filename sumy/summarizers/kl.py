@@ -109,7 +109,7 @@ class KLSummarizer(AbstractSummarizer):
     def _compute_ratings(self, sentences):
         word_freq = self.compute_tf(sentences)
         ratings = {}
-        summary = []
+        summary_as_word_list = []
 
         # make it a list so that it can be modified
         sentences_list = list(sentences)
@@ -122,9 +122,6 @@ class KLSummarizer(AbstractSummarizer):
             # will store all the kls values for this pass
             kls = []
 
-            # converts summary to word list
-            summary_as_word_list = self._get_all_words_in_doc(summary)
-
             for s in sentences_as_words:
                 # calculates the joint frequency through combining the word lists
                 joint_freq = self._joint_freq(s, summary_as_word_list)
@@ -135,8 +132,7 @@ class KLSummarizer(AbstractSummarizer):
             # to consider and then add it into the summary
             index_to_remove = self._find_index_of_best_sentence(kls)
             best_sentence = sentences_list.pop(index_to_remove)
-            del sentences_as_words[index_to_remove]
-            summary.append(best_sentence)
+            summary_as_word_list.extend(sentences_as_words.pop(index_to_remove))
 
             # value is the iteration in which it was removed multiplied by -1 so that
             # the first sentences removed (the most important) have highest values

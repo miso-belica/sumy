@@ -139,6 +139,22 @@ def test_stop_words_are_matched_against_normalized_words(summarizer):
     assert frequencies == {"cat": 0.5, "sleep": 0.5}
 
 
+def test_summarization_should_not_depend_on_letter_case(summarizer):
+    """Words are normalized, so shouting the document must not change the summary."""
+    sentences = [
+        "Dogs bark at the cat.",
+        "Dogs and cats live in the garden.",
+        "The garden is full of cats.",
+    ]
+    document = build_document(sentences)
+    lowercase_document = build_document([s.lower() for s in sentences])
+
+    summary = summarizer(document, 2)
+    lowercase_summary = summarizer(lowercase_document, 2)
+
+    assert [str(s).lower() for s in summary] == [str(s) for s in lowercase_summary]
+
+
 def test_the_sentences_should_be_in_different_order(summarizer):
     """https://github.com/miso-belica/sumy/issues/146"""
     paragraphs = [
