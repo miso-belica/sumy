@@ -1,5 +1,6 @@
 
 
+import numpy
 import pytest
 
 import sumy.summarizers.kl as kl_module
@@ -87,11 +88,15 @@ def test_compute_word_freq(summarizer):
 
 
 def joint_freq_of_words(summarizer, words_1, words_2):
-    return summarizer._joint_freq(
-        summarizer._compute_word_freq(words_1),
-        summarizer._compute_word_freq(words_2),
+    """Joint frequency of two word lists, labelled by word again to keep the assertions readable."""
+    vocabulary = {word: index for index, word in enumerate(dict.fromkeys(words_1 + words_2))}
+    joint_freq = summarizer._joint_freq(
+        summarizer._compute_word_freq_array(words_1, vocabulary),
+        summarizer._compute_word_freq_array(words_2, vocabulary),
         len(words_1) + len(words_2),
     )
+
+    return {word: joint_freq[index] for word, index in vocabulary.items()}
 
 
 def test_joint_freq(summarizer):
@@ -118,16 +123,16 @@ def test_joint_freq(summarizer):
 def test_kl_divergence(summarizer):
     EPS = 0.00001
 
-    w1 = {"one": 0.35, "two": 0.5, "three": 0.15}
-    w2 = {"one": 1.0/3.0, "two": 1.0/3.0, "three": 1.0/3.0}
+    w1 = numpy.array([0.35, 0.5, 0.15])
+    w2 = numpy.array([1.0/3.0, 1.0/3.0, 1.0/3.0])
 
     # This value comes from scipy.stats.entropy(w2_, w1_)
     # Note: the order of params is different
     kl_correct = 0.11475080798005841
     assert abs(summarizer._kl_divergence(w1, w2) - kl_correct) < EPS
 
-    w1 = {"one": 0.1, "two": 0.2, "three": 0.7}
-    w2 = {"one": 0.2, "two": 0.4, "three": 0.4}
+    w1 = numpy.array([0.1, 0.2, 0.7])
+    w2 = numpy.array([0.2, 0.4, 0.4])
 
     # This value comes from scipy.stats.entropy(w2_, w1_)
     # Note: the order of params is different
@@ -142,8 +147,9 @@ def test_missing_word_in_document_during_kl_divergence_computation(summarizer):
     """
     EPS = 0.00001
 
-    summary_frequences = {"one": 0.35, "two": 0.5, "three": 0.15, "four": 0.9}
-    document_frequencies = {"one": 1.0/3.0, "two": 1.0/3.0, "three": 1.0/3.0}
+    #                                one   two  three  four
+    summary_frequences = numpy.array([0.35, 0.5, 0.15, 0.9])
+    document_frequencies = numpy.array([1.0/3.0, 1.0/3.0, 1.0/3.0, 0.0])
 
     # This value comes from scipy.stats.entropy(w2_, w1_)
     # Note: the order of params is different
