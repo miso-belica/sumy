@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.8"
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
@@ -1829,6 +1829,11 @@ hebrew = [
 japanese = [
     { name = "tinysegmenter" },
 ]
+kl = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
 korean = [
     { name = "konlpy" },
 ]
@@ -1868,6 +1873,7 @@ requires-dist = [
     { name = "konlpy", marker = "extra == 'korean'", specifier = ">=0.6.0" },
     { name = "lxml-html-clean", specifier = ">=0.1.0" },
     { name = "nltk", specifier = ">=3.9.1,!=3.10.1" },
+    { name = "numpy", marker = "extra == 'kl'", specifier = ">=1.17.3" },
     { name = "numpy", marker = "extra == 'lexrank'", specifier = ">=1.17.3" },
     { name = "numpy", marker = "extra == 'lsa'", specifier = ">=1.17.3" },
     { name = "pyarabic", marker = "extra == 'arabic'", specifier = ">=0.6.14" },
@@ -1877,7 +1883,7 @@ requires-dist = [
     { name = "requests", specifier = ">=2.32.4" },
     { name = "tinysegmenter", marker = "extra == 'japanese'", specifier = ">=0.3" },
 ]
-provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
+provides-extras = ["lsa", "lexrank", "kl", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
 
 [package.metadata.requires-dev]
 dev = [
