@@ -89,10 +89,9 @@ class KLSummarizer(AbstractSummarizer):
         :param word_freq_2: word counts of the second word list
         :param total_len: combined length of both word lists
         """
-        if total_len == 0:  # both word lists are empty, so no word has any frequency
-            return numpy.zeros_like(word_freq_1)
-
-        return (word_freq_1 + word_freq_2) / total_len
+        # a zero length means that both word lists are empty, and so are their counts,
+        # so the divisor only has to stay away from zero to keep every frequency zero
+        return (word_freq_1 + word_freq_2) / numpy.maximum(total_len, 1)
 
     @staticmethod
     def _kl_divergence(summary_freq, doc_freq):
@@ -100,18 +99,21 @@ class KLSummarizer(AbstractSummarizer):
         Note: Could import scipy.stats and use scipy.stats.entropy(doc_freq, summary_freq)
         but this gives equivalent value without the import
         """
-        # a word that either side does not have has no frequency to compare
+        # a word that either side does not have has no frequency to compare, and
+        # log(1/1) adds nothing, so give both sides a frequency of one there
         common_words = (doc_freq > 0) & (summary_freq > 0)
-        doc_freq = doc_freq[common_words]
+        doc_freq = numpy.where(common_words, doc_freq, 1.0)
+        summary_freq = numpy.where(common_words, summary_freq, 1.0)
 
-        return (doc_freq * numpy.log(doc_freq / summary_freq[common_words])).sum()
+        # the last axis holds the words, so a table of sentences keeps one value per row
+        return (doc_freq * numpy.log(doc_freq / summary_freq)).sum(axis=-1)
 
     @staticmethod
     def _find_index_of_best_sentence(kls):
         """
         the best sentence is the one with the smallest kl_divergence
         """
-        return kls.index(min(kls))
+        return kls.argmin()
 
     def _compute_ratings(self, sentences):
         word_freq = self.compute_tf(sentences)
@@ -122,37 +124,46 @@ class KLSummarizer(AbstractSummarizer):
         word_to_index = {word: index for index, word in enumerate(word_freq)}
         doc_freq = numpy.fromiter(word_freq.values(), dtype=float, count=len(word_freq))
 
-        # make it a list so that it can be modified
+        # make it a list so that a sentence can be looked up by its position
         sentences_list = list(sentences)
 
         # get all content words once for efficiency
         sentences_as_words = [self._get_content_words_in_sentence(s) for s in sentences]
 
-        # the words of a sentence never change, so count them just once as well
-        sentences_as_freq = [self._compute_word_freq_array(words, word_to_index) for words in sentences_as_words]
-        sentences_lengths = [len(words) for words in sentences_as_words]
+        # the words of a sentence never change, so count them just once as well, into one
+        # row of the table of counts
+        sentences_as_freq = numpy.zeros((len(sentences_list), len(word_to_index)))
+        for row, words in enumerate(sentences_as_words):
+            sentences_as_freq[row] = self._compute_word_freq_array(words, word_to_index)
+
+        sentences_lengths = numpy.array([len(words) for words in sentences_as_words])
 
         # the summary is empty at the start and grows by one sentence per iteration
         summary_freq = numpy.zeros(len(word_to_index))
         summary_len = 0
 
+        # the sentences that are not in the summary yet, in the order of the document
+        candidates = numpy.arange(len(sentences_list))
+
         # Removes one sentence per iteration by adding to summary
-        while len(sentences_list) > 0:
-            # will store all the kls values for this pass
-            kls = []
+        while len(candidates) > 0:
+            # calculates the joint frequency of every candidate with the summary at once
+            joint_freq = self._joint_freq(
+                sentences_as_freq[candidates],
+                summary_freq,
+                (sentences_lengths[candidates] + summary_len).reshape(-1, 1),
+            )
 
-            for sentence_len, sentence_freq in zip(sentences_lengths, sentences_as_freq):
-                # calculates the joint frequency through combining the word counts
-                joint_freq = self._joint_freq(sentence_freq, summary_freq, sentence_len + summary_len)
-
-                # adds the calculated kl divergence to the list in index = sentence used
-                kls.append(self._kl_divergence(joint_freq, doc_freq))
+            # one kl divergence per candidate, in the same order
+            kls = self._kl_divergence(joint_freq, doc_freq)
 
             # to consider and then add it into the summary
             index_to_remove = self._find_index_of_best_sentence(kls)
-            best_sentence = sentences_list.pop(index_to_remove)
-            summary_len += sentences_lengths.pop(index_to_remove)
-            summary_freq += sentences_as_freq.pop(index_to_remove)
+            best = candidates[index_to_remove]
+            best_sentence = sentences_list[best]
+            summary_len += sentences_lengths[best]
+            summary_freq += sentences_as_freq[best]
+            candidates = numpy.delete(candidates, index_to_remove)
 
             # value is the iteration in which it was removed multiplied by -1 so that
             # the first sentences removed (the most important) have highest values
