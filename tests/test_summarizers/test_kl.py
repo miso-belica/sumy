@@ -2,6 +2,7 @@
 
 import pytest
 
+import sumy.summarizers.kl as kl_module
 from sumy.models.dom._sentence import Sentence
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.kl import KLSummarizer
@@ -24,6 +25,19 @@ def summarizer(stop_words):
     summarizer = KLSummarizer()
     summarizer.stop_words = stop_words
     return summarizer
+
+
+def test_numpy_not_installed():
+    summarizer = KLSummarizer()
+
+    numpy = kl_module.numpy
+    kl_module.numpy = None
+
+    try:
+        with pytest.raises(ValueError):
+            summarizer(build_document(), 10)
+    finally:
+        kl_module.numpy = numpy
 
 
 def test_empty_document(summarizer):

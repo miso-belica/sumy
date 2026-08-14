@@ -91,6 +91,7 @@ dependencies = [
 [project.optional-dependencies]
 LSA = ["numpy>=1.17.3"]
 LexRank = ["numpy>=1.17.3"]
+KL = ["numpy>=1.17.3"]
 Japanese = ["tinysegmenter>=0.3"]
 Chinese = ["jieba>=0.39"]
 Korean = ["konlpy>=0.6.0"]  # earlier releases do not declare their JPype1 dependency

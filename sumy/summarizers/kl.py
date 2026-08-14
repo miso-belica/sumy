@@ -2,6 +2,11 @@
 
 import math
 
+try:
+    import numpy
+except ImportError:
+    numpy = None
+
 from ._summarizer import AbstractSummarizer
 
 
@@ -15,10 +20,17 @@ class KLSummarizer(AbstractSummarizer):
     stop_words = frozenset()
 
     def __call__(self, document, sentences_count):
+        self._ensure_dependencies_installed()
+
         sentences = document.sentences
         ratings = self._compute_ratings(sentences)
 
         return self._get_best_sentences(sentences, sentences_count, ratings)
+
+    @staticmethod
+    def _ensure_dependencies_installed():
+        if numpy is None:
+            raise ValueError("KL summarizer requires NumPy. Please, install it by command 'pip install numpy'.")
 
     @staticmethod
     def _get_all_words_in_doc(sentences):
