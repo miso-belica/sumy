@@ -56,6 +56,19 @@ def test_single_sentence(summarizer):
     assert len(returned) == 1
 
 
+def test_sentence_without_content_words(summarizer):
+    """A sentence of nothing but stop words has no divergence to compute, which is zero."""
+    document = build_document([
+        "The cat and the dog.",
+        "The bird sings.",
+        "And I the and.",
+    ])
+
+    summary = summarizer(document, 2)
+
+    assert [str(s) for s in summary] == ["The cat and the dog.", "And I the and."]
+
+
 def test_compute_word_freq(summarizer):
     words = ["one", "two", "three", "four"]
     freq = summarizer._compute_word_freq(words)
