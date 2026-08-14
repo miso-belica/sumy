@@ -59,10 +59,18 @@ def test_compute_word_freq(summarizer):
     assert freq.get("three", 0) == 0
 
 
+def joint_freq_of_words(summarizer, words_1, words_2):
+    return summarizer._joint_freq(
+        summarizer._compute_word_freq(words_1),
+        summarizer._compute_word_freq(words_2),
+        len(words_1) + len(words_2),
+    )
+
+
 def test_joint_freq(summarizer):
     w1 = ["one", "two", "three", "four"]
     w2 = ["one", "two", "three", "four"]
-    freq = summarizer._joint_freq(w1, w2)
+    freq = joint_freq_of_words(summarizer, w1, w2)
 
     assert freq["one"] == 1.0/4
     assert freq["two"] == 1.0/4
@@ -71,7 +79,7 @@ def test_joint_freq(summarizer):
 
     w1 = ["one", "two", "three", "four"]
     w2 = ["one", "one", "three", "five"]
-    freq = summarizer._joint_freq(w1, w2)
+    freq = joint_freq_of_words(summarizer, w1, w2)
 
     assert freq["one"] == 3.0/8
     assert freq["two"] == 1.0/8
