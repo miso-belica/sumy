@@ -25,9 +25,7 @@ class KLSummarizer(AbstractSummarizer):
         return [w for s in sentences for w in s.words]
 
     def _get_content_words_in_sentence(self, sentence):
-        normalized_words = self._normalize_words(sentence.words)
-        normalized_content_words = self._filter_out_stop_words(normalized_words)
-        return normalized_content_words
+        return self._get_content_words(sentence.words)
 
     def _normalize_words(self, words):
         return [self.normalize_word(w) for w in words]
@@ -44,8 +42,11 @@ class KLSummarizer(AbstractSummarizer):
 
     def _get_all_content_words_in_doc(self, sentences):
         all_words = self._get_all_words_in_doc(sentences)
-        content_words = self._filter_out_stop_words(all_words)
-        normalized_content_words = self._normalize_words(content_words)
+        return self._get_content_words(all_words)
+
+    def _get_content_words(self, words):
+        normalized_words = self._normalize_words(words)
+        normalized_content_words = self._filter_out_stop_words(normalized_words)
         return normalized_content_words
 
     def compute_tf(self, sentences):

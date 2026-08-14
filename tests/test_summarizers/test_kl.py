@@ -130,6 +130,15 @@ def test_tf_idf_metric_should_be_real_number():
     }
 
 
+def test_stop_words_are_matched_against_normalized_words(summarizer):
+    """A capitalized stop word is still a stop word, so it must not be counted."""
+    sentence = Sentence("The cat and I sleep.", Tokenizer("english"))
+
+    frequencies = summarizer.compute_tf([sentence])
+
+    assert frequencies == {"cat": 0.5, "sleep": 0.5}
+
+
 def test_the_sentences_should_be_in_different_order(summarizer):
     """https://github.com/miso-belica/sumy/issues/146"""
     paragraphs = [

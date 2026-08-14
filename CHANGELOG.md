@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Fixed `KLSummarizer` counting capitalized stop words as content words, because the document's words were filtered before they were normalized. Same class of bug as https://github.com/miso-belica/sumy/pull/240
 - **CHORE:** Rebuilt the Docker image with all language extras, a multi-stage `uv sync` build, and a non-root user.
 
 ## 0.13.0 (2026-08-12)
