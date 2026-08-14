@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Fixed `KLSummarizer` counting capitalized stop words as content words, because the document's words were filtered before they were normalized. Same class of bug as https://github.com/miso-belica/sumy/pull/240
 - **CHORE:** Rebuilt the Docker image with all language extras, a multi-stage `uv sync` build, and a non-root user.
 - **FEATURE:** Added Python 3.15 support.
 - **FIX:** Required `breadability>=0.1.21`, which no longer imports `pkg_resources`, and dropped the `setuptools` dependency and its `<82` cap. See https://github.com/miso-belica/sumy/issues/235
