@@ -69,14 +69,15 @@ class KLSummarizer(AbstractSummarizer):
         :param word_freq_2: word counts of the second word list
         :param total_len: combined length of both word lists
         """
-        # inputs the counts from the first list and adds in the counts of the second one
-        joint = self._add_word_freq(word_freq_1.copy(), word_freq_2)
+        # copying the bigger table and adding the smaller one into it keeps the
+        # word by word work proportional to the smaller of the two
+        if len(word_freq_1) > len(word_freq_2):
+            joint = self._add_word_freq(word_freq_1.copy(), word_freq_2)
+        else:
+            joint = self._add_word_freq(word_freq_2.copy(), word_freq_1)
 
         # divides total counts by the combined length
-        for k in joint:
-            joint[k] /= float(total_len)
-
-        return joint
+        return {word: count / total_len for word, count in joint.items()}
 
     @staticmethod
     def _add_word_freq(word_freq, added_word_freq):
