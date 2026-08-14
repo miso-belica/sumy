@@ -61,8 +61,7 @@ class KLSummarizer(AbstractSummarizer):
         content_word_tf = {w: f / content_words_count for w, f in content_words_freq.items()}
         return content_word_tf
 
-    @staticmethod
-    def _joint_freq(word_freq_1, word_freq_2, total_len):
+    def _joint_freq(self, word_freq_1, word_freq_2, total_len):
         """
         Frequency of the words of two word lists merged together.
 
@@ -70,21 +69,22 @@ class KLSummarizer(AbstractSummarizer):
         :param word_freq_2: word counts of the second word list
         :param total_len: combined length of both word lists
         """
-        # inputs the counts from the first list
-        joint = word_freq_1.copy()
-
-        # adds in the counts of the second list
-        for k in word_freq_2:
-            if k in joint:
-                joint[k] += word_freq_2[k]
-            else:
-                joint[k] = word_freq_2[k]
+        # inputs the counts from the first list and adds in the counts of the second one
+        joint = self._add_word_freq(word_freq_1.copy(), word_freq_2)
 
         # divides total counts by the combined length
         for k in joint:
             joint[k] /= float(total_len)
 
         return joint
+
+    @staticmethod
+    def _add_word_freq(word_freq, added_word_freq):
+        """Adds the counts of the second table into the first one, which is modified."""
+        for word, count in added_word_freq.items():
+            word_freq[word] = word_freq.get(word, 0) + count
+
+        return word_freq
 
     @staticmethod
     def _kl_divergence(summary_freq, doc_freq):
@@ -110,7 +110,6 @@ class KLSummarizer(AbstractSummarizer):
     def _compute_ratings(self, sentences):
         word_freq = self.compute_tf(sentences)
         ratings = {}
-        summary_as_word_list = []
 
         # make it a list so that it can be modified
         sentences_list = list(sentences)
@@ -120,19 +119,20 @@ class KLSummarizer(AbstractSummarizer):
 
         # the words of a sentence never change, so count them just once as well
         sentences_as_freq = [self._compute_word_freq(words) for words in sentences_as_words]
+        sentences_lengths = [len(words) for words in sentences_as_words]
+
+        # the summary is empty at the start and grows by one sentence per iteration
+        summary_freq = {}
+        summary_len = 0
 
         # Removes one sentence per iteration by adding to summary
         while len(sentences_list) > 0:
             # will store all the kls values for this pass
             kls = []
 
-            # the summary is the same for every sentence of this pass
-            summary_freq = self._compute_word_freq(summary_as_word_list)
-            summary_len = len(summary_as_word_list)
-
-            for words, sentence_freq in zip(sentences_as_words, sentences_as_freq):
+            for sentence_len, sentence_freq in zip(sentences_lengths, sentences_as_freq):
                 # calculates the joint frequency through combining the word counts
-                joint_freq = self._joint_freq(sentence_freq, summary_freq, len(words) + summary_len)
+                joint_freq = self._joint_freq(sentence_freq, summary_freq, sentence_len + summary_len)
 
                 # adds the calculated kl divergence to the list in index = sentence used
                 kls.append(self._kl_divergence(joint_freq, word_freq))
@@ -140,8 +140,8 @@ class KLSummarizer(AbstractSummarizer):
             # to consider and then add it into the summary
             index_to_remove = self._find_index_of_best_sentence(kls)
             best_sentence = sentences_list.pop(index_to_remove)
-            del sentences_as_freq[index_to_remove]
-            summary_as_word_list.extend(sentences_as_words.pop(index_to_remove))
+            summary_len += sentences_lengths.pop(index_to_remove)
+            self._add_word_freq(summary_freq, sentences_as_freq.pop(index_to_remove))
 
             # value is the iteration in which it was removed multiplied by -1 so that
             # the first sentences removed (the most important) have highest values
