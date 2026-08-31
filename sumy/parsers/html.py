@@ -40,9 +40,11 @@ class HtmlParser(DocumentParser):
         # must not stop the plaintext side of sumy from being imported in a browser.
         try:
             from breadability.readable import Article
-        except ImportError:
+        except ImportError as error:
+            # `error` is in the message because breadability has its own dependencies: with
+            # breadability installed but lxml missing, "install breadability" is no help.
             raise ValueError(
-                "Parsing HTML requires breadability. "
+                f"Parsing HTML requires breadability ({error}). "
                 "Please, install it by command 'pip install breadability' or use PlaintextParser."
             )
 

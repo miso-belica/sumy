@@ -45,3 +45,11 @@ def test_html_parser_import_without_breadability(monkeypatch):
 
     with pytest.raises(ValueError, match="pip install breadability"):
         html.HtmlParser("<p>Hello.</p>", url=None, tokenizer=None)
+
+
+def test_html_parser_names_the_dependency_that_actually_failed(monkeypatch):
+    """breadability itself needs lxml, and "install breadability" is no help then."""
+    html = reimport_without(monkeypatch, "sumy.parsers.html", missing="lxml")
+
+    with pytest.raises(ValueError, match="lxml"):
+        html.HtmlParser("<p>Hello.</p>", url=None, tokenizer=None)
