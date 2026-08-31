@@ -228,11 +228,15 @@ Such a summary might include verbal innovations, and good abstractive summarizat
     // main thread: summarizing is synchronous and there is no worker here.
     requestAnimationFrame(() => {
       try {
+        // The field can be empty or negative -- a summary of zero sentences is not an answer.
+        const sentenceCount = Math.max(1, Math.trunc(Number(elements.sentences.value)) || 1);
+        elements.sentences.value = sentenceCount;
+
         const sentences = summarize(pyodide, {
           text: elements.text.value,
           language: elements.language.value,
           method: elements.method.value,
-          sentenceCount: Number(elements.sentences.value),
+          sentenceCount,
         });
 
         elements.summary.append(
