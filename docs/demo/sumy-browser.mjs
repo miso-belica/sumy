@@ -13,13 +13,17 @@
  */
 
 /** NLTK's own data repository, served with CORS headers by jsDelivr. About 4 MB. */
-export const PUNKT_TAB_URL =
+const PUNKT_TAB_URL =
   "https://cdn.jsdelivr.net/gh/nltk/nltk_data@gh-pages/packages/tokenizers/punkt_tab.zip";
 
 /** Where the tokenizer data is put; NLTK is told to look here. */
-export const NLTK_DATA_DIRECTORY = "/nltk_data";
+const NLTK_DATA_DIRECTORY = "/nltk_data";
 
-/** Summarizers usable with nothing but sumy, numpy and punkt_tab installed. */
+/**
+ * Summarizers usable with nothing but sumy, numpy and punkt_tab installed.
+ *
+ * The keys of `_SUMMARIZERS` in the bootstrap below, for a page to offer as a choice.
+ */
 export const METHODS = ["lsa", "luhn", "lex_rank", "text_rank", "sum_basic", "kl", "reduction", "random"];
 
 /**
@@ -44,8 +48,7 @@ export const LANGUAGES = [
 const BOOTSTRAP = `
 import nltk
 
-if ${JSON.stringify(NLTK_DATA_DIRECTORY)} not in nltk.data.path:
-    nltk.data.path.append(${JSON.stringify(NLTK_DATA_DIRECTORY)})
+nltk.data.path.append(${JSON.stringify(NLTK_DATA_DIRECTORY)})
 
 from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
@@ -132,7 +135,6 @@ export async function loadSumy(pyodide, { wheel = "sumy", punktTabUrl = PUNKT_TA
   report("Downloading the NLTK sentence tokenizer…");
   await installPunktTab(pyodide, download, punktTabUrl);
 
-  report("Ready.");
   pyodide.runPython(BOOTSTRAP);
 }
 
@@ -142,17 +144,17 @@ export async function loadSumy(pyodide, { wheel = "sumy", punktTabUrl = PUNKT_TA
  * @returns the picked sentences, in document order
  */
 export function summarize(pyodide, { text, language = "english", method = "lsa", sentenceCount = 3 }) {
-  if (!METHODS.includes(method)) throw new Error(`Unknown summarization method: ${method}`);
-
   const summarizeInPython = pyodide.globals.get("_sumy_summarize");
   if (!summarizeInPython) throw new Error("sumy is not loaded yet -- await loadSumy() first.");
 
-  let sentences;
   try {
-    sentences = summarizeInPython(text, language, method, sentenceCount);
-    return sentences.toJs();
+    const sentences = summarizeInPython(text, language, method, sentenceCount);
+    try {
+      return sentences.toJs();
+    } finally {
+      sentences.destroy();
+    }
   } finally {
-    if (sentences) sentences.destroy();
     summarizeInPython.destroy();
   }
 }
