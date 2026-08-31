@@ -34,10 +34,7 @@ class HtmlParser(DocumentParser):
 
     def __init__(self, html_content, tokenizer, url=None):
         super().__init__(tokenizer)
-        self._article = self._read_article(html_content, url)
 
-    @staticmethod
-    def _read_article(html_content, url):
         # Imported here, not at module level: breadability requires docopt, which PyPI only
         # carries as a source distribution, so it cannot be installed under Emscripten. That
         # must not stop the plaintext side of sumy from being imported in a browser.
@@ -49,7 +46,7 @@ class HtmlParser(DocumentParser):
                 "Please, install it by command 'pip install breadability' or use PlaintextParser."
             )
 
-        return Article(html_content, url)
+        self._article = Article(html_content, url)
 
     @cached_property
     def significant_words(self):
