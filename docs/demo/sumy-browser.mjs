@@ -89,8 +89,8 @@ def _sumy_summarize(text, language, method, sentence_count):
  * The zip is left packed: NLTK reads the models straight out of it, and unpacking 100+ files
  * into the Emscripten filesystem is only slower.
  */
-async function installPunktTab(pyodide, url) {
-  const response = await fetch(url);
+async function installPunktTab(pyodide, download, url) {
+  const response = await download;
   if (!response.ok) {
     throw new Error(`Could not download NLTK punkt_tab data from ${url}: HTTP ${response.status}`);
   }
@@ -112,6 +112,12 @@ async function installPunktTab(pyodide, url) {
 export async function loadSumy(pyodide, { wheel = "sumy", punktTabUrl = PUNKT_TAB_URL, onProgress } = {}) {
   const report = onProgress || (() => {});
 
+  // Started before the packages and awaited after them: 4 MB of tokenizer data that depends
+  // on nothing being installed, so it downloads while micropip works. `catch` keeps a failed
+  // download from being an unhandled rejection until installPunktTab reports it.
+  const download = fetch(punktTabUrl);
+  download.catch(() => {});
+
   report("Loading numpy…");
   await pyodide.loadPackage(["micropip", "numpy"]);
 
@@ -124,7 +130,7 @@ export async function loadSumy(pyodide, { wheel = "sumy", punktTabUrl = PUNKT_TA
   }
 
   report("Downloading the NLTK sentence tokenizer…");
-  await installPunktTab(pyodide, punktTabUrl);
+  await installPunktTab(pyodide, download, punktTabUrl);
 
   report("Ready.");
   pyodide.runPython(BOOTSTRAP);
