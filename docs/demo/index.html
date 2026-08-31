@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sumy in the browser</title>
+<meta name="description" content="Automatic text summarization with sumy, running in your browser through Pyodide and WebAssembly.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --page: #fbfaf8;
+    --card: #ffffff;
+    --ink: #1c1b19;
+    --muted: #6b6862;
+    --line: #e3dfd8;
+    --accent: #9c4221;
+    --accent-soft: #fdf3ee;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #17161a;
+      --card: #1f1e23;
+      --ink: #eceaf0;
+      --muted: #a09daa;
+      --line: #322f38;
+      --accent: #f0885a;
+      --accent-soft: #2a2027;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+    background: var(--page);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  main { max-width: 60rem; margin: 0 auto; }
+
+  h1 { margin: 0 0 .35rem; font-size: clamp(1.6rem, 4vw, 2.25rem); letter-spacing: -.02em; }
+
+  .lede { margin: 0 0 1.5rem; color: var(--muted); max-width: 46rem; }
+
+  a { color: var(--accent); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: .75rem;
+    padding: 1.25rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  label { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+
+  select, input[type="number"], textarea, button {
+    font: inherit;
+    color: inherit;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: .4rem;
+    padding: .5rem .6rem;
+  }
+
+  input[type="number"] { width: 5.5rem; }
+
+  textarea { width: 100%; min-height: 13rem; resize: vertical; line-height: 1.55; }
+
+  button {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    padding: .55rem 1.25rem;
+    cursor: pointer;
+  }
+
+  button:disabled { opacity: .55; cursor: progress; }
+
+  .status { margin: 1rem 0 0; font-size: .9rem; color: var(--muted); min-height: 1.6em; }
+  .status[data-state="error"] { color: #c53030; }
+
+  #summary { margin: 1.5rem 0 0; padding: 0; list-style: none; display: grid; gap: .75rem; }
+
+  #summary li {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: .35rem;
+    padding: .7rem .9rem;
+  }
+
+  footer { margin-top: 2.5rem; font-size: .875rem; color: var(--muted); }
+
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>sumy in the browser</h1>
+  <p class="lede">
+    The same <a href="https://github.com/miso-belica/sumy">sumy</a> you install with
+    <code>pip</code>, running as WebAssembly on this page. Nothing is uploaded anywhere:
+    <a href="https://pyodide.org/">Pyodide</a> starts CPython in a WASM sandbox and
+    <code>micropip</code> installs sumy into it straight from PyPI.
+  </p>
+
+  <div class="card">
+    <div class="controls">
+      <div>
+        <label for="language">Language</label>
+        <select id="language"></select>
+      </div>
+      <div>
+        <label for="method">Method</label>
+        <select id="method"></select>
+      </div>
+      <div>
+        <label for="sentences">Sentences</label>
+        <input id="sentences" type="number" min="1" max="20" value="3">
+      </div>
+      <button id="run" type="button" disabled>Summarize</button>
+    </div>
+
+    <label for="text">Document</label>
+    <textarea id="text" spellcheck="false"></textarea>
+
+    <p class="status" id="status" role="status">Starting Python…</p>
+    <ul id="summary"></ul>
+  </div>
+
+  <footer>
+    Installed in the page with
+    <code>await micropip.install("sumy")</code> — possible because PyPI now accepts wheels for
+    the PyEmscripten platform of
+    <a href="https://peps.python.org/pep-0783/">PEP 783</a>. sumy is pure Python, so its
+    ordinary <code>py3-none-any</code> wheel is what runs here.
+  </footer>
+</main>
+
+<script type="module">
+  import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.mjs";
+
+  import { LANGUAGES, METHODS, loadSumy, summarize } from "./sumy-browser.mjs";
+
+  const SAMPLE_TEXT = `Automatic summarization is the process of shortening a set of data computationally, to create a subset that represents the most important or relevant information within the original content.
+Artificial intelligence algorithms are commonly developed and employed to achieve this, specialized for different types of data.
+Text summarization is usually implemented by natural language processing methods, designed to locate the most informative sentences in a given document.
+There are two general approaches to automatic summarization: extraction and abstraction.
+Extractive methods work by selecting a subset of existing words, phrases, or sentences in the original text to form the summary.
+In contrast, abstractive methods build an internal semantic representation of the original content and then use natural language generation techniques to create a summary closer to what a human might write.
+Such a summary might include verbal innovations, and good abstractive summarization remains a hard problem.`;
+
+  const elements = {
+    language: document.getElementById("language"),
+    method: document.getElementById("method"),
+    sentences: document.getElementById("sentences"),
+    run: document.getElementById("run"),
+    text: document.getElementById("text"),
+    status: document.getElementById("status"),
+    summary: document.getElementById("summary"),
+  };
+
+  function fill(select, values) {
+    for (const value of values) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value.replace("_", " ");
+      select.append(option);
+    }
+  }
+
+  function report(message, state = "") {
+    elements.status.textContent = message;
+    elements.status.dataset.state = state;
+  }
+
+  fill(elements.language, LANGUAGES);
+  fill(elements.method, METHODS);
+  elements.text.value = SAMPLE_TEXT;
+
+  const pyodide = await loadPyodide({
+    // Progress and errors belong in the status line, not only in the developer console.
+    stderr: (line) => console.warn(line),
+  });
+
+  // ?wheel=<url> installs a wheel other than the latest sumy release from PyPI, which is how
+  // a release candidate (or this repository's own dist/sumy-*.whl) gets tried out in the page.
+  const wheel = new URLSearchParams(location.search).get("wheel") || "sumy";
+
+  try {
+    await loadSumy(pyodide, { wheel, onProgress: (message) => report(message) });
+  } catch (error) {
+    report(`Could not load sumy: ${error.message}`, "error");
+    throw error;
+  }
+
+  report("Ready — sumy runs locally in this tab.");
+  elements.run.disabled = false;
+
+  elements.run.addEventListener("click", () => {
+    elements.run.disabled = true;
+    report("Summarizing…");
+    elements.summary.replaceChildren();
+
+    // Yield once so the disabled button and the status line paint before Python blocks the
+    // main thread: summarizing is synchronous and there is no worker here.
+    requestAnimationFrame(() => {
+      try {
+        const sentences = summarize(pyodide, {
+          text: elements.text.value,
+          language: elements.language.value,
+          method: elements.method.value,
+          sentenceCount: Number(elements.sentences.value),
+        });
+
+        elements.summary.append(
+          ...sentences.map((sentence) => {
+            const item = document.createElement("li");
+            item.textContent = sentence;
+            return item;
+          }),
+        );
+        report(`${sentences.length} sentence(s) picked by ${elements.method.value}.`);
+      } catch (error) {
+        report(error.message, "error");
+      } finally {
+        elements.run.disabled = false;
+      }
+    });
+  });
+</script>
+</body>
+</html>
