@@ -6,7 +6,6 @@ from contextlib import closing
 from functools import wraps
 from os.path import abspath, dirname, join
 
-import requests
 from pycountry import languages
 
 from ._compat import string_types, to_string, to_unicode
@@ -30,6 +29,10 @@ def normalize_language(language):
 
 
 def fetch_url(url, timeout=(3.05, 30)):
+    # Imported here, not at module level: requests cannot open a socket under Emscripten, so
+    # sumy does not declare it there. Everything else in this module has to keep working.
+    import requests
+
     with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
         response.raise_for_status()
         return response.content
