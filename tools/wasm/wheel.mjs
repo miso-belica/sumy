@@ -2,6 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import process from "node:process";
 
 const REPOSITORY_ROOT = path.resolve(import.meta.dirname, "..", "..");
 
@@ -33,4 +34,19 @@ export function mountWheel(pyodide, wheel) {
   pyodide.FS.mkdirTree("/wheels");
   pyodide.FS.writeFile(path.join("/wheels", name), fs.readFileSync(wheel));
   return "emfs:/wheels/" + name;
+}
+
+/**
+ * Run a check, reporting a failure as one line.
+ *
+ * An unhandled rejection from inside Pyodide dumps the whole pyodide.asm.mjs source into the
+ * log, which buries the actual message.
+ */
+export async function runCheck(main) {
+  try {
+    await main();
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
 }

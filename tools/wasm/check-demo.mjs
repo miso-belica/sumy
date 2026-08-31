@@ -13,7 +13,7 @@ import process from "node:process";
 import { loadPyodide } from "pyodide";
 
 import { loadSumy, summarize } from "../../docs/demo/sumy-browser.mjs";
-import { findWheel, mountWheel } from "./wheel.mjs";
+import { findWheel, mountWheel, runCheck } from "./wheel.mjs";
 
 const TEXT = `
 Automatic summarization is the process of shortening a text document with software.
@@ -53,9 +53,4 @@ async function main() {
   for (const sentence of sentences) console.log("  * " + sentence);
 }
 
-try {
-  await main();
-} catch (error) {
-  console.error(error.message);
-  process.exit(1);
-}
+await runCheck(main);

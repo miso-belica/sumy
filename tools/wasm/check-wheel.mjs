@@ -14,7 +14,7 @@ import path from "node:path";
 import process from "node:process";
 import { loadPyodide } from "pyodide";
 
-import { findWheel, mountWheel } from "./wheel.mjs";
+import { findWheel, mountWheel, runCheck } from "./wheel.mjs";
 
 // Imported in a browser without breadability (docopt has no wheel) or requests (no sockets),
 // so these must not reach for either at import time.
@@ -59,11 +59,4 @@ failures
   console.log(`${path.basename(wheel)} installs and imports under Pyodide ${pyodide.version}.`);
 }
 
-// Reported by hand: an unhandled rejection from inside Pyodide dumps the whole
-// pyodide.asm.mjs source into the log, which buries the actual message.
-try {
-  await main();
-} catch (error) {
-  console.error(error.message);
-  process.exit(1);
-}
+await runCheck(main);
