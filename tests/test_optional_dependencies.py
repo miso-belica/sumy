@@ -23,7 +23,17 @@ def reimport_without(monkeypatch, module, missing):
     # sys.modules when another test already imported it, without consulting the parent.
     for name in [missing, *(name for name in sys.modules if name.startswith(missing + "."))]:
         monkeypatch.setitem(sys.modules, name, None)
+
+    # Importing a submodule also rebinds it as an attribute of its package, which sys.modules
+    # alone does not undo -- `sumy.parsers.html` would keep pointing at this second copy of
+    # the module, with its own classes, for the rest of the session.
+    parent, _, attribute = module.rpartition(".")
+    package = sys.modules.get(parent)
+    if package is not None and hasattr(package, attribute):
+        monkeypatch.setattr(package, attribute, getattr(package, attribute))
+
     monkeypatch.delitem(sys.modules, module, raising=False)
+
     return import_module(module)
 
 
