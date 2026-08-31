@@ -192,9 +192,22 @@ Such a summary might include verbal innovations, and good abstractive summarizat
   // Pyodide's own stderr is developer detail; what the reader needs is in the status line.
   const pyodide = await loadPyodide({ stderr: console.warn });
 
-  // ?wheel=<url> installs a wheel other than the latest sumy release from PyPI, which is how
+  // ?wheel=<path> installs a wheel other than the latest sumy release from PyPI, which is how
   // a release candidate (or this repository's own dist/sumy-*.whl) gets tried out in the page.
-  const wheel = new URLSearchParams(location.search).get("wheel") || "sumy";
+  //
+  // Resolved against this page and required to stay on its origin: micropip.install() runs the
+  // wheel's code, and Python in Pyodide can reach the DOM through `import js`. Without this, a
+  // crafted link to the demo would install and execute any wheel its author chose.
+  const requestedWheel = new URLSearchParams(location.search).get("wheel");
+  let wheel = "sumy";
+  if (requestedWheel) {
+    const resolved = new URL(requestedWheel, location.href);
+    if (resolved.origin !== location.origin) {
+      report(`Refusing to install a wheel from ${resolved.origin}; only this site is allowed.`, "error");
+      throw new Error("cross-origin wheel");
+    }
+    wheel = resolved.href;
+  }
 
   try {
     await loadSumy(pyodide, { wheel, onProgress: report });
