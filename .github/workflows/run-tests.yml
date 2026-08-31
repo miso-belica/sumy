@@ -88,6 +88,49 @@ jobs:
           file: ./coverage.xml
           fail_ci_if_error: false
 
+  # sumy also has to keep working where it is not CPython on a normal operating system: PEP 783
+  # made PyPI accept wheels for the PyEmscripten platform, so `micropip.install("sumy")` runs
+  # in a browser. Nothing in the matrix above can catch a regression there -- the failure mode
+  # is a dependency that cannot be resolved under Emscripten at all, which only shows up when
+  # something actually resolves it. So this job installs the built wheel into a real Pyodide
+  # runtime and summarizes a document through docs/demo/sumy-browser.mjs, the same module the
+  # demo page uses.
+  pyodide:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.14
+
+      - name: Build the wheel
+        run: uv build --wheel
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tools/wasm/package-lock.json
+
+      - name: Install Pyodide
+        run: npm ci
+        working-directory: tools/wasm
+
+      # Two separate checks on purpose: the first fails when a dependency or an import breaks
+      # under Emscripten, the second when summarizing itself does. Reading which one went red
+      # is most of the diagnosis.
+      - name: Check the wheel installs and imports under Pyodide
+        run: node tools/wasm/check-wheel.mjs
+
+      - name: Check summarizing works under Pyodide
+        run: node tools/wasm/check-demo.mjs
+
   # The `tests` job above pins everything through uv.lock, so it only ever proves that one
   # point in the supported range works. This job resolves every direct dependency to the
   # oldest version pyproject.toml claims to accept, which is what a user gets when an older
