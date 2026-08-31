@@ -62,6 +62,25 @@ jobs:
       - name: Build package
         run: uv build
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tools/wasm/package-lock.json
+
+      - name: Install Pyodide
+        run: npm ci
+        working-directory: tools/wasm
+
+      # The last gate before the upload, and on the exact artifact that is about to be
+      # uploaded: a wheel that cannot be installed by micropip breaks every browser using
+      # sumy, and a release cannot be taken back off PyPI. Placed after the bump commit is
+      # made but before it is pushed, so a failure here leaves nothing published anywhere.
+      - name: Check the wheel works in the browser
+        run: |
+          node tools/wasm/check-wheel.mjs
+          node tools/wasm/check-demo.mjs
+
       # Push before publishing: if this fails, nothing has reached PyPI yet, so there is
       # nothing to reconcile -- fix and re-run. If the publish step below fails instead, main
       # and the tag already correctly describe the release, so re-running just that step later
