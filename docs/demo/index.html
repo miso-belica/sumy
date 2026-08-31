@@ -189,17 +189,15 @@ Such a summary might include verbal innovations, and good abstractive summarizat
   fill(elements.method, METHODS);
   elements.text.value = SAMPLE_TEXT;
 
-  const pyodide = await loadPyodide({
-    // Progress and errors belong in the status line, not only in the developer console.
-    stderr: (line) => console.warn(line),
-  });
+  // Pyodide's own stderr is developer detail; what the reader needs is in the status line.
+  const pyodide = await loadPyodide({ stderr: console.warn });
 
   // ?wheel=<url> installs a wheel other than the latest sumy release from PyPI, which is how
   // a release candidate (or this repository's own dist/sumy-*.whl) gets tried out in the page.
   const wheel = new URLSearchParams(location.search).get("wheel") || "sumy";
 
   try {
-    await loadSumy(pyodide, { wheel, onProgress: (message) => report(message) });
+    await loadSumy(pyodide, { wheel, onProgress: report });
   } catch (error) {
     report(`Could not load sumy: ${error.message}`, "error");
     throw error;
