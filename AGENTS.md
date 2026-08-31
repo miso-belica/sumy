@@ -15,7 +15,7 @@ fail before you change anything, that is an environment problem, not a regressio
 
 sumy is also published for Pyodide, so a change to the dependency list or to a module-level
 import can break it in the browser without touching pytest. The checks run in node against a
-real Pyodide runtime:
+real Pyodide runtime (node 20.11+):
 
 ```sh
 $ uv build --wheel

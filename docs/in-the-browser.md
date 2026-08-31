@@ -64,8 +64,8 @@ demo leaves them out only to keep its download small.
 
 ## Checking it
 
-Two scripts in `tools/wasm` run this in a real Pyodide runtime from node, and CI runs both on
-every pull request and once more on the artifact of every release:
+Two scripts in `tools/wasm` run this in a real Pyodide runtime from node 20.11 or newer, and
+CI runs both on every pull request and once more on the artifact of every release:
 
 ```sh
 $ uv build --wheel

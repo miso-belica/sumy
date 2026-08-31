@@ -30,10 +30,13 @@ export function findWheel(explicitPath) {
  * file name for the package name, version and tags -- so the name has to be kept as it is.
  */
 export function mountWheel(pyodide, wheel) {
-  const name = path.basename(wheel);
+  // "/wheels/" + name, not path.join: the Emscripten filesystem always uses forward slashes,
+  // while path.join on Windows would write a file literally called `\wheels\sumy-....whl`
+  // that the returned emfs: URL then cannot find.
+  const mounted = "/wheels/" + path.basename(wheel);
   pyodide.FS.mkdirTree("/wheels");
-  pyodide.FS.writeFile(path.join("/wheels", name), fs.readFileSync(wheel));
-  return "emfs:/wheels/" + name;
+  pyodide.FS.writeFile(mounted, fs.readFileSync(wheel));
+  return "emfs:" + mounted;
 }
 
 /**

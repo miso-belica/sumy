@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "description": "Checks that the sumy wheel installs and runs under Pyodide (PEP 783 PyEmscripten).",
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "check-wheel": "node check-wheel.mjs"
   },
