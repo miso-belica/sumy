@@ -29,19 +29,41 @@ def normalize_language(language):
 
 
 def fetch_url(url, timeout=(3.05, 30)):
+    if sys.platform == "emscripten":
+        return _fetch_url_in_browser(url)
+
     # Imported here, not at module level: requests cannot open a socket under Emscripten, so
     # sumy does not declare it there. Everything else in this module has to keep working.
     try:
         import requests
     except ImportError:
         raise ValueError(
-            "Downloading a document requires requests, which a browser cannot use anyway. "
+            "Downloading a document requires requests. "
             "Please, install it by command 'pip install requests' or pass the text to sumy yourself."
         )
 
     with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
         response.raise_for_status()
         return response.content
+
+
+def _fetch_url_in_browser(url):
+    """
+    Download a document with the browser's own HTTP client.
+
+    There are no sockets in a browser, so requests cannot work there; Pyodide offers a
+    synchronous XMLHttpRequest client instead. Two consequences of it being the browser's
+    client and not ours: the download is subject to the same-origin policy, so it only
+    succeeds for this page's own origin or a server sending CORS headers, and `timeout` does
+    not apply -- a synchronous request cannot carry one. `_HTTP_HEADERS` is not sent either;
+    a browser sets User-Agent itself and forbids overriding it.
+    """
+    from pyodide.http import pyxhr
+
+    response = pyxhr.get(url)
+    response.raise_for_status()
+
+    return response.content
 
 
 def cached_property(getter):

@@ -12,6 +12,7 @@ both back afterwards.
 """
 
 import sys
+import types
 from importlib import import_module
 
 import pytest
@@ -68,3 +69,31 @@ def test_html_parser_names_the_dependency_that_actually_failed(monkeypatch):
 
     with pytest.raises(ValueError, match="lxml"):
         html.HtmlParser("<p>Hello.</p>", url=None, tokenizer=None)
+
+
+class FakeXhrResponse:
+    """The part of ``pyodide.http.pyxhr``'s response that fetch_url uses."""
+
+    def __init__(self, content):
+        self.content = content
+        self.raised_for_status = False
+
+    def raise_for_status(self):
+        self.raised_for_status = True
+
+
+def test_fetch_url_uses_the_browsers_own_http_client(monkeypatch):
+    """A browser has no sockets, but Pyodide offers a synchronous XMLHttpRequest client."""
+    response = FakeXhrResponse(b"<html>Downloaded in a tab.</html>")
+    requested = []
+
+    pyxhr = types.SimpleNamespace(get=lambda url: requested.append(url) or response)
+    monkeypatch.setitem(sys.modules, "pyodide", types.ModuleType("pyodide"))
+    monkeypatch.setitem(sys.modules, "pyodide.http", types.SimpleNamespace(pyxhr=pyxhr))
+    monkeypatch.setattr(sys, "platform", "emscripten")
+
+    utils = reimport_without(monkeypatch, "sumy.utils", missing="requests")
+
+    assert utils.fetch_url("https://example.com/") == b"<html>Downloaded in a tab.</html>"
+    assert requested == ["https://example.com/"]
+    assert response.raised_for_status
