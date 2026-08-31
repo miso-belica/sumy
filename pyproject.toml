@@ -65,14 +65,29 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
+# The markers on this list are what makes sumy installable in a browser. Under Emscripten
+# (Pyodide, PEP 783) `micropip.install("sumy")` has to resolve every requirement below from
+# PyPI, and four of them cannot be resolved there at all or have nothing to do:
+#
+#   * breadability requires docopt, which PyPI carries only as a source distribution, and it
+#     needs lxml-html-clean -> lxml, which has no pure-Python wheel either. HTML extraction is
+#     therefore impossible in the browser; PlaintextParser is not.
+#   * setuptools is only here for breadability's `pkg_resources` import, so it follows it out.
+#   * requests cannot open a socket in a browser, so fetching a URL is the page's job, not
+#     sumy's.
+#   * docopt-ng drives the `sumy` command line, and there is no terminal in a browser.
+#
+# The code paths behind them import lazily and explain what is missing, so nothing here
+# changes what `pip install sumy` gets on a normal platform.
 dependencies = [
-    "docopt-ng>=0.6.3",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
-    "breadability>=0.1.20",
-    "lxml-html-clean>=0.1.0",  # Required by breadability (lxml.html.clean was moved to separate package)
+    "docopt-ng>=0.6.3; sys_platform != 'emscripten'",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
+    "breadability>=0.1.20; sys_platform != 'emscripten'",
+    # Required by breadability (lxml.html.clean was moved to separate package)
+    "lxml-html-clean>=0.1.0; sys_platform != 'emscripten'",
     # 2.32.4 is the release that fixes GHSA-9hjg-9r4m-mvj7, where a malicious redirect leaks
     # .netrc credentials. It is also the newest requests that still supports Python 3.8, as
     # 2.33.0 requires 3.10.
-    "requests>=2.32.4",
+    "requests>=2.32.4; sys_platform != 'emscripten'",
     "pycountry>=18.2.23",
     # 3.9 evaluates wn.morphy at import time, so it cannot be imported without the wordnet
     # corpus. 3.10.1 blocks its own imports when the venv sits under the CWD.
@@ -81,11 +96,11 @@ dependencies = [
     # cap, sumy.parsers.html fails outright when doing `import breadability`. Both bounds below
     # repeat the cap, so lifting it means editing both lines.
     # 70.0.0 fixes GHSA-cx63-2mw6-8hw5, a ReDoS in package_index.
-    "setuptools>=70.0.0,<82",
+    "setuptools>=70.0.0,<82; sys_platform != 'emscripten'",
     # 78.1.1 fixes GHSA-5rjg-fvgr-3xxf, a path traversal in PackageIndex, but is the first
     # release to require Python 3.9. Python 3.8 cannot reach it at all -- 75.3.4 is the last
     # setuptools that installs there -- so it keeps the lower floor above and stays exposed.
-    "setuptools>=78.1.1,<82; python_version >= '3.9'",
+    "setuptools>=78.1.1,<82; python_version >= '3.9' and sys_platform != 'emscripten'",
 ]
 
 [project.optional-dependencies]
@@ -105,7 +120,10 @@ Polish = ["pystempel>=2.0.0"]
 # NLTK dropped them at 3.9.3, so a universal lock has to pin nltk 3.9.1/3.9.2 on those two
 # interpreters and every NLTK advisory is unfixable there. Restricting the resolution keeps
 # uv.lock -- the development environment -- on a patched nltk.
-environments = ["python_version >= '3.10'"]
+# The `sys_platform` half keeps the lock a single non-Emscripten resolution: the dependencies
+# above are marked `sys_platform != 'emscripten'`, which would otherwise fork every entry in
+# uv.lock into a browser branch that nothing in this repository installs from.
+environments = ["python_version >= '3.10' and sys_platform != 'emscripten'"]
 
 [dependency-groups]
 dev = [

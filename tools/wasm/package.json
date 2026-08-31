@@ -1,0 +1,12 @@
+{
+  "name": "sumy-wasm-tools",
+  "private": true,
+  "type": "module",
+  "description": "Checks that the sumy wheel installs and runs under Pyodide (PEP 783 PyEmscripten).",
+  "scripts": {
+    "check-wheel": "node check-wheel.mjs"
+  },
+  "dependencies": {
+    "pyodide": "314.0.6"
+  }
+}

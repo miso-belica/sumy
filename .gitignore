@@ -16,3 +16,6 @@ __pycache__/
 
 # do not import jupyter notebooks for exploration
 notebooks/
+
+# node modules of the Pyodide check in tools/wasm
+node_modules/
