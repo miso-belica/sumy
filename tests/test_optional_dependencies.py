@@ -19,7 +19,10 @@ import pytest
 
 def reimport_without(monkeypatch, module, missing):
     """Import ``module`` from scratch, with ``missing`` unimportable."""
-    monkeypatch.setitem(sys.modules, missing, None)
+    # Its submodules too: `from breadability.readable import ...` is satisfied straight from
+    # sys.modules when another test already imported it, without consulting the parent.
+    for name in [missing, *(name for name in sys.modules if name.startswith(missing + "."))]:
+        monkeypatch.setitem(sys.modules, name, None)
     monkeypatch.delitem(sys.modules, module, raising=False)
     return import_module(module)
 
