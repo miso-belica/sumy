@@ -106,9 +106,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Set up Python
-        run: uv python install 3.14
-
+      # No `uv python install`: `uv build` provisions its own interpreter, and nothing else in
+      # this job runs Python -- the checks below run in node.
       - name: Build the wheel
         run: uv build --wheel
 

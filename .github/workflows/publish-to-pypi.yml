@@ -76,10 +76,11 @@ jobs:
       # uploaded: a wheel that cannot be installed by micropip breaks every browser using
       # sumy, and a release cannot be taken back off PyPI. Placed after the bump commit is
       # made but before it is pushed, so a failure here leaves nothing published anywhere.
-      - name: Check the wheel works in the browser
-        run: |
-          node tools/wasm/check-wheel.mjs
-          node tools/wasm/check-demo.mjs
+      - name: Check the wheel installs and imports under Pyodide
+        run: node tools/wasm/check-wheel.mjs
+
+      - name: Check summarizing works under Pyodide
+        run: node tools/wasm/check-demo.mjs
 
       # Push before publishing: if this fails, nothing has reached PyPI yet, so there is
       # nothing to reconcile -- fix and re-run. If the publish step below fails instead, main
