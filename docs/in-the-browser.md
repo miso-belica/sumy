@@ -29,46 +29,34 @@ called; fetch the page with `fetch()` and hand sumy the text.
 
 ## Doing it yourself
 
+Three things have to happen in the page, and
+[`docs/demo/sumy-browser.mjs`](demo/sumy-browser.mjs) is a plain ES module that does all
+three -- import it instead of writing them again:
+
 ```html
 <script type="module">
   import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.mjs";
+  import { loadSumy, summarize } from "https://miso-belica.github.io/sumy/demo/sumy-browser.mjs";
 
   const pyodide = await loadPyodide();
+  await loadSumy(pyodide);
 
-  // numpy is needed by the LSA and LexRank summarizers; Pyodide ships it.
-  await pyodide.loadPackage(["micropip", "numpy"]);
-  const micropip = pyodide.pyimport("micropip");
-  await micropip.install("sumy");
-
-  // NLTK's sentence tokenizer data. nltk.download() opens a socket, so fetch the zip and
-  // write it where NLTK looks; NLTK reads the models out of the zip as it is.
-  const punkt = await fetch(
-    "https://cdn.jsdelivr.net/gh/nltk/nltk_data@gh-pages/packages/tokenizers/punkt_tab.zip",
-  );
-  pyodide.FS.mkdirTree("/nltk_data/tokenizers");
-  pyodide.FS.writeFile("/nltk_data/tokenizers/punkt_tab.zip", new Uint8Array(await punkt.arrayBuffer()));
-
-  console.log(pyodide.runPython(`
-import nltk
-nltk.data.path.append("/nltk_data")
-
-from sumy.nlp.stemmers import Stemmer
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.summarizers.lsa import LsaSummarizer
-from sumy.utils import get_stop_words
-
-parser = PlaintextParser.from_string("Some long text. Split into sentences.", Tokenizer("english"))
-summarizer = LsaSummarizer(Stemmer("english"))
-summarizer.stop_words = get_stop_words("english")
-
-"\\n".join(str(sentence) for sentence in summarizer(parser.document, 2))
-`));
+  console.log(summarize(pyodide, { text: "Some long text. Split into sentences.", sentenceCount: 2 }));
 </script>
 ```
 
-The demo does exactly this in [`docs/demo/sumy-browser.mjs`](demo/sumy-browser.mjs), which is
-a plain ES module you can import instead of copying the above.
+What it does, if you would rather do it by hand:
+
+1. `micropip.install("sumy")`, plus `pyodide.loadPackage("numpy")` -- the LSA and LexRank
+   summarizers need numpy, and Pyodide ships it.
+2. NLTK's `punkt_tab` sentence tokenizer data. This is the part with no obvious answer:
+   `nltk.download()` opens a socket, so instead fetch
+   [the zip](https://cdn.jsdelivr.net/gh/nltk/nltk_data@gh-pages/packages/tokenizers/punkt_tab.zip)
+   yourself, write it to `/nltk_data/tokenizers/punkt_tab.zip` through `pyodide.FS`, and
+   `nltk.data.path.append("/nltk_data")`. NLTK reads the models out of the zip as it is, so
+   there is no need to unpack it.
+3. The ordinary sumy API -- `PlaintextParser`, `Tokenizer`, a summarizer and
+   `get_stop_words` -- exactly as on any other platform.
 
 Languages needing an extra tokenizer or stemmer package (Arabic, Chinese, Greek, Hebrew,
 Japanese, Korean, Polish, Thai) also work if you `micropip.install` that package first; the
