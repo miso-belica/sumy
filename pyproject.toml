@@ -65,20 +65,11 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
-# The markers on this list are what makes sumy installable in a browser. Under Emscripten
-# (Pyodide, PEP 783) `micropip.install("sumy")` has to resolve every requirement below from
-# PyPI, and five of them cannot be resolved there at all or have nothing to do:
-#
-#   * breadability requires docopt, which PyPI carries only as a source distribution, and it
-#     needs lxml-html-clean -> lxml, which has no pure-Python wheel either. HTML extraction is
-#     therefore impossible in the browser; PlaintextParser is not.
-#   * setuptools is only here for breadability's `pkg_resources` import, so it follows it out.
-#   * requests cannot open a socket in a browser, so fetching a URL is the page's job, not
-#     sumy's.
-#   * docopt-ng drives the `sumy` command line, and there is no terminal in a browser.
-#
-# The code paths behind them import lazily and explain what is missing, so nothing here
-# changes what `pip install sumy` gets on a normal platform.
+# The `sys_platform != 'emscripten'` markers below are what makes sumy installable in a
+# browser: micropip has to resolve every requirement, and these five cannot be resolved under
+# Emscripten or have nothing to do there. The code paths behind them import lazily and say
+# what is missing, so `pip install sumy` is unchanged everywhere else. Which ones and why:
+# docs/in-the-browser.md.
 dependencies = [
     "docopt-ng>=0.6.3; sys_platform != 'emscripten'",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
     "breadability>=0.1.20; sys_platform != 'emscripten'",
