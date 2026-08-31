@@ -49,6 +49,11 @@ def test_html_parser_import_without_breadability(monkeypatch):
 
 def test_html_parser_names_the_dependency_that_actually_failed(monkeypatch):
     """breadability itself needs lxml, and "install breadability" is no help then."""
+    # breadability has to be imported again for the missing lxml to bite; an earlier test in
+    # the session may have left it in sys.modules, already holding its lxml import.
+    for name in [name for name in sys.modules if name.startswith("breadability")]:
+        monkeypatch.delitem(sys.modules, name)
+
     html = reimport_without(monkeypatch, "sumy.parsers.html", missing="lxml")
 
     with pytest.raises(ValueError, match="lxml"):
