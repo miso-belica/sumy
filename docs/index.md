@@ -29,3 +29,8 @@ Then you need a [`Stemmer`](https://github.com/miso-belica/sumy/blob/master/sumy
 And we are reaching the finish line here. You have `Document` created and you are not afraid to use your `Stemmer`. Now you are ready to choose one of the [`Summarizers`](https://github.com/miso-belica/sumy/tree/master/sumy/summarizers). Probably except for the [`RandomSummarizer`](https://github.com/miso-belica/sumy/blob/master/sumy/summarizers/random.py) which serves just as a lower limit when evaluating the quality of the summaries. The `Summarizer` needs a `Stemmer` as it's dependency and optionally the list of the stop-words. Although it's the optional dependency I really recommend to use it to get better results. You can use `sumy.utils.get_stop_words(language: str)` or simply provide your list of the words. After all of this, your summarizer is ready to serve you. Simply provide it the `Document` and the count of the sentences you want to return and you are done.
 
 You can find some specifics to the summarizators at the [separate page](summarizators.md).
+
+## Sumy in the browser
+
+Everything above also runs client-side as WebAssembly -- see [the live demo](demo/) and
+[running sumy in the browser](in-the-browser.md).

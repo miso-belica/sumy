@@ -43,9 +43,23 @@ $ uv run pytest         # Run tests
 $ uv run sumy --help    # Run sumy using uv
 ```
 
+### In the browser
+
+sumy also installs into a page with [Pyodide](https://pyodide.org/), because PyPI now serves
+wheels for the PyEmscripten platform of [PEP 783](https://peps.python.org/pep-0783/):
+
+```js
+await micropip.install("sumy");
+```
+
+See [running sumy in the browser](docs/in-the-browser.md) for what works there and what does
+not.
+
 ## Usage
 
-Thanks to some good soul out there, the easiest way to try sumy is in your browser at https://huggingface.co/spaces/issam9/sumy_space
+The easiest way to try sumy is in your browser: <https://miso-belica.github.io/sumy/demo/>
+summarizes text locally in the tab, with no server involved. Thanks to some good soul out
+there, there is also https://huggingface.co/spaces/issam9/sumy_space
 
 Sumy contains command line utility for quick summarization of documents.
 
