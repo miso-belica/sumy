@@ -12,6 +12,8 @@ import sys
 from contextlib import contextmanager
 from importlib import import_module, reload
 
+import pytest
+
 
 @contextmanager
 def hidden_modules(*names):
@@ -44,3 +46,10 @@ def reimport(name):
 def test_utils_import_without_requests():
     with hidden_modules("requests"):
         assert reimport("sumy.utils").normalize_language("en") == "english"
+
+
+def test_fetch_url_without_requests_explains_what_to_install():
+    with hidden_modules("requests"):
+        utils = reimport("sumy.utils")
+        with pytest.raises(ImportError, match="pip install requests"):
+            utils.fetch_url("https://example.com/")

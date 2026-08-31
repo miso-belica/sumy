@@ -31,7 +31,14 @@ def normalize_language(language):
 def fetch_url(url, timeout=(3.05, 30)):
     # Imported here, not at module level: requests cannot open a socket under Emscripten, so
     # sumy does not declare it there. Everything else in this module has to keep working.
-    import requests
+    try:
+        import requests
+    except ImportError:
+        raise ImportError(
+            "Downloading a document requires requests, which is not available on this platform "
+            "(a browser cannot open a socket). Please, install it by command 'pip install requests' "
+            "or pass the document text to sumy yourself."
+        )
 
     with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
         response.raise_for_status()
