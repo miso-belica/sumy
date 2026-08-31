@@ -36,12 +36,12 @@ def test_utils_import_without_requests(monkeypatch):
 def test_fetch_url_without_requests_explains_what_to_install(monkeypatch):
     utils = reimport_without(monkeypatch, "sumy.utils", missing="requests")
 
-    with pytest.raises(ImportError, match="pip install requests"):
+    with pytest.raises(ValueError, match="pip install requests"):
         utils.fetch_url("https://example.com/")
 
 
 def test_html_parser_import_without_breadability(monkeypatch):
     html = reimport_without(monkeypatch, "sumy.parsers.html", missing="breadability")
 
-    with pytest.raises(ImportError, match="pip install breadability"):
+    with pytest.raises(ValueError, match="pip install breadability"):
         html.HtmlParser("<p>Hello.</p>", url=None, tokenizer=None)

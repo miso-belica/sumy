@@ -44,8 +44,8 @@ class HtmlParser(DocumentParser):
         try:
             from breadability.readable import Article
         except ImportError:
-            raise ImportError(
-                "Parsing HTML requires breadability, which is not available on this platform. "
+            raise ValueError(
+                "Parsing HTML requires breadability. "
                 "Please, install it by command 'pip install breadability' or use PlaintextParser."
             )
 

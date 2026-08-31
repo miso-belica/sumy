@@ -34,10 +34,9 @@ def fetch_url(url, timeout=(3.05, 30)):
     try:
         import requests
     except ImportError:
-        raise ImportError(
-            "Downloading a document requires requests, which is not available on this platform "
-            "(a browser cannot open a socket). Please, install it by command 'pip install requests' "
-            "or pass the document text to sumy yourself."
+        raise ValueError(
+            "Downloading a document requires requests, which a browser cannot use anyway. "
+            "Please, install it by command 'pip install requests' or pass the text to sumy yourself."
         )
 
     with closing(requests.get(url, headers=_HTTP_HEADERS, timeout=timeout)) as response:
