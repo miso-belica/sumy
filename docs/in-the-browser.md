@@ -12,7 +12,7 @@ with `micropip`, instead of waiting for them to be built into the Pyodide distri
 
 sumy is pure Python, so it needs no wheel of its own for that platform -- the ordinary
 `sumy-*-py3-none-any.whl` is what runs in the browser. What did need work is the dependency
-list: `micropip` has to resolve every requirement, and four of sumy's cannot be resolved or
+list: `micropip` has to resolve every requirement, and five of sumy's cannot be resolved or
 used under Emscripten. They are declared `sys_platform != "emscripten"` in `pyproject.toml`:
 
 | Dependency         | Why it is skipped in a browser                                             |

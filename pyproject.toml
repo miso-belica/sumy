@@ -67,7 +67,7 @@ classifiers = [
 ]
 # The markers on this list are what makes sumy installable in a browser. Under Emscripten
 # (Pyodide, PEP 783) `micropip.install("sumy")` has to resolve every requirement below from
-# PyPI, and four of them cannot be resolved there at all or have nothing to do:
+# PyPI, and five of them cannot be resolved there at all or have nothing to do:
 #
 #   * breadability requires docopt, which PyPI carries only as a source distribution, and it
 #     needs lxml-html-clean -> lxml, which has no pure-Python wheel either. HTML extraction is
