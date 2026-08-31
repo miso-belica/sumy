@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+- **FEATURE:** sumy runs in the browser. `micropip.install("sumy")` now works under Pyodide/PyEmscripten ([PEP 783](https://peps.python.org/pep-0783/)), and there is a live demo at https://miso-belica.github.io/sumy/demo/. See [running sumy in the browser](docs/in-the-browser.md).
+- **FEATURE:** `breadability`, `lxml-html-clean`, `requests`, `setuptools` and `docopt-ng` are no longer installed on Emscripten, where they cannot be resolved or cannot work. Every other platform installs them as before.
+- **FIX:** `sumy.utils` and `sumy.parsers.html` no longer import `requests` and `breadability` at import time; both now say what to install when the dependency is missing.
 - **CHORE:** Rebuilt the Docker image with all language extras, a multi-stage `uv sync` build, and a non-root user.
 
 ## 0.13.0 (2026-08-12)

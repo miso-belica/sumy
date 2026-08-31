@@ -11,6 +11,21 @@ $ uv run pytest
 Some tests need optional dependencies (`numpy`, `jieba`, `tinysegmenter`) and NLTK data. If they
 fail before you change anything, that is an environment problem, not a regression.
 
+## Checking the browser build
+
+sumy is also published for Pyodide, so a change to the dependency list or to a module-level
+import can break it in the browser without touching pytest. The checks run in node against a
+real Pyodide runtime:
+
+```sh
+$ uv build --wheel
+$ cd tools/wasm && npm ci && cd -
+$ node tools/wasm/check-wheel.mjs   # wheel installs, every module imports
+$ node tools/wasm/check-demo.mjs    # a document really gets summarized
+```
+
+See @docs/in-the-browser.md for what does and does not work there.
+
 ## Always practice red/green TDD
 
 Every behavioral change starts with a test that fails for the right reason.
