@@ -23,9 +23,30 @@ used under Emscripten. They are declared `sys_platform != "emscripten"` in `pypr
 | `setuptools`       | only needed for `breadability`'s `pkg_resources` import                     |
 | `docopt-ng`        | drives the `sumy` command line, and a browser has no terminal              |
 
-So in a browser sumy can summarize plain text, but not extract an article from an HTML page
-(`HtmlParser`) or download a URL itself (`sumy.utils.fetch_url`). Both explain that when
-called; fetch the page with `fetch()` and hand sumy the text.
+So a browser install summarizes plain text. The two things that dependency list pays for are
+still reachable, with a caveat each:
+
+* **`sumy.utils.fetch_url` works**, through Pyodide's own synchronous XMLHttpRequest client
+  rather than `requests`. It is the *browser* doing the download, so the same-origin policy
+  applies: only this page's origin, or a server sending CORS headers, will answer. Nothing can
+  be done about that from Python -- for any other page, fetch it through a proxy you control.
+  The `timeout` argument is ignored, since a synchronous request cannot carry one.
+* **`HtmlParser` needs a manual dependency dance.** micropip cannot resolve breadability
+  (docopt is a source distribution) and cannot get lxml from PyPI -- but the Pyodide
+  distribution *has* lxml, so installing the two without their dependency metadata works:
+
+  ```js
+  await pyodide.loadPackage("lxml");                    // Pyodide's own build
+  const micropip = pyodide.pyimport("micropip");
+  await micropip.install(["chardet", "setuptools"]);    // breadability needs both
+  // deps=False: docopt has no wheel, and lxml-html-clean asks for a newer lxml than Pyodide's
+  await micropip.install.callKwargs(["lxml-html-clean", "breadability"], { deps: false });
+  ```
+
+  After that `HtmlParser.from_string(html, url, tokenizer)` really does extract the article.
+  It is left out of sumy's own dependency list because pinning it would break plain
+  `micropip.install("sumy")` for everyone, and because it leans on a version mismatch that
+  can stop working with any Pyodide release.
 
 ## Doing it yourself
 
