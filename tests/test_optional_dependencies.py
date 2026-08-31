@@ -53,3 +53,10 @@ def test_fetch_url_without_requests_explains_what_to_install():
         utils = reimport("sumy.utils")
         with pytest.raises(ImportError, match="pip install requests"):
             utils.fetch_url("https://example.com/")
+
+
+def test_html_parser_import_without_breadability():
+    with hidden_modules("breadability"):
+        html = reimport("sumy.parsers.html")
+        with pytest.raises(ImportError, match="pip install breadability"):
+            html.HtmlParser("<p>Hello.</p>", url=None, tokenizer=None)
