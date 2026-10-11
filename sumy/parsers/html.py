@@ -31,6 +31,11 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_url(cls, url, tokenizer, timeout=None):
+        """
+        Fetches the URL as given, following redirects, and parses it.
+        Validating untrusted URLs is up to the caller. To use your own
+        HTTP client, fetch the page yourself and call `from_string`.
+        """
         data = fetch_url(url, timeout)
         return cls(data, tokenizer, url)
 
