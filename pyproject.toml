@@ -81,11 +81,11 @@ dependencies = [
     # cap, sumy.parsers.html fails outright when doing `import breadability`. Both bounds below
     # repeat the cap, so lifting it means editing both lines.
     # 70.0.0 fixes GHSA-cx63-2mw6-8hw5, a ReDoS in package_index.
-    "setuptools>=70.0.0,<82",
+    "setuptools>=70.0.0,<85",
     # 78.1.1 fixes GHSA-5rjg-fvgr-3xxf, a path traversal in PackageIndex, but is the first
     # release to require Python 3.9. Python 3.8 cannot reach it at all -- 75.3.4 is the last
     # setuptools that installs there -- so it keeps the lower floor above and stays exposed.
-    "setuptools>=78.1.1,<82; python_version >= '3.9'",
+    "setuptools>=78.1.1,<85; python_version >= '3.9'",
 ]
 
 [project.optional-dependencies]
