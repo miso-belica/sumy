@@ -67,7 +67,7 @@ classifiers = [
 ]
 dependencies = [
     "docopt-ng>=0.6.3",  # 0.6.1 was docopt's first release, docopt-ng's is 0.6.3
-    "breadability>=0.1.20",
+    "breadability>=0.1.21",  # 0.1.20 imports pkg_resources, which setuptools v82 deleted
     "lxml-html-clean>=0.1.0",  # Required by breadability (lxml.html.clean was moved to separate package)
     # 2.32.4 is the release that fixes GHSA-9hjg-9r4m-mvj7, where a malicious redirect leaks
     # .netrc credentials. It is also the newest requests that still supports Python 3.8, as
@@ -77,15 +77,6 @@ dependencies = [
     # 3.9 evaluates wn.morphy at import time, so it cannot be imported without the wordnet
     # corpus. 3.10.1 blocks its own imports when the venv sits under the CWD.
     "nltk>=3.9.1,!=3.10.1",
-    # Required by breadability for pkg_resources, which setuptools v82 deleted. Without the
-    # cap, sumy.parsers.html fails outright when doing `import breadability`. Both bounds below
-    # repeat the cap, so lifting it means editing both lines.
-    # 70.0.0 fixes GHSA-cx63-2mw6-8hw5, a ReDoS in package_index.
-    "setuptools>=70.0.0,<82",
-    # 78.1.1 fixes GHSA-5rjg-fvgr-3xxf, a path traversal in PackageIndex, but is the first
-    # release to require Python 3.9. Python 3.8 cannot reach it at all -- 75.3.4 is the last
-    # setuptools that installs there -- so it keeps the lower floor above and stays exposed.
-    "setuptools>=78.1.1,<82; python_version >= '3.9'",
 ]
 
 [project.optional-dependencies]
