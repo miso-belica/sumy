@@ -2,6 +2,7 @@
 
 ## Unreleased
 - **CHORE:** Rebuilt the Docker image with all language extras, a multi-stage `uv sync` build, and a non-root user.
+- **FEATURE:** Added Python 3.15 support.
 - **FIX:** Required `breadability>=0.1.21`, which no longer imports `pkg_resources`, and dropped the `setuptools` dependency and its `<82` cap. See https://github.com/miso-belica/sumy/issues/235
 
 ## 0.13.0 (2026-08-12)
