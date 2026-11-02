@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.8"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -44,14 +44,17 @@ wheels = [
 
 [[package]]
 name = "breadability"
-version = "0.1.20"
+version = "0.1.21"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "chardet" },
     { name = "docopt" },
-    { name = "lxml" },
+    { name = "lxml", extra = ["html-clean"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ad/2d/bb6c9b381e6b6a432aa2ffa8f4afdb2204f1ff97cfcc0766a5b7683fec43/breadability-0.1.20.tar.gz", hash = "sha256:f1a7fdad1e58e295df80954879143824c706bbfb1826cdf4b1d15de1a86afe99", size = 32505, upload-time = "2014-04-14T02:08:22.862Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/a8/4a9cd8a88b15bc73ff1f6f2d0fd8b790545a03b89d1803d6ad898f96a016/breadability-0.1.21.tar.gz", hash = "sha256:a4ca059c1d1ecd1186076ab6a63a9e184d65d74571c23ce7d9d7dbf4a80b59a7", size = 30137, upload-time = "2026-08-12T17:51:47.948Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/02/69/d26b690bebd2ef0f4ccf2e3444469a3c0a32acd5a09a2b4a52c547c40830/breadability-0.1.21-py2.py3-none-any.whl", hash = "sha256:f74c449d342efb59478ba8573d9f84c53f3d58f13772a29b32cfdedc2e727e1b", size = 21785, upload-time = "2026-08-12T17:51:46.871Z" },
+]
 
 [[package]]
 name = "bump-my-version"
@@ -685,6 +688,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/32/a2/4ac7eb32a4d997dd352c32c32399aae27b3f268d440e6f9cfa405b575d2f/lxml-6.1.0-pp311-pypy311_pp73-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:07f98f5496f96bf724b1e3c933c107f0cbf2745db18c03d2e13a291c3afd2635", size = 4251124, upload-time = "2026-04-18T04:36:09.056Z" },
     { url = "https://files.pythonhosted.org/packages/33/ef/d6abd850bb4822f9b720cfe36b547a558e694881010ff7d012191e8769c6/lxml-6.1.0-pp311-pypy311_pp73-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4642e04449a1e164b5ff71ffd901ddb772dfabf5c9adf1b7be5dffe1212bc037", size = 4401758, upload-time = "2026-04-18T04:36:11.803Z" },
     { url = "https://files.pythonhosted.org/packages/40/44/3ee09a5b60cb44c4f2fbc1c9015cfd6ff5afc08f991cab295d3024dcbf2d/lxml-6.1.0-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:7da13bb6fbadfafb474e0226a30570a3445cfd47c86296f2446dafbd77079ace", size = 3508860, upload-time = "2026-04-18T04:32:48.619Z" },
+]
+
+[package.optional-dependencies]
+html-clean = [
+    { name = "lxml-html-clean" },
 ]
 
 [[package]]
@@ -1521,15 +1529,6 @@ wheels = [
 ]
 
 [[package]]
-name = "setuptools"
-version = "81.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0d/1c/73e719955c59b8e424d015ab450f51c0af856ae46ea2da83eba51cc88de1/setuptools-81.0.0.tar.gz", hash = "sha256:487b53915f52501f0a79ccfd0c02c165ffe06631443a886740b91af4b7a5845a", size = 1198299, upload-time = "2026-02-06T21:10:39.601Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl", hash = "sha256:fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6", size = 1062021, upload-time = "2026-02-06T21:10:37.175Z" },
-]
-
-[[package]]
 name = "six"
 version = "1.17.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1558,7 +1557,6 @@ dependencies = [
     { name = "nltk" },
     { name = "pycountry" },
     { name = "requests" },
-    { name = "setuptools" },
 ]
 
 [package.optional-dependencies]
@@ -1606,7 +1604,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "breadability", specifier = ">=0.1.20" },
+    { name = "breadability", specifier = ">=0.1.21" },
     { name = "docopt-ng", specifier = ">=0.6.3" },
     { name = "greek-stemmer-pos", marker = "extra == 'greek'", specifier = ">=1.1.2" },
     { name = "hebrew-tokenizer", marker = "extra == 'hebrew'", specifier = ">=2.3.0" },
@@ -1621,8 +1619,6 @@ requires-dist = [
     { name = "pystempel", marker = "extra == 'polish'", specifier = ">=2.0.0" },
     { name = "pythainlp", marker = "extra == 'thai'", specifier = ">=5.0.0" },
     { name = "requests", specifier = ">=2.32.4" },
-    { name = "setuptools", specifier = ">=70.0.0,<82" },
-    { name = "setuptools", marker = "python_full_version >= '3.9'", specifier = ">=78.1.1,<82" },
     { name = "tinysegmenter", marker = "extra == 'japanese'", specifier = ">=0.3" },
 ]
 provides-extras = ["lsa", "lexrank", "japanese", "chinese", "korean", "hebrew", "greek", "arabic", "thai", "polish"]
