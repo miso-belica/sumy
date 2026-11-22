@@ -196,7 +196,7 @@ def test_large_document_is_summarized_fast():
     elapsed = time.perf_counter() - start
 
     assert len(summary) == 10
-    assert elapsed < 5.0
+    assert elapsed < 1.0
 
 
 def test_document_is_all_in_upper_case():

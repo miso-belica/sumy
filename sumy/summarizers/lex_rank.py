@@ -74,16 +74,11 @@ class LexRankSummarizer(AbstractSummarizer):
 
     @staticmethod
     def _compute_idf(sentences):
-        idf_metrics = {}
         sentences_count = len(sentences)
+        # each sentence counts once per term, however often the term repeats in it
+        document_frequencies = Counter(term for sentence in sentences for term in dict.fromkeys(sentence))
 
-        for sentence in sentences:
-            for term in sentence:
-                if term not in idf_metrics:
-                    n_j = sum(1 for s in sentences if term in s)
-                    idf_metrics[term] = math.log(sentences_count / n_j)
-
-        return idf_metrics
+        return {term: math.log(sentences_count / n_j) for term, n_j in document_frequencies.items()}
 
     def _create_matrix(self, sentences, threshold, tf_metrics, idf_metrics):
         """
