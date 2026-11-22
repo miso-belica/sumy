@@ -159,6 +159,25 @@ def test_article_example():
     assert len(sentences) == 20
 
 
+@pytest.mark.parametrize("sentences_count, expected_indexes", [
+    (5, [2, 7, 17, 32, 43]),
+    # the 16th best sentence ties with 14 others, so stop before it
+    (15, [0, 2, 7, 17, 19, 22, 23, 26, 28, 29, 32, 34, 36, 40, 43]),
+])
+def test_article_example_picks_the_same_sentences(sentences_count, expected_indexes):
+    parser = PlaintextParser.from_string(
+        load_resource("articles/prevko_cz_1.txt"),
+        Tokenizer("czech")
+    )
+    document = parser.document
+    summarizer = LexRankSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    sentences = summarizer(document, sentences_count)
+
+    assert [document.sentences.index(s) for s in sentences] == expected_indexes
+
+
 def test_document_is_all_in_upper_case():
     """
     When all words is in upper case Plaintext parser first line as heading and
