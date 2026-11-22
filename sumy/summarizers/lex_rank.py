@@ -162,7 +162,11 @@ class LexRankSummarizer(AbstractSummarizer):
 
         while lambda_val > epsilon:
             next_p = numpy.dot(transposed_matrix, p_vector)
-            next_p /= numpy.linalg.norm(next_p)
+            norm = numpy.linalg.norm(next_p)
+            if norm == 0:
+                # all similarities are 0, e.g. every word is in every sentence so its IDF is 0
+                return p_vector
+            next_p /= norm
             lambda_val = numpy.linalg.norm(numpy.subtract(next_p, p_vector))
             p_vector = next_p
 

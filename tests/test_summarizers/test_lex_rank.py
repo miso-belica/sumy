@@ -85,6 +85,16 @@ def test_words_shared_by_all_but_one_sentence_are_not_ignored():
     assert [str(s) for s in sentences] == ["Cats like dogs."]
 
 
+@pytest.mark.filterwarnings("error")
+def test_single_sentence_document():
+    """Every word of a single sentence is in all sentences, so all IDFs are 0."""
+    document = build_document(("Cats sleep.",))
+
+    sentences = LexRankSummarizer()(document, 1)
+
+    assert [str(s) for s in sentences] == ["Cats sleep."]
+
+
 def test_cosine_similarity_for_the_same_sentence_with_duplicate_words_should_be_one():
     """
     We compute similarity of the same sentences. These should be exactly the same and
