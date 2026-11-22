@@ -218,7 +218,7 @@ def test_large_document_is_summarized_in_little_memory():
 
     assert len(summary) == 10
     # the old pairwise loops peaked at 34 MiB, about one |sentences|×|sentences| matrix of floats
-    assert peak < 70 * 2**20
+    assert peak < 40 * 2**20
 
 
 def test_document_is_all_in_upper_case():

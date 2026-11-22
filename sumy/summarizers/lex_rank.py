@@ -6,7 +6,7 @@ try:
     import numpy
 except ImportError:
     numpy = None
-from collections import Counter
+from collections import Counter, defaultdict
 
 from ._summarizer import AbstractSummarizer
 
@@ -84,20 +84,25 @@ class LexRankSummarizer(AbstractSummarizer):
         """
         Creates matrix of shape |sentences|×|sentences|.
         """
-        # shortcut: dense |sentences|×|terms| matrix, switch to a sparse one if memory becomes the limit
-        columns = {term: column for column, term in enumerate(idf_metrics)}
-        tf_idf = numpy.zeros((len(sentences), len(columns)))
+        # list the sentences of every term with the term's TF-IDF weight scaled to a unit length sentence,
+        # skipping zero weights, so a sentence without weighted words keeps similarity 0 to every sentence
+        sentences_of_term = defaultdict(lambda: ([], []))
         for row, tf in enumerate(tf_metrics):
-            for term, value in tf.items():
-                tf_idf[row, columns[term]] = value * idf_metrics[term]
+            weights = {term: value * idf_metrics[term] for term, value in tf.items() if idf_metrics[term]}
+            norm = math.sqrt(sum(weight * weight for weight in weights.values()))
+            for term, weight in weights.items():
+                rows, term_weights = sentences_of_term[term]
+                rows.append(row)
+                term_weights.append(weight / norm)
 
-        # unit length rows make the cosine similarity of every pair a single matrix product
-        norms = numpy.linalg.norm(tf_idf, axis=1)
-        norms[norms == 0] = 1  # a sentence without weighted words stays all zeros, so its similarities are 0
-        tf_idf /= norms[:, numpy.newaxis]
+        # the cosine similarity of two sentences is the sum over their shared terms,
+        # so every term adds to the pairs of its own sentences only
+        matrix = numpy.zeros((len(sentences), len(sentences)))
+        for rows, term_weights in sentences_of_term.values():
+            term_weights = numpy.array(term_weights)
+            matrix[numpy.ix_(rows, rows)] += numpy.outer(term_weights, term_weights)
 
         # threshold and normalize in place, so only one |sentences|×|sentences| matrix is ever allocated
-        matrix = tf_idf.dot(tf_idf.T)
         numpy.greater(matrix, threshold, out=matrix)
         degrees = matrix.sum(axis=1)
         degrees[degrees == 0] = 1
