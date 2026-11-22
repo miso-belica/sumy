@@ -89,29 +89,23 @@ class LexRankSummarizer(AbstractSummarizer):
         """
         Creates matrix of shape |sentences|×|sentences|.
         """
-        # create matrix |sentences|×|sentences| filled with zeroes
-        sentences_count = len(sentences)
-        matrix = numpy.zeros((sentences_count, sentences_count))
-        degrees = numpy.zeros((sentences_count, ))
+        # shortcut: dense |sentences|×|terms| matrix, switch to a sparse one if memory becomes the limit
+        columns = {term: column for column, term in enumerate(idf_metrics)}
+        tf_idf = numpy.zeros((len(sentences), len(columns)))
+        for row, tf in enumerate(tf_metrics):
+            for term, value in tf.items():
+                tf_idf[row, columns[term]] = value * idf_metrics[term]
 
-        for row, (sentence1, tf1) in enumerate(zip(sentences, tf_metrics)):
-            for col, (sentence2, tf2) in enumerate(zip(sentences, tf_metrics)):
-                matrix[row, col] = self.cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics)
+        # unit length rows make the cosine similarity of every pair a single matrix product
+        norms = numpy.linalg.norm(tf_idf, axis=1)
+        norms[norms == 0] = 1  # a sentence without weighted words stays all zeros, so its similarities are 0
+        tf_idf /= norms[:, numpy.newaxis]
 
-                if matrix[row, col] > threshold:
-                    matrix[row, col] = 1.0
-                    degrees[row] += 1
-                else:
-                    matrix[row, col] = 0
+        matrix = (tf_idf.dot(tf_idf.T) > threshold).astype(float)
+        degrees = matrix.sum(axis=1)
+        degrees[degrees == 0] = 1
 
-        for row in range(sentences_count):
-            for col in range(sentences_count):
-                if degrees[row] == 0:
-                    degrees[row] = 1
-
-                matrix[row][col] = matrix[row][col] / degrees[row]
-
-        return matrix
+        return matrix / degrees[:, numpy.newaxis]
 
     @staticmethod
     def cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics):
