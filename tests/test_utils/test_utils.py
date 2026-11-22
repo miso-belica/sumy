@@ -61,30 +61,24 @@ def test_items_count_with_unsupported_init_type():
         count([])
 
 
-def test_normalize_language_with_alpha_2_code():
-    assert normalize_language("fr") == "french"
-    assert normalize_language("zh") == "chinese"
-    assert normalize_language("sk") == "slovak"
-
-
-def test_normalize_language_with_alpha_3_code():
-    assert normalize_language("fra") == "french"
-    assert normalize_language("zho") == "chinese"
-    assert normalize_language("slk") == "slovak"
-
-
-def test_normalize_language_with_greek_code():
-    # ISO 639 names Greek "Modern Greek (1453-)", but sumy keys it as "greek"
-    assert normalize_language("el") == "greek"
-    assert normalize_language("ell") == "greek"
-
-
-def test_normalize_language_with_code_named_differently_in_nltk():
-    assert normalize_language("nb") == "norwegian"
-    assert normalize_language("nn") == "norwegian"
-
-
-def test_normalize_language_with_language_name():
-    assert normalize_language("french") == "french"
-    assert normalize_language("chinese") == "chinese"
-    assert normalize_language("slovak") == "slovak"
+@pytest.mark.parametrize("language, expected", [
+    # ISO 639-1 codes
+    ("fr", "french"),
+    ("zh", "chinese"),
+    ("sk", "slovak"),
+    # ISO 639-3 codes
+    ("fra", "french"),
+    ("zho", "chinese"),
+    ("slk", "slovak"),
+    # ISO 639 names these "Modern Greek (1453-)", "Norwegian Bokmål" and "Norwegian Nynorsk"
+    ("el", "greek"),
+    ("ell", "greek"),
+    ("nb", "norwegian"),
+    ("nn", "norwegian"),
+    # language names
+    ("french", "french"),
+    ("chinese", "chinese"),
+    ("slovak", "slovak"),
+])
+def test_normalize_language(language, expected):
+    assert normalize_language(language) == expected
