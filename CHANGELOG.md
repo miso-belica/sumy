@@ -2,6 +2,7 @@
 
 ## Unreleased
 - **FIX:** Fixed the IDF of `LexRankSummarizer` to `log(N / n_w)` as defined in the paper http://tangra.si.umich.edu/~radev/lexrank/lexrank.pdf, so words in all sentences but one are no longer ignored.
+- **FEATURE:** Made `LexRankSummarizer` about 250x faster (2 000 sentences in 0.27s instead of 70s) by NumPy. See https://github.com/miso-belica/sumy/issues/109
 
 ## 0.14.0 (2026-11-22)
 - **SECURITY:** Fixed quadratic time of the Japanese and Chinese sentence tokenizer on text without `！？。`, where 80 000 characters took 95s. With NLTK 3.10.3+ it raised `TimeoutError` after 5s instead. See https://github.com/miso-belica/sumy/security/advisories/GHSA-3hvc-5j3w-jxvf

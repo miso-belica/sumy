@@ -6,7 +6,7 @@ try:
     import numpy
 except ImportError:
     numpy = None
-from collections import Counter
+from collections import Counter, defaultdict
 
 from ._summarizer import AbstractSummarizer
 
@@ -74,42 +74,43 @@ class LexRankSummarizer(AbstractSummarizer):
 
     @staticmethod
     def _compute_idf(sentences):
-        idf_metrics = {}
         sentences_count = len(sentences)
+        # each sentence counts once per term, however often the term repeats in it
+        document_frequencies = Counter(term for sentence in sentences for term in dict.fromkeys(sentence))
 
-        for sentence in sentences:
-            for term in sentence:
-                if term not in idf_metrics:
-                    n_j = sum(1 for s in sentences if term in s)
-                    idf_metrics[term] = math.log(sentences_count / n_j)
-
-        return idf_metrics
+        return {term: math.log(sentences_count / n_j) for term, n_j in document_frequencies.items()}
 
     def _create_matrix(self, sentences, threshold, tf_metrics, idf_metrics):
         """
         Creates matrix of shape |sentences|×|sentences|.
         """
-        # create matrix |sentences|×|sentences| filled with zeroes
-        sentences_count = len(sentences)
-        matrix = numpy.zeros((sentences_count, sentences_count))
-        degrees = numpy.zeros((sentences_count, ))
+        # list the sentences of every term with the term's TF-IDF weight scaled to a unit length sentence,
+        # skipping zero weights, so a sentence without weighted words keeps similarity 0 to every sentence
+        sentences_of_term = defaultdict(lambda: ([], []))
+        for row, tf in enumerate(tf_metrics):
+            weights = {term: value * idf_metrics[term] for term, value in tf.items() if idf_metrics[term]}
+            norm = math.sqrt(sum(weight * weight for weight in weights.values()))
+            for term, weight in weights.items():
+                rows, term_weights = sentences_of_term[term]
+                rows.append(row)
+                term_weights.append(weight / norm)
 
-        for row, (sentence1, tf1) in enumerate(zip(sentences, tf_metrics)):
-            for col, (sentence2, tf2) in enumerate(zip(sentences, tf_metrics)):
-                matrix[row, col] = self.cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics)
+        # the cosine similarity of two sentences is the sum over their shared terms,
+        # so every term adds to the pairs of its own sentences only, in blocks of rows no bigger
+        # than one matrix row, so a term in almost every sentence does not need a second matrix
+        matrix = numpy.zeros((len(sentences), len(sentences)))
+        for rows, term_weights in sentences_of_term.values():
+            rows, term_weights = numpy.array(rows), numpy.array(term_weights)
+            block_size = max(1, len(sentences) // len(rows))
+            for start in range(0, len(rows), block_size):
+                block = slice(start, start + block_size)
+                matrix[numpy.ix_(rows[block], rows)] += numpy.outer(term_weights[block], term_weights)
 
-                if matrix[row, col] > threshold:
-                    matrix[row, col] = 1.0
-                    degrees[row] += 1
-                else:
-                    matrix[row, col] = 0
-
-        for row in range(sentences_count):
-            for col in range(sentences_count):
-                if degrees[row] == 0:
-                    degrees[row] = 1
-
-                matrix[row][col] = matrix[row][col] / degrees[row]
+        # threshold and normalize in place, so only one |sentences|×|sentences| matrix is ever allocated
+        numpy.greater(matrix, threshold, out=matrix)
+        degrees = matrix.sum(axis=1)
+        degrees[degrees == 0] = 1
+        matrix /= degrees[:, numpy.newaxis]
 
         return matrix
 

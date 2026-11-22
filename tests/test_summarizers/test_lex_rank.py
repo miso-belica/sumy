@@ -1,6 +1,10 @@
 
 
+import itertools
 import math
+import random
+import time
+import tracemalloc
 
 import numpy
 import pytest
@@ -157,6 +161,68 @@ def test_article_example():
 
     sentences = summarizer(parser.document, 20)
     assert len(sentences) == 20
+
+
+@pytest.mark.parametrize("sentences_count, expected_indexes", [
+    (5, [2, 7, 17, 32, 43]),
+    # the 16th best sentence ties with 14 others, so stop before it
+    (15, [0, 2, 7, 17, 19, 22, 23, 26, 28, 29, 32, 34, 36, 40, 43]),
+])
+def test_article_example_picks_the_same_sentences(sentences_count, expected_indexes):
+    parser = PlaintextParser.from_string(
+        load_resource("articles/prevko_cz_1.txt"),
+        Tokenizer("czech")
+    )
+    document = parser.document
+    summarizer = LexRankSummarizer(stem_word)
+    summarizer.stop_words = get_stop_words("czech")
+
+    sentences = summarizer(document, sentences_count)
+
+    assert [document.sentences.index(s) for s in sentences] == expected_indexes
+
+
+def _build_large_document(frequent_word=None):
+    rnd = random.Random(0)
+    # the tokenizer drops words with digits, so spell the 2 000 words in letters only
+    vocabulary = ["".join(letters) for letters in itertools.product("abcdefghij", repeat=4)][:2000]
+    sentences = [" ".join(rnd.choice(vocabulary) for _ in range(15)) + "." for _ in range(2000)]
+    if frequent_word:
+        # all sentences but one, so its IDF is not 0 and the word still counts
+        sentences = [frequent_word + " " + s for s in sentences[:-1]] + sentences[-1:]
+    document = build_document(sentences)
+    for sentence in document.sentences:
+        _ = sentence.words  # tokenize up front, so only LexRank is measured
+
+    return document
+
+
+def test_large_document_is_summarized_fast():
+    """See https://github.com/miso-belica/sumy/issues/109"""
+    document = _build_large_document()
+
+    start = time.perf_counter()
+    summary = LexRankSummarizer()(document, 10)
+    elapsed = time.perf_counter() - start
+
+    assert len(summary) == 10
+    assert elapsed < 1.0
+
+
+@pytest.mark.parametrize("frequent_word", [None, "jjjj"])
+def test_large_document_is_summarized_in_little_memory(frequent_word):
+    document = _build_large_document(frequent_word)
+
+    tracemalloc.start()
+    try:
+        summary = LexRankSummarizer()(document, 10)
+        _, peak = tracemalloc.get_traced_memory()
+    finally:
+        tracemalloc.stop()
+
+    assert len(summary) == 10
+    # the old pairwise loops peaked at 34 MiB, about one |sentences|×|sentences| matrix of floats
+    assert peak < 40 * 2**20
 
 
 def test_document_is_all_in_upper_case():
