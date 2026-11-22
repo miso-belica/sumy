@@ -4,6 +4,7 @@ import itertools
 import math
 import random
 import time
+import tracemalloc
 
 import numpy
 import pytest
@@ -181,15 +182,21 @@ def test_article_example_picks_the_same_sentences(sentences_count, expected_inde
     assert [document.sentences.index(s) for s in sentences] == expected_indexes
 
 
-def test_large_document_is_summarized_fast():
-    """See https://github.com/miso-belica/sumy/issues/109"""
+def _build_large_document():
     rnd = random.Random(0)
     # the tokenizer drops words with digits, so spell the 2 000 words in letters only
     vocabulary = ["".join(letters) for letters in itertools.product("abcdefghij", repeat=4)][:2000]
     sentences = [" ".join(rnd.choice(vocabulary) for _ in range(15)) + "." for _ in range(2000)]
     document = build_document(sentences)
     for sentence in document.sentences:
-        _ = sentence.words  # tokenize up front, so only LexRank is timed
+        _ = sentence.words  # tokenize up front, so only LexRank is measured
+
+    return document
+
+
+def test_large_document_is_summarized_fast():
+    """See https://github.com/miso-belica/sumy/issues/109"""
+    document = _build_large_document()
 
     start = time.perf_counter()
     summary = LexRankSummarizer()(document, 10)
@@ -197,6 +204,21 @@ def test_large_document_is_summarized_fast():
 
     assert len(summary) == 10
     assert elapsed < 1.0
+
+
+def test_large_document_is_summarized_in_little_memory():
+    document = _build_large_document()
+
+    tracemalloc.start()
+    try:
+        summary = LexRankSummarizer()(document, 10)
+        _, peak = tracemalloc.get_traced_memory()
+    finally:
+        tracemalloc.stop()
+
+    assert len(summary) == 10
+    # the old pairwise loops peaked at 34 MiB, about one |sentences|×|sentences| matrix of floats
+    assert peak < 100 * 2**20
 
 
 def test_document_is_all_in_upper_case():
