@@ -163,8 +163,9 @@ class Tokenizer:
     SPECIAL_SENTENCE_TOKENIZERS: ClassVar[dict] = {
         'ukrainian': nltk.RegexpTokenizer(r'[.!?…»]', gaps=True),
         'hebrew': nltk.RegexpTokenizer(r'\.\s+', gaps=True),
-        'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
-        'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
+        # optional terminator: a required one backtracks quadratically on text without it
+        'japanese': nltk.RegexpTokenizer('[^　！？。]+[！？。]?'),
+        'chinese': nltk.RegexpTokenizer('[^　！？。]+[！？。]?'),
         'korean': KoreanSentencesTokenizer(),
         'greek': GreekSentencesTokenizer(),
         'arabic': ArabicSentencesTokenizer(),

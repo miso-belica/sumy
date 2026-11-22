@@ -156,6 +156,14 @@ def test_tokenize_chinese_paragraph():
     assert expected == tokenizer.to_sentences(paragraph)
 
 
+@pytest.mark.parametrize("language", ["japanese", "chinese"])
+def test_tokenize_long_cjk_paragraph_without_terminator_in_linear_time(language):
+    """https://github.com/miso-belica/sumy/security/advisories/GHSA-3hvc-5j3w-jxvf"""
+    paragraph = "a" * 200_000
+
+    assert Tokenizer(language).to_sentences(paragraph) == (paragraph,)
+
+
 @pytest.mark.skipif(sys.version_info < (3,), reason="JPype1 from konlpy does not support Python 2 anymore")
 def test_tokenize_korean_paragraph():
     tokenizer = Tokenizer('korean')
