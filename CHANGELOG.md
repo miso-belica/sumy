@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- **FIX:** Fixed the Greek language codes `el` and `ell` resolving to `modern greek (1453-)`, which broke the tokenizer, stemmer and stop words. See https://github.com/miso-belica/sumy/issues/261
 - **INCOMPATIBILITY:** `KLSummarizer` now requires `numpy`, like `LsaSummarizer` and `LexRankSummarizer` do, and raises `ValueError` without it. Install it with the new `sumy[KL]` extra.
 - **FIX:** Fixed `KLSummarizer` counting capitalized stop words as content words, because the document's words were filtered before they were normalized. Same class of bug as https://github.com/miso-belica/sumy/pull/240
 - **FIX:** Fixed `KLSummarizer` comparing the already summarized sentences by their raw words, so stop words and letter case of the summary skewed the divergence of every remaining candidate.

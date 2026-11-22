@@ -17,6 +17,12 @@ _HTTP_HEADERS = {
 }
 
 
+# ISO 639 names that differ from the language names sumy and NLTK use
+_LANGUAGE_ALIASES = {
+    "modern greek (1453-)": "greek",
+}
+
+
 def normalize_language(language):
     for lookup_key in ("alpha_2", "alpha_3"):
         try:
@@ -26,7 +32,8 @@ def normalize_language(language):
         except KeyError:
             pass
 
-    return language.lower()
+    language = language.lower()
+    return _LANGUAGE_ALIASES.get(language, language)
 
 
 def fetch_url(url, timeout=(3.05, 30)):
