@@ -96,11 +96,14 @@ class LexRankSummarizer(AbstractSummarizer):
         norms[norms == 0] = 1  # a sentence without weighted words stays all zeros, so its similarities are 0
         tf_idf /= norms[:, numpy.newaxis]
 
-        matrix = (tf_idf.dot(tf_idf.T) > threshold).astype(float)
+        # threshold and normalize in place, so only one |sentences|×|sentences| matrix is ever allocated
+        matrix = tf_idf.dot(tf_idf.T)
+        numpy.greater(matrix, threshold, out=matrix)
         degrees = matrix.sum(axis=1)
         degrees[degrees == 0] = 1
+        matrix /= degrees[:, numpy.newaxis]
 
-        return matrix / degrees[:, numpy.newaxis]
+        return matrix
 
     @staticmethod
     def cosine_similarity(sentence1, sentence2, tf1, tf2, idf_metrics):
