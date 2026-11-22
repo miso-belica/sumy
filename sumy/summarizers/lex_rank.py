@@ -81,7 +81,7 @@ class LexRankSummarizer(AbstractSummarizer):
             for term in sentence:
                 if term not in idf_metrics:
                     n_j = sum(1 for s in sentences if term in s)
-                    idf_metrics[term] = math.log(sentences_count / (1 + n_j))
+                    idf_metrics[term] = math.log(sentences_count / n_j)
 
         return idf_metrics
 

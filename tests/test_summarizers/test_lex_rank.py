@@ -57,20 +57,32 @@ def test_idf_metrics():
     metrics = summarizer._compute_idf(sentences)
 
     expected = {
-        "this": math.log(6/3),
-        "is": math.log(6/4),
-        "yes": math.log(6/3),
-        "simple": math.log(6/3),
-        "sentence": math.log(6/4),
-        "too": math.log(6/2),
-        "not": math.log(6/2),
-        "every": math.log(6/3),
-        "makes": math.log(6/2),
-        "me": math.log(6/2),
-        "happy": math.log(6/3),
-        "day": math.log(6/2),
+        "this": math.log(6/2),
+        "is": math.log(6/3),
+        "yes": math.log(6/2),
+        "simple": math.log(6/2),
+        "sentence": math.log(6/3),
+        "too": math.log(6/1),
+        "not": math.log(6/1),
+        "every": math.log(6/2),
+        "makes": math.log(6/1),
+        "me": math.log(6/1),
+        "happy": math.log(6/2),
+        "day": math.log(6/1),
     }
     assert expected == metrics
+
+
+def test_words_shared_by_all_but_one_sentence_are_not_ignored():
+    """
+    "cats" and "dogs" occur in 2 of 3 sentences. With IDF log(N / n_w) from the paper they
+    link the last sentence to both others, so it is the most central one.
+    """
+    document = build_document(("Cats sleep.", "Dogs bark.", "Cats like dogs."))
+
+    sentences = LexRankSummarizer()(document, 1)
+
+    assert [str(s) for s in sentences] == ["Cats like dogs."]
 
 
 def test_cosine_similarity_for_the_same_sentence_with_duplicate_words_should_be_one():
