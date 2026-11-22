@@ -73,6 +73,12 @@ def test_normalize_language_with_alpha_3_code():
     assert normalize_language("slk") == "slovak"
 
 
+def test_normalize_language_with_greek_code():
+    # ISO 639 names Greek "Modern Greek (1453-)", but sumy keys it as "greek"
+    assert normalize_language("el") == "greek"
+    assert normalize_language("ell") == "greek"
+
+
 def test_normalize_language_with_language_name():
     assert normalize_language("french") == "french"
     assert normalize_language("chinese") == "chinese"
