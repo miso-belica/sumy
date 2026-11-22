@@ -1,6 +1,9 @@
 
 
+import itertools
 import math
+import random
+import time
 
 import numpy
 import pytest
@@ -176,6 +179,24 @@ def test_article_example_picks_the_same_sentences(sentences_count, expected_inde
     sentences = summarizer(document, sentences_count)
 
     assert [document.sentences.index(s) for s in sentences] == expected_indexes
+
+
+def test_large_document_is_summarized_fast():
+    """See https://github.com/miso-belica/sumy/issues/109"""
+    rnd = random.Random(0)
+    # the tokenizer drops words with digits, so spell the 2 000 words in letters only
+    vocabulary = ["".join(letters) for letters in itertools.product("abcdefghij", repeat=4)][:2000]
+    sentences = [" ".join(rnd.choice(vocabulary) for _ in range(15)) + "." for _ in range(2000)]
+    document = build_document(sentences)
+    for sentence in document.sentences:
+        _ = sentence.words  # tokenize up front, so only LexRank is timed
+
+    start = time.perf_counter()
+    summary = LexRankSummarizer()(document, 10)
+    elapsed = time.perf_counter() - start
+
+    assert len(summary) == 10
+    assert elapsed < 120.0
 
 
 def test_document_is_all_in_upper_case():
