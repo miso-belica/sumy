@@ -96,11 +96,15 @@ class LexRankSummarizer(AbstractSummarizer):
                 term_weights.append(weight / norm)
 
         # the cosine similarity of two sentences is the sum over their shared terms,
-        # so every term adds to the pairs of its own sentences only
+        # so every term adds to the pairs of its own sentences only, in blocks of rows no bigger
+        # than one matrix row, so a term in almost every sentence does not need a second matrix
         matrix = numpy.zeros((len(sentences), len(sentences)))
         for rows, term_weights in sentences_of_term.values():
-            term_weights = numpy.array(term_weights)
-            matrix[numpy.ix_(rows, rows)] += numpy.outer(term_weights, term_weights)
+            rows, term_weights = numpy.array(rows), numpy.array(term_weights)
+            block_size = max(1, len(sentences) // len(rows))
+            for start in range(0, len(rows), block_size):
+                block = slice(start, start + block_size)
+                matrix[numpy.ix_(rows[block], rows)] += numpy.outer(term_weights[block], term_weights)
 
         # threshold and normalize in place, so only one |sentences|×|sentences| matrix is ever allocated
         numpy.greater(matrix, threshold, out=matrix)

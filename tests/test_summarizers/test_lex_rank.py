@@ -182,11 +182,14 @@ def test_article_example_picks_the_same_sentences(sentences_count, expected_inde
     assert [document.sentences.index(s) for s in sentences] == expected_indexes
 
 
-def _build_large_document():
+def _build_large_document(frequent_word=None):
     rnd = random.Random(0)
     # the tokenizer drops words with digits, so spell the 2 000 words in letters only
     vocabulary = ["".join(letters) for letters in itertools.product("abcdefghij", repeat=4)][:2000]
     sentences = [" ".join(rnd.choice(vocabulary) for _ in range(15)) + "." for _ in range(2000)]
+    if frequent_word:
+        # all sentences but one, so its IDF is not 0 and the word still counts
+        sentences = [frequent_word + " " + s for s in sentences[:-1]] + sentences[-1:]
     document = build_document(sentences)
     for sentence in document.sentences:
         _ = sentence.words  # tokenize up front, so only LexRank is measured
@@ -206,8 +209,9 @@ def test_large_document_is_summarized_fast():
     assert elapsed < 1.0
 
 
-def test_large_document_is_summarized_in_little_memory():
-    document = _build_large_document()
+@pytest.mark.parametrize("frequent_word", [None, "jjjj"])
+def test_large_document_is_summarized_in_little_memory(frequent_word):
+    document = _build_large_document(frequent_word)
 
     tracemalloc.start()
     try:
