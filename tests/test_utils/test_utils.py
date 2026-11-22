@@ -79,6 +79,11 @@ def test_normalize_language_with_greek_code():
     assert normalize_language("ell") == "greek"
 
 
+def test_normalize_language_with_code_named_differently_in_nltk():
+    assert normalize_language("nb") == "norwegian"
+    assert normalize_language("nn") == "norwegian"
+
+
 def test_normalize_language_with_language_name():
     assert normalize_language("french") == "french"
     assert normalize_language("chinese") == "chinese"

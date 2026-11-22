@@ -20,6 +20,8 @@ _HTTP_HEADERS = {
 # ISO 639 names that differ from the language names sumy and NLTK use
 _LANGUAGE_ALIASES = {
     "modern greek (1453-)": "greek",
+    "norwegian bokmål": "norwegian",
+    "norwegian nynorsk": "norwegian",
 }
 
 
