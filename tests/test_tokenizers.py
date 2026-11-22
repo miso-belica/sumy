@@ -164,6 +164,13 @@ def test_tokenize_long_cjk_paragraph_without_terminator_in_linear_time(language)
     assert Tokenizer(language).to_sentences(paragraph) == (paragraph,)
 
 
+@pytest.mark.parametrize("language", ["japanese", "chinese"])
+def test_tokenize_cjk_paragraph_keeps_sentence_without_terminator(language):
+    tokenizer = Tokenizer(language)
+
+    assert tokenizer.to_sentences("一文目。見出し　二文目") == ("一文目。", "見出し", "二文目")
+
+
 @pytest.mark.skipif(sys.version_info < (3,), reason="JPype1 from konlpy does not support Python 2 anymore")
 def test_tokenize_korean_paragraph():
     tokenizer = Tokenizer('korean')
