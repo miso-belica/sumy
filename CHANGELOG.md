@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+
+## 0.14.0 (2026-11-22)
 - **SECURITY:** Fixed quadratic time of the Japanese and Chinese sentence tokenizer on text without `！？。`, where 80 000 characters took 95s. With NLTK 3.10.3+ it raised `TimeoutError` after 5s instead. See https://github.com/miso-belica/sumy/security/advisories/GHSA-3hvc-5j3w-jxvf
 - **FIX:** Fixed the Japanese and Chinese sentence tokenizer dropping sentences without a trailing `！？。`.
 - **FIX:** Resolve the language codes of Greek (`el`, `ell`) and Norwegian (`nb`, `nn`) to the language names sumy uses. See https://github.com/miso-belica/sumy/issues/261

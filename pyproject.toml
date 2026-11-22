@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sumy"
-version = "0.13.0"
+version = "0.14.0"
 description = "Module for automatic summarization of text documents and HTML pages."
 readme = "README.md"
 license = { text = "Apache License, Version 2.0" }
@@ -134,7 +134,7 @@ include = [
 ]
 
 [tool.bumpversion]
-current_version = "0.13.0"
+current_version = "0.14.0"
 commit = true
 tag = true
 
